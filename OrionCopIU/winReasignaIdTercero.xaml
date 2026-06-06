@@ -1,0 +1,60 @@
+﻿<src:ClsFormInterface x:Class="WinReasignaIdTercero"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="VentanaPan1" Height="320" Width="600" WindowStyle="SingleBorderWindow" 
+            WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png">
+    <Grid Name="grdPpal" LostFocus="OnPierdeFoco" GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" Name="rwdControl"/>
+            <RowDefinition MinHeight="100"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center"/>
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Grid Grid.Row="1">
+            <Canvas Grid.Row="1">
+                <Label x:Name="lblTitulo" Canvas.Left="40" Canvas.Top="20" Padding="0" 
+                       Content="Reasigna la Identificación del Tercero ..." IsTabStop="False"
+                       Background="Transparent" Foreground="Gray" FontSize="18" FontStyle="Italic"
+                       ToolTip="Cambia la identificación del Tercero en toda la Aplicacion."/>
+                <Label x:Name="lblComentario" Canvas.Left="40" Canvas.Top="50" 
+                               Content="Cambia en toda la Aplicación, el Número de Identificación de este Tercero por un nuevo Número."
+                               Padding="0" />
+                <Label Content="Tercero a modificar su Id." Canvas.Left="40" Canvas.Top="96" Padding="0"/>
+                <Label x:Name="txtIdTerceroAct" Canvas.Left="180" Canvas.Top="95" Width="100"
+                       HorizontalContentAlignment="Right" Style="{StaticResource RecTxtSoloLectura}"/>
+                <Label x:Name="txtNombreTerAct" Canvas.Left="290" Canvas.Top="95" Width="260"
+                       Style="{StaticResource RecTxtSoloLectura}"/>
+                <Label x:Name="lblIdTerceroNuevo" Content="Nuevo número de Id." Canvas.Left="40" 
+                       Canvas.Top="131" Padding="0"/>
+                <TextBox x:Name="txtIdTerceroNuevo" Canvas.Left="180" 
+                                 Canvas.Top="130" Width="100" TabIndex="1"/>
+
+            </Canvas>
+        </Grid>
+        <!--Area inferior de la ventana-->
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

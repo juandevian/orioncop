@@ -1,0 +1,102 @@
+﻿<src:ClsFormInterface  x:Class="WinCuentaCorreoOrigen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Title="Cuenta Curreo Origen" Height="460" Width="400"
+        WindowState="Normal" WindowStartupLocation="CenterScreen" 
+        Icon="RecImagenes/orionLogo24.png" FontSize="12">
+    <Grid x:Name="grdPpal"  Control.GotFocus="OnCogerFoco" Control.LostFocus="OnPierdeFoco"
+          ButtonBase.Click="OnBotonClic"> 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" x:Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel x:Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu x:Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center"/>
+        </DockPanel>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+			IsTabStop="False" HorizontalAlignment="Stretch"  
+			Height="2" Opacity=".5"/>
+        <Canvas Grid.Row="1">
+            <Label x:Name="lblNomServidor" Content="Servidor de origen" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}" Canvas.Left="10" 
+                               Canvas.Top="7"/>
+            <ComboBox x:Name="cboNomServidor" Canvas.Left="133" Canvas.Top="10"
+                      VerticalContentAlignment="Center" Width="230" TabIndex="1"
+                      Style="{StaticResource RecFuenteNormal}" Height="19"/>
+            <TextBox x:Name="txtServidor" Canvas.Left="133" Canvas.Top="35"
+                                 Width="230" Style="{StaticResource RecFuenteNormal}"
+                                 TabIndex="2"/>
+            <Label x:Name="lblPuerto" Content="Puerto" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}" Canvas.Left="10" 
+                               Canvas.Top="67"/>
+            <TextBox x:Name="txtPuerto" Canvas.Left="133" Canvas.Top="65"
+                                 Width="60" Style="{StaticResource RecFuenteNormal}"
+                                 TabIndex="3"/>
+            <Label x:Name="lblEmailOrigen" Content="Email de origen" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}" Canvas.Left="10" 
+                               Canvas.Top="91"/>
+            <TextBox x:Name="txtEmailOrigen" Canvas.Left="133" Canvas.Top="90"
+                                 Width="230" Style="{StaticResource RecFuenteNormal}"
+                                 TabIndex="4"/>
+            <Label x:Name="lblContraseña" Content="Contraseña email de origen" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}" Canvas.Left="10" 
+                               Canvas.Top="117"/>
+            <PasswordBox x:Name="pswConfCon" Canvas.Left="223" Canvas.Top="115"
+                                         Width="140" Height="20" TabIndex="5"/>
+            <CheckBox x:Name="chkReqAutenti" Content="Requiere autenticación"
+                                  Style="{StaticResource RecFuenteNormal}"
+                                  Canvas.Left="10" Canvas.Top="145" TabIndex="6"/>
+            <CheckBox x:Name="chkHabilitar" Content="Habilitar TLS/SSL" 
+                                  Style="{StaticResource RecFuenteNormal}"
+                                  Canvas.Left="10" Canvas.Top="170" TabIndex="7"/>
+            <Label x:Name="lblMensPorTanda" Content="Mensajes por tanda" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}" Canvas.Left="10" 
+                               Canvas.Top="196"/>
+            <TextBox x:Name="txtMensPorTanda" Canvas.Left="133" Canvas.Top="195"
+                                 Width="40" Style="{StaticResource RecFuenteNormal}"
+                                 TabIndex="8"/>
+            <Label x:Name="lblIntervalo" Content="Intervalo entre tandas" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}" Canvas.Left="10" 
+                               Canvas.Top="221"/>
+            <TextBox x:Name="txtIntervalo" Canvas.Left="133" Canvas.Top="220"
+                                 Width="40" Style="{StaticResource RecFuenteNormal}"
+                                 TabIndex="9"/>
+            <Button x:Name="bttEnviarPrueba" Canvas.Left="10"   Canvas.Top="250"
+                                Padding="0" Margin="0" Width="160" Height="22" TabIndex="11"
+                                ToolTip="Envía un correo de prueba al email de origen.">
+                <DockPanel Width="155">
+                    <Label Content="Enviar correo de prueba" Background="Transparent"
+                                       Padding="0" Style="{StaticResource RecFuenteNormal}" 
+                                       DockPanel.Dock="left" Margin="3,0,0,0"
+                                       VerticalContentAlignment="Center" IsTabStop="False"/>
+                    <Image Source="RecImagenes/enviar.png" Width="17" Height="17" 
+                                       HorizontalAlignment="Right" DockPanel.Dock="Right" 
+                                       VerticalAlignment="Center" Margin="6,0,0,0"/>
+                </DockPanel>
+            </Button>
+        </Canvas>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <Canvas x:Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

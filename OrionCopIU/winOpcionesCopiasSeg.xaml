@@ -1,0 +1,70 @@
+﻿<src:ClsFormInterface x:Class="WinOpcionesCopiasSeg"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Opciones Copias de Seguridad" Height="360" Width="500" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
+    <Grid Name="grdPpal" Control.LostFocus="OnPierdeFoco"
+          Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" Name="rwdControl"/>
+            <RowDefinition MinHeight="100"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray" 
+                  VerticalAlignment="Center"  TabIndex="1"/>
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Grid Grid.Row="1" Button.Click="OnBotonClic" Selector.SelectionChanged="OnCambioSeleccion">
+            <Canvas>
+                <Label x:Name="lblTrayCopiaSeg" Content="Guardar Copias de Seguridad en:" 
+                			Canvas.Left="20" Canvas.Top="18" Padding="0"/>
+                <TextBox x:Name="txtTrayCopiaSeg" Canvas.Left="20" Canvas.Top="45" Width="440" 
+							TabIndex="2"/>
+                <Button x:Name="bttExaminar" Canvas.Left="240" Canvas.Top="15" Padding="0" Margin="0"
+                                Width="100" Height="22" BorderThickness="2" TabIndex="1">
+                    <DockPanel Width="100">
+                        <Label Content="Examinar ..." Background="Transparent" 
+                                       Padding="0" DockPanel.Dock="Left" HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center" IsTabStop="False"/>
+                    </DockPanel>
+                </Button>
+                <CheckBox x:Name="chkActivaProgBK" Canvas.Left="40"  Canvas.Top="90" 
+                			Content="Activar Copias de Seguridad Programadas" IsChecked="False"
+                			Padding="30,0,0,0" TabIndex="3"/>
+                <Label x:Name="lblDiaBK" Content="Día de la Semana" Canvas.Left="40"
+							Canvas.Top="116" Padding="0"/>
+                <ComboBox x:Name="cboDiaBK" Canvas.Left="188" Canvas.Top="115" Width="120" 
+							Padding="6,1,1,1" IsEnabled="False" TabIndex="4"/>
+                <Label x:Name="lblHoraBK" Content="Hora del Día (Formato 24 horas)" Canvas.Left="40"
+							Canvas.Top="150" Padding="0"/>
+                <TextBox x:Name="txtHoraBk" Canvas.Left="238" Canvas.Top="150" Width="70"
+                         ToolTip="Entrar con el formato hh:mm, 24 Horas" IsEnabled="False"
+                         TabIndex="5"/>
+            </Canvas>
+        </Grid>
+        <!--Area inferior de la ventana-->
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

@@ -1,0 +1,136 @@
+﻿<src:ClsFormInterface x:Class="WinDocumentos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
+    Title="winDocumentos" Height="530" Width="690" FontSize="12" 
+    WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" 
+    Icon="RecImagenes/OrionLogo24.png" KeyUp="ClsFormInterface_KeyUp" >
+    <Grid x:Name="grdPpal"
+		LostFocus="OnPierdeFoco"
+		GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" x:Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel x:Name="PanelControl" Grid.Row="0">
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <Menu x:Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center"/>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140"/>
+                <RowDefinition MinHeight="100"/>
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0">
+                <Label Content="DOCUMENTOS CONTABLES" Canvas.Top="5" 
+                           Canvas.Left="15" FontWeight="Bold"/>
+                <Label x:Name="lblIdDocumento" Content="Id. Documento Contable" Canvas.Left="30"
+							Canvas.Top="41" Padding="0"/>
+                <TextBox x:Name="txtIdDocumento" Canvas.Left="180" Canvas.Top="40" 
+                         Width="26" HorizontalContentAlignment="Right"
+                          TabIndex="1"/>
+                <Label x:Name="lblNombre"  Content="Nombre Documento Contable" Canvas.Left="265"
+							Canvas.Top="41" Padding="0"/>
+                <Label x:Name="txtNombre" Canvas.Left="440" Canvas.Top="40" 
+                           Width="220" Style="{StaticResource RecTxtSoloLectura}"/>
+                <Label x:Name="lblTipoDocumento" Content="Tipo del Documento en Contabilidad" 
+                           Canvas.Left="30" Canvas.Top="76" Padding="0"/>
+                <TextBox x:Name="txtTipoDocumento" Canvas.Left="265" Canvas.Top="75" 
+                             Width="60"  TabIndex="2"/>
+                <Label x:Name="lblPrefijo" Content="Prefijo del Documento" Canvas.Left="30"
+                               Canvas.Top="111" Padding="0"/>
+                <TextBox x:Name="txtPrefijo" Canvas.Left="180" Canvas.Top="110" 
+                             Width="60" TabIndex="3"/>
+                <Label x:Name="lblNroInicial" Content="Ultimo Número usado" Canvas.Left="310"
+                               Canvas.Top="111" Padding="0"/>
+                <TextBox x:Name="txtNroInicial" Canvas.Left="440" Canvas.Top="110" 
+                         Width="60" HorizontalContentAlignment="Right"
+                          TabIndex="4"/>
+            </Canvas>
+            <DataGrid x:Name="dgrDocumentos" Grid.Row="1"
+						IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False"
+						ItemsSource="{Binding}" SelectionMode="Extended" SelectionUnit="FullRow"
+						IsReadOnly="True" Background="Transparent" IsTabStop="False">
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Id. Dcto." Width="85" CanUserSort="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                         Text="{Binding IdDocumento}"
+                                         IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Nombre Documento" Width="300" CanUserSort="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" 
+                                         IsTabStop="False" Text="{Binding NombreDocumento}" 
+                                         IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Prefijo" Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" 
+                                         Text="{Binding PrefijoDocumento}"
+                                         IsTabStop="False" IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Numeración Inicial" Width="110">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" 
+                                         IsTabStop="False" HorizontalAlignment="Right" 
+                                         Text="{Binding NumeracionInicialDoc}"
+                                         IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Tipo de Documento" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Center" 
+											Text="{Binding TipoDocumentoCont}"
+											IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

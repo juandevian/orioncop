@@ -1,0 +1,51 @@
+﻿<Window x:Class="WinAbrirRepGenerado"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+        Title="Abrir Reporte ya generado" Height="240" Width="460" FontSize="12"
+        WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen">
+    <Grid Button.Click="Button_Click">
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Label Notificaciones-->
+        <StaticResource ResourceKey="RecNotifica"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="100"/>
+                <RowDefinition Height="53"/>
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0">
+                <Label Content="Seleccione el Reporte que desea abrir dando Clic en 'Examinar...'"
+                       Padding="0" Canvas.Left="15" Canvas.Top="43" />
+                <Button x:Name="bttSeleccionar" Canvas.Left="340" Canvas.Top="67" Padding="0" Margin="0"
+                                Width="70" Height="22" BorderThickness="2" TabIndex="1"
+                        ToolTip="De Clic aquí para selecciona el Reporte deseado.">
+                    <DockPanel Width="65">
+                        <Label Content="Examinar ..." Background="Transparent" 
+                                       Padding="0" DockPanel.Dock="Left" HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+                <Label x:Name="txtArchivoSele" Canvas.Top="100" Canvas.Left="15" Width="415" 
+                       Style="{StaticResource RecTxtSoloLectura}"/>
+            </Canvas>
+            <Grid Grid.Row="1" x:Name="grdPieVentana">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="18"/>
+                </Grid.RowDefinitions>
+                <Canvas Name="cnvBotones" Grid.Row="0" Height="28">
+                    <Button Name="bttAceptar" Content="_Abrir Reporte" Style="{StaticResource RecBttAceCan}"
+                            Canvas.Right="140" Canvas.Top="3" TabIndex="200" />
+                    <Button Name="bttCancelar" Content="_Cerrar Ventana" Style="{StaticResource RecBttAceCan}" 
+                            Canvas.Right="20" Canvas.Top="3" TabIndex="201"/>
+                </Canvas>
+                <DockPanel Name="dcpMensajes" Grid.Row="1" Height="25" VerticalAlignment="Bottom" >
+                    <Label Content=""  Foreground="White" Name="lblMensajes"
+                           HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                           Background="SlateGray"/>
+                </DockPanel>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

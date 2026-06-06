@@ -1,0 +1,127 @@
+﻿<src:ClsFormInterface x:Class="WinConsultasSql"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+                      Title="Consultas Sql" Height="600" Width="900" 
+                      WindowStyle="SingleBorderWindow" 
+                      WindowState="Maximized"  WindowStartupLocation="CenterScreen" 
+                      Icon="RecImagenes/OrionLogo24.png">
+    <Grid Name="grdPpal"  ButtonBase.Click="OnBotonClic" Control.LostFocus="OnPierdeFoco" 
+          Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  VerticalAlignment="Center" 
+                        TabIndex="1"/>
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition MinWidth="100"/>
+            </Grid.ColumnDefinitions>
+            <TreeView x:Name="trvOrionPlus" Grid.Column="0" BorderThickness="0"
+                      Background="Transparent" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            </TreeView>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="300*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="140*"/>
+                    </Grid.RowDefinitions>
+                    <Canvas Grid.Row="0">
+                        <Label Canvas.Left="20" Canvas.Top="20" Content="Numero Consulta" Padding="0"/>
+                        <Label x:Name="txtIdConsulta" Canvas.Left="130" Canvas.Top="20" Width="30" 
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                        <Label x:Name="lblNombreConsulta" Canvas.Left="250" Canvas.Top="20" Content="Nombre Consulta" Padding="0"/>
+                        <TextBox x:Name="txtNombreConsulta" Canvas.Left="360" Canvas.Top="20" 
+                                 Width="200" Background="Transparent" Visibility="Hidden"
+                                 TabIndex="2"/>
+                        <ComboBox x:Name="cboNombreConsulta" Canvas.Left="360" Canvas.Top="20" 
+                                  Width="200" Background="Transparent" Padding="6,1,1,1"
+                                  TabIndex="3"/>
+                    </Canvas>
+                    <Label Grid.Row="1" x:Name="lblConsulta" Height="18" Content="Consulta" Padding="10,0,0,0"
+                           Margin="0,2,0,0" VerticalAlignment="Top"/>
+                    <TextBox Grid.Row="1" x:Name="txtConsulta"
+                             Padding="15,20,10,5" Background="Transparent" 
+                             Foreground="Blue" FontSize="14"
+                             TextAlignment="Justify" TextWrapping="Wrap" 
+                             ToolTip="Escriba aqui la Expresión SQL a ejecutar."
+                             VerticalScrollBarVisibility="Auto" TabIndex="4"/>
+                </Grid>
+                <DataGrid x:Name="dgrResultado" Grid.Row="1" Margin="0" Padding="0"
+                          VerticalScrollBarVisibility="Auto" IsEnabled="True"
+                          HorizontalScrollBarVisibility="Auto" IsReadOnly="True" IsTabStop="True"
+                          IsSynchronizedWithCurrentItem="True" 
+                          SelectionMode="Single"  SelectionUnit="FullRow"
+                          Background="Transparent" ItemsSource="{Binding}" TabIndex="5">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                </DataGrid>
+            </Grid>
+            <GridSplitter Grid.Column="0" Background="Gray" HorizontalAlignment="Right" 
+            	VerticalAlignment="Stretch" IsTabStop="False" 
+            	ShowsPreview="True" Width="2" Opacity=".5"
+            	MouseEnter="GridSplitter_MouseEnter" 
+            	MouseLeave="GridSplitter_MouseLeave"/>
+        </Grid>
+        <!--Area inferior de la ventana-->
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+                <Button x:Name="bttEjecutar" Canvas.Left="40" Canvas.Top="5" 
+                        Width="85"
+                        Style="{StaticResource RecEstiloBttGen}"
+                        TabIndex="6">
+                    <DockPanel Width="85">
+                        <Label Content="Ejecutar" Background="Transparent" Padding="0" 
+                               DockPanel.Dock="Left" Margin="10,0,0,0" HorizontalAlignment="Left"
+                               VerticalContentAlignment="Center" IsTabStop="True"/>
+                        <Image Source="RecImagenes/IrA.png" Width="17" Height="17" 
+                               HorizontalAlignment="Right" DockPanel.Dock="Right" 
+                               Margin="0,0,5,0"/>
+                    </DockPanel>
+                </Button>
+                <Button x:Name="bttExportar" Canvas.Left="180"   Canvas.Top="7" Padding="0" Margin="0"
+                            Width="120" Height="20" TabIndex="7">
+                    <DockPanel Width="120">
+                        <Image Source="RecImagenes/excel.png" Width="17" Height="17" 
+                               HorizontalAlignment="Left" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                        <Label x:Name="lblContentBtt"  Content="Exportar a Excel" 
+                               Background="Transparent" Padding="0" 
+                               DockPanel.Dock="Left"  Margin="5,0,0,0"
+                               VerticalContentAlignment="Center" IsTabStop="False"/>
+                    </DockPanel>
+                </Button>
+            </Canvas>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

@@ -1,0 +1,820 @@
+﻿<src:ClsFormInterface x:Class="WinCuentaClientes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Estado de la Cuenta al Día de Hoy" 
+    Height="580" Width="910" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
+    <Grid x:Name="grdPpal" LostFocus="OnPierdeFoco"
+		GotFocus="OnCogerFoco" Selector.SelectionChanged="OnCboCambio" MenuItem.Click="OnMenuClic">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" x:Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel x:Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu x:Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center"/>
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="200*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderThickness="2" BorderBrush="Gray">
+                <Canvas Grid.Row="0">
+                    <Label x:Name="lblIdCliente" Content="Id. Cliente" Canvas.Left="40" Canvas.Top="10" 
+						Padding="0"/>
+                    <TextBox x:Name="txtIdCliente" Canvas.Left="100" Canvas.Top="10" 
+						Width="86" HorizontalContentAlignment="Right" TabIndex="1"/>
+                    <Label x:Name="txtNombreCliente" Canvas.Left="190" Canvas.Top="10"
+						Width="350" Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label x:Name="lblIdPredioAgr" Content="Predio Agrupador" Canvas.Left="40" Canvas.Top="40" 
+						Padding="0"/>
+                    <ComboBox x:Name="cboPredioAgru" Canvas.Left="200" Canvas.Top="40" Width="200"  
+						Padding="6,1,1,1"
+						TabIndex="2"/>
+                    <Label x:Name="lblEstadoSugeridoDeuda" Content="Estado Sugerido de la Deuda"
+                           Canvas.Left="570" Canvas.Top="10" 
+                           Padding="0"/>
+                    <Label x:Name="txtEstadoSugeridoDeuda" Style="{StaticResource RecTxtSoloLectura}" 
+                           Width="120" Canvas.Left="750" Canvas.Top="10" 
+                           ToolTip="Estado sugerido de la deuda del Cliente para el presente Predio Agrupador"
+                           Padding="6,1,1,1"/>
+                    <Label x:Name="lblEstadoActualDeuda" Content="Estado Actual de la Deuda" 
+                           Canvas.Left="570" Canvas.Top="40" 
+                           Padding="0"/>
+                    <ComboBox x:Name="cboEstadoActualDeuda" Width="120" Canvas.Left="750" Canvas.Top="40" 
+                        Padding="6,1,1,1" ItemsSource="{Binding}"
+                        TabIndex="3">
+                    </ComboBox>
+                </Canvas>
+            </Border>
+            <TabControl x:Name="tbcEstadoCta" Style="{StaticResource RecTabCtrl}"
+                            Grid.Row="1" TabItem.MouseUp="OnRatonUp">
+                <TabItem x:Name="tbiEstadoCta" Header="Estado de la Deuda" 
+                             Style="{StaticResource RecTabItem}" Width="150">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="125"/>
+                            <RowDefinition MinHeight="100"/>
+                        </Grid.RowDefinitions>
+                        <Canvas Grid.Row="0">
+                            <Label Content="ESTADO ACTUAL DE LA DEUDA" 
+                                       Canvas.Top="10" Canvas.Left="10" 
+                                       Padding="0" FontWeight="Bold"/>
+                            <Label x:Name="lblServicio" Content="Servicio" Padding="0"
+                                       Canvas.Left="40" Canvas.Top="40" Style="{StaticResource RecFuenteNormal}"/>
+                            <ComboBox x:Name="cboServicio" Width="190" Canvas.Left="185" Canvas.Top="40" 
+                                          Padding="6,1,1,1" TabIndex="7"  Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="lblFechaEstado" Canvas.Top="40" Canvas.Left="420" 
+                                       Padding="0" Content="Fecha y Hora del Estado"
+                                       Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="txtFechaEstado" Canvas.Left="570" Canvas.Top="40"
+                                       Width="160" Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblIntPorCausar" Canvas.Top="100" Canvas.Left="40" 
+                                       Padding="0" Content="Intereses por Causar"
+                                       Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="txtIntPorCausar" Canvas.Left="185" Canvas.Top="100"
+                                       Width="100" Style="{StaticResource RecTxtSoloLectura}"
+                                       HorizontalContentAlignment="Right"/>
+                            <Label x:Name="lblDeudaCapital" Canvas.Top="70" Canvas.Left="40" 
+                                       Padding="0" Content="Deuda Capital"
+                                       Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="txtDeudaCapital" Canvas.Left="185" Canvas.Top="70"
+                                       Width="100" HorizontalContentAlignment="Right"
+                                       Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblDeudaMora" Canvas.Top="70" Canvas.Left="420" 
+                                       Padding="0" Content="Deuda Intereses Mora"
+                                       Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="txtDeudaMora" Canvas.Left="630" Canvas.Top="70"
+                                       Width="100" HorizontalContentAlignment="Right"  
+                                       Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblTotalDeuda" Canvas.Top="100" Canvas.Left="420" 
+                                       Padding="0" Content="Total de la Deuda"
+                                       Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="txtTotalDeuda" Canvas.Left="630" Canvas.Top="100"
+                                       Width="100" HorizontalContentAlignment="Right" 
+                                       Style="{StaticResource RecTxtSoloLectura}"/>
+                        </Canvas>
+                        <Label x:Name="lblFactEstado" Grid.Row="1" Margin="20,2,500,140" Padding="0" 
+                               Content="Cuentas de Cobro debidas:"/>
+                        <DataGrid x:Name="dgrFacturasEstado" Grid.Row="1" Margin="40,25,42,5"
+                                      IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False"
+                                      ItemsSource="{Binding}" SelectionMode="Extended" 
+                                      SelectionUnit="FullRow" IsReadOnly="True" Background="Transparent" 
+                                      IsTabStop="False" Style="{StaticResource RecFuenteNormal}"
+                                      ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Prefijo" Width="80"
+                                                        CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											Text="{Binding Prefijo}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Número" Width="110" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False"
+											Text="{Binding IdFactura}" 
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Fecha" Width="90">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" 
+            								Text="{Binding FechaFactura, StringFormat=\{0:dd/MM/yyyy\}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Valor" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Valor, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Deuda Capital" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding DeudaCapital, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Deuda Intereses" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding DeudaMora, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Saldo" Width="120" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Saldo, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="tbiMovto" Header="Movimiento Deuda" 
+                             Style="{StaticResource RecTabItem}" Width="150">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition MinHeight="50"/>
+                        </Grid.RowDefinitions>
+                        <Canvas Grid.Row="0" x:Name="cnvMovimiento">
+                            <Label Content="MOVIMIENTO DE LA DEUDA" Canvas.Top="10" Canvas.Left="10" 
+                           Padding="0" FontWeight="Bold"/>
+                            <Label Canvas.Left="213" Canvas.Top="10" Padding="0" 
+                                   Content="Entre el" Style="{StaticResource RecFuenteNormal}"/>
+                            <DatePicker x:Name="dtpFechaMovDesde" Canvas.Left="270" Canvas.Top="5" 
+                                        Width="120" TabIndex="11" Style="{StaticResource RecFuenteNormal}"/>
+                            <Label Canvas.Left="213" Canvas.Top="35" Padding="0" 
+                                   Content="y el" Style="{StaticResource RecFuenteNormal}"/>
+                            <DatePicker x:Name="dtpFechaMovHasta" Canvas.Left="270" Canvas.Top="35" 
+                                Width="120" TabIndex="12" Style="{StaticResource RecFuenteNormal}"/>
+                            <RadioButton x:Name="rdbMovDeuda" Canvas.Left="450" Canvas.Top="10" 
+                                      Background="Transparent" Content="Mostrar movimiento de la Deuda" 
+                                      Padding="10,0,0,0" IsChecked="True" TabIndex="13"
+                                                 Style="{StaticResource RecFuenteNormal}"/>
+                            <RadioButton x:Name="rdbMovAnticipos" Canvas.Left="450" Canvas.Top="40" 
+                                      Background="Transparent" Content="Mostrar movimiento Anticipos" 
+                                      Padding="10,0,0,0" TabIndex="14" Style="{StaticResource RecFuenteNormal}"/>
+                        </Canvas>
+                        <DataGrid x:Name="dgrMovimiento" AutoGenerateColumns="False" 
+                                              Grid.Row="1" VerticalScrollBarVisibility="Visible" 
+                                              IsEnabled="True" IsReadOnly="True" IsTabStop="True"
+                                              IsSynchronizedWithCurrentItem="True" Margin="30,5,25,5"
+                                              SelectionMode="Single"  SelectionUnit="FullRow"
+                                              Background="Transparent" ItemsSource="{Binding}"
+                                              Style="{StaticResource RecFuenteNormal}">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Fecha"  Width="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                             HorizontalAlignment="Left" 
+                                             Text="{Binding Path=FechaNovedad,  StringFormat={}{0:dd/MM/yyyy}}"
+                                             IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Detalle" Width="460">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                             HorizontalAlignment="Left" Text="{Binding Path=Detalle}"
+                                             IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Valor" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False"
+                                             Text="{Binding Path=Valor, StringFormat={}{0:c}}" 
+                                             HorizontalAlignment="Right"  
+                                             IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Saldo" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False"
+                                             Text="{Binding Path=Saldo, StringFormat={}{0:c}}" 
+                                             HorizontalAlignment="Right"  
+                                             IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="tbiFras" Header="Cuentas Cobro" 
+                             Style="{StaticResource RecTabItem}" Width="120">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition MinHeight="50"/>
+                        </Grid.RowDefinitions>
+                        <Canvas x:Name="cnvFacturas" Grid.Row="0">
+                            <Label x:Name="lblFacturasCli" Content="CUENTAS COBRO DEL CLIENTE " 
+                                       Canvas.Top="10" Canvas.Left="10" 
+                                       Padding="0" FontWeight="Bold"/>
+                            <Label x:Name="lblFactCli" Canvas.Left="30" Canvas.Top="45" Padding="0" 
+                                       Content="Mostrar las Cuentas de Cobro entre el"
+                                       Style="{StaticResource RecFuenteNormal}"/>
+                            <DatePicker x:Name="dtpFechaDesde" Canvas.Left="240" Canvas.Top="40" 
+                                            Width="120" TabIndex="21" Style="{StaticResource RecFuenteNormal}"/>
+                            <Label Canvas.Left="370" Canvas.Top="43" Padding="0" 
+                                   Style="{StaticResource RecFuenteNormal}" Content="y el"/>
+                            <DatePicker x:Name="dtpFechaHasta" Canvas.Left="400" Canvas.Top="40" 
+                                            Width="120" TabIndex="22" Style="{StaticResource RecFuenteNormal}"/>
+                        </Canvas>
+                        <DataGrid x:Name="dgrFacturasCliente" IsSynchronizedWithCurrentItem="True" 
+                                      AutoGenerateColumns="False" Style="{StaticResource RecFuenteNormal}"
+                                      ItemsSource="{Binding}" SelectionMode="Extended" Grid.Row="1"
+                                      SelectionUnit="FullRow" IsReadOnly="True" Background="Transparent" 
+                                      IsTabStop="False" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                      Margin="5,5,10,5">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Prefijo" Width="60" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" 
+                                                         IsTabStop="False" Text="{Binding Prefijo}"
+                                                         IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Número" Width="100" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" 
+                                                 IsTabStop="False"
+                                                 Text="{Binding IdFactura}" 
+                                                 HorizontalContentAlignment="Right"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Fecha" Width="120" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											Text="{Binding FechaFactura, StringFormat={}{0:dd/MM/yyyy}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Valor" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding ValorFactura, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Débitos" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Debitos, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Créditos" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Creditos, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="temSaldo" Header="Saldo Cta Cobro" Width="120" 
+                                                            CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Saldo, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Días Vencida" Width="80" 
+                                                            CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" 
+                                                         IsTabStop="False" HorizontalAlignment="Right" 
+                                                         Text="{Binding Dias}"
+                                                         IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="tbiRecCaj" Header="Recibos Caja" 
+                             Style="{StaticResource RecTabItem}" Width="110">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition MinHeight="50"/>
+                        </Grid.RowDefinitions>
+                        <Canvas x:Name="cnvRecibos" Grid.Row="0">
+                            <Label Content="RECIBOS DE CAJA DEL CLIENTE " 
+                                       Canvas.Top="10" Canvas.Left="10" 
+                                       Padding="0" FontWeight="Bold"/>
+                            <Label Canvas.Left="30" Canvas.Top="40" Padding="0" 
+                                       Style="{StaticResource RecFuenteNormal}"
+                                       Content="Mostrar los Recibos del Cliente entre el"/>
+                            <DatePicker x:Name="dtpFechaDesdeRec" Canvas.Left="250" Canvas.Top="40" 
+                                            Width="120" TabIndex="31"
+                                            Style="{StaticResource RecFuenteNormal}"/>
+                            <Label Canvas.Left="380" Canvas.Top="40" Padding="0" 
+                                       Content="y el" Style="{StaticResource RecFuenteNormal}"/>
+                            <DatePicker x:Name="dtpFechaHastaRec" Canvas.Left="410" Canvas.Top="40" 
+                                            Width="120" TabIndex="32" Style="{StaticResource RecFuenteNormal}"/>
+                        </Canvas>
+                        <DataGrid x:Name="dgrRecibosCliente" IsSynchronizedWithCurrentItem="True" 
+                                      AutoGenerateColumns="False" Style="{StaticResource RecFuenteNormal}"
+                                      ItemsSource="{Binding}" SelectionMode="Extended" Grid.Row="1"
+                                      SelectionUnit="FullRow" IsReadOnly="True" Background="Transparent" 
+                                      IsTabStop="False" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                      Margin="110,5,105,5">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Prefijo" Width="60" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" 
+                                                         IsTabStop="False" Text="{Binding Prefijo}"
+                                                         IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Número" Width="100" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" 
+                                                 IsTabStop="False"
+                                                 Text="{Binding IdReciboCaja}" 
+                                                 HorizontalContentAlignment="Right"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Fecha" Width="120" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											Text="{Binding FechaReciboCaja, StringFormat={}{0:dd/MM/yyyy}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Valor" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Valor, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Valor Anticipo" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding ValorAnticipo, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Saldo Deuda" Width="120" 
+                                                            CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Saldo, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="tbiAnti" Header="Anticipos" 
+                         Style="{StaticResource RecTabItem}" Width="110">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition MinHeight="50"/>
+                        </Grid.RowDefinitions>
+                        <Canvas Grid.Row="0"  x:Name="cnvAnticipos">
+                            <Label Content="ANTICIPOS RECIBIDOS DEL CLIENTE " 
+                           Canvas.Top="10" Canvas.Left="10" 
+                           Padding="0" FontWeight="Bold"/>
+                        </Canvas>
+                        <DataGrid x:Name="dgrAnticipos" Grid.Row="1" Margin="20,5,20,5"
+                                      Style="{StaticResource RecFuenteNormal}"
+                              IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False"
+                              ItemsSource="{Binding}" SelectionMode="Extended" SelectionUnit="FullRow"
+                              IsReadOnly="True" Background="Transparent" IsTabStop="False"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Nro" Width="35" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" 
+                                                 IsTabStop="False"
+                                                 Text="{Binding IdAnticipo}" 
+                                                 HorizontalContentAlignment="Right"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Fecha" Width="80" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											Text="{Binding FechaAnticipo, StringFormat={}{0:dd/MM/yyyy}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Origen" Width="60">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											Text="{Binding DocOrigen}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Número Doc." Width="80">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False"
+                                                 Text="{Binding NroDocOriAnt}"
+                                                 ToolTip="Número del Documento que originó el anticipo."
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Servicio" Width="180">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False"
+                                                     Text="{Binding Servicio}"
+                                                     ToolTip="Número del Documento que originó el anticipo."
+                                                     IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Valor" Width="110">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding ValorAnticipo, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Debitos" Width="110">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Debitos, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Saldo Anticipo" Width="110">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Saldo, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Anulado" Width="55" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                                 HorizontalAlignment="Center" 
+                                                 Text="{Binding Anu}"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="tbiNCR" Header="Notas Crédito" 
+                             Style="{StaticResource RecTabItem}" Width="110">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition MinHeight="50"/>
+                        </Grid.RowDefinitions>
+                        <Canvas Grid.Row="0" x:Name="cnvNotasCr">
+                            <Label Content="NOTAS CREDITO AL CLIENTE" 
+                                       Canvas.Top="10" Canvas.Left="10" 
+                                       Padding="0" FontWeight="Bold"/>
+                        </Canvas>
+                        <DataGrid x:Name="dgrNotasCr" Grid.Row="1" Margin="180,5,175,5"
+                                      Style="{StaticResource RecFuenteNormal}"
+                                      IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False"
+                                      ItemsSource="{Binding}" SelectionMode="Extended" 
+                                      SelectionUnit="FullRow" IsReadOnly="True" Background="Transparent" 
+                                      IsTabStop="False" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Prefijo" Width="80" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											Text="{Binding PrefijoNotaCr}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Número" Width="100" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" 
+                                                 IsTabStop="False"
+                                                 Text="{Binding IdNotaCr}" 
+                                                 HorizontalContentAlignment="Right"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Fecha" Width="120" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                                 Text="{Binding FechaNota, StringFormat={}{0:dd/MM/yyyy}}"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Valor Nota Cr" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Valor, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Anulado" Width="80" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                                 HorizontalAlignment="Center" 
+                                                 Text="{Binding Anu}"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="tbiNDB" Header="Intereses Mora" 
+                             Style="{StaticResource RecTabItem}" Width="120">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition MinHeight="50"/>
+                        </Grid.RowDefinitions>
+                        <Canvas Grid.Row="0" x:Name="cnvMora">
+                            <Label Content="NOTAS POR INTERESES DE MORA" 
+                                       Canvas.Top="10" Canvas.Left="10" 
+                                       Padding="0" FontWeight="Bold"/>
+                            <Label Canvas.Left="30" Canvas.Top="44" Padding="0" 
+                                       Style="{StaticResource RecFuenteNormal}"
+                           Content="Mostrar las Notas del Cliente entre el"/>
+                            <DatePicker x:Name="dtpFechaDesdeMora" Canvas.Left="250" Canvas.Top="40" 
+                                Width="120" TabIndex="61" Style="{StaticResource RecFuenteNormal}"/>
+                            <Label Canvas.Left="380" Canvas.Top="44" Padding="0" 
+                                       Style="{StaticResource RecFuenteNormal}"
+                           Content="y el"/>
+                            <DatePicker x:Name="dtpFechaHastaMora" Canvas.Left="410" Canvas.Top="40" 
+                                Width="120" TabIndex="62" Style="{StaticResource RecFuenteNormal}"/>
+                        </Canvas>
+                        <DataGrid x:Name="dgrNotasDbCliente" Grid.Row="1" Margin="170,5,165,2"
+                                      Style="{StaticResource RecFuenteNormal}"                                      
+                              IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False"
+                              ItemsSource="{Binding}" SelectionMode="Extended" SelectionUnit="FullRow"
+                              IsReadOnly="True" Background="Transparent" IsTabStop="False"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Prefijo" Width="80" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                                 Text="{Binding PrefijoNotaDb}"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Número" Width="100" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" 
+                                                 IsTabStop="False"
+                                                 Text="{Binding IdNotaDb}" 
+                                                 HorizontalContentAlignment="Right"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Fecha" Width="120" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											Text="{Binding FechaNota, StringFormat={}{0:dd/MM/yyyy}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Valor Nota" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Valor, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Anulado" Width="100" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                                 HorizontalAlignment="Center" 
+                                                 Text="{Binding Anu}"
+                                                 IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <!--Area inferior de la ventana-->
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+			IsTabStop="False" HorizontalAlignment="Stretch"  
+			Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas x:Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

@@ -1,0 +1,289 @@
+﻿<src:ClsFormInterface x:Class="MWOrionCop"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Orión Plus"  WindowStyle="SingleBorderWindow" WindowState="Maximized"
+    Height="800" Width="1280" WindowStartupLocation="CenterScreen" 
+    Icon="RecImagenes/OrionLogo24.png" KeyDown="ClsFormInterface_KeyDown" 
+    Closing="ClsFormInterface_Closing" FontSize="12">
+    <Grid x:Name="grdPpal" MenuItem.Click="OnMenuClic">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
+            <RowDefinition Height="500*" MinHeight="50"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Gray" BorderThickness="5" CornerRadius="0">
+            <StaticResource ResourceKey="RecImgCabeza" />
+        </Border>
+        <StaticResource ResourceKey="RecImgCuerpo"/>
+        <Image Source="RecImagenes/OrionLogo24.png" Grid.Row="0" HorizontalAlignment="Left"
+               VerticalAlignment="Top" Height="160" Width="Auto" 
+               Margin="70,15,0,0" />
+        <Label Name="lblNombreApp" Foreground="White" FontSize="46" FontFamily="Arial"
+               Margin="300,45,0,0" Padding="0"
+               HorizontalAlignment="Left" VerticalAlignment="Top">Orión</Label>
+        <Label Name="lblEdicionApp" Foreground="Black" FontSize="46" FontFamily="Arial" 
+               Margin="415,45,0,0" Padding="0" FontStyle="Italic"
+               HorizontalAlignment="Left" VerticalAlignment="Top">Plus</Label>
+        <Label Name="lblVersion" Foreground="White" FontSize="16" FontFamily="Arial" 
+               Margin="300,100,0,0" Padding="0" 
+               HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Name="lblCompañia" Foreground="White" FontSize="16" FontFamily="Arial" 
+               Margin="300,125,0,0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+               Content="O P T I M U S O F T"/>
+        <Label x:Name="lblCCA" Margin="80,160,100,10" Height="30"
+               HorizontalContentAlignment="Left" FontSize="14" FontFamily="Arial"
+               FontStyle="Oblique" Foreground="OrangeRed" Visibility="Hidden"
+               Content="Advertencia: En esta Copropiedad, el cálculo de las Cuotas de Administración, posiblemente no corresponde a lo establecido en el Reglamento de Propiedad Horizontal"/>
+        <Grid Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Name="rwdControl" Height="120" />
+                <RowDefinition MinHeight="300" />
+            </Grid.RowDefinitions>
+            <DockPanel Name="PanelControl" Grid.Row="0" >
+                <!--ToolBar-->
+                <StaticResource ResourceKey="RecToolBarPan" />
+                <!--Label Notificaciones-->
+                <StaticResource ResourceKey="RecNotifica"/>
+                <!--Menu-->
+                <Menu Name="MenuVen" DockPanel.Dock="Bottom" Height="25" Background="Gray"
+                        VerticalAlignment="Center">
+                    <MenuItem Header="_Acciones" Name="MnuAcciones" 
+                             Style="{StaticResource RecMnuItemPri}">
+                        <MenuItem Header="Cambiar _Ubicación y/o Usuario" Name="MnuCambiarUbicacion" 
+                                  InputGestureText="Ctrl+U"
+                                  ToolTip="Cambia la Ubicacion en la Carpeta de Trabajo Actual" 
+                                  Style="{StaticResource RecMnuItemSec}">
+                            <MenuItem.Icon>
+                                <Image Source="RecImagenes/Abrir.ico" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Cambiar _Representante Legal" Name="MnuCambiarRepLegal" 
+                                  ToolTip="Cambia el Representante Legal de la Copropiedad" 
+                                  Style="{StaticResource RecMnuItemSec}">
+                            <MenuItem.Icon>
+                                <Image Source="RecImagenes/Admin.ico" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Ca_mbiar Contraseña" Name="MnuCambiarContrasena" 
+                                    ToolTip="Cambia la Contraseña del Usuario Actual" 
+                                    Style="{StaticResource RecMnuItemSec}" />
+                        <Separator />
+                        <MenuItem Header="_Refrescar" Name="MnuRefrescar" 
+                                  ToolTip="Vuelve a cargar los datos desde la Base de Datos."
+                                  Style="{StaticResource RecMnuItemSec}">
+                            <MenuItem.Icon>
+                                <Image Source="RecImagenes/Refrescar_1.ico"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Salir" Name="MnuSalir" ToolTip="Salir de la Aplicación" 
+                                Style="{StaticResource RecMnuItemSec}">
+                            <MenuItem.Icon>
+                                <Image Source="RecImagenes/salir_inicio.ico"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="A_nticipos" Name="MnuAnticipos" Background="#575756"
+                              ToolTip ="De clic aquí para consultar todos los anticipos recibidos!"
+                              Style="{StaticResource RecMnuItemPri}" />
+                    <MenuItem Header="Esta_dos de Deuda" Name="MnuEstadoCuenta" Background="#575756"
+                              ToolTip="De clic aquí para consultar los Estados de la Deuda y todo el movimiento, por Cliente y por Predio Agrupador!"
+                              Style="{StaticResource RecMnuItemPri}" />
+                    <MenuItem Header="R_eportes" Name="MnuReportes" Background="#575756"
+                              ToolTip="De clic aquí para generar los diferentes reportes de la Aplicación!"
+                              Style="{StaticResource RecMnuItemPri}">
+                        <MenuItem Header="Reportes _Administrativos" 
+                                  ToolTip="Contiene los accesos a los Reportes de Tipo Administrativo" 
+                                  Style="{StaticResource RecMnuItemSec}">
+                            <MenuItem Header="Caja y _Bancos" x:Name="MnuCajaBancos"
+                                      ToolTip="Muestra los valores recibidos por cada medio de pago entre dos Fechas!"
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Recibos de Caja entre Fechas" x:Name="MnuRCFechas"
+                                      ToolTip="Muestra los Recibos de Caja elaborados entre dos Fechas!"
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Recibos de Caja Reversados (Anulados)" 
+                                      x:Name="MnuRCReversados"
+                                      ToolTip="Muestra los valores reversados por cada medio de pago entre dos Fechas!"
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Informe _Diario" x:Name="MnuInfDiario"
+                                      ToolTip="Muestra la numeración de las Facturas y el Valor Facturado según el IVA entre dos Fechas!"
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <Separator />
+                            <MenuItem Header="Cartera por Cliente a una Fecha" x:Name="MnuCarteraCliente"
+                                      ToolTip="Muestra el valor de las Cuentas por Cobrar por Cliente a una Fecha dada."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Cartera por Predio Agrupador" x:Name="MnuCarteraPredAgr"
+                                      ToolTip="Muestra el valor de las Cuentas por Cobrar por Predio Agrupador a hoy."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Car_tera por Predio" x:Name="MnuCarteraPredio"
+                                      ToolTip="Muestra el valor de las Cuentas por Cobrar por Predio a hoy."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Car_tera por Servicio" x:Name="MnuCarteraServicio"
+                                      ToolTip="Muestra el valor de las Cuentas por Cobrar por Servicio a hoy."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Cartera Detallada por Servicio a una Fecha" 
+                                      x:Name="MnuCxCDetPorSer"
+                                      ToolTip="Muestra el valor de las Cuentas por Cobrar por Predio Agrupador y Servicio a una Fecha."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Edad de la Cartera" x:Name="MnuEdadCartera"
+                                      ToolTip="Muestra las Cuentas por Cobrar clasificadas según su Edad al Día de Hoy."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Estado de las Deudas" x:Name="MnuRepEstadoCuenta"
+                                      ToolTip="Muestra el Estado de Cuenta Actual y el Estado de Cuenta Sugerido por cada Deudor."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <Separator />
+                            <MenuItem Header="Predios por _Sector" x:Name="MnuRepPrediosSector"
+                                      ToolTip="Genera un Reporte de los Predios agrupador por Sector en orden alfabético."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Predios por _Propietario" x:Name="MnuRepPrediosCliente"
+                                      ToolTip="Genera un Reporte de los Propietarios con sus respectivos Predios."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Propi_etarios por Coeficiente de Propiedad" 
+                                      x:Name="MnuRepPropiPorCP"
+                                      ToolTip="Genera un Reporte de los propietarios y el total de sus coeficientes de propiedad"
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Propieta_rios por Coeficiente de Propiedad (Resumido)" 
+                                      x:Name="MnuRepPropiPorCP_Res"
+                                      ToolTip="Genera un Reporte de los propietarios y el total de sus coeficientes de propiedad"
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Coe_ficiente de Propiedad por Propietario" 
+                                      x:Name="MnuCoeficientesPorpP"
+                                      ToolTip="Genera un Reporte de los coeficientes de propiedad por cada propietario"
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Cuotas _Administración por Propietario" x:Name="MnuRepCuotasAdminProp"
+                                      ToolTip="Genera un Reporte de los Propietarios con la Cuota de Administración de cada Predio."
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                            <Separator />
+                            <MenuItem Header="Valores Facturados por _Servicio" x:Name="MnuValoresFact"
+                                      ToolTip="Genera listado de valores facturados por cliente, predio agrupador y servicio entre fechas"
+                                      Style="{StaticResource RecMnuItemSec}"/>
+                        </MenuItem>
+                        <MenuItem Header="Reportes _Contables" 
+                                  ToolTip="Contiene los accesos a los Reportes de Tipo Contable" 
+                                  Style="{StaticResource RecMnuItemSec}">
+                            <MenuItem Header="_Auxiliar Contable" x:Name="MnuAuxContable"
+                                  ToolTip="Permite la Generación de Auxiliares Contables" 
+                                  Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="_Resumen Movimiento Contable" x:Name="MnuResumenMovCont"
+                                  Style="{StaticResource RecMnuItemSec}"/>
+                            <MenuItem Header="Relación Documentos" x:Name="MnuRelacionDocs"
+                                  Style="{StaticResource RecMnuItemSec}"/>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem x:Name="MnuAbrirReportesGen" Header="_Abrir Reportes ya Generados"
+                                  ToolTip="Abre Reportes Generados con anterioridad y guardados en este Equipo."
+                                  Style="{StaticResource RecMnuItemSec}"/>
+                    </MenuItem>
+                </Menu>
+            </DockPanel>
+            <Canvas Grid.Row="1" x:Name="grdInfo">
+                <Grid ButtonBase.Click="OnBotonClic">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="360*"/>
+                    </Grid.ColumnDefinitions>
+                    <Canvas x:Name="cnvSegundo" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label Style="{StaticResource RecLblStatus}" Canvas.Top="40" Name="lblStatus1" >Empresa</Label>
+                        <Label Style="{StaticResource RecLblStatus}" Canvas.Top="65" Name="lblStatus2"  >Copropiedad</Label>
+                        <Label Style="{StaticResource RecLblStatus}" Canvas.Top="90" Name="lblStatus3" >Usuario</Label>
+                        <Label Style="{StaticResource RecLblStatus}" Canvas.Top="115" Name="lblStatus4"  >Estación</Label>
+                        <Label Style="{StaticResource RecLblStatus}" Canvas.Top="140" Name="lblStatus5"  >Hoy</Label>
+                        <Label Style="{StaticResource RecLblStatus}" Canvas.Top="165" Name="lblStatus6"  >Periodo Actual</Label>
+                        <Label Style="{StaticResource RecLblStatus}" Canvas.Top="260" Name="lblStatus8" 
+                                FontSize="14" FontWeight="Bold">Estado Conexión a internet</Label>
+                        <Label Style="{StaticResource RecLblStatus}" Canvas.Top="290" Name="lblStatus7" 
+                                FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Canvas.Left="40" VerticalAlignment="Center">Estado del Contrato</Label>
+                        <Label Style="{StaticResource RecLblConStatus}" Canvas.Top="5" Name="lblProcEFac" FontSize="18"  Foreground="Blue" Visibility="Visible" />
+                        <Label Style="{StaticResource RecLblConStatus}" Canvas.Top="40" Name="lblEmpresa"/>
+                        <Label Style="{StaticResource RecLblConStatus}" Canvas.Top="65" Name="lblCentroUtilidad"/>
+                        <Label Style="{StaticResource RecLblConStatus}" Canvas.Top="90" Name="lblUsuario"/>
+                        <Label Style="{StaticResource RecLblConStatus}" Canvas.Top="115" Name="lblEstacion"/>
+                        <Label Style="{StaticResource RecLblConStatus}" Canvas.Top="140" Name="lblFecha"/>
+                        <Label Style="{StaticResource RecLblConStatus}" Canvas.Top="165" Name="lblPeriodo"/>
+                        <Label Name="lblEstadoInt" Canvas.Left="300" Canvas.Top="260" 
+                               Height="20" HorizontalContentAlignment="Left" FontSize="14" 
+                               FontWeight="Bold" Padding="5,0,5,0"/>
+                        <TextBlock  Name="lblEstadoCon" Canvas.Left="300" Canvas.Top="290" 
+                                Height="40" FontSize="14" TextWrapping="Wrap"
+                                FontWeight="Bold" Padding="5,0,5,0" MaxWidth="500"/>
+                        <Button x:Name="bttRefConexion" Canvas.Left="410" Canvas.Top="257.5" 
+                                Padding="0" Margin="0" Width="26" Height="26" IsTabStop="False"
+                                ToolTip="Refresca Conexión con Interner">
+                            <DockPanel Width="26">
+                                <Image Source="RecImagenes/refrescar.png" Width="24" Height="24"
+                                           HorizontalAlignment="Left" DockPanel.Dock="Left"
+                                           Margin="0"/>
+                            </DockPanel>
+                        </Button>
+                        <Label x:Name="lblAccion" Content="Importando facturas iniciales"
+                               Canvas.Top="242" Padding="0" Visibility="Hidden" Canvas.Left="486"/>
+                        <ProgressBar x:Name="pgbProcesos" Canvas.Left="486" Canvas.Top="260" 
+                                     Width="400" Height="15" Visibility="Hidden" 
+                                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label x:Name="lblResultado" Canvas.Left="486" Canvas.Top="291"
+                               Width="400" Padding="0" Content="Facturas Procesadas: 0 de 0" 
+                               HorizontalContentAlignment="Left" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    </Canvas>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition MinHeight="50"/>
+                        </Grid.RowDefinitions>
+                        <Canvas Grid.Row="0">
+                            <Button x:Name="bttMostrarAyuda" Canvas.Left="5"   Canvas.Top="5" 
+                                    Padding="0" Margin="0" Width="125" Height="22" 
+                                    IsTabStop="False">
+                                <DockPanel Width="120">
+                                    <Image Source="RecImagenes/ayuda.png" Width="18" Height="18"
+                                           HorizontalAlignment="Left" DockPanel.Dock="Left" 
+                                           Margin="3,0,0,0"/>
+                                    <Label Content="Mostrar Ayuda" Background="Transparent" 
+                                           Padding="0" DockPanel.Dock="Right" Margin="5,0,0,0"
+                                           VerticalContentAlignment="Center" IsTabStop="False"/>
+                                </DockPanel>
+                            </Button>
+                            <Button x:Name="bttOcultarAyuda" Canvas.Left="5"   Canvas.Top="5" 
+                                    Padding="0" Margin="0" Width="120" Height="22" IsTabStop="False"
+                                    Visibility="Hidden">
+                                <DockPanel Width="120">
+                                    <Image Source="RecImagenes/ayuda.png" Width="18" Height="18"
+                                           HorizontalAlignment="Left" DockPanel.Dock="Left" 
+                                           Margin="3,0,0,0"/>
+                                    <Label Content="Ocultar Ayuda" Background="Transparent" 
+                                           Padding="0" DockPanel.Dock="Right" Margin="5,0,0,0"
+                                           VerticalContentAlignment="Center" IsTabStop="False"/>
+                                </DockPanel>
+                            </Button>
+                            <Button x:Name="bttAbrirWinAyuda" Canvas.Left="150"   Canvas.Top="5" 
+                                    Padding="0" Margin="0" Width="160" Height="22" TabIndex="50">
+                                <DockPanel Width="160">
+                                    <Image Source="RecImagenes/ayuda.png" Width="18" Height="18"
+                                           HorizontalAlignment="Left" DockPanel.Dock="Left" 
+                                           Margin="3,0,0,0"/>
+                                    <Label Content="Abrir ventana ayuda" Background="Transparent" 
+                                           Padding="0" DockPanel.Dock="Right" Margin="5,0,0,0"
+                                           VerticalContentAlignment="Center" IsTabStop="False"/>
+                                </DockPanel>
+                            </Button>
+                        </Canvas>
+                        <Canvas Grid.Row="1">
+                            <Border x:Name="brdAyuda" BorderBrush="Black" BorderThickness="2" 
+                                CornerRadius="20" Grid.Column="2" Height="330" Width="550"
+                                Visibility="Hidden">
+                                <Canvas>
+                                    <Label x:Name="lblAyuda" Content="Procedimiento" FontSize="14"
+                                           FontWeight="Bold" Canvas.Top="3" Canvas.Left="10"
+                                           Padding="0"/>
+                                    <TextBox x:Name="txtAyuda"  Canvas.Top="30" Canvas.Left="5"
+                                             Width="535" Height="290" FontSize="14" 
+                                             TextWrapping="Wrap" Background="Transparent"
+                                             VerticalScrollBarVisibility="Auto" BorderThickness="0"/>
+                                </Canvas>
+                            </Border>
+                        </Canvas>
+                    </Grid>
+                </Grid>
+            </Canvas>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

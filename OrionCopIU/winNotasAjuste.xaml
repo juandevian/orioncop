@@ -1,0 +1,198 @@
+﻿<src:ClsFormInterface x:Class="WinNotasAjuste"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+    Title="Notas Ajuste Cuota de Administración" Height="520" Width="690" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
+    <Grid x:Name="grdPpal" GotFocus="OnCogerFoco" ComboBox.SelectionChanged="OnCboCambio">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" x:Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel x:Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu x:Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center"/>
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="400*"/>
+            </Grid.RowDefinitions>
+            <Canvas x:Name="cnvGenerales" Grid.Row="0">
+                <Label x:Name="lblIdNotaAjuste" Content="Id." Padding="0"
+                		Canvas.Left="15" Canvas.Top="11"/>
+                <Border Canvas.Left="40" Canvas.Top="7" BorderBrush="Gray" BorderThickness="1" 
+                            CornerRadius="0" Width="214" Height="24">
+                    <Canvas>
+                        <Label x:Name="lblPref" Content="Pref." Padding="0"
+                                   Canvas.Left="2" Canvas.Top="3" />
+                        <ComboBox x:Name="cboPref" Canvas.Left="30" Canvas.Top="1" Width="58"
+                                     TabIndex="1" Height="19"/>
+                        <Label x:Name="lblIdNota" Content="Número" Padding="0"
+                               Canvas.Left="100" Canvas.Top="3" />
+                        <TextBox x:Name="txtIdNota" Canvas.Left="150" Canvas.Top="1" 
+                                 Width="60" HorizontalContentAlignment="Right" TabIndex="2" />
+                    </Canvas>
+                </Border>
+                <Label Canvas.Left="490" Canvas.Top="11" Content="Fecha Nota" 
+                       Padding="0" FontWeight="Bold"/>
+                <Label x:Name="txtFechaNotaP" Canvas.Left="560" Canvas.Top="10" FontWeight="Bold"
+                       Width="100" Style="{StaticResource RecTxtSoloLectura}"
+                       HorizontalContentAlignment="Right"/>
+                <Label x:Name="lblIdCliente" Content="Cliente" Padding="0"
+					Canvas.Left="10" Canvas.Top="41"/>
+                <Label x:Name="txtIdCliente" Canvas.Left="60" Canvas.Top="40" Width="80"
+					Style="{StaticResource RecTxtSoloLectura}" />
+                <Label x:Name="txtNombreCliente" Canvas.Left="145" Canvas.Top="40" Width="320"
+					Style="{StaticResource RecTxtSoloLectura}"/>
+                <Label x:Name="lblValorNotaCr" Content="Valor Nota" Padding="0"
+					Canvas.Left="490" FontWeight="Bold" Canvas.Top="41"/>
+                <Label x:Name="txtValorNotaP" Canvas.Left="560" Canvas.Top="40" FontWeight="Bold"
+                       Width="100" Style="{StaticResource RecTxtSoloLectura}"
+                       HorizontalContentAlignment="Right"/>
+                <Label x:Name="lblIdPredioAgru" Canvas.Left="10" Canvas.Top="71"
+					Content="Predio Agrupador" Padding="0"/>
+                <Label x:Name="txtIdPredioAgru" Canvas.Left="145" Canvas.Top="70" Width="100"
+					Style="{StaticResource RecTxtSoloLectura}"/>
+            </Canvas>
+            <GridSplitter Grid.Row="1" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+            <TabControl  x:Name="tbcNotaAjuste" Grid.Row="1" Style="{StaticResource RecTabCtrl}"
+                        Margin="5" TabItem.MouseUp="OnRatonUp">
+                <TabItem x:Name="tbiDetalles" Header="Detalles" 
+                          Style="{StaticResource RecTabItem}" Width="200">
+                    <Canvas x:Name="cnvDatosNotaAju">
+                        <Label Content="DETALLES DE LA NOTA DE AJUSTE" Canvas.Top="10" 
+                           Canvas.Left="10" FontWeight="Bold" Padding="0"/>
+                        <Label Canvas.Left="30" Canvas.Top="51" 
+                           Content="Nombre del Predio" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}"/>
+                        <Label x:Name="txtIdPredio" Canvas.Left="156" Canvas.Top="50"
+                           Width="100" Style="{StaticResource RecTxtSoloLectura}"/>
+                        <Label Canvas.Left="30" Canvas.Top="81" Content="Fecha de la Nota" 
+                               Padding="0" Style="{StaticResource RecFuenteNormal}"/>
+                        <Label x:Name="txtFechaNota" Canvas.Left="156" Canvas.Top="80" 
+                           Width="100" Style="{StaticResource RecTxtSoloLectura}"/>
+                        <Label Canvas.Left="30" Canvas.Top="111" 
+                           Content="Id. del Anticipo" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}"/>
+                        <Label x:Name="txtIdAnticipo" Canvas.Left="156" Canvas.Top="110" 
+                           Width="60" Style="{StaticResource RecTxtSoloLectura}"/>
+                        <Label Canvas.Left="30" Canvas.Top="141"
+                               Content="Valor Nota" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}"/>
+                        <Label x:Name="txtValorNota" Canvas.Left="156" Canvas.Top="140"
+                           Width="100" Style="{StaticResource RecTxtSoloLectura}" 
+                           HorizontalContentAlignment="Right"/>
+                        <Label Content="Usuario generó Nota"
+                               Canvas.Top="171" Canvas.Left="30" Padding="0"
+                               Style="{StaticResource RecFuenteNormal}"/>
+                        <Label x:Name="txtUsuarioGenero" Canvas.Left="156" Canvas.Top="170" 
+                           Width="120" Style="{StaticResource RecTxtSoloLectura}"/>
+                    </Canvas>
+                </TabItem>
+                <TabItem x:Name="tbiNovedades" Header="Movimiento Contable" 
+                          Style="{StaticResource RecTabItem}" Width="200">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition MinHeight="50"/>
+                        </Grid.RowDefinitions>
+                        <Canvas x:Name="cnvDetalles" Grid.Row="0">
+                            <Label Content="MOVIMIENTO" Canvas.Top="5" Canvas.Left="5" 
+                                   FontWeight="Bold"/>
+                        </Canvas>
+                        <DataGrid x:Name="dgrNovedades" Grid.Row="1" Style="{StaticResource RecFuenteNormal}"
+                                  IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False"
+                                  ItemsSource="{Binding}" SelectionMode="Extended" SelectionUnit="FullRow"
+                                  IsReadOnly="True" Background="Transparent" TabIndex="7" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  Margin="50,5,47,5">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Novedad" Width="75">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" IsReadOnly="True"
+											Text="{Binding IdNovedad}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Fecha" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Left" IsReadOnly="True"
+											Text="{Binding FechaNovedad, StringFormat=\{0:dd/MM/yyyy\}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Cuenta Db" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False"
+											Text="{Binding IdCuentaDb}" IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Cuenta Cr" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False"
+											Text="{Binding IdCuentaCr}" IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Valor" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False"
+											Text="{Binding Valor, StringFormat=\{0:c\}}" 
+											HorizontalAlignment="Right"  
+											IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <!--Area inferior de la ventana-->
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+			IsTabStop="False" HorizontalAlignment="Stretch"  
+			Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas x:Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

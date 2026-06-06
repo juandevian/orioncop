@@ -1,0 +1,100 @@
+﻿<Window x:Class="WinSectoresModuloServicio"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Sectores y su Contribución al Módulo" Height="575" Width="510" 
+    WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" FontSize="12">
+    <Grid>
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="160"/>
+                <RowDefinition Height="100*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderThickness="2" BorderBrush="Gray">
+                <Canvas Grid.Row="0">
+                    <Label x:Name="lblCarpeta" Content="Carpeta Actual" Canvas.Left="20" Canvas.Top="10" 
+                       Padding="0" TabIndex="1"/>
+                    <Label x:Name="txtCarpeta" Canvas.Left="170" Canvas.Top="10" Width="310" 
+                       Style="{StaticResource RecTxtSoloLectura}"
+                       TabIndex="2"/>
+                    <Label x:Name="lblCentroUtilidad" Content="Copropiedad Actual" 
+                       Canvas.Left="20" Canvas.Top="40" 
+                       Padding="0" TabIndex="3"/>
+                    <Label x:Name="txtCentroUtilidad" Canvas.Left="170" Canvas.Top="40" Width="310" 
+                       Style="{StaticResource RecTxtSoloLectura}" TabIndex="4"/>
+                    <Label x:Name="lblAno" Content="Año" Canvas.Left="20" Canvas.Top="70" 
+                       Padding="0" TabIndex="5"/>
+                    <Label x:Name="txtAno" Canvas.Left="170" Canvas.Top="70" Width="60" 
+                       Style="{StaticResource RecTxtSoloLectura}" TabIndex="6"/>
+                    <Label x:Name="lblServicio" Content="Servicio" 
+                       Canvas.Left="20" Canvas.Top="100" Padding="0" TabIndex="7"/>
+                    <Label x:Name="txtServicio" Canvas.Left="170" Canvas.Top="100" Width="310" 
+                       Style="{StaticResource RecTxtSoloLectura}" TabIndex="8"/>
+                    <Label x:Name="lblModulo" Content="Módulo de Contribución" 
+                       Canvas.Left="20" Canvas.Top="130" Padding="0" TabIndex="9"/>
+                    <Label x:Name="txtModulo" Canvas.Left="170" Canvas.Top="130" Width="310" 
+                       Style="{StaticResource RecTxtSoloLectura}" TabIndex="10"/>
+                </Canvas>
+            </Border>
+            <Canvas x:Name="cnvDatagrid" Grid.Row="1">
+                <DataGrid x:Name="dgrSectoresModulo" Canvas.Left="20" Canvas.Top="20" Height="260"
+                          IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False"
+                          ItemsSource="{Binding}" SelectionMode="Extended" SelectionUnit="FullRow"
+                          IsReadOnly="True" IsTabStop="True" Background="Transparent" 
+                          ScrollViewer.VerticalScrollBarVisibility="Auto" TabIndex="11">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Id. Sector" Width="60">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                             HorizontalAlignment="Center" Text="{Binding IdSector}"
+                                             IsReadOnly="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Nombre Del Sector Contribuyente" Width="280">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                             Text="{Binding Nombre}" IsReadOnly="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Vlr. Contribución" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                             HorizontalAlignment="Right" 
+                                             Text="{Binding ValorInicial, StringFormat={}{0:c}}"
+                                             IsReadOnly="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Label x:Name="lblValorIni" Content="Total Vlr. Inicial" Canvas.Left="360" Canvas.Top="290" 
+                       Padding="0" TabIndex="12"/>
+                <Label x:Name="txtValorIni" Canvas.Left="490" Canvas.Top="290" Width="120" 
+                       Style="{StaticResource RecTxtSoloLectura}" HorizontalContentAlignment="Right"
+                       TabIndex="13"/>
+                <Label x:Name="lblValorDef" Content="Total Vlr. Definitivo" Canvas.Left="360" Canvas.Top="320" 
+                       Padding="0" TabIndex="14"/>
+                <Label x:Name="txtValorDef" Canvas.Left="490" Canvas.Top="320" Width="120" 
+                       Style="{StaticResource RecTxtSoloLectura}" HorizontalContentAlignment="Right"
+                           TabIndex="15"/>
+                <Button Canvas.Bottom="10" Canvas.Right="20" Content="_Cerrar" 
+                        Style="{StaticResource RecBttAceCan}" Click="Button_Click"
+                        TabIndex="16"/>
+            </Canvas>
+        </Grid>
+    </Grid>
+</Window>

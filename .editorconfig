@@ -1,0 +1,7 @@
+﻿[*.vb]
+
+# BC42104: Se usa la variable antes de que se le haya asignado un valor
+dotnet_diagnostic.BC42104.severity = error
+
+[*.{cs,vb}]
+indent_style=space

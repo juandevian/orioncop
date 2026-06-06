@@ -1,0 +1,59 @@
+﻿<src:ClsFormInterface x:Class="WinProcesaEFac"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+        xmlns:local="clr-namespace:OPT.OrionP.OrionCopIU"
+        mc:Ignorable="d" WindowStyle="SingleBorderWindow" Top="30" Left="30"
+        Icon="RecImagenes/OrionLogo24.png" Height="265" Width="700" 
+        Closing="ClsFormInterface_Closing" FontSize="12">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" x:Name="rwdControl"/>
+            <RowDefinition MinHeight="40"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray" 
+                  VerticalAlignment="Center" TabIndex="1"/>
+        </DockPanel>
+        <Canvas Grid.Row="1">
+            <Label x:Name="lblTitulo" Canvas.Left="40" Canvas.Top="5" Padding="0" 
+                   Content="" IsTabStop="False" Background="Transparent" 
+                   Foreground="Gray" FontSize="14" FontStyle="Italic"/>
+            <Label Canvas.Left="75" Canvas.Top="25" Content="Proceso:" Padding="0"
+                   Style="{StaticResource RecFuenteNormal}"/>
+            <Label x:Name="txtProceso" Foreground="Blue" Background="LightGray" 
+                   Canvas.Top="25" Canvas.Left="155" Width="400"
+                   HorizontalContentAlignment="Center" VerticalAlignment="Center"
+                   FontSize="12" FontWeight="Bold" Padding="0" Content=" "/>
+            <Label Canvas.Left="75" Canvas.Top="50" Content="Avance:" Padding="0"
+                   Style="{StaticResource RecFuenteNormal}"/>
+            <ProgressBar x:Name="pgbAvance" Canvas.Left="155" Canvas.Top="50" Width="355" 
+                         Height="16"/>
+            <Label x:Name="txtAvance" Foreground="Blue" Background="LightGray" 
+                   Canvas.Top="50" Canvas.Left="515" Width="40"
+                   HorizontalContentAlignment="Center" VerticalAlignment="Center"
+                   FontSize="12" FontWeight="Bold" Padding="0" Content=""/>
+        </Canvas>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

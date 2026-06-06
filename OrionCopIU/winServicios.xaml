@@ -1,0 +1,446 @@
+﻿<src:ClsFormInterface x:Class="WinServicios"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+    Title="WinServicios" Height="570" Width="700"
+    WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
+    <Grid x:Name="grdPpal" MenuItem.Click="OnMenuClic">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"  x:Name="rwdControl"/>
+            <RowDefinition MinHeight="200" />
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel x:Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu x:Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center"/>
+        </DockPanel>
+        <Grid Grid.Row="1" ComboBox.SelectionChanged="OnCboCambio" ButtonBase.Click="OnBotonClic" 
+              LostFocus="OnPierdeFoco" GotFocus="OnCogerFoco" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="310*"/>
+            </Grid.RowDefinitions>
+            <Canvas  Grid.Row="0" x:Name="Encabezado">
+                <Label x:Name="lblIdServicio" Content="Id." Canvas.Left="10" Canvas.Top="10" 
+					Padding="0"/>
+                <TextBox x:Name="txtIdServicio" Canvas.Left="30" Canvas.Top="10" Width="40" 
+                       ToolTip="Identificación del Servicio" TabIndex="1"/>
+                <Label x:Name="lblNomServicio" Content="Nombre" Canvas.Left="85" 
+                       Canvas.Top="10" Padding="0"/>
+                <TextBox x:Name="txtNombreServicio" Canvas.Left="140" Canvas.Top="10" 
+                         Width="340" ToolTip="Nombre del Servicio" TabIndex="2"/>
+                <Label x:Name="lblAno" Content="Año" Canvas.Left="495" Canvas.Top="10" 
+					Padding="0" />
+                <Label x:Name="txtAno" Canvas.Left="525" Canvas.Top="10" Width="40"
+                       HorizontalContentAlignment="Right" 
+                       Style="{StaticResource RecTxtSoloLectura}"
+                       ToolTip="Año del Servicio"/>
+                <CheckBox x:Name="chkActivo" Content="Está activo" 
+                                      Canvas.Left="585" Canvas.Top="11" Padding="10,0,0,0" 
+                                      TabIndex="3" Style="{StaticResource RecFuenteNormal}"/>
+            </Canvas>
+            <GridSplitter Grid.Row="1" Background="Gray" HorizontalAlignment="Stretch" 
+				IsTabStop="False" VerticalAlignment="Top" ShowsPreview="True" 
+				Height="2" Opacity=".5"/>
+            <Grid Grid.Row="1">
+                <TabControl x:Name="tbcServicios" Style="{StaticResource RecTabCtrl}"
+                            TabIndex="3">
+                    <TabItem x:Name="tbiGenerales" Header="Datos Generales"
+                             Style="{StaticResource RecTabItem}" Width="200">
+                        <Canvas x:Name="cnvGenerales">
+                            <Label x:Name="lblConceptoSer" Content="Concepto del Servicio" 
+                                   Canvas.Top="11" Canvas.Left="10" 
+                                   Padding="0" Style="{StaticResource RecFuenteNormal}"/>
+                            <TextBox x:Name="txtConceptoSer" Canvas.Left="175" Canvas.Top="10" 
+                                     Width="200" ToolTip="Nombre del Servicio" TabIndex="1" Height="18"
+                                     Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="lblTipoServicio" Content="Tipo de Servicio" 
+                                   Canvas.Top="11" Canvas.Left="415" 
+                                   Padding="0" Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="txtTipoServicio" Canvas.Left="510" Canvas.Top="10" 
+                                   Width="150" Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblDiaFactura" Content="Dia en que se Factura" 
+                                   Canvas.Left="10" Canvas.Top="41" Padding="0" 
+                                   Style="{StaticResource RecFuenteNormal}" />
+                            <TextBox x:Name="txtDiaFactura" Canvas.Left="175" Canvas.Top="40" 
+                                     Width="30" HorizontalContentAlignment="Right" TabIndex="2" 
+                                     Height="18" Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="lblFechaFactura" Canvas.Left="415" Canvas.Top="41" Padding="0" 
+                                   Content="Fecha Factura Presente Período"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="txtFechaFactura" Canvas.Left="585" Canvas.Top="40" 
+                                   Width="75" 
+                                   HorizontalContentAlignment="Right" 
+                                   Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblDiasVence" Content="Vencimiento Facturas (Días)" Canvas.Left="10" 
+                                   Canvas.Top="71" Padding="0" Style="{StaticResource RecFuenteNormal}"/>
+                            <TextBox x:Name="txtDiasVence" Canvas.Left="175" Canvas.Top="70" Width="30"
+                                     HorizontalContentAlignment="Right" TabIndex="3" Height="18"
+                                     Style="{StaticResource RecFuenteNormal}"/>
+                            <CheckBox x:Name="chkVenceFinMes" Content="Vence a fin de Mes ?" 
+                                      Canvas.Left="230"
+                                      Canvas.Top="71" Padding="5,0,0,0" 
+                                      TabIndex="4" Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="lblFechaVence" Content="Fecha Vence Presente Período" 
+                                   Canvas.Left="415" Canvas.Top="71" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="txtFechaVence" Canvas.Left="585" Canvas.Top="70" 
+                                   Width="75" HorizontalContentAlignment="Right"
+                                   Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblPeriodoGracia" Content="Período de Gracia (Días)" 
+                                   Canvas.Left="10" Canvas.Top="101" Padding="0" 
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <TextBox x:Name="txtDiasGracia" Canvas.Left="175" Canvas.Top="100" 
+                                     Width="30" HorizontalContentAlignment="Right"
+                                     TabIndex="6" Style="{StaticResource RecFuenteNormal}" 
+                                     Height="18"/>
+                            <CheckBox x:Name="chkGraciaFinMes" Content="Gracias hasta fin de Mes ?" 
+                                      Canvas.Left="230"
+                                      Canvas.Top="101" Padding="5,0,0,0" 
+                                      TabIndex="4" Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="lblModoCausaMora" Canvas.Left="10" Canvas.Top="131"
+                                   Content="Modo causa los Intereses de Mora" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <ComboBox x:Name="cboModoCausaMora" Canvas.Left="230" Canvas.Top="130"
+                                      Width="180" Padding="6,1,1,1" TabIndex="5"
+                                      Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="lblFechaGracia" Content="Fecha Gracia Presente Período" 
+                                   Canvas.Left="415" Canvas.Top="101" Padding="0" 
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="txtFechaGracia" Canvas.Left="585" Canvas.Top="100" Width="75"
+                                   HorizontalContentAlignment="Right"
+                                   Style="{StaticResource RecTxtSoloLectura}"/>
+                            <CheckBox x:Name="chkFactuPropYPreAgr" Content="Facturar aparte al Propietario"
+                                      Canvas.Left="50" Canvas.Top="175" Padding="10,0,0,0" 
+                                      ToolTip="Seleccionado: Genera una Factura por Propietario y por Predio Agrupador"
+                                      TabIndex="8" 
+                                      Style="{StaticResource RecFuenteNormal}"/>
+                            <CheckBox x:Name="chkEsServicioId" Content="Es Servicio de Identificación"
+                                      Canvas.Left="300" Canvas.Top="175" Padding="10,0,0,0" 
+                                      TabIndex="9" 
+                                      Style="{StaticResource RecFuenteNormal}"/>
+                            <CheckBox x:Name="chkFacturacionProgramable" 
+                                      Content="Es la Facturación Programable" Canvas.Left="50" 
+                                      Canvas.Top="205" Padding="10,0,0,0" 
+                                      TabIndex="10" Style="{StaticResource RecFuenteNormal}"/>
+                            <CheckBox x:Name="chkEsCalculado" 
+                                      Content="Es Calculado y Programado por la Aplicación" 
+                                      Canvas.Left="300" Canvas.Top="205" Padding="10,0,0,0" 
+                                      TabIndex="11" Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="lblTipoBaseCalculo" Content="Tipo de Base para el Cálculo" 
+                                   Canvas.Top="236" Canvas.Left="50" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <ComboBox x:Name="cboTipoBaseCalculo" Canvas.Top="235" Canvas.Left="300" 
+                                      Width="180" Padding="6,1,1,1" TabIndex="12"
+                                      Style="{StaticResource RecFuenteNormal}"/>
+                            <GroupBox x:Name="grbEstado" Header="Estado del Servicio" 
+                                      Canvas.Left="40" Canvas.Top="258" Width="608" 
+                                      Height="50" Style="{StaticResource RecFuenteNormal}">
+                                <Canvas>
+                                    <CheckBox x:Name="chkEstaCalculado" 
+                                              Content="Ya está calculado el Servicio y generada la Programación" 
+                                              Canvas.Left="15" Canvas.Top="5" Padding="10,0,0,0" 
+                                              Background="Transparent" IsEnabled="False" 
+                                              IsTabStop="False" Style="{StaticResource RecFuenteNormal}"/>
+                                    <CheckBox x:Name="chkEstaAjustadoEsAjuste" Content="Está Ajustado"
+                                              Canvas.Right="15" Canvas.Top="5" Padding="10,0,0,0" 
+                                              Background="Transparent" IsEnabled="False" 
+                                              IsTabStop="False" Style="{StaticResource RecFuenteNormal}" Canvas.Left="483"/>
+                                </Canvas>
+                            </GroupBox>
+                        </Canvas>
+                    </TabItem>
+                    <TabItem x:Name="tbiValores" Header="Valores" TabIndex="16"
+                             Style="{StaticResource RecTabItem}" Width="200">
+                        <Grid x:Name="grdModulos">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="90"/>
+                                <RowDefinition Height="130"/>
+                                <RowDefinition MinHeight="40"/>
+                            </Grid.RowDefinitions>
+                            <Canvas x:Name="cnvValores" Grid.Row="0" 
+                                    ComboBox.SelectionChanged ="OnCboCambio">
+                                <Label x:Name="lblValorServicio" Content="Valor Presupuestado" 
+                                   Canvas.Left="15" Canvas.Top="11" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                                <Label x:Name="txtValorPres" Canvas.Left="140" Canvas.Top="10" 
+                                   Width="110" HorizontalContentAlignment="Right" 
+                                   Style="{StaticResource RecTxtSoloLectura}" />
+                                <Label x:Name="lblValorCalculado" Content="Valor de ejecución del Servicio" 
+                                   Canvas.Left="320" Canvas.Top="11" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                                <Label x:Name="txtValorCalculado" Canvas.Left="500" 
+                                   Canvas.Top="10" Width="110" HorizontalContentAlignment="Right" 
+                                   Style="{StaticResource RecTxtSoloLectura}" />
+                                <Label x:Name="lblPeriodoInicio" Content="Período Inicio Facturación: " 
+                                   Canvas.Left="15" Canvas.Top="42" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                                <Label x:Name="lblAnoPeriodo" Content="Año" 
+                                   Canvas.Left="165" Canvas.Top="42" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                                <ComboBox x:Name="cboAnoPeriodo" Canvas.Left="195" Canvas.Top="40" 
+                                      Width="80" Padding="6,1,1,1" TabIndex="1"/>
+                                <Label x:Name="lblMesPeriodo" Content="Mes" 
+                                   Canvas.Left="290" Canvas.Top="42" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                                <ComboBox x:Name="cboMesPeriodo" Canvas.Left="320" 
+                                      Canvas.Top="40" Width="40" Padding="6,1,1,1" 
+                                      TabIndex="2"/>
+                                <Label x:Name="lblCantidadPeri" Content="Cantidad de Períodos a Facturar" 
+                                   Canvas.Left="388" Canvas.Top="42" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                                <TextBox x:Name="txtCantidadPer" Canvas.Left="570" 
+                                     Canvas.Top="40" Width="40" Padding="10,0,5,0" 
+                                     HorizontalContentAlignment="Right" TabIndex="3"/>
+                                <Label Name="lblModCon" Canvas.Top="65" Canvas.Left="215"
+                                       Content="Módulos que contribuyen al Servicio"/>
+                            </Canvas>
+                            <DataGrid Grid.Row="1" x:Name="dgrContribuciones"
+                                      AutoGenerateColumns="False" Margin="95,0,95,5"
+                                      IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}"
+                                      IsReadOnly="True" Background="Transparent" 
+                                      Style="{StaticResource RecFuenteNormal}"
+                                      IsTabStop="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id." Width="40">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" 
+                                                         BorderThickness="0" IsReadOnly="True"
+                                                         Text="{Binding IdModuloContribucion}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Nombre del mòdulo de contribuciòn" Width="305">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" 
+                                                         BorderThickness="0" IsReadOnly="True"
+                                                         Text="{Binding NombreModulo}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Valor contribuciòn" Width="125">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0"
+                                                         HorizontalContentAlignment="Right"
+                                                         Text="{Binding ValorPres, StringFormat=\{0:c\}}"
+                                                         IsReadOnly="True"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="LightGray"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                            </DataGrid>
+                            <Canvas x:Name="cnvBotonesCont" Grid.Row="2">
+                                <Button x:Name="bttAgregarContribucion" Canvas.Left="60" 
+                                        Canvas.Top="5" Width="160" 
+                                        Style="{StaticResource RecEstiloBttGen}"
+                                        Height="24" TabIndex="2" >
+                                    <DockPanel Width="158">
+                                        <Label Content="Nueva contribución" Background="Transparent" 
+                                               Padding="0" Margin="5,0,0,0" DockPanel.Dock="Left"
+                                               VerticalContentAlignment="Center" IsTabStop="False"
+                                               Style="{StaticResource RecFuenteNormal}"/>
+                                        <Image Source="RecImagenes/nuevo.png" Width="20" 
+                                                   Height="20" HorizontalAlignment="Right" 
+                                                   DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                    </DockPanel>
+                                </Button>
+                                <Button x:Name="bttModificarContribucion" Canvas.Left="260" 
+                                        Canvas.Top="5" Width="160" 
+                                        Style="{StaticResource RecEstiloBttGen}"
+                                        TabIndex="3" Height="24">
+                                    <DockPanel Width="158">
+                                        <Label Content="Modificar contribuciòn" Background="Transparent"
+                                               Padding="0" Margin="5,0,0,0" DockPanel.Dock="Left"
+                                               VerticalContentAlignment="Center" IsTabStop="False"
+                                               Style="{StaticResource RecFuenteNormal}"/>
+                                        <Image Source="RecImagenes/modificar.png" Width="20" Height="20" 
+            					HorizontalAlignment="Right" DockPanel.Dock="Right" 
+            					Margin="0,0,5,0"/>
+                                    </DockPanel>
+                                </Button>
+                                <Button x:Name="bttEliminarContribucion" Canvas.Left="460" Canvas.Top="5" 
+                                        Width="160" Style="{StaticResource RecEstiloBttGen}"
+                                        TabIndex="4" Height="24">
+                                    <DockPanel Width="158">
+                                        <Label Content="Eliminar contribución" Background="Transparent" 
+                                               Padding="0" Style="{StaticResource RecFuenteNormal}"
+                                               Margin="5,0,0,0" DockPanel.Dock="Left"
+                                               VerticalContentAlignment="Center" IsTabStop="False"/>
+                                        <Image Source="RecImagenes/suprimir.png" Width="20" 
+                                               Height="20" HorizontalAlignment="Right" 
+                                               DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                    </DockPanel>
+                                </Button>
+                                <Label x:Name="lblAdvertencia" Content="NOTA:" FontWeight="Bold" 
+                                   Canvas.Left="15" Canvas.Top="40" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                                <TextBox x:Name="txtAdvertencia" Canvas.Left="60" Canvas.Top="40" 
+                                     Width="590" Height="44" VerticalContentAlignment="Center"
+                                     TextWrapping="Wrap" Background="Transparent" Padding="0"
+                                     IsTabStop="False" IsReadOnly="True" TextAlignment="Justify"
+                                     Text="El valor de la cuota de administración siempre es calculado para que el presupuesto anual, ingresado en el Año o en los Módulos de Contribución, sea cubierto en los doce períodos del año."
+                                     Style="{StaticResource RecFuenteNormal}"/>
+
+                            </Canvas>
+                        </Grid>
+                    </TabItem>
+                    <TabItem x:Name="tbiParContables" Header="Parámetros Contables" 
+                             Style="{StaticResource RecTabItem}" Width="200" TabIndex="20">
+                        <Canvas x:Name="cnvParametrosContables">
+                            <Label x:Name="lblCtaDebito" Content="Código Cuenta por Cobrar (Db)" 
+                                   Canvas.Left="25" Canvas.Top="11" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <Button x:Name="bttEncontrarCtaDb" Canvas.Left="250" Canvas.Top="10"
+                                    Style="{StaticResource RecEstiloBttEnc}"
+                                    TabIndex="21"
+                                    ToolTip="Clic aqui para buscar la Cuenta Db(Cuenta por Cobrar) del Servicio."/>
+                            <TextBox x:Name="txtCtaDebito" Canvas.Left="265" Canvas.Top="10"
+                                     Width="90" TabIndex="22" Height="18"
+                                     ToolTip="CxC "/>
+                            <Label x:Name="txtNomCtaDebito" Canvas.Left="370" Canvas.Top="10" 
+                                   Width="270" Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblCtaCredito" Content="Código Cuenta Ingresos (Cr)" 
+                                   Canvas.Left="25" Canvas.Top="41" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <Button x:Name="bttEncontrarCtaCr" Canvas.Left="250" Canvas.Top="40"
+                                    Style="{StaticResource RecEstiloBttEnc}" TabIndex="23"
+                                    ToolTip="Clic aqui para buscar la Cuenta Cr(Ingreso) del Servicio."/>
+                            <TextBox x:Name="txtCtaCredito" Canvas.Left="265" 
+                                     Canvas.Top="40" Width="90" TabIndex="24" Height="18"
+                                     ToolTip="ING. "/>
+                            <Label x:Name="txtNomCtaCredito" Canvas.Left="370" Canvas.Top="40"
+                                   Width="270" Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblCtaDevol" Content="Código Cuenta Devolución (Db)" 
+                                   Canvas.Left="25" Canvas.Top="71" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <Button x:Name="bttEncontrarCtaDev" Canvas.Left="250" Canvas.Top="70"
+                                    Style="{StaticResource RecEstiloBttEnc}" TabIndex="25"
+                                    ToolTip="Clic aqui para buscar la Cuenta Cr(Ingreso) del Servicio."/>
+                            <TextBox x:Name="txtCtaDevolucion" Canvas.Left="265" 
+                                     Canvas.Top="70" Width="90" TabIndex="26" Height="18"
+                                     ToolTip="DEVOLUCIONES "/>
+                            <Label x:Name="txtNomCtaDevolucion" Canvas.Left="370" Canvas.Top="70"
+                                   Width="270" Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblTipoTerCtaCrédito" Content="Tipo Tercero Cuenta Cédito" 
+                                   Canvas.Left="25" Canvas.Top="101" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <ComboBox x:Name="cboTipoTerCtaCr" Canvas.Left="265" Canvas.Top="100" 
+                                      Width="120" Padding="6,1,1,1" TabIndex="27"
+                                      Height="18"/>
+                            <Label x:Name="lblTerCtaCrédito" Content="Tercero Cuenta Cédito" 
+                                   Canvas.Left="25" Canvas.Top="131" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <Button x:Name="bttEncontrarTerCr" Canvas.Left="250" Canvas.Top="130"
+                                    Style="{StaticResource RecEstiloBttEnc}" TabIndex="28"
+                                    ToolTip="Clic aqui para buscar la Cuenta Cr(Ingreso) del Servicio."/>
+                            <TextBox x:Name="txtIdTerceroCr" Canvas.Left="265" 
+                                     Canvas.Top="130" Width="90" TabIndex="29" Height="18"/>
+                            <Label x:Name="txtNomTerceroCtaCe" Canvas.Left="370" Canvas.Top="130"
+                                   Width="270" Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblCtaMora" Content="Código Cuenta Ingresos Int. Mora (Cr)" 
+                                   Canvas.Left="25" Canvas.Top="161" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <Button x:Name="bttEncontrarCtaMora" Canvas.Left="250" Canvas.Top="160"
+                                    Style="{StaticResource RecEstiloBttEnc}" TabIndex="30"
+                                    ToolTip="Clic aqui para buscar la Cuenta Cr(Ingreso) del Servicio."/>
+                            <TextBox x:Name="txtCtaMora" Canvas.Left="265" Canvas.Top="160"
+                                     Width="90" TabIndex="31" Height="18"
+                                     ToolTip="ING. INT. MORA  "/>
+                            <Label x:Name="txtNomCtaMora" Canvas.Left="370" Canvas.Top="160"
+                                   Width="270" Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label x:Name="lblCtaIva" Content="Código Cuenta IVA (Cr)" 
+                                   Canvas.Left="25" Canvas.Top="191" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <Button x:Name="bttEncontrarCtaIva" Canvas.Left="250" Canvas.Top="190"
+                                    Style="{StaticResource RecEstiloBttEnc}" TabIndex="32"
+                                    ToolTip="Clic aqui para buscar la Cuenta del IVA."/>
+                            <TextBox x:Name="txtCtaIva" Canvas.Left="265" Canvas.Top="190"
+                                     Width="90" TabIndex="33" Height="18"/>
+                            <Label x:Name="txtNomCtaIva" Canvas.Left="370" Canvas.Top="190"
+                                   Width="270" Style="{StaticResource RecTxtSoloLectura}"
+                                   ToolTip="CUENTA IVA"/>
+                            <Label x:Name="lblTarifaIva" Content="Tarifa del IVA" 
+                                   Canvas.Left="25" Canvas.Top="221" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <TextBox x:Name="txtTarifaIva" Canvas.Left="265" Canvas.Top="220" 
+                                     Width="90" HorizontalContentAlignment="Right" 
+                                     TabIndex="34" Height="18"/>
+                            <CheckBox x:Name="chkEsExcluido" Content="Es Excluido del IVA"
+                                      Canvas.Left="370" Canvas.Top="221" Padding="20,0,0,0"
+                                      TabIndex="35" Style="{StaticResource RecFuenteNormal}"/>
+                            <Label x:Name="lblTarifaRetefuente" Content="Tarifa Retención en la Fuente"
+                                   Canvas.Left="25" Canvas.Top="251" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <TextBox x:Name="txtTarifaretefuente" Canvas.Left="265" 
+                                     Canvas.Top="250" Width="90" HorizontalContentAlignment="Right" 
+                                     TabIndex="36" Height="18"/>
+                            <Label x:Name="lblBaseRetefuente" Content="Se Retiene en la fuente a partir de" 
+                                   Canvas.Left="370" Canvas.Top="251" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <TextBox x:Name="txtBaseretefuente" Canvas.Left="555" Canvas.Top="251" 
+                                     Width="85" HorizontalContentAlignment="Right" 
+                                     TabIndex="37" Height="18"/>
+                            <Label x:Name="lblTarifaReteIca" Content="Tarifa Retención ICA"
+                                   Canvas.Left="25" Canvas.Top="281" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <TextBox x:Name="txtTarifaReteIca" Canvas.Left="265" 
+                                     Canvas.Top="280" Width="90" HorizontalContentAlignment="Right" 
+                                     TabIndex="38" Height="18"/>
+                            <Label x:Name="lblBaseReteIca" Content="Se Retiene ICA a partir de" 
+                                   Canvas.Left="370" Canvas.Top="281" Padding="0"
+                                   Style="{StaticResource RecFuenteNormal}"/>
+                            <TextBox x:Name="txtBasereteica" Canvas.Left="555" Canvas.Top="280" 
+                                     Width="85" HorizontalContentAlignment="Right" 
+                                     TabIndex="39" Height="18"/>
+                        </Canvas>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top"
+                      IsTabStop="False" HorizontalAlignment="Stretch"  
+                      Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana" ButtonBase.Click="OnBotonClic" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <Button x:Name="bttSectores" Canvas.Left="30"   Canvas.Top="5" Padding="0" Margin="0"
+                        Width="165" Height="22" TabIndex="41">
+                    <DockPanel Width="160">
+                        <Image Source="RecImagenes/IrA.png" Width="17" Height="17" 
+                                HorizontalAlignment="Left" DockPanel.Dock="Left" Margin="3,0,0,0"/>
+                        <Label Content="Mostrar Sectores Servicio" Background="Transparent" Padding="0" 
+                                DockPanel.Dock="Right" Margin="5,0,0,0"
+                                VerticalContentAlignment="Center" IsTabStop="False"/>
+                    </DockPanel>
+                </Button>
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

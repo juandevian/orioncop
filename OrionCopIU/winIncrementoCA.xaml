@@ -1,0 +1,40 @@
+﻿<Window x:Class="WinIncrementoCA"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png"
+    Title="Incremento Presupuesto" Height="280" Width="400" Loaded="Window_Loaded" FontSize="12">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition MinHeight="20"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0" Margin="0,20,0,0">
+            <!--Label Relleno-->
+            <Label Height="10" DockPanel.Dock="Top"/>
+            <!--Label Notificaciones-->
+            <Label x:Name="lblNotifica" Background="Transparent" Height="16"
+                   Padding="10,0,0,0" BorderThickness="1" BorderBrush="LightGray"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <Canvas Grid.Row="1">
+            <Label Content="Incremento del Presupuesto para el Nuevo Año" Canvas.Left="20"
+                   Canvas.Top="20"  Foreground="Gray" FontSize="17" FontStyle="Italic"
+                   Padding="0"/>
+            <Label Content="Ingrese el incremento para el nuevo Año (%)" Canvas.Left="25"
+                   Canvas.Top="61" Padding="0"/>
+            <TextBox x:Name="txtIncremento" Canvas.Left="303" Canvas.Top="60" Width="50"
+                     Background="Transparent" HorizontalContentAlignment="Right" TabIndex="1"
+                     Padding="0,0,0,0" />
+            <Label Content="Cálculo de las Cuotas de administración basado en:" Canvas.Left="25"
+                   Canvas.Top="91" Padding="0"/>
+            <ComboBox x:Name="CboBaseCalcCA" Canvas.Left="133" Canvas.Top="115" Width="220" 
+                      TabIndex="1" />
+            <Button Name="bttAceptar" Content="_Aceptar" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Right="140" Canvas.Top="155" TabIndex="5" Canvas.Left="155"/>
+            <Button Name="bttCancelar" Content="_Cancelar" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Right="20" Canvas.Top="155" TabIndex="6" Canvas.Left="275" />
+        </Canvas>
+    </Grid>
+</Window>

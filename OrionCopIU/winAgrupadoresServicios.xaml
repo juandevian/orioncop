@@ -1,0 +1,133 @@
+﻿<src:ClsFormInterface x:Class="WinAgrupadoresServicios"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Conceptos de Facturación" Height="600" Width="850" WindowStyle="SingleBorderWindow" 
+            WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png">
+    <Grid Name="grdPpal">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"  Name="rwdControl"/>
+            <RowDefinition MinHeight="200" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0" >
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center"/>
+        </DockPanel>
+        <Canvas Grid.Row="1" Control.LostFocus="OnPierdeFoco" Control.GotFocus="OnCogerFoco">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition MinHeight="300"/>
+                </Grid.RowDefinitions>
+                <GridSplitter Grid.Row="1" Background="Gray" HorizontalAlignment="Stretch" IsTabStop="False"
+                              VerticalAlignment="Top" ShowsPreview="True" Height="2" Opacity=".5"/>
+                <Canvas Grid.Row="0">
+                    <Label x:Name="lblIdAgrupador" Content="Id. Concepto Facturación" Canvas.Left="23" Canvas.Top="11" 
+                           Padding="0" />
+                    <TextBox x:Name="txtIdAgrupador" Canvas.Left="170" Canvas.Top="10" Width="100"/>
+                    <Label x:Name="lblNombreAgru" Content="Nombre del Concepto de Facturación" 
+                           Canvas.Left="345" Canvas.Top="11" Padding="0"/>
+                    <TextBox x:Name="txtNombre" Canvas.Left="560" Canvas.Top="10" Width="260" 
+                             TabIndex="1"/>
+                </Canvas>
+                <Canvas Grid.Row="1">
+                    <GroupBox Header="Condición Especial" Canvas.Left="20" Canvas.Top="10" 
+                              Width="800" Height="60" IsTabStop="False">
+                        <Canvas>
+                            <RadioButton Content="Facturar a Propietario por Predio Agrupador" 
+                                         Canvas.Left="20" Canvas.Top="11" Click="RadioButton_Click"
+                                         TabIndex="2" x:Name="rdbProPorPreAgr"/>
+                            <RadioButton Content="Facturar a Propietario Sin Predio Agrupador" 
+                                         Canvas.Left="290" Canvas.Top="10" Click="RadioButton_Click"
+                                         TabIndex="3" x:Name="rdbProSinPreAgr"/>
+                            <RadioButton Content="No Facturar a Propietario" 
+                                         Canvas.Left="560" Canvas.Top="10" Click="RadioButton_Click"
+                                         TabIndex="3" x:Name="rdbNoFactPorPro" IsChecked="True"/>
+                        </Canvas>
+                    </GroupBox>
+                    <GroupBox Header="Fecha de Facturación" Canvas.Left="20" Canvas.Top="80" Width="800"
+                              Height="60" IsTabStop="False">
+                        <Canvas Margin="0,0,0,0.2">
+                            <Label x:Name="lblDiaFactura" Content="Dia en que se Factura" Canvas.Left="20" 
+                                   Canvas.Top="10" Padding="0"/>
+                            <TextBox x:Name="txtDiaFactura" Canvas.Left="220" Canvas.Top="10" Width="40"
+                                     HorizontalContentAlignment="Right"
+                                     TabIndex="4"/>
+                            <Label x:Name="lblFechaFactura" Content="Fecha Facturación Presente Período" Canvas.Left="480" 
+                                   Canvas.Top="10" Padding="0"/>
+                            <Label x:Name="txtFechaFactura" Canvas.Left="700" Canvas.Top="10" Width="80" 
+                                   HorizontalContentAlignment="Right" 
+                                   Style="{StaticResource RecTxtSoloLectura}"/>
+                        </Canvas>
+                    </GroupBox>
+                    <GroupBox Header="Vencimiento de las Facturas" Canvas.Left="20" Canvas.Top="150" 
+                              Width="800" Height="60" IsTabStop="False">
+                        <Canvas>
+                            <Label x:Name="lblDiasVence" Content="Vencimiento Facturas (Días)" Canvas.Left="20" 
+                                   Canvas.Top="10" Padding="0" />
+                            <TextBox x:Name="txtDiasVence" Canvas.Left="220" Canvas.Top="10" Width="40"
+                                     HorizontalContentAlignment="Right" TabIndex="5"/>
+                            <CheckBox x:Name="chkVenceFinMes" Content="? Vence a fin de Mes" Canvas.Left="290"
+                                      Canvas.Top="10" FlowDirection="RightToLeft" Padding="30,0,0,0" 
+                                      TabIndex="6"/>
+                            <Label x:Name="lblFechaVence" Content="Fecha de Vencimiento Presente Período" 
+                                   Canvas.Left="480" Canvas.Top="10" Padding="0"/>
+                            <Label x:Name="txtFechaVence" Canvas.Left="700" Canvas.Top="10" Width="80"
+                                   HorizontalContentAlignment="Right"
+                                   Style="{StaticResource RecTxtSoloLectura}"/>
+                        </Canvas>
+                    </GroupBox>
+                    <GroupBox Header="Período de Gracia para el Pago" Canvas.Left="20" Canvas.Top="220" 
+                              Width="800" Height="60" IsTabStop="False" >
+                        <Canvas>
+                            <Label x:Name="lblPeriodoGracia" Content="Período de Gracia (Días)" Canvas.Left="20" 
+                                   Canvas.Top="10" Padding="0" />
+                            <TextBox x:Name="txtDiasGracia" Canvas.Left="220" Canvas.Top="10" Width="40"
+                                     HorizontalContentAlignment="Right"
+                                     TabIndex="7"/>
+                            <CheckBox x:Name="chkGraciaFinMes" Content="? Gracia hasta fin de Mes" Canvas.Left="290"
+                                      Canvas.Top="10" FlowDirection="RightToLeft" Padding="10,0,0,0" 
+                                      TabIndex="8"/>
+                            <Label x:Name="lblFechaGracia" Content="Fecha vence Gracia Presente Período" 
+                                   Canvas.Left="480" Canvas.Top="10" Padding="0" />
+                            <Label x:Name="txtFechaGracia" Canvas.Left="700" Canvas.Top="10" Width="80"
+                                   HorizontalContentAlignment="Right"
+                                   Style="{StaticResource RecTxtSoloLectura}"/>
+                        </Canvas>
+                    </GroupBox>
+                    <Label x:Name="lblPieFra1" Content="Pie de Factura Uno" Canvas.Left="20"
+                                   Canvas.Top="300" Padding="0"/>
+                    <TextBox x:Name="txtPieFac1" Canvas.Left="140" Canvas.Top="300" Width="680" Height="36"
+                             HorizontalAlignment="Left" TextAlignment="Justify" 
+                             TextWrapping="Wrap" TabIndex="9"/>
+                    <Label x:Name="lblPieFra2" Content="Pie de Factura Dos" Canvas.Left="20"
+                                   Canvas.Top="345" Padding="0"/>
+                    <TextBox x:Name="txtPieFac2" Canvas.Left="140" Canvas.Top="345" Width="680" Height="36"
+                             HorizontalAlignment="Left" TextAlignment="Justify" 
+                             TextWrapping="Wrap" TabIndex="10"/>
+                </Canvas>
+            </Grid>
+        </Canvas>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

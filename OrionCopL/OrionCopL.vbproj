@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AE0EA285-2FF1-4338-8FEE-B59AE837DA2F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>OPT.OrionP.OrionCopL</RootNamespace>
+    <AssemblyName>OrionCopL</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>..\..\C_ReglasDirectricesDiseñoExtendidas.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>DES=1</DefineConstants>
+    <Optimize>false</Optimize>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>false</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+    <DefineConstants>DES=0</DefineConstants>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <CodeAnalysisRuleSet>..\..\C_ReglasDirectricesDiseñoExtendidas.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Text</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>strnampanokey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>false</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DES = 1</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>..\..\C_ReglasDirectricesDiseñoExtendidas.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DES = 0</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Word\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4058.19167, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Recursos\packages\QR\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="OPT.OrionP.GesDat" />
+    <Import Include="OPT.OrionP.OrionCopL" />
+    <Import Include="OPT.OrionP.PanL" />
+    <Import Include="OPT.OrionP.PanL.Aplicacion" />
+    <Import Include="OPT.OrionP.PanL.Ubicacion" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.IO" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Windows" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="acOrionCopL.vb" />
+    <Compile Include="clsActualizacionApl.vb" />
+    <Compile Include="clsAno.vb" />
+    <Compile Include="clsAnticipo.vb" />
+    <Compile Include="clsCalculosServicios.vb" />
+    <Compile Include="clsCentroUtilidadOriCop.vb" />
+    <Compile Include="clsCliente.vb" />
+    <Compile Include="clsCorreoE.vb" />
+    <Compile Include="clsCuentaBanco.vb" />
+    <Compile Include="ClsInformeCont.vb" />
+    <Compile Include="clsDocumento.vb" />
+    <Compile Include="clsEstadoCuenta.vb" />
+    <Compile Include="clsFactura.vb" />
+    <Compile Include="clsFacturaEstado.vb" />
+    <Compile Include="clsHistModServicio.vb" />
+    <Compile Include="clsHistServicio.vb" />
+    <Compile Include="clsImportarOrion.vb" />
+    <Compile Include="clsItemFactura.vb" />
+    <Compile Include="clsItemNotaCon.vb" />
+    <Compile Include="clsItemNotaCr.vb" />
+    <Compile Include="clsItemNotaDb.vb" />
+    <Compile Include="clsItemProgramaFact.vb" />
+    <Compile Include="clsItemRecCaja.vb" />
+    <Compile Include="clsMedioPago.vb" />
+    <Compile Include="clsModuloContribucion.vb" />
+    <Compile Include="clsModuloServicio.vb" />
+    <Compile Include="clsNotaAjusteCuotaAdmin.vb" />
+    <Compile Include="clsNotaCon.vb" />
+    <Compile Include="clsNotaCr.vb" />
+    <Compile Include="clsNotaDb.vb" />
+    <Compile Include="clsNotaDevAnt.vb" />
+    <Compile Include="clsNotaReversionCr.vb" />
+    <Compile Include="clsNovedad.vb" />
+    <Compile Include="clsNovedadAnticipo.vb" />
+    <Compile Include="clsOrionCop.vb" />
+    <Compile Include="clsPeriodo.vb" />
+    <Compile Include="ClsPropietario.vb" />
+    <Compile Include="clsProveedorEFac.vb" />
+    <Compile Include="clsXProvEFacCentroUtilOri.vb" />
+    <Compile Include="clsReciboCaja.vb" />
+    <Compile Include="clsSectorModulo.vb" />
+    <Compile Include="clsSectorModuloServicio.vb" />
+    <Compile Include="clsServicio.vb" />
+    <Compile Include="clsTasaMora.vb" />
+    <Compile Include="clsSector.vb" />
+    <Compile Include="clsPredio.vb" />
+    <Compile Include="clsXTerCliente.vb" />
+    <Compile Include="mDefPubOrionCopL.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Descripcion Clases\AgrupadorServicios.docx" />
+    <None Include="Descripcion Clases\Año.docx" />
+    <None Include="Descripcion Clases\Causación intereses de mora.docx" />
+    <None Include="Descripcion Clases\CentroUtilidadOriCop.docx" />
+    <None Include="Descripcion Clases\Cliente.docx" />
+    <None Include="Descripcion Clases\Factruracion.docx" />
+    <None Include="Descripcion Clases\Periodo.docx" />
+    <None Include="Descripcion Clases\Predio.docx" />
+    <None Include="Descripcion Clases\PUC.xlsx" />
+    <None Include="Descripcion Clases\Servicio.docx" />
+    <None Include="Descripcion Clases\Tareas.docx" />
+    <None Include="Diseño\ManejoPresupuestoAdmin.xlsx" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="strnampanokey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Comunes\PanDat\PanDat.vbproj">
+      <Project>{4821bbce-ef90-4f8c-8c56-eb9b2ecc435c}</Project>
+      <Name>PanDat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Comunes\PanL\PanL.vbproj">
+      <Project>{672afae9-ed6a-4404-a42e-73629924c9af}</Project>
+      <Name>PanL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

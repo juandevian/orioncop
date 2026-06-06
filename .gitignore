@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+packages/
+*.user
+*.suo
+*.pfx
+*.publishsettings
+appsettings.*.local.json
+

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Reglas de OriIntCon" Description="Reglas de análisis de código de OriIntCon.vbproj." ToolsVersion="16.0">
+  <Include Path="basiccorrectnessrules.ruleset" Action="Default" />
+  <Include Path="basicdesignguidelinerules.ruleset" Action="Default" />
+  <Include Path="managedminimumrules.ruleset" Action="Default" />
+  <Include Path="minimumrecommendedrules.ruleset" Action="Default" />
+  <Include Path="nativerecommendedrules.ruleset" Action="Default" />
+  <Rules AnalyzerId="Microsoft.NetFramework.VisualBasic.Analyzers" RuleNamespace="Microsoft.NetFramework.VisualBasic.Analyzers">
+    <Rule Id="CA3076" Action="Warning" />
+    <Rule Id="CA3077" Action="Warning" />
+  </Rules>
+</RuleSet>

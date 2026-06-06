@@ -1,0 +1,52 @@
+﻿<src:ClsFormInterface x:Class="WinLogOn"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Usuario: " Height="300" Width="480" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12"
+    Closed="clsFormInterface_Closed">
+    <Grid Name="grdPpal" Control.LostFocus="OnPierdeFoco"
+          Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"  Name="rwdControl"/>
+            <RowDefinition MinHeight="100" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--Label relleno-->
+            <Label Height="40" DockPanel.Dock="Top"/>
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+        </DockPanel>
+        <Canvas Grid.Row="1">
+            <Label x:Name="lblIdUsuario" Content="Usuario" Canvas.Left="168" Canvas.Top="10" 
+                   Padding="0" TabIndex="0"/>
+            <TextBox x:Name="txtUsuario" Canvas.Left="248" Canvas.Top="10" Width="160"  
+                     TabIndex="1" />
+            <Label x:Name="lblContrasena" Content="Contraseña" Canvas.Left="168" Canvas.Top="45" 
+                   Padding="0" TabIndex="2"/>
+            <PasswordBox x:Name="pwbContrasena" Canvas.Left="248" Canvas.Top="45" Width="160"  
+                         TabIndex="3"/>
+            <Label x:Name="lblCarpeta" Content="Carpeta de Trabajo" Canvas.Left="53" Canvas.Top="80" 
+                   Padding="0" TabIndex="4"/>
+            <ComboBox x:Name="cboCarpeta" Canvas.Left="168" Canvas.Top="80" Width="240" Padding="4,1,1,1" 
+                      TabIndex="5"/>
+            <Label x:Name="lblCenUtilidad" Content="Copropiedad" Canvas.Left="53" Canvas.Top="115" 
+                   Padding="0" TabIndex="6"/>
+            <ComboBox x:Name="cboCenUtilidad" Canvas.Left="168" Canvas.Top="115" Width="240" Padding="4,1,1,1" 
+                      TabIndex="7"/>
+        </Canvas>
+        <Image Source="RecImagenes/LogOn.png" HorizontalAlignment="Left" Height="70" Margin="69,4.667,0,0" 
+               Grid.Row="1" VerticalAlignment="Top" Width="70"/>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

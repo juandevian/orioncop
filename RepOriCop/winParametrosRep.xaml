@@ -1,0 +1,151 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WinParametrosRep"
+    Title="Reporte de Ingresos a Caja y Bancos" Height="260" Width="380" 
+        WindowStyle="SingleBorderWindow" Left="600" Top=" 30"
+        Loaded="Window_Loaded" >
+    <Grid LostFocus="OnPierdeFoco" ButtonBase.Click="Button_Click"
+          GotFocus="OnCogerFoco">
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="100"/>
+                <RowDefinition Height="53"/>
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0" x:Name="cnvCajaBancos" d:IsHidden="True">
+                <Label x:Name="lblFechaIni" Canvas.Left="190" Canvas.Top="3" 
+					Content="Fecha Inicial" 
+					Padding="0"/>
+                <Label x:Name="lblFechaFin" Canvas.Left="196" Canvas.Top="64" 
+					Content="Fecha Final" Padding="0"/>
+                <Label x:Name="lblFechaDesde" Canvas.Left="17" Canvas.Top="25" 
+					Content="Mostrar los Ingresos entre el" 
+					Padding="0"/>
+                <DatePicker x:Name="dtpFechaDesde" Canvas.Left="190" Canvas.Top="20" 
+					Width="130" 
+					TabIndex="1"/>
+                <Label x:Name="lblFechaHasta" Canvas.Left="150" Canvas.Top="86"
+					Content="y el" Padding="0"/>
+                <DatePicker x:Name="dtpFechaHasta" Canvas.Left="196" Canvas.Top="82" 
+					Width="130" TabIndex="2"/>
+            </Canvas>
+            <Canvas Grid.Row="0" x:Name="cnvEdadCartera" Height="180" Width="375" d:IsHidden="True">
+                <Label x:Name="Limite1" Content="Primer Rango" 
+                		Canvas.Left="35" Canvas.Top="5" Padding="0"/>
+                <Label Content="Entre 1" Padding="0"
+                		Canvas.Left="155" Canvas.Top="5"/>
+                <Label Content="y" Padding="0"
+                		Canvas.Left="240" Canvas.Top="5"/>
+                <TextBox x:Name="txtLimite1" Canvas.Left="260" Canvas.Top="5" 
+                		Width="35" HorizontalContentAlignment="Right" 
+                		Background="Transparent"/>
+                <Label Content="Días" Padding="0"
+                		Canvas.Left="320" Canvas.Top="5"/>
+                <Label x:Name="Limite2" Content="Segundo Rango" 
+                		Canvas.Left="35" Canvas.Top="31" Padding="0"/>
+                <Label x:Name="lblEntre2" Content="Entre" Padding="0"
+                		Canvas.Left="155" Canvas.Top="31"/>
+                <Label Content="y" Padding="0"
+                		Canvas.Left="240" Canvas.Top="31"/>
+                <TextBox x:Name="txtLimite2" Canvas.Left="260" Canvas.Top="30" 
+                		Width="35" HorizontalContentAlignment="Right" 
+                		Background="Transparent"/>
+                <Label Content="Días" Padding="0"
+                		Canvas.Left="320" Canvas.Top="31"/>
+                <Label x:Name="Limite3" Content="Tercer Rango" 
+                		Canvas.Left="35" Canvas.Top="56" Padding="0"/>
+                <Label x:Name="lblEntre3" Content="Entre" Padding="0"
+                		Canvas.Left="155" Canvas.Top="56"/>
+                <Label Content="y" Padding="0"
+                		Canvas.Left="240" Canvas.Top="56"/>
+                <TextBox x:Name="txtLimite3" Canvas.Left="260" Canvas.Top="55" 
+                		Width="35" HorizontalContentAlignment="Right" 
+                		Background="Transparent"/>
+                <Label Content="Días" Padding="0"
+                		Canvas.Left="320" Canvas.Top="56"/>
+                <Label x:Name="Limite4" Content="Cuarto Rango" 
+                		Canvas.Left="35" Canvas.Top="81" Padding="0"/>
+                <Label x:Name="lblEntre4" Content="Entre" Padding="0"
+                		Canvas.Left="155" Canvas.Top="81"/>
+                <Label Content="y" Padding="0"
+                		Canvas.Left="240" Canvas.Top="81"/>
+                <TextBox x:Name="txtLimite4" Canvas.Left="260" Canvas.Top="80" 
+                		Width="35" HorizontalContentAlignment="Right" 
+                		Background="Transparent"/>
+                <Label Content="Días" Padding="0"
+                		Canvas.Left="320" Canvas.Top="81"/>
+                <Label x:Name="Limite5" Content="Quinto Rango" 
+                		Canvas.Left="35" Canvas.Top="106" Padding="0"/>
+                <Label x:Name="lblEntre5" Content="Más de" Padding="0"
+                		Canvas.Left="155" Canvas.Top="106"/>
+                <TextBox x:Name="txtLimite5" Canvas.Left="260" Canvas.Top="105" 
+                		Width="35" HorizontalContentAlignment="Right" 
+                		Background="Transparent" IsReadOnly="True"
+                		IsTabStop="False"/>
+                <Label Content="Días" Padding="0"
+                		Canvas.Left="320" Canvas.Top="106"/>
+                <GroupBox Header="Tipo de Reporte" Height="50" Canvas.Left="35" Canvas.Top="128" Width="308">
+                    <Canvas ButtonBase.Click="OnRdbClick">
+                        <RadioButton x:Name="rdbDetallado" Content="Detallado" 
+                				Canvas.Left="20" Canvas.Top="7"/>
+                        <RadioButton x:Name="rdbResumido" Content="Resumido" 
+                				Canvas.Left="120" Canvas.Top="7"/>
+                        <RadioButton x:Name="rdbGrafico" Content="Gráfico" 
+                				Canvas.Left="220" Canvas.Top="7"/>
+                    </Canvas>
+                </GroupBox>
+            </Canvas>
+            <Canvas Grid.Row="0" x:Name="cnvInfDiario" d:IsHidden="True" Height="180" Width="375">
+                <Label x:Name="lblFechaIniIng" Canvas.Left="214" Canvas.Top="13" 
+                		Content="Fecha Inicial" 
+                		Padding="0"/>
+                <Label x:Name="lblFechaFinIng" Canvas.Left="220" Canvas.Top="72" 
+                		Content="Fecha Final" Padding="0"/>
+                <Label x:Name="lblInforme" Canvas.Left="10" Canvas.Top="34" 
+                		Content="Generar el informe entre el" 
+                		Padding="0"/>
+                <DatePicker x:Name="dtpFechaDesdeIng" Canvas.Left="214" Canvas.Top="30" 
+                		Width="130" 
+                		TabIndex="1"/>
+                <Label x:Name="lblFechaHastaIng" Canvas.Left="150" Canvas.Top="94"
+                		Content="y el" Padding="0"/>
+                <DatePicker x:Name="dtpFechaHastaIng" Canvas.Left="220" Canvas.Top="90" 
+                		Width="130" TabIndex="2"/>
+            </Canvas>
+            <Canvas Grid.Row="0" x:Name="cnvCarteraCliente">
+                <Label x:Name="lblFechaCarHasta" Content="Fecha de la Cartera por Cliente:"
+					Canvas.Top="40" Padding="0" Canvas.Left="20" />
+                <DatePicker x:Name="dtpFechaCartera" Canvas.Left="220" Canvas.Top="40" 
+					Width="130" TabIndex="2"/>
+            </Canvas>
+            <Canvas Grid.Row="0" x:Name="cnvItemsProgramaFact" d:IsHidden="True">
+                <Label Canvas.Left="20" Canvas.Top="20" Content="Seleccione el Año" 
+					Padding="0"/>
+                <ComboBox x:Name="cboAnos" Canvas.Left="155" Canvas.Top="20" Width="80" Padding="5,0,0,0"
+					Background="Transparent" TabIndex="2"/>
+                <Label Canvas.Left="20" Canvas.Top="55" Content="Seleccione el Servicio" 
+					Padding="0"/>
+                <ComboBox x:Name="cboServicios" Canvas.Left="155" Canvas.Top="55" Width="200" Padding="5,0,0,0"
+					Background="Transparent" TabIndex="3"/>
+            </Canvas>
+            <Grid Grid.Row="1" x:Name="grdPieVentana">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="18"/>
+                </Grid.RowDefinitions>
+                <Canvas x:Name="cnvBotones" Grid.Row="0" Height="28">
+                    <Button x:Name="bttAceptar" Content="_Aceptar" Style="{StaticResource RecBttAceCan}"
+						Canvas.Right="140" Canvas.Top="3" TabIndex="200" Canvas.Left="133" />
+                    <Button x:Name="bttCancelar" Content="_Cerrar" Style="{StaticResource RecBttAceCan}" 
+						Canvas.Right="20" Canvas.Top="3" TabIndex="201" Canvas.Left="253"/>
+                </Canvas>
+                <DockPanel x:Name="dcpMensajes" Grid.Row="1" Height="25" VerticalAlignment="Bottom" >
+                    <Label Content=""  Foreground="White" x:Name="lblMensajes"
+						HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+						Background="SlateGray"/>
+                </DockPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

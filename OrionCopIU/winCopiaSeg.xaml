@@ -1,0 +1,80 @@
+﻿<src:ClsFormInterface x:Class="WinCopiaSeg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+        Title="Copia de Seguridad" Height="400" Width="530"
+        WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" 
+        Icon="RecImagenes/OrionLogo24.png">
+    <Grid Name="grdPpal" Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" Name="rwdControl"/>
+            <RowDefinition MinHeight="100"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  VerticalAlignment="Center" 
+                        TabIndex="1"/>
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Grid Grid.Row="1">
+            <Canvas>
+                <Label x:Name="lblCopiaSeguridad" Canvas.Left="20" Canvas.Top="20" Padding="0" 
+                       Content="Administrar Copias de Seguridad..." IsTabStop="False"
+                   Background="Transparent" Foreground="Gray" FontSize="18" FontStyle="Italic"/>
+                <RadioButton x:Name="rdbGenerabK" Canvas.Left="40" Canvas.Top="55" 
+                                      Background="Transparent" Content="Generar Copia de seguridad" 
+                                      Padding="10,0,0,0" IsChecked="True" TabIndex="2"/>
+                <RadioButton x:Name="rdbRestaurarBk" Canvas.Left="302" Canvas.Top="55" 
+                                      Background="Transparent" Content="Restaurar Copia de Seguridad" 
+                                      Padding="10,0,0,0"  TabIndex="3"/>
+                <Label x:Name="lblRestaurar" Canvas.Left="40" Canvas.Top="93" 
+                       Content="Seleccione la Copia de Seguridad a restaurar:"
+                       Background="Transparent" Padding="0"/>
+                <Button x:Name="bttExaminar" Canvas.Left="302" Canvas.Top="90" Padding="0" Margin="0" 
+                        Width="70" Height="22" BorderThickness="2" TabIndex="4">
+                    <DockPanel Width="70">
+                        <Label Content="Examinar ..." Background="Transparent" 
+                                       Padding="0" DockPanel.Dock="Left" HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center" IsTabStop="False"/>
+                    </DockPanel>
+                </Button>
+                <Label x:Name="lblBackUp"  Canvas.Left="40" Canvas.Top="93" 
+                       Content="Copia de Seguridad a Generar:" Visibility="Collapsed"
+                       Background="Transparent" Padding="0"/>
+                <Label x:Name="txtAvance" Canvas.Left="435" Canvas.Top="181" Width="50" 
+                       Style="{StaticResource RecTxtSoloLectura}" FontWeight="Bold"
+                       HorizontalContentAlignment="Center"/>
+                <TextBox x:Name="txtCopiaSeguridad" Canvas.Left="40" Canvas.Top="120"
+                       Width="445" Background="Transparent" IsReadOnly="True" IsTabStop="False" Height="22"/>
+                <Label Content="Proceso" Canvas.Left="40" Canvas.Top="156" Padding="0"/>
+                <Label x:Name="txtProceso" Canvas.Left="100" Canvas.Top="155" Width="385" 
+                       Style="{StaticResource RecTxtSoloLectura}" FontWeight="Bold"
+                       HorizontalContentAlignment="Center"/>
+                <ProgressBar x:Name="pgbAvance" Canvas.Left="40" Canvas.Top="181" Width="380" 
+                             Height="18"/>
+            </Canvas>
+        </Grid>
+        <!--Area inferior de la ventana-->
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

@@ -1,0 +1,58 @@
+﻿<Window x:Class="WinRegistroCopropiedad"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStartupLocation="CenterScreen" FontSize="12"
+        xmlns:local="clr-namespace:OPT.OrionP.OrionCopIU"
+        mc:Ignorable="d"
+        Title="WinRegistroCopropiedad" Height="315" Width="400" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition MinHeight="20" />
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0" Margin="0,20,0,0">
+            <!--Label Relleno-->
+            <Label Height="10" DockPanel.Dock="Top"/>
+            <!--Label Notificaciones-->
+            <Label x:Name="lblNotifica" Background="Transparent" Height="16"
+                   Padding="10,0,0,0" BorderThickness="1" BorderBrush="LightGray"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <Canvas Grid.Row="1">
+            <Label Content="Registro de la copropiedad" Canvas.Left="20"
+                   Canvas.Top="20"  Foreground="Gray" FontSize="17" FontStyle="Italic"
+                   Padding="0"/>
+            <TextBox Height="72" Canvas.Left="40" Text="Por favor ingrese el NIT de la copropiedad, sin dígito de verificación y sin  comas ni puntos (solo números).
+                     
+                     
+                     Al registrar el NIT, usted acepta los terminos del contrato contenidos en el archivo 'ContratoDelClienteOrionPlus.pdf' ubicado en la carpeta 'C:\Panorama.net\Dat'"  
+                     Canvas.Top="50" Width="315" TextWrapping="Wrap" Background="Transparent"
+                     IsEnabled="False" BorderThickness="0" FontSize="10"/>
+            <Button x:Name="bttAbrirContrato" Canvas.Left="40" Canvas.Top="125" 
+                    Padding="0" Margin="0" Width="120" Height="22" TabIndex="1"
+                            ToolTip="Abre el contrato entre el Cliente y OPTIMUSOFT S.A.S.">
+                <DockPanel Width="117">
+                    <Image Source="RecImagenes/IrA.png" Width="17" Height="17" 
+                                HorizontalAlignment="Left" DockPanel.Dock="Left" Margin="3,0,0,0"/>
+                    <Label Content="Abrir el Contrato" Background="Transparent" Padding="0" 
+                                DockPanel.Dock="Right" Margin="5,0,0,0"
+                                VerticalContentAlignment="Center" IsTabStop="False"/>
+                </DockPanel>
+            </Button>
+            <CheckBox x:Name="chkAceptarCon" Content="He leido y acepto el contrato" 
+                      Canvas.Left="199"  Canvas.Top="128" Padding="5,0,0,0" TabIndex="2"/>
+            <Label Canvas.Left="40" Canvas.Top="156"  Content="Número del NIT de la Copropiedad: " 
+                   Padding="0"/>
+            <TextBox x:Name="txtNit" Canvas.Left="275" Canvas.Top="155" Width="100"
+                     Background="Transparent" HorizontalContentAlignment="Right" TabIndex="3" />
+            <Button Name="bttAceptar" Content="_Aceptar" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Right="140" Canvas.Top="192" TabIndex="5" Canvas.Left="155"/>
+            <Button Name="bttCancelar" Content="_Cancelar" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Right="20" Canvas.Top="192" TabIndex="4" Canvas.Left="275" />
+        </Canvas>
+    </Grid>
+</Window>

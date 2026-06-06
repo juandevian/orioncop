@@ -1,0 +1,141 @@
+﻿<src:ClsFormInterface x:Class="WinTasasMora"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Tasas Interés de Mora" Height="600" Width="780" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
+    <Grid Name="grdPpal" Control.LostFocus="OnPierdeFoco"
+          Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"  Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+<!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  VerticalAlignment="Center" />
+        </DockPanel>
+        <Grid Grid.Row="1" x:Name="grdTasasMora">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="300*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="0" Background="Gray" HorizontalAlignment="Right" 
+                        IsTabStop="False" VerticalAlignment="Stretch" Width="2" Opacity=".5"/>
+            <Canvas x:Name="Datos" Grid.Column="0">
+                <Label x:Name="lblOrdinal" Content="Ordinal" Canvas.Left="20" Canvas.Top="20" 
+                    Padding="0" TabIndex="6"/>
+                <TextBox x:Name="txtOrdinal" Canvas.Left="235" Canvas.Top="20" Width="40" 
+                            Background="Transparent" Text="{Binding Path=Ordinal}" 
+                            TabIndex="7"/>
+                <Label x:Name="lblFechaDesde" Content="_Rige a partir de:" Canvas.Left="20" 
+                        Canvas.Top="60" Padding="0" TabIndex="8"/>
+                <DatePicker x:Name="dtpFechaDesde" Canvas.Left="155" Canvas.Top="60" Width="120" 
+                            SelectedDate="{Binding FechaDesde}" Background="Transparent" 
+                            TabIndex="9"/>
+                <DatePicker x:Name="dtpFechaDesdeNueva" Canvas.Left="155" Canvas.Top="60" 
+                            Visibility="Hidden" Width="120" 
+                            TabIndex="10" />
+                <Label x:Name="lblFechaHasta" Content="Rige Hasta:" Canvas.Left="20" Canvas.Top="100" 
+                        Padding="0" TabIndex="11"/>
+                <TextBox x:Name="txtFechaHasta" Canvas.Left="155" Canvas.Top="100" 
+                        Text="{Binding FechaHasta, StringFormat={}{0:dd/MM/yyyy}}" 
+                        IsReadOnly="True" Width="120" IsEnabled="False" Background="Transparent"
+                        HorizontalContentAlignment="Right" IsTabStop="False" TabIndex="12"/>
+                <Label x:Name="lblTasaMora" Content="Tasa de _Mora Mensual" Canvas.Left="20" 
+                        Canvas.Top="140" Padding="0" TabIndex="13"/>
+                <TextBox x:Name="txtTasaMora" Canvas.Left="195" Canvas.Top="140" Width="80" 
+                         Background="Transparent"  HorizontalContentAlignment="Right" TabIndex="14"/>
+                <TextBox x:Name="txtTasaMoraNueva" Canvas.Left="195" Canvas.Top="140" Width="80" 
+                         Visibility="Hidden" HorizontalContentAlignment="Right" 
+                         TabIndex="15"/>
+                <Label x:Name="lblTasaMoraEA" Content="Tasa de Mora efectivo Anual" 
+                        Canvas.Left="20" Canvas.Top="180" Padding="0" 
+                        TabIndex="16"/>
+                <Label x:Name="txtTasaEA" Canvas.Left="195" Canvas.Top="180" 
+                        Style="{StaticResource RecTxtSoloLectura}" Width="80"
+                        HorizontalContentAlignment="Right" TabIndex="17" />
+            </Canvas>
+            <Canvas x:Name="Grid" Grid.Column="1">
+                <DataGrid x:Name="dgrTasasMora" Canvas.Top="20" Canvas.Left="45" Height="380" Width="360"
+                            AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" 
+                            IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" 
+                            SelectionMode="Extended" SelectionUnit="FullRow" 
+                            Background="Transparent" IsReadOnly="True" 
+                            TabIndex="18">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Ordinal" Width="60">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Background="Transparent" BorderThickness="0" 
+                                                IsTabStop="False" 
+                                                HorizontalAlignment="Right" 
+                                                Text="{Binding Ordinal}" IsReadOnly="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Rige a partir de:" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Background="Transparent" BorderThickness="0" 
+                                                IsTabStop="False" HorizontalContentAlignment="Right" 
+                                                Text="{Binding FechaDesde, StringFormat={}{0:dd/MM/yyyy}}" 
+                                                IsReadOnly="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Rige Hasta:" Width="95">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Background="Transparent" BorderThickness="0" 
+                                                IsTabStop="False" HorizontalContentAlignment="Right" 
+                                                Text="{Binding FechaHasta, StringFormat={}{0:dd/MM/yyyy}}"
+                                                IsReadOnly="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Int. Mora" Width="75">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Background="Transparent" BorderThickness="0" 
+                                                IsTabStop="False" 
+                                                HorizontalAlignment="Right" 
+                                                Text="{Binding TasaMora, StringFormat={}{0:#0.000%}}"
+                                                IsReadOnly="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Canvas>
+         </Grid>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

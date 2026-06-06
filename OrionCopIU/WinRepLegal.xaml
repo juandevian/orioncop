@@ -1,0 +1,86 @@
+﻿<src:ClsFormInterface x:Class="WinRepLegal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OPT.OrionP.OrionCopIU"
+        mc:Ignorable="d" Title="Tercero Administrador" Height="310" Width="660" 
+        WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" 
+        Icon="RecImagenes/OrionLogo24.png" FontSize="12">
+    <Grid Name="grdPpal" Control.LostFocus="OnPierdeFoco" Control.GotFocus="OnCogerFoco"
+          Button.Click="OnBotonClic">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" Name="rwdControl"/>
+            <RowDefinition MinHeight="60"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  VerticalAlignment="Center" 
+                        TabIndex="1"/>
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Grid Grid.Row="1">
+            <Canvas>
+                <GroupBox x:Name="grbRepLegal" Header="Representante legal" Canvas.Left="10"
+                          Canvas.Top="10" Width="385" Height="105"
+                          Style="{StaticResource RecFuenteNormal}">
+                    <Canvas>
+                        <Label x:Name="lblIdRepLegal" Content="Identificación" Padding="0" 
+                                       Canvas.Left="10" Canvas.Top="7"/>
+                        <TextBox x:Name="txtIdRepLegal" Canvas.Left="100" Canvas.Top="5"
+                                         Width="90" HorizontalAlignment="Right"  TabIndex="2"/>
+                        <Label x:Name="lblNombreRepLeg" Content="Nombre" Padding="0" 
+                                       Canvas.Left="10" Canvas.Top="30"/>
+                        <Label x:Name="txtNombreRepLegal" Canvas.Left="100" Canvas.Top="30"
+                                         Width="265"   Style="{StaticResource RecTxtSoloLectura}"/>
+                        <Label x:Name="lblCargo" Content="Cargo" Padding="0" 
+                                       Canvas.Left="10" Canvas.Top="56"/>
+                        <TextBox x:Name="txtCargo" Canvas.Left="100" Canvas.Top="55"
+                                         Width="265"  TabIndex="3"/>
+                    </Canvas>
+                </GroupBox>
+                <Label  Canvas.Top="10" Canvas.Left="420" Padding="0" 
+                       Content="Firma representante legal"/>
+                <Border Canvas.Left="420" Canvas.Top="30" BorderBrush="Gray" 
+                                BorderThickness="2" >
+                    <Image x:Name="imgFirma" Height="40" Width="180" Stretch="Uniform"/>
+                </Border>
+                <Button x:Name="bttFirma" Canvas.Left="420" Canvas.Top="90"
+                        Width="95" Style="{StaticResource RecEstiloBttGen}"
+                        Height="20" TabIndex="5" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                    <DockPanel Width="90">
+                        <Label Content="Importar firma" Background="Transparent"
+                               Padding="0" DockPanel.Dock="Left"
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Center" IsTabStop="False"
+                               Style="{StaticResource RecFuenteNormal}"/>
+                    </DockPanel>
+                </Button>
+
+            </Canvas>
+        </Grid>
+        <!--Area inferior de la ventana-->
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

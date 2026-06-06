@@ -1,0 +1,145 @@
+﻿<src:ClsFormInterface x:Class="WinSectores"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Sectores" Height="560" Width="620" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
+    <Grid Name="grdPpal" Control.LostFocus="OnPierdeFoco" 
+              Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"  Name="rwdControl"/>
+            <RowDefinition MinHeight="200" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  VerticalAlignment="Center" />
+        </DockPanel>
+        <Grid x:Name="grdSector" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="240*"/>
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0">
+                <Label x:Name="lblIdSector" Content="Id. _Sector" Canvas.Left="30" Canvas.Top="11" 
+                       Padding="0"/>
+                <TextBox x:Name="txtIdSector" Canvas.Left="170" Canvas.Top="10" Width="30" 
+                         Background="Transparent" Text="{Binding Path=IdSector}" TabIndex="1"/>
+                <TextBox x:Name="txtIdSectorNuevo" Canvas.Left="235" Canvas.Top="10" Width="30" 
+                         Visibility="Hidden" TabIndex="2"/>
+                <Label x:Name="lblNombreSector" Content="_Nombre del Sector" 
+                       Canvas.Left="30" Canvas.Top="41" 
+                       Padding="0"/>
+                <TextBox x:Name="txtNombreSector" Canvas.Left="170" Canvas.Top="40" 
+                         Background="Transparent" Width="174" Text="{Binding Path=Nombre}"
+                         TabIndex="4"/>
+                <TextBox x:Name="txtNombreSectorNuevo" Canvas.Left="170" Canvas.Top="40" 
+                         Width="174" Visibility="Hidden"
+                         TabIndex="5"/>
+                <Label x:Name="lblDsctoPP" Content="Descuento Pronto Pago" 
+                       Canvas.Left="30" Canvas.Top="71" 
+                       Padding="0"/>
+                <TextBox x:Name="txtDsctoPP" Canvas.Left="170" Canvas.Top="70" 
+                         Background="Transparent" Width="100" Text="{Binding Path=DsctoForma}"
+                         HorizontalContentAlignment="Right" TabIndex="6"/>
+                <TextBox x:Name="txtDsctoPPNuevo" Canvas.Left="235" Canvas.Top="70" 
+                         Background="Transparent" Width="100" Visibility="Hidden"
+                         HorizontalContentAlignment="Right"  TabIndex="7"/>
+                <Label x:Name="lblBaseSector" Content="Area ponderada sector" 
+                       Canvas.Left="375" Canvas.Top="11" 
+                       Padding="0" />
+                <Label x:Name="txtBaseSector" Canvas.Left="510" Canvas.Top="10" Width="80" 
+                       Style="{StaticResource RecTxtSoloLectura}"
+                       Content="{Binding Path=Area}"
+                       HorizontalContentAlignment="Right" TabIndex="3"/>
+                <Label x:Name="lblAreaPonderada" Content="Total área ponderada" 
+                       Canvas.Left="375" Canvas.Top="41" 
+                       Padding="0" />
+                <Label x:Name="txtAreaPonderada" Canvas.Left="510" Canvas.Top="40" Width="80" 
+                       Style="{StaticResource RecTxtSoloLectura}"
+                       Content="{Binding Path=Area}"
+                       HorizontalContentAlignment="Right"/>
+                <Label Content="Total área" Canvas.Left="375" Canvas.Top="71" Padding="0"/>
+                <Label  x:Name="txtArea" Canvas.Left="510" Canvas.Top="70" Width="80"
+                        HorizontalContentAlignment="Right" 
+                        Style="{StaticResource RecTxtSoloLectura}"/>
+            </Canvas>
+            <GridSplitter Grid.Row="1" Background="Gray" HorizontalAlignment="Stretch" 
+                          IsTabStop="False" VerticalAlignment="Top" ShowsPreview="True" 
+                          Height="2" Opacity=".5"/>
+            <!--<Canvas Grid.Row="1">-->
+            <DataGrid Grid.Row="1" x:Name="dgrSectores" IsSynchronizedWithCurrentItem="True" 
+                          AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible"
+                          ItemsSource="{Binding}" SelectionMode="Extended" SelectionUnit="FullRow"
+                          IsReadOnly="True" IsTabStop="True" Background="Transparent" TabIndex="10">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Id. Sector" Width="60">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" IsEnabled="False"
+            								Text="{Binding IdSector}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Nombre" Width="280">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" IsEnabled="False"
+            								Text="{Binding Nombre}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Area ponderada" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         IsTabStop="False" HorizontalContentAlignment="Right"
+                                         Text="{Binding Area}" IsEnabled="False"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Dscto Pronto Pago" Width="140">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" HorizontalContentAlignment="Right"
+            								Text="{Binding DsctoForma}" IsEnabled="False"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+            <!--</Canvas>-->
+        </Grid>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition  Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

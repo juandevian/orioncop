@@ -1,0 +1,156 @@
+﻿<src:ClsFormInterface x:Class="WinAnos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Año" Height="530" Width="550" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
+    <Grid Name="grdPpal" MenuItem.Click="OnMenuClic" 
+          Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"  Name="rwdControl"/>
+            <RowDefinition MinHeight="160" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center"/>
+        </DockPanel>
+        <Grid Grid.Row="1" TextBox.LostFocus="OnPierdeFoco" ComboBox.SelectionChanged="OnCboCambio"
+                ButtonBase.Click="OnBttClic" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0">
+                <Label x:Name="lblAno" Content="Año" Canvas.Left="20"
+                       Canvas.Top="6" Padding="0" FontWeight="Normal" FontSize="12"/>
+                <Label x:Name="txtAno" Width="40"  Canvas.Left="50" Canvas.Top="5"
+                           HorizontalContentAlignment="Right" FontWeight="Normal" FontSize="12"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                <CheckBox x:Name="chkEstaCerrado" Content="Está cerrado el Año" Canvas.Left="160"
+                              Canvas.Top="6" Padding="5,0,0,0"
+                              Background="Transparent" IsEnabled="False" IsTabStop="False"
+                              FontWeight="Normal" FontSize="12"/>
+            </Canvas>
+            <TabControl Grid.Row="1" Style="{StaticResource RecTabCtrl}">
+                <TabItem Header="Cuota de Administración" Style="{StaticResource RecTabItem}" Width="200">
+                    <Canvas >
+                        <CheckBox x:Name="chkModuloPorSer" Content="A cada Servicio del Año contribuye solo un Módulo!"
+                              Canvas.Left="20" Canvas.Top="15" Padding="10,0,0,0" Style="{StaticResource RecFuenteNormal}"
+                              Background="Transparent" TabIndex="1"/>
+                        <Label Content="Cálculo de las Cuotas de Administración basado en:" Canvas.Left="20"
+                               Canvas.Top="43" Style="{StaticResource RecFuenteNormal}" 
+                               x:Name="lblBaseCalcCA" Padding="0"/>
+                        <ComboBox x:Name="CboBaseCalcCA" Canvas.Left="320" Canvas.Top="40" 
+                                   Width="180" Style="{StaticResource RecFuenteNormal}"
+                                  TabIndex="2" VerticalContentAlignment="Center" />
+                        <Label x:Name="lblPresInicial" Content="Presupuesto Ingresos por Cuotas de Administración" 
+                               Canvas.Left="20" Canvas.Top="71" Padding="0" 
+                               Style="{StaticResource RecFuenteNormal}"/>
+                        <TextBox x:Name="txtPresAno" Width="120" Canvas.Left="380" 
+                                 Canvas.Top="75" Style="{StaticResource RecFuenteNormal}"
+                                 HorizontalContentAlignment="Right" 
+                                 TabIndex="3" Height="18"/>
+                        <Label x:Name="lblPresCalc" Content="Ejecución del Presupuesto por Cuotas de Administración" Canvas.Left="20"
+                           Canvas.Top="101" Padding="0" Style="{StaticResource RecFuenteNormal}"/>
+                        <Label x:Name="txtPresCalc" Width="120" Canvas.Left="380" Canvas.Top="105"
+                           HorizontalContentAlignment="Right" Style="{StaticResource RecTxtSoloLectura}"
+                           FontWeight="Normal" FontSize="12" Height="18"/>
+                        <GroupBox x:Name="grbDsctoPP" Canvas.Left="20" Canvas.Top="130"
+                                  Style="{StaticResource RecFuenteNormal}" Width="490" 
+                                  Height="86" 
+                                  Header="Pronto Pago" Padding="0" >
+                            <Canvas>
+                                <CheckBox x:Name="chkDsctoPP" Content="Descuento por Pronto Pago" 
+                                      Canvas.Left="10" Canvas.Top="5" 
+                                      Padding="5,0,0,0" TabIndex="11"/>
+                                <RadioButton x:Name="rdbDsctoPorcien" Canvas.Left="229" Canvas.Top="5" 
+                                      Background="Transparent" Content="Porcentaje" 
+                                      Padding="10,0,0,0" IsChecked="True" TabIndex="12"/>
+                                <RadioButton x:Name="rdbDsctoValor" Canvas.Left="359" Canvas.Top="5" 
+                                      Background="Transparent" Content="Valor Fijo" 
+                                      Padding="10,0,0,0"  TabIndex="13"/>
+                                <Label x:Name="lblDiasDscto" Content="Días para Descuento" 
+                                   Canvas.Left="10" Canvas.Top="31" Padding="0"/>
+                                <TextBox x:Name="txtDiasDscto" Canvas.Left="135" Canvas.Top="30"
+                                     Width="40" Padding="10,0,5,0"
+                                     HorizontalContentAlignment="Right" TabIndex="14"/>
+                                <TextBox x:Name="txtMontoPP" Canvas.Left="189" Canvas.Top="28" 
+                                     Width="280" Height="22" VerticalContentAlignment="Top"
+                                     TextWrapping="Wrap" Background="Transparent" Padding="2,3,2,0"
+                                     IsTabStop="False" IsReadOnly="True" TextAlignment="Justify"
+                                     Text="El monto del descuento se define en cada Sector."/>
+                            </Canvas>
+                        </GroupBox>
+                        <GroupBox x:Name="grbEstado" Canvas.Left="20" Canvas.Top="220" 
+                                  Header="Estado de la Cuota de Administración"
+                                  Width="490" Height="55" Style="{StaticResource RecFuenteNormal}" >
+                            <Canvas>
+                                <CheckBox x:Name="chkEstaCalculado" 
+                                      Content="Están generadas y calculadas" 
+                                      Canvas.Left="30" Canvas.Top="5" Padding="10,0,0,0" 
+                                      Background="Transparent" IsEnabled="False" IsTabStop="False"/>
+                                <CheckBox x:Name="chkEstaAjustado" Content="Está Ajustado"
+                                      Canvas.Right="30" Canvas.Top="5" Padding="10,0,0,0" 
+                                      Background="Transparent" IsEnabled="False" IsTabStop="False"/>
+                            </Canvas>
+                        </GroupBox>
+                    </Canvas>
+                </TabItem>
+                <TabItem Header="Períodos" Style="{StaticResource RecTabItem}" Width="120">
+                    <DataGrid x:Name="dgrPeriodos" AutoGenerateColumns="False" 
+                              ItemsSource="{Binding}" Background="Transparent"
+                              BorderBrush="Transparent" SelectionMode="Extended" 
+                              SelectionUnit="FullRow" IsReadOnly="True" TabIndex="20" 
+                              Margin="2,10,2,30" FontWeight="Normal" FontSize="12">
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="LightGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Año" Width="40" Binding="{Binding IdAno}"/>
+                            <DataGridTextColumn Header="Período" Width="60" Binding="{Binding IdPeriodo}"/>
+                            <DataGridTextColumn Header="Nombre " Width="150" Binding="{Binding Nombre}"/>
+                            <DataGridTemplateColumn Header="Fecha Facturado" Width="110">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+                                             Text="{Binding FechaFacturacion, StringFormat={}{0:dd/MM/yyyy}}"
+                                             HorizontalContentAlignment="Right" IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridCheckBoxColumn Header="Esta Cerrado ?" IsReadOnly="True" IsThreeState="False"
+                                                Width="100" Binding="{Binding EstaCerrado}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

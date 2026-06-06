@@ -1,0 +1,957 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="CopyrightTYS" xml:space="preserve">
+    <value>Copyright T&amp;&amp;S S.A.S.</value>
+  </data>
+  <data name="DosPuntosEspacio" xml:space="preserve">
+    <value>: </value>
+  </data>
+  <data name="Producto" xml:space="preserve">
+    <value>Producto</value>
+  </data>
+  <data name="Licencia" xml:space="preserve">
+    <value>Licencia</value>
+  </data>
+  <data name="Ver" xml:space="preserve">
+    <value>Versión</value>
+  </data>
+  <data name="Espacio" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="Cancelar" xml:space="preserve">
+    <value>_Cancelar</value>
+  </data>
+  <data name="GrpCarpetas" xml:space="preserve">
+    <value>Grupo Carpetas</value>
+  </data>
+  <data name="IdCarpeta" xml:space="preserve">
+    <value>Id. Carpeta</value>
+  </data>
+  <data name="IdCenUtil" xml:space="preserve">
+    <value>Id. Copropiedad</value>
+  </data>
+  <data name="IdRepLegal" xml:space="preserve">
+    <value>Id. Representante Legal</value>
+  </data>
+  <data name="IdTerCenUti" xml:space="preserve">
+    <value>Id. Tercero Copropiedad</value>
+  </data>
+  <data name="MasCtasCont" xml:space="preserve">
+    <value>Mascara Cuentas Contables</value>
+  </data>
+  <data name="NivCapturaIngresos" xml:space="preserve">
+    <value>Nivel de Captura de Ingresos</value>
+  </data>
+  <data name="NombreCarpeta" xml:space="preserve">
+    <value>Nombre Carpeta</value>
+  </data>
+  <data name="NomCenUti" xml:space="preserve">
+    <value>Nombre Copropiedad</value>
+  </data>
+  <data name="NomRepLeg" xml:space="preserve">
+    <value>Nombre Representante Legal</value>
+  </data>
+  <data name="NomTerCenUti" xml:space="preserve">
+    <value>Nombre Tercero Copropiedad</value>
+  </data>
+  <data name="App" xml:space="preserve">
+    <value> - Aplicación</value>
+  </data>
+  <data name="Carpeta" xml:space="preserve">
+    <value> - Empresa</value>
+  </data>
+  <data name="CenUti" xml:space="preserve">
+    <value> - Copropiedad</value>
+  </data>
+  <data name="CtasConta" xml:space="preserve">
+    <value>Cuentas Contables</value>
+  </data>
+  <data name="Separador" xml:space="preserve">
+    <value> - </value>
+  </data>
+  <data name="TTPlanContable" xml:space="preserve">
+    <value>Dar clic contrario para abrir la ventana 'Cuentas Contabilidad'</value>
+  </data>
+  <data name="TTSeleccionarAccion" xml:space="preserve">
+    <value>Dar clic contrario para seleccionar la acción a ejecutar</value>
+  </data>
+  <data name="Cliente" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
+  <data name="TTConfiguracion" xml:space="preserve">
+    <value>Dar clic contrario o doble clic para configurar la Copropiedad</value>
+  </data>
+  <data name="ServiciosAnual" xml:space="preserve">
+    <value>Servicios Anuales</value>
+  </data>
+  <data name="ServiciosPerm" xml:space="preserve">
+    <value>Servicios Permanentes</value>
+  </data>
+  <data name="BaseCP" xml:space="preserve">
+    <value>Base para el Cálculo del Coediciente de Propiedad </value>
+  </data>
+  <data name="BaseRedCP" xml:space="preserve">
+    <value>Base del Redondeo para Coeficiente de Propiedad</value>
+  </data>
+  <data name="BaseRedGral" xml:space="preserve">
+    <value>Base del Redondeo para operaciones en general</value>
+  </data>
+  <data name="BaseRedIM" xml:space="preserve">
+    <value>Base del Redondeo para Intereses de Mora</value>
+  </data>
+  <data name="ComparaTU" xml:space="preserve">
+    <value>Compara con Tasa de Usura</value>
+  </data>
+  <data name="DiasJuri" xml:space="preserve">
+    <value>Días para Cobro Jurídico</value>
+  </data>
+  <data name="DiasPerdida" xml:space="preserve">
+    <value>Dias para Pérdida</value>
+  </data>
+  <data name="DiasPersuasivo" xml:space="preserve">
+    <value>Días para Cobro Persuasivo</value>
+  </data>
+  <data name="DiasPreju" xml:space="preserve">
+    <value>Días para Cobro Prejurídico</value>
+  </data>
+  <data name="FecUltCausa" xml:space="preserve">
+    <value>Fecha de la Ultima Causación General</value>
+  </data>
+  <data name="IdCtaAntRec" xml:space="preserve">
+    <value>Cuenta para Anticipos Recibidos</value>
+  </data>
+  <data name="IdCtaCaja" xml:space="preserve">
+    <value>Cuenta para Caja</value>
+  </data>
+  <data name="IdCtaDctoCap" xml:space="preserve">
+    <value>Cuenta para Devoluciones de Capital</value>
+  </data>
+  <data name="IdCtaInMoCr" xml:space="preserve">
+    <value>Cuenta para Intereses de Mora Crédito</value>
+  </data>
+  <data name="IdCtaInMoDb" xml:space="preserve">
+    <value>Cuenta para Intereses de Mora Débito</value>
+  </data>
+  <data name="IdCtaRetFte" xml:space="preserve">
+    <value>Cuenta para Retefuente</value>
+  </data>
+  <data name="IdCtaRetIca" xml:space="preserve">
+    <value>Cuenta para Retención de Industria y Comercio</value>
+  </data>
+  <data name="IdCtaRetIva" xml:space="preserve">
+    <value>Cuenta para ReteIva</value>
+  </data>
+  <data name="PlazoFacManual" xml:space="preserve">
+    <value>Plazo por Defecto en Factura Manual</value>
+  </data>
+  <data name="TTRedoCP" xml:space="preserve">
+    <value>1=No se redondea; de 4 a 9: Se redondea a la cantidad de decimales indicado.</value>
+  </data>
+  <data name="TTRedoOpeMonet" xml:space="preserve">
+    <value>0.1=Redondea a décimo; 0.2=Redondea a centecimos; Número Entero=Redondea a multiplo entero del número.</value>
+  </data>
+  <data name="TTAgruServicios" xml:space="preserve">
+    <value>Dar clic contrario para abrir la ventana 'Conceptos de Facturación'</value>
+  </data>
+  <data name="Ano" xml:space="preserve">
+    <value>Año</value>
+  </data>
+  <data name="TTBaseSector" xml:space="preserve">
+    <value>Total del área o de las unidades que conforman el Sector</value>
+  </data>
+  <data name="EsAjuste" xml:space="preserve">
+    <value>? Es Ajuste</value>
+  </data>
+  <data name="Servicio" xml:space="preserve">
+    <value>Servicio</value>
+  </data>
+  <data name="TTServicio" xml:space="preserve">
+    <value>Dar clic contrario para abrir la ventana 'Servicios'</value>
+  </data>
+  <data name="NombreNodoServicioAno" xml:space="preserve">
+    <value>ServicioAno</value>
+  </data>
+  <data name="TotalUnidadesSector" xml:space="preserve">
+    <value>Total unidades del sector</value>
+  </data>
+  <data name="Predio" xml:space="preserve">
+    <value>PREDIOS</value>
+  </data>
+  <data name="TasasMora" xml:space="preserve">
+    <value>Tasas Interés de Mora</value>
+  </data>
+  <data name="MnuAgregarSectorModulo" xml:space="preserve">
+    <value>Agregar _Sector Contribuyente</value>
+  </data>
+  <data name="TTAgreSecMod" xml:space="preserve">
+    <value>Agrega un Sector para contribuir con el Modulo Actual</value>
+  </data>
+  <data name="TTAgreTodosSecMod" xml:space="preserve">
+    <value>Agrega todos los Sector para contribuir con el Modulo Actual</value>
+  </data>
+  <data name="TTAdicionaModuloServicio" xml:space="preserve">
+    <value>Adiciona un Modulo de Contribución al Servicio</value>
+  </data>
+  <data name="IdCliente" xml:space="preserve">
+    <value>Id. Cliente</value>
+  </data>
+  <data name="IdPredio" xml:space="preserve">
+    <value>Id. Predio</value>
+  </data>
+  <data name="BtnCerrar" xml:space="preserve">
+    <value>C_errar</value>
+  </data>
+  <data name="TTAbrirSectoresServicio" xml:space="preserve">
+    <value>Abre la Ventana de los Sectores que Contribuyen al Servicio</value>
+  </data>
+  <data name="Ninguno" xml:space="preserve">
+    <value>&lt;Ninguno&gt;</value>
+  </data>
+  <data name="De" xml:space="preserve">
+    <value> de </value>
+  </data>
+  <data name="FactProcesadas" xml:space="preserve">
+    <value>Facturas procesadas: </value>
+  </data>
+  <data name="GenPrePropPA" xml:space="preserve">
+    <value>SOLO A PROPIETARIOS Y PREDIO AGRU.</value>
+  </data>
+  <data name="PreFact" xml:space="preserve">
+    <value>Prefijo de Facturas</value>
+  </data>
+  <data name="PreNoCo" xml:space="preserve">
+    <value>Prefijo de Notas de Contabilidad</value>
+  </data>
+  <data name="PreNoCr" xml:space="preserve">
+    <value>Prefijo de Notas Crédito</value>
+  </data>
+  <data name="PreNoDb" xml:space="preserve">
+    <value>Prefijo de Notas Débito</value>
+  </data>
+  <data name="PreRec" xml:space="preserve">
+    <value>Prefijo de Recibos de Caja</value>
+  </data>
+  <data name="PrePrefact" xml:space="preserve">
+    <value>Prefijo de las Prefacturas</value>
+  </data>
+  <data name="GenPrePredios" xml:space="preserve">
+    <value>A PREDIOS</value>
+  </data>
+  <data name="GenPreClientes" xml:space="preserve">
+    <value>A CLIENTES</value>
+  </data>
+  <data name="EleProce" xml:space="preserve">
+    <value>Elementos Procesados : </value>
+  </data>
+  <data name="RecCaja" xml:space="preserve">
+    <value>Recibo de Caja</value>
+  </data>
+  <data name="Todos" xml:space="preserve">
+    <value>&lt;Todos&gt;</value>
+  </data>
+  <data name="ProcesosEjec" xml:space="preserve">
+    <value>Procesos Ejecutados: </value>
+  </data>
+  <data name="CuentaCliente" xml:space="preserve">
+    <value>Cuenta del Cliente</value>
+  </data>
+  <data name="NotaCr" xml:space="preserve">
+    <value>NOTAS CREDITO</value>
+  </data>
+  <data name="AplAnticipos" xml:space="preserve">
+    <value>Aplicando Anticipos</value>
+  </data>
+  <data name="GenEstadosCtasCli" xml:space="preserve">
+    <value>Generando Estados de Cuenta Clientes</value>
+  </data>
+  <data name="GenFacturasDef" xml:space="preserve">
+    <value>Generando Facturas Definitivas</value>
+  </data>
+  <data name="RepAuxiliarCon" xml:space="preserve">
+    <value>Auxiliar Contable</value>
+  </data>
+  <data name="TituloRep" xml:space="preserve">
+    <value>Reporte: </value>
+  </data>
+  <data name="BtnGenRep" xml:space="preserve">
+    <value>Generar _Reporte</value>
+  </data>
+  <data name="TTCierraVen" xml:space="preserve">
+    <value>Cancela el Reporte y Cierra la Ventana</value>
+  </data>
+  <data name="TTGeneraRep" xml:space="preserve">
+    <value>Estando habilitado genera el Reporte</value>
+  </data>
+  <data name="PreProcesados" xml:space="preserve">
+    <value>Predios Procesados :</value>
+  </data>
+  <data name="AjuCuota" xml:space="preserve">
+    <value>Ajuste Cuota</value>
+  </data>
+  <data name="IdRecCaja" xml:space="preserve">
+    <value>Nro. del Recibo de Caja</value>
+  </data>
+  <data name="NombrePredio" xml:space="preserve">
+    <value>Identificación del Predio</value>
+  </data>
+  <data name="AppCont" xml:space="preserve">
+    <value>Aplicación Contable para Interfaz</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importado</value>
+  </data>
+  <data name="NombreBk" xml:space="preserve">
+    <value>OrionPlusBk</value>
+  </data>
+  <data name="PreNotRevRC" xml:space="preserve">
+    <value>Prefijo Nota Reversa Rec. Caja</value>
+  </data>
+  <data name="NotaRevRC" xml:space="preserve">
+    <value>Nota Reversión Cr{edito Nro</value>
+  </data>
+  <data name="FechaAnulacion" xml:space="preserve">
+    <value>Fecha Anulación</value>
+  </data>
+  <data name="FechaCancelacion" xml:space="preserve">
+    <value>Fecha Cancelación</value>
+  </data>
+  <data name="FechaGracia" xml:space="preserve">
+    <value>Fecha Limite pago sin Mora</value>
+  </data>
+  <data name="GenEstadosCtasPre" xml:space="preserve">
+    <value>Generando Estados de Cuenta Predios</value>
+  </data>
+  <data name="NomAgrSer" xml:space="preserve">
+    <value>CONCEPTO DE FACTURACION</value>
+  </data>
+  <data name="NomAjuCtaAdm" xml:space="preserve">
+    <value>AJUSTES CUOTA ADMINISTRACION</value>
+  </data>
+  <data name="NomAno" xml:space="preserve">
+    <value>AÑO</value>
+  </data>
+  <data name="NomAnti" xml:space="preserve">
+    <value>ANTICIPOS</value>
+  </data>
+  <data name="NomAutDscto" xml:space="preserve">
+    <value>AUTORIZACION DESCUENTO</value>
+  </data>
+  <data name="NomAuxCont" xml:space="preserve">
+    <value>AUXILIAR CONTABLE</value>
+  </data>
+  <data name="NomCausaMora" xml:space="preserve">
+    <value>CAUSA INTERESES DE MORA</value>
+  </data>
+  <data name="NomCenUtilOri" xml:space="preserve">
+    <value>CONFIGURACION COPROPIEDAD</value>
+  </data>
+  <data name="NomClientes" xml:space="preserve">
+    <value>CLIENTES</value>
+  </data>
+  <data name="NomVenMW" xml:space="preserve">
+    <value>VENTANA PRINCIPAL</value>
+  </data>
+  <data name="NomCtaBco" xml:space="preserve">
+    <value>CUENTAS BANCOS</value>
+  </data>
+  <data name="NomCtasCob" xml:space="preserve">
+    <value>CUENTAS DE COBRO</value>
+  </data>
+  <data name="NomEstaCta" xml:space="preserve">
+    <value>ESTADO DE CUENTA</value>
+  </data>
+  <data name="NomFacMan" xml:space="preserve">
+    <value>FACTURA MANUAL</value>
+  </data>
+  <data name="NomFacts" xml:space="preserve">
+    <value>FACTURAS</value>
+  </data>
+  <data name="NomGenFras" xml:space="preserve">
+    <value>GENERAR FACTURAS</value>
+  </data>
+  <data name="NomGenPreF" xml:space="preserve">
+    <value>GENERAR PREFACTURAS</value>
+  </data>
+  <data name="NomIntCon" xml:space="preserve">
+    <value>INTERFAZ CONTABLE</value>
+  </data>
+  <data name="NomModCont" xml:space="preserve">
+    <value>MODULOS DE CONTRIBICION</value>
+  </data>
+  <data name="NomModSer" xml:space="preserve">
+    <value>MODULOS DEL SERVICIO</value>
+  </data>
+  <data name="NomNotAplAnt" xml:space="preserve">
+    <value>NOTAS APLICACION ANTICIPOS </value>
+  </data>
+  <data name="NomNotCr" xml:space="preserve">
+    <value>NOTAS CREDITO</value>
+  </data>
+  <data name="NomNotDevAnt" xml:space="preserve">
+    <value>NOTAS REINTEGRO ANTICIPOS</value>
+  </data>
+  <data name="NomNotInt" xml:space="preserve">
+    <value>NOTAS INTERESES MORA</value>
+  </data>
+  <data name="NomNotRevCr" xml:space="preserve">
+    <value>NOTAS REVERSION CREDITOS</value>
+  </data>
+  <data name="NomPara" xml:space="preserve">
+    <value>CONFIGURAR APLICACION</value>
+  </data>
+  <data name="NomPre" xml:space="preserve">
+    <value>PREDIOS</value>
+  </data>
+  <data name="NomProFact" xml:space="preserve">
+    <value>PROGRAMACION FACTURAS</value>
+  </data>
+  <data name="NomRecCaj" xml:space="preserve">
+    <value>RECIBOS DE CAJA</value>
+  </data>
+  <data name="NomRevPreF" xml:space="preserve">
+    <value>REVERSAR PREFACTURAS</value>
+  </data>
+  <data name="NomSec" xml:space="preserve">
+    <value>SECTORES</value>
+  </data>
+  <data name="NomSecMod" xml:space="preserve">
+    <value>SECTORES APORTAN AL MODULO</value>
+  </data>
+  <data name="NomSer" xml:space="preserve">
+    <value>SERVICIO</value>
+  </data>
+  <data name="NomTasMor" xml:space="preserve">
+    <value>TASAS INTERESES DE MORA</value>
+  </data>
+  <data name="Cero" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="CuentaPredio" xml:space="preserve">
+    <value>Cuenta del Predio</value>
+  </data>
+  <data name="Docs" xml:space="preserve">
+    <value>Documentos</value>
+  </data>
+  <data name="NomNotAju" xml:space="preserve">
+    <value>NOTAS AJUSTE CUOTA ADMIN.</value>
+  </data>
+  <data name="TTRedoIM" xml:space="preserve">
+    <value>Los intereses por mora y los descuentos por pronto pago se redondean asi: </value>
+  </data>
+  <data name="IdCtaDctoPP" xml:space="preserve">
+    <value>Cuenta para Descuentos por Pronto Pago</value>
+  </data>
+  <data name="FichaAnt" xml:space="preserve">
+    <value>Ficha Anticipos - Anticipo Número: </value>
+  </data>
+  <data name="FichaCliente" xml:space="preserve">
+    <value>Ficha Clientes - Cliente: </value>
+  </data>
+  <data name="FichaPredio" xml:space="preserve">
+    <value>Ficha Predios - Predio: </value>
+  </data>
+  <data name="FichaRec" xml:space="preserve">
+    <value>Ficha Recibos de Caja - Recibo de Caja Número: </value>
+  </data>
+  <data name="FichaCtaCobro" xml:space="preserve">
+    <value>Ficha Cuentas Cobro - Cuenta de Cobro Número: </value>
+  </data>
+  <data name="FichaNAju" xml:space="preserve">
+    <value>Ficha Notas Ajuste Cuota Administración - Nota Nro: </value>
+  </data>
+  <data name="FichaNApl" xml:space="preserve">
+    <value>Ficha Notas Aplicación Anticipos - Nota Nro: </value>
+  </data>
+  <data name="FichaNCr" xml:space="preserve">
+    <value>Ficha Notas Crédito - Nota Nro: </value>
+  </data>
+  <data name="FichaNDb" xml:space="preserve">
+    <value>Ficha Notas Intereses Mora - Nota Nro: </value>
+  </data>
+  <data name="FichaNDev" xml:space="preserve">
+    <value>Ficha Notas Reintegro de Anticipos - Nota Nro:</value>
+  </data>
+  <data name="FichaNRevCr" xml:space="preserve">
+    <value>Ficha Notas Reversión Créditos - Nota Nro: </value>
+  </data>
+  <data name="NoCausa" xml:space="preserve">
+    <value>La presente Factura no Causa Mora</value>
+  </data>
+  <data name="Fecha" xml:space="preserve">
+    <value>Fecha: </value>
+  </data>
+  <data name="Respo" xml:space="preserve">
+    <value>Responsable: </value>
+  </data>
+  <data name="Tarea" xml:space="preserve">
+    <value>Tarea: </value>
+  </data>
+  <data name="EscribaTarea" xml:space="preserve">
+    <value>Escriba aqui la descripción de la tarea.</value>
+  </data>
+  <data name="SinTareas" xml:space="preserve">
+    <value>No hay más Tareas para mostrar!</value>
+  </data>
+  <data name="ExpFras" xml:space="preserve">
+    <value>Exportando Facturas a PDF</value>
+  </data>
+  <data name="ExpRec" xml:space="preserve">
+    <value>Rxportando Recibos de Caja</value>
+  </data>
+  <data name="ImpFras" xml:space="preserve">
+    <value>Importando Facturas de Saldos</value>
+  </data>
+  <data name="CamposSinSatisfacer" xml:space="preserve">
+    <value>Aún hay campos requeridos por satisfacer!</value>
+  </data>
+  <data name="IdCtaIngPorIden" xml:space="preserve">
+    <value>Cuenta para Ingresos por identificar</value>
+  </data>
+  <data name="MedPagoDef" xml:space="preserve">
+    <value>Medio de Pago por defecto</value>
+  </data>
+  <data name="TerCtaCajaBancos" xml:space="preserve">
+    <value>Tercero para las Cuentas de Caja y Bancos</value>
+  </data>
+  <data name="NomECorreo" xml:space="preserve">
+    <value>CORREO ELCTRONICO</value>
+  </data>
+  <data name="ArchExt" xml:space="preserve">
+    <value>Archivo externo</value>
+  </data>
+  <data name="Fact" xml:space="preserve">
+    <value>Una Factura</value>
+  </data>
+  <data name="NAA" xml:space="preserve">
+    <value>Nota Aplicación Anticipo</value>
+  </data>
+  <data name="NCR" xml:space="preserve">
+    <value>Nota Crédito</value>
+  </data>
+  <data name="NDB" xml:space="preserve">
+    <value>Nota Intereses Mora</value>
+  </data>
+  <data name="FactAuto" xml:space="preserve">
+    <value>Facturas automáticas del Mes</value>
+  </data>
+  <data name="SolComen" xml:space="preserve">
+    <value>Solo comentario</value>
+  </data>
+  <data name="GenEdadCar" xml:space="preserve">
+    <value>Generando Reporte Edad de la Cartera</value>
+  </data>
+  <data name="GenInte" xml:space="preserve">
+    <value>Generando Intereses de Mora</value>
+  </data>
+  <data name="GenBK" xml:space="preserve">
+    <value>Generando Copia de Seguridad</value>
+  </data>
+  <data name="ProcesoCanc" xml:space="preserve">
+    <value>Proceso cancelado por el Usuario!</value>
+  </data>
+  <data name="ProTer" xml:space="preserve">
+    <value>Proceso terminado</value>
+  </data>
+  <data name="RevPreFac" xml:space="preserve">
+    <value>Reversando Pre-Facturas</value>
+  </data>
+  <data name="AjusCuoAdm" xml:space="preserve">
+    <value>Ajustando Cuotas de Administración</value>
+  </data>
+  <data name="CerrarBtn" xml:space="preserve">
+    <value>_Cerrar</value>
+  </data>
+  <data name="Doc" xml:space="preserve">
+    <value>Documento</value>
+  </data>
+  <data name="Anos" xml:space="preserve">
+    <value>Años</value>
+  </data>
+  <data name="Documentos" xml:space="preserve">
+    <value>DOCUMENTOS</value>
+  </data>
+  <data name="RecCajaFec" xml:space="preserve">
+    <value>Recibos de Caja entre Fechas</value>
+  </data>
+  <data name="Coma" xml:space="preserve">
+    <value>,</value>
+  </data>
+  <data name="GuionSeparador" xml:space="preserve">
+    <value>- </value>
+  </data>
+  <data name="Importar" xml:space="preserve">
+    <value>Importar</value>
+  </data>
+  <data name="NomCtaCon" xml:space="preserve">
+    <value>CUENTAS CONTABILIDAD</value>
+  </data>
+  <data name="NomImp" xml:space="preserve">
+    <value>IMPORTACIÓN</value>
+  </data>
+  <data name="NomLogOn" xml:space="preserve">
+    <value>ORION PLUS: ACCESO Y REGISTRO</value>
+  </data>
+  <data name="NomRegCla" xml:space="preserve">
+    <value>REGISTRO LICENCIA APLICACION</value>
+  </data>
+  <data name="RegProcesados" xml:space="preserve">
+    <value>Registros Procesados:</value>
+  </data>
+  <data name="TipoArchivoImagen" xml:space="preserve">
+    <value>Imagen(.jpg)|*.jpg</value>
+  </data>
+  <data name="TiposArchivosOrigen" xml:space="preserve">
+    <value>Archivo Excel (*.xls, *.xlsx)|*.xls;*.xlsx|Archivo Access (*.mdb)|*.mdb|Todos los archivos (*.*)|*.*</value>
+  </data>
+  <data name="TTBotonesDePanel" xml:space="preserve">
+    <value>Con Ctrl+F2 se muestra el Panel Siguiente; Con Ctrl+F3 se muestra el Panel Anterior</value>
+  </data>
+  <data name="Usuario" xml:space="preserve">
+    <value>Usuario: </value>
+  </data>
+  <data name="ImportarObjeto" xml:space="preserve">
+    <value>Importar Objeto</value>
+  </data>
+  <data name="AbreAyuda" xml:space="preserve">
+    <value>Abre la Ayuda de Panorama.</value>
+  </data>
+  <data name="AbreAyudaCmd" xml:space="preserve">
+    <value>cmdAyuda</value>
+  </data>
+  <data name="AbreBloc" xml:space="preserve">
+    <value>Abre el Bloc de Notas de Windows.</value>
+  </data>
+  <data name="AbreBlocCmd" xml:space="preserve">
+    <value>cmdNotas</value>
+  </data>
+  <data name="AbreCalc" xml:space="preserve">
+    <value>Abre la Calculadora de Windows.</value>
+  </data>
+  <data name="AbreCalcCmd" xml:space="preserve">
+    <value>cmdCalculadora</value>
+  </data>
+  <data name="AbreCalendario" xml:space="preserve">
+    <value>Abre el Calendario de Windows.</value>
+  </data>
+  <data name="AbreCalendarioCmd" xml:space="preserve">
+    <value>cmdCalendario</value>
+  </data>
+  <data name="AbreMens" xml:space="preserve">
+    <value>Abre los Mensajes de Panorama.</value>
+  </data>
+  <data name="AbreMensCmd" xml:space="preserve">
+    <value>cmdMensajes</value>
+  </data>
+  <data name="AceptaCam" xml:space="preserve">
+    <value>Acepta los cambios en la Ventana.</value>
+  </data>
+  <data name="AceptaCamCmd" xml:space="preserve">
+    <value>cmdAceptar</value>
+  </data>
+  <data name="Advertencia" xml:space="preserve">
+    <value>ADVERTENCIA: </value>
+  </data>
+  <data name="AnuCmd" xml:space="preserve">
+    <value>cmdAnular</value>
+  </data>
+  <data name="AnuObj" xml:space="preserve">
+    <value>Anular un Objeto</value>
+  </data>
+  <data name="CancelaCam" xml:space="preserve">
+    <value>Cancela los cambios en la Ventana.</value>
+  </data>
+  <data name="CancelaCamCmd" xml:space="preserve">
+    <value>cmdCancelar</value>
+  </data>
+  <data name="CierraWin" xml:space="preserve">
+    <value>Cierra la Ventana actual.</value>
+  </data>
+  <data name="CierraWinCmd" xml:space="preserve">
+    <value>cmdCerrar</value>
+  </data>
+  <data name="CrearCmd" xml:space="preserve">
+    <value>cmdCrear</value>
+  </data>
+  <data name="CrearObj" xml:space="preserve">
+    <value>Crear un Objeto</value>
+  </data>
+  <data name="GuaCmd" xml:space="preserve">
+    <value>cmdGuardar</value>
+  </data>
+  <data name="GuaObj" xml:space="preserve">
+    <value>Guardar los cambios en el Objeto</value>
+  </data>
+  <data name="IrAntCmd" xml:space="preserve">
+    <value>cmdAlAnterior</value>
+  </data>
+  <data name="IrAntObj" xml:space="preserve">
+    <value>Ir Al Anterior</value>
+  </data>
+  <data name="IrBusCmd" xml:space="preserve">
+    <value>cmdBuscar</value>
+  </data>
+  <data name="IrBusObj" xml:space="preserve">
+    <value>Busca un Objeto</value>
+  </data>
+  <data name="IrPriCmd" xml:space="preserve">
+    <value>cmdAlPrimero</value>
+  </data>
+  <data name="IrPriObj" xml:space="preserve">
+    <value>Ir Al Primero</value>
+  </data>
+  <data name="IrSigCmd" xml:space="preserve">
+    <value>cmdAlSiguiente</value>
+  </data>
+  <data name="IrSigObj" xml:space="preserve">
+    <value>Ir Al Siguiente</value>
+  </data>
+  <data name="IrUltCmd" xml:space="preserve">
+    <value>cmdAlUltimo</value>
+  </data>
+  <data name="IrUltObj" xml:space="preserve">
+    <value>Ir Al Ultimo</value>
+  </data>
+  <data name="ModCmd" xml:space="preserve">
+    <value>cmdModificar</value>
+  </data>
+  <data name="ModObj" xml:space="preserve">
+    <value>Modificar un Objeto</value>
+  </data>
+  <data name="RefCmd" xml:space="preserve">
+    <value>cmdRefrescar</value>
+  </data>
+  <data name="RefObj" xml:space="preserve">
+    <value>Refrescar un Objeto</value>
+  </data>
+  <data name="SaleApp" xml:space="preserve">
+    <value>Sale de la Aplicación.</value>
+  </data>
+  <data name="SaleAppCmd" xml:space="preserve">
+    <value>cmdSalirApp</value>
+  </data>
+  <data name="SupCmd" xml:space="preserve">
+    <value>cmdSuprimir</value>
+  </data>
+  <data name="SupObj" xml:space="preserve">
+    <value>Suprimir un Objeto</value>
+  </data>
+  <data name="ErrorStr" xml:space="preserve">
+    <value>ERROR: </value>
+  </data>
+  <data name="EstConsultando" xml:space="preserve">
+    <value>Consultando</value>
+  </data>
+  <data name="EstCreando" xml:space="preserve">
+    <value>Creando</value>
+  </data>
+  <data name="EstModificando" xml:space="preserve">
+    <value>Modificando</value>
+  </data>
+  <data name="Informacion" xml:space="preserve">
+    <value>INFORMACION: </value>
+  </data>
+  <data name="Calendario" xml:space="preserve">
+    <value>Calendario</value>
+  </data>
+  <data name="TipoArchivoRep" xml:space="preserve">
+    <value>Reporte(.rpt)|*.rpt</value>
+  </data>
+  <data name="NomInfCon" xml:space="preserve">
+    <value>INFORME DE CONTINGENCIA</value>
+  </data>
+  <data name="TerPro" xml:space="preserve">
+    <value>Terminando Proceso</value>
+  </data>
+  <data name="NomEFac" xml:space="preserve">
+    <value>FACTURACION ELECTRONICA</value>
+  </data>
+  <data name="AntPorApl" xml:space="preserve">
+    <value>Generando Reporte Anticipos por Aplicar</value>
+  </data>
+  <data name="NomCierraMes" xml:space="preserve">
+    <value>CIERRA PERIODO ACTUAL</value>
+  </data>
+  <data name="IdCtaImptosAsumidos" xml:space="preserve">
+    <value>Cuenta para Impuetos Asumidos</value>
+  </data>
+  <data name="TotalAreaCoprop" xml:space="preserve">
+    <value>Total área de la copropiedad</value>
+  </data>
+  <data name="CuotasAdmin" xml:space="preserve">
+    <value>Cuotas de Administración</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Administración</value>
+  </data>
+  <data name="SinInfo" xml:space="preserve">
+    <value>Sin Información</value>
+  </data>
+  <data name="AntRec" xml:space="preserve">
+    <value>Anticipo recibido</value>
+  </data>
+  <data name="GenPrePropSPA" xml:space="preserve">
+    <value>A PROPIETARIOS SIN PREDIO AGRU.</value>
+  </data>
+  <data name="CobPer" xml:space="preserve">
+    <value>Cobro persuasivo</value>
+  </data>
+  <data name="MenCtaCobro" xml:space="preserve">
+    <value>Cuenta de cobro</value>
+  </data>
+  <data name="TotalAreaPond" xml:space="preserve">
+    <value>Total área ponderada</value>
+  </data>
+  <data name="NomProp" xml:space="preserve">
+    <value>Propietario</value>
+  </data>
+  <data name="FichaProp" xml:space="preserve">
+    <value>Ficha propietario</value>
+  </data>
+  <data name="CoefPropProp" xml:space="preserve">
+    <value>Coeficientes de Propiedad por Propietario</value>
+  </data>
+  <data name="TTAbrirModulosServicio" xml:space="preserve">
+    <value>Abre la Ventana de los Módulo que contribuyen al Servicio</value>
+  </data>
+  <data name="CtaBanc" xml:space="preserve">
+    <value>Cuentas Bancarias</value>
+  </data>
+  <data name="NomCtaCorreoOri" xml:space="preserve">
+    <value>Cuenta Correo Origen</value>
+  </data>
+  <data name="MensPrueEmail" xml:space="preserve">
+    <value>Este es un correo de prueba enviado desde Orión</value>
+  </data>
+  <data name="SubjeEmail" xml:space="preserve">
+    <value>Prueba Orión</value>
+  </data>
+  <data name="NomTerceroAdmin" xml:space="preserve">
+    <value>TERCERO ADMINISTRADOR</value>
+  </data>
+  <data name="ElimFirma" xml:space="preserve">
+    <value>Eliminar firma</value>
+  </data>
+  <data name="ImporFirma" xml:space="preserve">
+    <value>Importar firma</value>
+  </data>
+</root>

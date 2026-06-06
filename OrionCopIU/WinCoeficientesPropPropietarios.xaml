@@ -1,0 +1,175 @@
+﻿<src:ClsFormInterface x:Class="WinCoeficientesPropPropietarios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+        Title="Coeficientes de propiedad por Propietario" Height="480" Width="800" 
+        WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" 
+        Icon="RecImagenes/OrionLogo24.png" WindowState="Maximized" FontSize="12">
+    <Grid x:Name="grdPpal" ButtonBase.Click="OnBotonClic">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" x:Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel x:Name="PanelControl" Grid.Row="0" >
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu x:Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray" 
+				VerticalAlignment="Center" />
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="dgrCoefPropP" AutoGenerateColumns="False"
+					VerticalScrollBarVisibility="Auto" IsEnabled="True"
+					HorizontalScrollBarVisibility="Auto" IsReadOnly="True" IsTabStop="True"
+					IsSynchronizedWithCurrentItem="True"
+					SelectionMode="Single"  SelectionUnit="FullRow"
+					Background="Transparent" ItemsSource="{Binding}" Margin="10,5,10,5">
+                <DataGrid.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type GroupItem}">
+                                            <Expander IsExpanded="False" Background="#FF112255" Foreground="#FFEEEEEE">
+                                                <Expander.Header>
+                                                    <DockPanel>
+                                                        <TextBlock FontWeight="Bold" Margin="5,0,0,0" 
+																Text="{Binding Name}"/>
+                                                        <TextBlock FontWeight="Bold" Margin="20,0,0,0" 
+																Text="{Binding ItemCount}"/>
+                                                    </DockPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </DataGrid.GroupStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Id. Propietario" Width="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         HorizontalAlignment="Left" IsReadOnly="True"
+                                         Text="{Binding IdTerceroPropietario}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Nombres" Width="160">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         HorizontalAlignment="Left" IsReadOnly="True"
+										Text="{Binding Nombres}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Apellidos" Width="160">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+										HorizontalAlignment="Left" Text="{Binding Apellidos}"
+										IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Razón Social" Width="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+										HorizontalAlignment="Left" Text="{Binding RazonSocial}"
+										IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Teléfono" Width="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+										HorizontalAlignment="Left" Text="{Binding Telefono}"
+										IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Correo" Width="300">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" 
+										HorizontalAlignment="Left" Text="{Binding Correo}"
+										IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Apartamento/Casa" Width="130">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+										HorizontalAlignment="Left" Text="{Binding Predio}"
+										IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Suma Coeficientes" Width="110">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0" 
+										Text="{Binding TotalCoeficientes, StringFormat=P10}" 
+										HorizontalAlignment="Right" IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--Area inferior de la ventana-->
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+			IsTabStop="False" HorizontalAlignment="Stretch"  
+			Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas x:Name="cnvBotones" Grid.Row="0">
+                <Button x:Name="bttExportar" Canvas.Right="280"   Canvas.Top="7" Padding="0" 
+                        Margin="0" Width="120" Height="20" >
+                    <DockPanel Width="120">
+                        <Image Source="RecImagenes/excel.png" Width="17" Height="17" 
+							HorizontalAlignment="Left" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                        <Label x:Name="lblContentBtt"  Content="Exportar a Excel" 
+							Background="Transparent" Padding="0" 
+							DockPanel.Dock="Left"  Margin="5,0,0,0"
+							VerticalContentAlignment="Center" IsTabStop="False"/>
+                    </DockPanel>
+                </Button>
+                <Label Canvas.Left="20" Canvas.Top="8" Content="Cantidad de Registros" Padding="0"/>
+                <Label x:Name="txtCantReg" Canvas.Top="7" Canvas.Left="150" Width="40"
+					Style="{StaticResource RecTxtSoloLectura}"/>
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

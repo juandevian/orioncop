@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdicionarModulosModificando" xml:space="preserve">
+    <value>Antes de adicionar módulos de contribucion al servicio, es necesario que el servicio este en modo de 'Modificación'´.</value>
+  </data>
+  <data name="CamposSinSatisfacer" xml:space="preserve">
+    <value>INFORMACION: Aún hay campos requeridos por satisfacer!</value>
+  </data>
+  <data name="errPeriodoMayorSaldo" xml:space="preserve">
+    <value>Valor del Período mayor al Saldo!</value>
+  </data>
+  <data name="VerAnoActual" xml:space="preserve">
+    <value>El Año actual no ha sido Creado. Es necesario hacerlo antes de seguir adelante!</value>
+  </data>
+  <data name="VerAnos" xml:space="preserve">
+    <value>Antes de seguir adelante, se debe crear y parametrizar el Año Inicial!</value>
+  </data>
+  <data name="VerCenUtil" xml:space="preserve">
+    <value>Antes de seguir adelante, es necesario definir las Opciones de la Copropiedad!</value>
+  </data>
+  <data name="VerClientes" xml:space="preserve">
+    <value>Es necesario crear o importar los Clientes de la Copropiedad antes de seguir adelante!</value>
+  </data>
+  <data name="VerCoefProp" xml:space="preserve">
+    <value>Antes de seguir adelante, es necesario calcular los Coeficientes de Propiedad!</value>
+  </data>
+  <data name="VerCtasCont" xml:space="preserve">
+    <value>Antes de seguir adelante, se deben crear las Cuentas de Contabilidad necesarias para la Interfaz Contable!</value>
+  </data>
+  <data name="VerModulos" xml:space="preserve">
+    <value>Antes de seguir adelante, es necesario crear los Modulos de la Copropiedad!</value>
+  </data>
+  <data name="VerPredios" xml:space="preserve">
+    <value>Antes de seguir adelante, es necesario importar o crear los Predios de la Copropiedad!</value>
+  </data>
+  <data name="VerSect" xml:space="preserve">
+    <value>Antes de seguir adelante, es necesario crear los Sectores de la Copropiedad!</value>
+  </data>
+  <data name="VerSectModulo" xml:space="preserve">
+    <value>Para seguir adelante, es necesario asignar los Sectores que contribuyen a cada uno de los Modulos!</value>
+  </data>
+  <data name="VerServicioAno" xml:space="preserve">
+    <value>Para continuar, se deben crear los Servicios del Año</value>
+  </data>
+  <data name="VerTasasMora" xml:space="preserve">
+    <value>Antes de seguir adelante, es necesario establecer las Tasas de Mora para el cobro de Intereses!</value>
+  </data>
+  <data name="VerTerceros" xml:space="preserve">
+    <value>Antes de seguir adelante, es necesario crear o importar los Terceros!</value>
+  </data>
+  <data name="MFImportada" xml:space="preserve">
+    <value>Importada</value>
+  </data>
+  <data name="MFManual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="MFSistema" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="RCAbonoCap" xml:space="preserve">
+    <value>Pago aplicado a Capital</value>
+  </data>
+  <data name="RCAbonoMor" xml:space="preserve">
+    <value>Pago aplicado a Intereses de Mora</value>
+  </data>
+  <data name="RCAnticipo" xml:space="preserve">
+    <value>Anticipo recibido</value>
+  </data>
+  <data name="RCDsctoCap" xml:space="preserve">
+    <value>Descuento a Capital</value>
+  </data>
+  <data name="RCDsctoMor" xml:space="preserve">
+    <value>Descuento a Intereses de Mora</value>
+  </data>
+  <data name="RCReteFte" xml:space="preserve">
+    <value>Retención en la Fuente</value>
+  </data>
+  <data name="RCRetIca" xml:space="preserve">
+    <value>Retención de Industria y Comercio</value>
+  </data>
+  <data name="RCRetIva" xml:space="preserve">
+    <value>Retención del IVA</value>
+  </data>
+  <data name="Cero" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Coma" xml:space="preserve">
+    <value>,</value>
+  </data>
+  <data name="RCDsctoPP" xml:space="preserve">
+    <value>Descuento por Pronto Pago</value>
+  </data>
+  <data name="RCAntRec" xml:space="preserve">
+    <value>Anticipo recibido</value>
+  </data>
+  <data name="NombreBk" xml:space="preserve">
+    <value>OriPBk</value>
+  </data>
+  <data name="VerBancos" xml:space="preserve">
+    <value>Antes de seguir adelante, es necesario establecer las Cuentas Bancarias!</value>
+  </data>
+  <data name="VerDocs" xml:space="preserve">
+    <value>Es necesario verificar los Documentos Contables!</value>
+  </data>
+  <data name="VerDocsNoDef" xml:space="preserve">
+    <value>Es necesario definir los Documentos Contables!</value>
+  </data>
+  <data name="Ninguno" xml:space="preserve">
+    <value>&lt;Ninguno&gt;</value>
+  </data>
+  <data name="RCRAbonoCap" xml:space="preserve">
+    <value>Reversión Pago a Capital</value>
+  </data>
+  <data name="RCRAbonoMor" xml:space="preserve">
+    <value>Reversión Pago Intereses Mora</value>
+  </data>
+  <data name="RCRAnticipo" xml:space="preserve">
+    <value>Reversión Anticipo recibido</value>
+  </data>
+  <data name="RCRAntRec" xml:space="preserve">
+    <value>Reversión Anticipo recibido</value>
+  </data>
+  <data name="RCRDsctoCap" xml:space="preserve">
+    <value>Reversión Descuento a Capital</value>
+  </data>
+  <data name="RCRDsctoMor" xml:space="preserve">
+    <value>Reversión Descuento Intereses de Mora</value>
+  </data>
+  <data name="RCRDsctoPP" xml:space="preserve">
+    <value>Reversión Descuento Pronto Pago</value>
+  </data>
+  <data name="RCRReteFte" xml:space="preserve">
+    <value>Reversión Retención en la Fuente</value>
+  </data>
+  <data name="RCRRetIca" xml:space="preserve">
+    <value>Reversión Retención de Industria y Comercio</value>
+  </data>
+  <data name="RCRRetIva" xml:space="preserve">
+    <value>Reversión Retención del IVA</value>
+  </data>
+  <data name="NAAAntAplCap" xml:space="preserve">
+    <value>Anticipo aplicado a Capital</value>
+  </data>
+  <data name="NAAAntAplInt" xml:space="preserve">
+    <value>Anticipo aplicado a Intereses</value>
+  </data>
+  <data name="NAARAntAplCap" xml:space="preserve">
+    <value>Reversión Anticipo aplicado a Capital</value>
+  </data>
+  <data name="NAARAntAplInt" xml:space="preserve">
+    <value>Reversión Anticipo aplicado a Intereses</value>
+  </data>
+  <data name="NAADsctoPP" xml:space="preserve">
+    <value>Descuento Pronto Pago Aplicado</value>
+  </data>
+  <data name="NAARDsctoPP" xml:space="preserve">
+    <value>Reversion Descuento Pronto Pago Aplicado</value>
+  </data>
+  <data name="NAAReteFte" xml:space="preserve">
+    <value>Retención en la Fuente Aplicado</value>
+  </data>
+  <data name="NAARReteFte" xml:space="preserve">
+    <value>Reversión Retención en la Fuente Aplicado</value>
+  </data>
+  <data name="NAAReteIca" xml:space="preserve">
+    <value>Retención Industria y Comercio Aplicado</value>
+  </data>
+  <data name="NAAReteIva" xml:space="preserve">
+    <value>Retención del IVA Aplicado</value>
+  </data>
+  <data name="NAARReteIca" xml:space="preserve">
+    <value>Retención Industria y Comercio Reversado</value>
+  </data>
+  <data name="NAARReteIva" xml:space="preserve">
+    <value>Retención del IVA Reversado</value>
+  </data>
+  <data name="MFContingencia" xml:space="preserve">
+    <value>Contingencia</value>
+  </data>
+  <data name="VerProp" xml:space="preserve">
+    <value>Antes de seguir adelante, es necesario crear o importar los Propietarios!</value>
+  </data>
+  <data name="VerServiciosPer" xml:space="preserve">
+    <value>Para continuar, se debe crear al menos un servicio permanente!</value>
+  </data>
+</root>

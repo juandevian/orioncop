@@ -1,0 +1,50 @@
+﻿<src:ClsFormInterface x:Class="WinModulosServicios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" Icon="RecImagenes/terceros.png"
+        Title="Mòdulo de servicio" Height="310" Width="400" GotFocus="OnCogerFoco" 
+        LostFocus="OnPierdeFoco" FontSize="12">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition MinHeight="20"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel x:Name="PanelControl" Grid.Row="0">
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+        </DockPanel>
+        <Canvas Grid.Row="1" LostFocus="OnPierdeFoco" ComboBox.SelectionChanged="OnCboCambio">
+            <Label x:Name="lblModuloServicio" Canvas.Left="25" Canvas.Top="23"
+                   Content="Mòdulo de servicio" Padding="0"/>
+            <ComboBox x:Name="cboModuloServicio" Width="220" Canvas.Left="150" Canvas.Top="20"/>
+            <Label x:Name="lblValorCont" Canvas.Left="25" Canvas.Top="51" 
+                   Content="Valor contribuciòn" Padding="0"/>
+            <TextBox x:Name="txtValorCont" Canvas.Left="250" Canvas.Top="50" Width="120" 
+                     TabIndex="2" HorizontalContentAlignment="Right" />
+            <Label Content="Observación: " Canvas.Top ="75" Canvas.Left="25" Padding="0"
+                   FontStyle="Italic" FontWeight="Bold"/>
+            <TextBox x:Name="txtNota" Canvas.Top="90" Canvas.Left="25" Width="345" Height="75" 
+                     Background="Transparent" TextWrapping="Wrap" IsEnabled ="False " 
+                     IsTabStop="False"/>
+        </Canvas>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+			IsTabStop="False" HorizontalAlignment="Stretch"  
+			Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

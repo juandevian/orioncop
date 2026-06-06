@@ -1,0 +1,207 @@
+﻿<src:ClsFormInterface x:Class="WinAnticipos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Anticipos" Height="550" Width="800" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/ORIONLOGO24.png" FontSize="12">
+    <Grid Name="grdPpal" MenuItem.Click="OnMenuClic" Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  VerticalAlignment="Center" 
+                        TabIndex="1"/>
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Grid Grid.Row="1">
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="370*"/>
+                </Grid.RowDefinitions>
+                <Canvas x:Name="cnvGenerales" Grid.Row="0">
+                    <Label x:Name="lblIdAnticipo" Content="Número" Padding="0"
+                           Canvas.Left="10" Canvas.Top="10"/>
+                    <TextBox x:Name="txtIdAnticipo" Canvas.Left="60" Canvas.Top="10" Width="60"
+                             HorizontalContentAlignment="Right" TabIndex="2" />
+                    <Label x:Name="lblIdCliente" Content="Cliente" Padding="0"
+                           Canvas.Left="160" Canvas.Top="10"/>
+                    <Label x:Name="txtIdCliente" Canvas.Left="205" Canvas.Top="10" Width="80"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label x:Name="txtNombreCliente" Canvas.Left="290" Canvas.Top="10" Width="320"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label Canvas.Left="633" Canvas.Top="11" Content="Fecha" Padding="0"
+                           HorizontalContentAlignment="Right" FontWeight="Bold"/>
+                    <Label x:Name="txtFechaA" Canvas.Left="680" Canvas.Top="10" Width="95"
+                           Style="{StaticResource RecTxtSoloLectura}" FontWeight="Bold"
+                           HorizontalContentAlignment="Right"/>
+                    <Label x:Name="lblIdPredioAgru" Canvas.Left="10" Canvas.Top="41"
+                           Content="Predio Agrupador" Padding="0"/>
+                    <Label x:Name="txtIdPredioAgru" Canvas.Left="135" Canvas.Top="40" Width="150"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label x:Name="lblServicio" Canvas.Left="310" Canvas.Top="41"
+                           Content="Servicio" Padding="0"/>
+                    <Label x:Name="txtServicio" Canvas.Left="360" Canvas.Top="40" Width="250"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label x:Name="lblEstado" Canvas.Left="10" Canvas.Top="71"
+                           Content="Estado" Padding="0"/>
+                    <Label x:Name="txtEstado" Canvas.Left="135" Canvas.Top="70" Width="100" 
+                           Style="{StaticResource RecTxtSoloLectura}" FontWeight="Bold"
+                           HorizontalContentAlignment="Center"/>
+                    <Label Canvas.Left="633" Canvas.Top="41" Content="Valor" Padding="0"
+                           HorizontalContentAlignment="Right" FontWeight="Bold"/>
+                    <Label x:Name="txtValorA" Canvas.Left="680" Canvas.Top="40" Width="95"
+                           Style="{StaticResource RecTxtSoloLectura}" FontWeight="Bold"
+                           HorizontalContentAlignment="Right"/>
+                </Canvas>
+                <GridSplitter Grid.Row="1" Background="Gray" VerticalAlignment="Top" 
+                              IsTabStop="False" HorizontalAlignment="Stretch"  
+                              Height="2" Opacity=".5"/>
+                <Canvas Grid.Row="1" x:Name="cnvDatosAnticipo">
+                    <Label Content="DATOS DEL ANTICIPO" Canvas.Top="10" Canvas.Left="10" 
+						FontWeight="Bold" Padding="0"/>
+                    <Label x:Name="lblFechaAnticipo" Canvas.Left="20" Canvas.Top="31" 
+						Content="Fecha del Anticipo" Padding="0"/>
+                    <Label x:Name="txtFechaAnticipo" Canvas.Left="140" Canvas.Top="30" Width="100"
+						Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label x:Name="lblOrigen" Canvas.Left="20" Canvas.Top="91" 
+                           Content="Origen del Anticipo" Padding="0"/>
+                    <Label x:Name="txtOrigen" Canvas.Left="140" Canvas.Top="90" Width="100"
+                           Style="{StaticResource RecTxtSoloLectura}" 
+                           HorizontalContentAlignment="Left"/>
+                    <Label x:Name="lblIdOrigen" Canvas.Left="280" Canvas.Top="91" 
+                           Content="Nro. del Recibo de Caja" Padding="0"/>
+                    <Label x:Name="txtIdOrigen" Canvas.Left="420" Canvas.Top="90" Width="100"
+                           HorizontalContentAlignment="Right"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label x:Name="lblValorAnticipo" Canvas.Left="280" Canvas.Top="31" 
+                           Content="Valor del Anticipo" Padding="0"/>
+                    <Label x:Name="txtValorAnticipo" Canvas.Left="420" Canvas.Top="30" Width="100"
+                           Style="{StaticResource RecTxtSoloLectura}" 
+                           HorizontalContentAlignment="Right"/>
+                    <Label Canvas.Left="20" Canvas.Top="61" Content="Créditos al Anticipo" Padding="0"/>
+                    <Label x:Name="txtCreditos" Canvas.Left="140" Canvas.Top="60" Width="100"
+                           Style="{StaticResource RecTxtSoloLectura}" 
+                           HorizontalContentAlignment="Right"/>
+                    <Label x:Name="lblDebitos" Canvas.Left="280" Canvas.Top="61" 
+                           Content="Débitos al Anticipo" Padding="0"/>
+                    <Label x:Name="txtDebitos" Canvas.Left="420" Canvas.Top="60" Width="100"
+                           Style="{StaticResource RecTxtSoloLectura}" 
+                           HorizontalContentAlignment="Right"/>
+                    <Label x:Name="lblSaldo" Canvas.Left="550" Canvas.Top="61" 
+                           Content="Valor por Aplicar" Padding="0"/>
+                    <Label x:Name="txtSaldo" Canvas.Left="659" Canvas.Top="60" Width="100"
+                           Style="{StaticResource RecTxtSoloLectura}" 
+                           HorizontalContentAlignment="Right"/>
+                    <DataGrid x:Name="dgrNovedaAnt" Canvas.Left="20" Canvas.Top="120" Height="135"
+                              IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False"
+                              ItemsSource="{Binding}" SelectionMode="Extended" SelectionUnit="FullRow"
+                              IsReadOnly="True" Background="Transparent" TabIndex="5"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="LightGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Ord." Width="40">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                                                 Padding="5,0,0,0" IsReadOnly="True" 
+                                                 Text="{Binding IdNovedad}"
+                                                 HorizontalContentAlignment="Right"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Doc. Origen" Width="80">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                                                 Padding="5,0,0,0" IsReadOnly="True" 
+                                                 Text="{Binding DocOrigen}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Nro. Doc. Origen" Width="100">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                                                 Padding="5,0,0,0" IsReadOnly="True" 
+                                                 Text="{Binding IdDocOrigen}"
+                                                 HorizontalContentAlignment="Right"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Detalle" Width="200">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                                                 Padding="5,0,0,0" IsReadOnly="True" 
+                                                 Text="{Binding Detalle}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Cuenta Cr" Width="90">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                                                 Padding="5,0,0,0" IsReadOnly="True" 
+                                                 Text="{Binding IdCuentaCr}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Cuenta Db" Width="90">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                                                 Padding="5,0,0,0" IsReadOnly="True" 
+                                                 Text="{Binding IdCuentaDb}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Valor" Width="120">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" IsTabStop="False" 
+											HorizontalAlignment="Right" 
+											Text="{Binding Valor, StringFormat=\{0:c\}}"
+											IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Canvas>
+            </Grid>
+        </Grid>
+        <!--Area inferior de la ventana-->
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

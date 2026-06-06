@@ -1,0 +1,65 @@
+﻿<src:ClsFormInterface x:Class="WinCambioContrasena"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Cambio de Contraseña" Height="250" Width="600" WindowStyle="SingleBorderWindow" 
+            WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" Closing="clsFormInterface_Closing">
+    <Grid Name="grdPpal" Control.LostFocus="OnPierdeFoco"
+          Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"  Name="rwdControl"/>
+            <RowDefinition MinHeight="100"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel x:Name="PanelControl" Grid.Row="0">
+            <!--Relleno-->
+            <Label Height="10" DockPanel.Dock="Top"/>
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+        </DockPanel>
+        <Canvas Grid.Row="1">
+            <Label x:Name="lblIdUsuario" Content="Nombre de Usuario" Canvas.Left="10" Canvas.Top="10" 
+                   Padding="0"/>
+            <Label x:Name="txtUsuario" Canvas.Left="145" Canvas.Top="10" Width="140" 
+                   Style="{StaticResource RecTxtSoloLectura}" IsTabStop="False"/>
+            <Label x:Name="lblFechaCreacion" Content="Fecha de Creación" Canvas.Left="10" Canvas.Top="40" 
+                   Padding="0"/>
+            <Label x:Name="txtFechaCreacion" Canvas.Left="145" Canvas.Top="40" Width="140" 
+                   Style="{StaticResource RecTxtSoloLectura}" IsTabStop="False"/>
+            <Label x:Name="lblFechaUltCambio" Content="Fecha Ultimo Cambio" Canvas.Left="13" Canvas.Top="70" 
+                   Padding="0"/>
+            <Label x:Name="txtFechaUltCambio" Canvas.Left="145" Canvas.Top="70" Width="140"
+                   Style="{StaticResource RecTxtSoloLectura}" IsTabStop="False"/>
+            <Label x:Name="lblContrasenaActual" Content="Contrase_ña Actual" Canvas.Left="10" Canvas.Top="100" 
+                   Padding="0"/>
+            <PasswordBox x:Name="pwbContrasenaActual" Canvas.Left="145" Canvas.Top="100" Width="140" 
+                         TabIndex="1"/>
+            <Label x:Name="lblNuevaContrasena" Content="_Nueva Contraseña" Canvas.Left="310" Canvas.Top="10" 
+                   Padding="0"/>
+            <PasswordBox x:Name="pwbContrasena" Canvas.Left="435" Canvas.Top="10" Width="140" 
+                         TabIndex="2" />
+            <Label x:Name="lblConfirmarContrasena" Content="C_onfirmar Contraseña" Canvas.Left="310" 
+                   Canvas.Top="40" Padding="0"/>
+            <PasswordBox x:Name="pwbConfirmarContrasena" Canvas.Left="435" Canvas.Top="40" Width="140" 
+                         TabIndex="3" />
+            <Label x:Name="lblTipoCambio" Content="_Próximo Cambio" Canvas.Left="310" Canvas.Top="70" 
+                   Padding="0"/>
+            <ComboBox x:Name="cboTipoCambio" Canvas.Left="435" Canvas.Top="70" Width="140" Padding="4,1,1,1"
+                      ItemsSource="{Binding}" TabIndex="4"/>
+            <Label x:Name="lblFechaExpiracion" Content="_Fecha de Expiración" Canvas.Left="310" Canvas.Top="100" 
+                   Padding="0"/>
+            <DatePicker x:Name="dtpFechaExpiracion" Canvas.Left="435" Canvas.Top="100" Width="140" Padding="4,1,1,1" 
+                        IsTabStop="True" TabIndex="5"/>
+        </Canvas>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

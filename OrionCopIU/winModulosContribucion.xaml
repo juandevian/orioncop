@@ -1,0 +1,124 @@
+﻿<src:ClsFormInterface x:Class="WinModulosContribucion"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Módulos de Contribución" Height="570" Width="620" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
+    <Window.Resources>
+        <!--Menues Contextuales-->
+        <ContextMenu x:Key="RecMnuSectoresMC">
+            <MenuItem Name="MnuAbrirSectoresC" Header="Abrir Sectores Contribuyentes" 
+                      Click="MnuContextual_Click" Style="{StaticResource RecMnuItemSec}">
+            </MenuItem>
+        </ContextMenu>
+    </Window.Resources>
+    <Grid Name="grdPpal" Control.LostFocus="OnPierdeFoco"
+          Control.GotFocus="OnCogerFoco" MenuItem.Click="OnMenuClic">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"  Name="rwdControl"/>
+            <RowDefinition MinHeight="200" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center" TabIndex="0"/>
+        </DockPanel>
+        <Grid x:Name="grdModulos" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="300*"/>
+            </Grid.RowDefinitions>
+            <GridSplitter Grid.Row="1" Background="Gray" HorizontalAlignment="Stretch" 
+                          IsTabStop="False" VerticalAlignment="Top" ShowsPreview="True" 
+                          Height="2" Opacity=".5"/>
+            <Canvas Grid.Row="0">
+                <Label x:Name="lblIdModulo" Content="Id. Módulo de Contribución" 
+                       Canvas.Left="50" Canvas.Top="10" 
+                       Padding="0"/>
+                <TextBox x:Name="txtIdModulo" Canvas.Left="245" Canvas.Top="10" Width="60" 
+                         Background="Transparent" TabIndex="1"
+                         Text="{Binding Path=IdModuloContribucion}"/>
+                <TextBox x:Name="txtIdModuloNuevo" Canvas.Left="245" Canvas.Top="10" Width="60" 
+                         Visibility="Hidden" TabIndex="2"/>
+                <Label x:Name="lblNombreModulo" Content="Nombre Módulo de Contribución" 
+                       Canvas.Left="50" Canvas.Top="40" Padding="0"/>
+                <TextBox x:Name="txtNombreModulo" Canvas.Left="245" Canvas.Top="40" Width="320"
+                         Text="{Binding Path=Nombre}"
+                         Background="Transparent" TabIndex="3"/>
+                <TextBox x:Name="txtNombreModuloNuevo" Canvas.Left="245" Canvas.Top="40" Width="320" 
+                         Visibility="Hidden" TabIndex="4"/>
+                <CheckBox x:Name="chkContriCuotaAdmin" Content="? Contribuye con la Cuota de Administración" 
+                          Canvas.Left="50" Canvas.Top="70" FlowDirection="RightToLeft" 
+                          Padding="6,0,0,0" Background="Transparent" 
+                          IsChecked="{Binding Path=ContribuyeCuotaAdmin}" TabIndex="5"/>
+                <CheckBox x:Name="chkContriCuotaAdminNuevo" Content="? Contribuye con la Cuota de Administración" 
+                          Canvas.Left="50" Canvas.Top="70" Visibility="Visible"
+                          FlowDirection="RightToLeft" Padding="6,0,0,0"
+                          Background="Transparent" TabIndex="6"/>
+            </Canvas>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400*"/>
+                </Grid.ColumnDefinitions>
+                <Canvas x:Name="cnvModulos" Grid.Column="0">
+                    <DataGrid x:Name="dgrModulos" Canvas.Left="10" Canvas.Top="20" 
+                              Height="260" AutoGenerateColumns="False"  
+                              ItemsSource="{Binding}" VerticalScrollBarVisibility="Visible"
+                              IsSynchronizedWithCurrentItem="True"
+                              SelectionMode="Extended" SelectionUnit="FullRow"
+                              IsReadOnly="True" IsTabStop="True" Background="Transparent" 
+                              BorderBrush="Transparent" TabIndex="10">
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="LightGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id. Módulo" Width="100" 
+                                                Binding="{Binding IdModuloContribucion}"/>
+                            <DataGridTextColumn Header="Nombre Del Módulo de Contribución" 
+                                                Width="340" Binding="{Binding Nombre}"/>
+                            <DataGridCheckBoxColumn Header="Contri. Cuota Admin. ?" IsReadOnly="True" 
+                                                    IsThreeState="False" Width="130" 
+                                                    Binding="{Binding ContribuyeCuotaAdmin}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Canvas>
+            </Grid>
+        </Grid>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana" Button.Click="OnBotonClic">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <Button x:Name="bttAbrirSectores" Canvas.Left="20" Canvas.Top="5"  
+                        Width="230" Height="22" TabIndex="11">
+                        <DockPanel Width="225">
+                        <Image Source="RecImagenes/IrA.png" Width="18" Height="18" 
+                               HorizontalAlignment="Left" DockPanel.Dock="Left" Margin="3,0,0,0"/>
+                        <Label Content="Abrir Sectores Contribuyentes" Background="Transparent" Padding="0" 
+                                   DockPanel.Dock="Right" Margin="5,0,0,0"
+                                   VerticalContentAlignment="Center" IsTabStop="False"/>
+                        </DockPanel>
+                    </Button>
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

@@ -1,0 +1,35 @@
+﻿<Window x:Class="WinMesInicioFact"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FontSize="12"
+        WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png"
+        Title="Mes Inicio Facturación" Height="260" Width="400" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition MinHeight="20"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0" Margin="0,20,0,0">
+            <!--Label Relleno-->
+            <Label Height="10" DockPanel.Dock="Top"/>
+            <!--Label Notificaciones-->
+            <Label x:Name="lblNotifica" Background="Transparent" 
+                   Padding="10,0,0,0" BorderThickness="1" BorderBrush="LightGray"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <Canvas Grid.Row="1">
+            <Label Content="Mes inicio Facturación" Canvas.Left="20"
+                   Canvas.Top="20"  Foreground="Gray" FontSize="17" FontStyle="Italic"
+                   Padding="0"/>
+            <RadioButton x:Name="rdbMesAct" Content="Mes actual" Canvas.Left="100" 
+                         TabIndex="2" Canvas.Top="70"/>
+            <RadioButton x:Name="rdbMesAnt" Content="Mes anterior al actual" Canvas.Left="100" 
+                         TabIndex="3" Canvas.Top="100"/>
+            <Button Name="bttAceptar" Content="_Aceptar" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Right="140" Canvas.Top="145" TabIndex="5" Canvas.Left="155"/>
+            <Button Name="bttCancelar" Content="_Cancelar" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Right="20" Canvas.Top="145" TabIndex="6" Canvas.Left="275" />
+        </Canvas>
+    </Grid>
+</Window>

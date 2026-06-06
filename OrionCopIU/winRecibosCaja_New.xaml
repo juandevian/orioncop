@@ -1,0 +1,1056 @@
+﻿<src:ClsFormInterface x:Class="WinRecibosCaja"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+    Title="winReciboCaja" Height="600" Width="900" WindowStyle="SingleBorderWindow" 
+            WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png">
+    <Grid x:Name="grdPpal" ButtonBase.Click="OnBotonClic" 
+          MenuItem.Click="OnMenuClic" GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" x:Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpoRC" />
+        <!--Barra de Herramientas y Menu-->
+        <DockPanel x:Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu x:Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center"/>
+        </DockPanel>
+        <!--Contenido especifico de la Ventana-->
+        <Canvas x:Name="cnvRecsCaja" Grid.Row="1" d:IsHidden="True">
+            <Label Canvas.Left="280" FontWeight="Bold" FontSize="16" 
+                   Content="Recibos de Caja (últimos dos meses)"/>
+            <DataGrid x:Name="dgrRecsCaja" Canvas.Top="30" Margin="60,0,40,20" Height="370"
+                      AutoGenerateColumns="False" 
+                      ToolTip="Doble clic o clic contratio abre el recibo de caja seleccionado!"
+                      VerticalScrollBarVisibility="Visible" IsReadOnly="False"
+                      IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}"
+                      Background="Transparent" IsTabStop="False"
+                      Style="{StaticResource RecFuenteNormal}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Fecha" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         Padding="5,0,0,0" IsReadOnly="True"
+                                         Text="{Binding FechaReciboCaja , StringFormat='dd/MM/yyyy'}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Pref." Width="40">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         Padding="5,0,0,0" IsReadOnly="True"
+                                         Text="{Binding Prefijo}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Número" Width="60">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         Padding="5,0,0,0" IsReadOnly="True"
+                                         Text="{Binding IdReciboCaja}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Pred. Agr." Width="140">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         Padding="5,0,0,0" IsReadOnly="True"
+                                         Text="{Binding IdPredioAgrupador}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Id. Cliente" Width="60">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         Padding="5,0,0,0" IsReadOnly="True"
+                                         Text="{Binding IdTerceroCliente}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Nombre Cliente" Width="270">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         Padding="5,0,0,0" IsReadOnly="True"
+                                         Text="{Binding NombreCompleto}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Valor" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Background="Transparent" BorderThickness="0"
+                                         HorizontalContentAlignment="Right"
+                                         Padding="0,0,5,0" IsReadOnly="True"
+                                         Text="{Binding Valor, StringFormat=\{0:c\}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+        </Canvas>
+        <Grid x:Name="grdRecCaja" Grid.Row="1" LostFocus="OnPierdeFoco" 
+                ComboBox.SelectionChanged="OnCboCambio" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="155"/>
+                <RowDefinition MinHeight="100"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="640"/>
+                    <ColumnDefinition MinWidth="190"/>
+                </Grid.ColumnDefinitions>
+                <GridSplitter Grid.Column="0" Background="Gray" VerticalAlignment="Stretch" 
+            		HorizontalAlignment="Right" IsTabStop="False"
+            		Width="1" Opacity=".5"/>
+                <Canvas Grid.Column="1" x:Name="cnvValores">
+                    <Label Content="Total Recibido" Padding="0"
+                           Canvas.Left="10" Canvas.Top="50"
+                           FontSize="13" FontWeight="SemiBold"/>
+                    <Label x:Name="txtRecibido" Canvas.Left="125" Canvas.Top="50" Width="110"
+                           HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                           Style="{StaticResource RecTxtSoloLectura}"
+                           FontSize="13" FontWeight="SemiBold"/>
+                    <Label Content="Saldo pendiente" Padding="0" 
+                           Canvas.Left="10" Canvas.Top="86"
+                           ToolTip="Saldo pendiente después de aplicar el presente Pago"
+                           HorizontalContentAlignment="Right"/>
+                    <Label x:Name="txtSaldoPen" Canvas.Left="125" Canvas.Top="85" Width="110" 
+                    	HorizontalContentAlignment="Right"
+                    	Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label Content="Valor del Anticipo" Padding="0" Canvas.Top="121" Canvas.Left="10"/>
+                    <Label x:Name="txtAnticipo" Canvas.Left="125" Canvas.Top="120" Width="110"
+                           HorizontalContentAlignment="Right" 
+                           Style="{StaticResource RecTxtSoloLectura}" />
+                </Canvas>
+                <Canvas Grid.Column="0" x:Name="cnvEncabezado">
+                    <Label x:Name="lblIdRec" Content="Id." Padding="0"
+                		Canvas.Left="15" Canvas.Top="11"/>
+                    <Border Canvas.Left="65" Canvas.Top="7" BorderBrush="Gray" BorderThickness="1" 
+                            CornerRadius="0" Width="214" Height="24">
+                        <Canvas>
+                            <Label x:Name="lblPref" Content="Pref." Padding="0"
+                                   Canvas.Left="1" Canvas.Top="3" />
+                            <ComboBox x:Name="cboPref" Canvas.Left="30" Canvas.Top="1" Width="58"
+                                     TabIndex="1" Height="19"/>
+                            <Label x:Name="lblIdRecibo" Content="Número" Padding="0"
+                                   Canvas.Left="100" Canvas.Top="3" />
+                            <TextBox x:Name="txtNroRecCaja" Canvas.Left="150" Canvas.Top="1" 
+                                     Width="60" HorizontalContentAlignment="Right" TabIndex="2" />
+                        </Canvas>
+                    </Border>
+                    <Label x:Name="lblEstado" Canvas.Left="300" Canvas.Top="11"
+                		Content="Estado"  Padding="0"/>
+                    <Label x:Name="txtEstado" Canvas.Left="355" Canvas.Top="10" Width="100"
+                		Style="{StaticResource RecTxtSoloLectura}" FontWeight="Bold"
+                		HorizontalContentAlignment="Center"/>
+                    <Label x:Name="lblFechaRec" Content="Fecha" Padding="0"
+                		Canvas.Left="470" Canvas.Top="11" FontWeight="Bold"/>
+                    <DatePicker x:Name="dtpFechaRec" Canvas.Left="520" Canvas.Top="7" Width="105"
+                                SelectedDateChanged="OnCambioFecha" FontWeight="Bold"
+                                HorizontalContentAlignment="Right" TabIndex="3"/>
+                    <Label x:Name="lblIdCliente" Content="Cliente" Padding="0"
+                		Canvas.Left="15" Canvas.Top="36"/>
+                    <Button x:Name="bttEncontrarCliente" Canvas.Left="65" Canvas.Top="35"
+                            Style="{StaticResource RecEstiloBttEnc}" TabIndex="4"
+                            ToolTip="Clic aqui para buscar El Cliente."/>
+                    <TextBox x:Name="txtIdCliente" Canvas.Left="80" Canvas.Top="34" Width="80"
+                		ToolTip="Digite el signo de interrogación (?) para buscar el Cliente!"
+                		TabIndex="5"/>
+                    <Label x:Name="txtNombreCliente" Canvas.Left="163" Canvas.Top="35" Width="292"
+                		Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label x:Name="lblValor" Content="Valor" Padding="0" Canvas.Left="470" Canvas.Top="36"
+                           FontWeight="Bold"/>
+                    <Label x:Name="txtValorR" Canvas.Left="520" Canvas.Top="35" Width="105"
+                           HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                           Style="{StaticResource RecTxtSoloLectura}" FontWeight="Bold"/>
+                    <CheckBox x:Name="chkAnticipo"  Content="Es solo un Anticipo" 
+                              Canvas.Left="413" Canvas.Top="60" Padding="5,0,0,0" 
+                              Visibility="Collapsed" TabIndex="6"/>
+                    <Label x:Name="lblIntPorCausar" Content="Intereses por causar" Padding="0"
+                           Canvas.Left="410" Canvas.Top="105" Visibility="Collapsed"/>
+                    <Label x:Name="txtIntPorCausar" Canvas.Left="535" Canvas.Top="104"
+                                   Style="{StaticResource RecTxtSoloLectura}" Width="90" 
+                                   HorizontalContentAlignment="Right" Visibility="Collapsed"/>
+                    <Button x:Name="bttCausarIntereses" Canvas.Left="505" Canvas.Top="125"
+                                    Width="120" Style="{StaticResource RecEstiloBttGen}"
+                                    TabIndex="13" Visibility="Collapsed">
+                        <DockPanel Width="120">
+                            <Label Content="Causar Intereses" Background="Transparent" 
+                                           Padding="0" DockPanel.Dock="Left" Margin="5,0,0,0" 
+                                           HorizontalAlignment="Left" 
+                                           VerticalContentAlignment="Center" IsTabStop="False"/>
+                            <Image Source="RecImagenes/IrA.png" Width="17" Height="17" 
+                                           HorizontalAlignment="Right" DockPanel.Dock="Right" 
+                                           Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                    <Label x:Name="lblPredioAgru" Content="Predios Agrupadores" Padding="0"
+                		Canvas.Left="15" Canvas.Top="60"/>
+                    <ListBox x:Name="lsbPrediosAgru" Canvas.Left="15"  Canvas.Top="75"
+                             Width="160" Height="70" SelectionMode="Multiple" 
+                             Background="Transparent" TabIndex="8">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Padding" Value="5,0,0,0" />
+                                <Setter Property="Margin" Value="0" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                    <Label x:Name="lblServicios" Content="Conceptos del Pago" Padding="0"
+                           Canvas.Left="185" Canvas.Top="60"/>
+                    <ListBox x:Name="lsbServicios" Canvas.Left="185"  Canvas.Top="75"
+                             Width="210" Height="70" SelectionMode="Multiple"
+                             Background="Transparent" TabIndex="9" FontSize="11">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Padding" Value="5,0,0,0" />
+                                <Setter Property="Margin" Value="0" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                    <GroupBox x:Name="grbDocs" Canvas.Left="405" Canvas.Top="55" Height="92" Width="220"
+                              Header="Documentos Relacionados"  IsTabStop="False"
+                              ToolTip="Para abrir el Documento de doble clic sobre su número." d:IsHidden="True">
+                        <Canvas>
+                            <Label Content="Nro. del Anticipo" Padding="0" Canvas.Top="3" Canvas.Left="5"/>
+                            <Label x:Name="txtIdAnticipo" Canvas.Left="125" Canvas.Top="2" Width="80"
+                                   HorizontalContentAlignment="Right" 
+                                   Style="{StaticResource RecTxtSoloLectura}" />
+                            <Label Content="Nro. Nota Reversión" Padding="0" Canvas.Top="26" Canvas.Left="5"/>
+                            <Label x:Name="txtNroNotaRCr" Canvas.Top="25" Canvas.Left="125" Width="80" 
+                                   HorizontalContentAlignment="Right" 
+                                   Style="{StaticResource RecTxtSoloLectura}"/>
+                            <Label Content="Nro. Notas Crédito" Padding="0" Canvas.Top="49" Canvas.Left="5"/>
+                            <Label x:Name="txtNroNotasCr" Canvas.Top="48" Canvas.Left="125" Width="80" 
+                                   HorizontalContentAlignment="Right" 
+                                   Style="{StaticResource RecTxtSoloLectura}"/>
+                        </Canvas>
+                    </GroupBox>
+                    <TextBox x:Name="txtIdPredio" Canvas.Left="260" Canvas.Top="115" Width="140"
+                		Visibility="Collapsed" Background="Transparent"/>
+                    <Label Content="Total de la Deuda" Padding="0"
+                		Canvas.Left="650" Canvas.Top="16"/>
+                    <Label x:Name="txtDeudaRecibo" Canvas.Left="765" Canvas.Top="15" Width="110"
+                		HorizontalContentAlignment="Right"
+                		Style="{StaticResource RecTxtSoloLectura}" RenderTransformOrigin="0.5,0.5">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="1.909"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.3"/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                </Canvas>
+            </Grid>
+            <GridSplitter Grid.Row="1" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  
+				Height="2" Opacity=".5"/>
+            <Grid x:Name="grdConsulta" Grid.Row="1">
+                <TabControl x:Name="tbcRecibosCaja" Grid.Row="1" Style="{StaticResource RecTabCtrl}"
+                            Margin="0,5,0,0" d:IsHidden="True">
+                    <TabItem x:Name="tbiDetalles" Header="Detalles" 
+                		Style="{StaticResource RecTabItem}" Width="200" d:IsHidden="True">
+                        <Grid x:Name="grdItems">
+                            <Grid.RowDefinitions>
+                                <RowDefinition MinHeight="100"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <DataGrid x:Name="dgrItems" Margin="30,5,30,5"
+                				Grid.Row="0" AutoGenerateColumns="False" 
+                				VerticalScrollBarVisibility="Visible" 
+                				IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" 
+                				IsReadOnly="True" Background="Transparent" IsTabStop="False"
+                				Style="{StaticResource RecFuenteNormal}"
+                                ToolTip="De clic contrario en la fila seleccionada para abrir el documento afectado!">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Ord." Width="55">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									Padding="5,0,0,0" IsReadOnly="True" 
+                									Text="{Binding Ordinal}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Nro.Doc.Afectado" Width="80" x:Name="dgtNroFac">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									Padding="5,0,0,0" IsReadOnly="True" 
+                									Text="{Binding NroFact}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Detalle" Width="540">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									Padding="5,0,0,0" IsReadOnly="True" 
+                									Text="{Binding Detalle}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Valor" Width="120">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0"
+                									HorizontalContentAlignment="Right"
+                									Padding="0,0,5,0" IsReadOnly="True" 
+                									Text="{Binding Valor, StringFormat=\{0:c\}}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="LightGray"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                            </DataGrid>
+                            <Canvas Grid.Row="1">
+                                <Label Content="Comentario" Padding="0"
+                					Canvas.Left="30" Canvas.Top="7"
+                					Style="{StaticResource RecFuenteNormal}"/>
+                                <TextBox x:Name="txtComentarioRec" Canvas.Left="110" Canvas.Top="6" 
+                					Width="380" Height="36" HorizontalAlignment="Left" 
+                					TextAlignment="Justify" TextWrapping="Wrap" 
+                					Background="Transparent"/>
+                                <Label Content="Fecha de elaboración" Padding="0"
+                					Canvas.Left="570" Canvas.Top="7"
+                					Style="{StaticResource RecFuenteNormal}"/>
+                                <Label x:Name="txtFechaElaboracon" Canvas.Left="700" Canvas.Top="6" 
+                					Width="160" HorizontalContentAlignment="Left"
+                					Style="{StaticResource RecTxtSoloLectura}"/>
+                            </Canvas>
+                        </Grid>
+                    </TabItem>
+                    <TabItem x:Name="tbiMediosPago" Header="Medios de Pago" 
+                		Style="{StaticResource RecTabItem}" Width="200" d:IsHidden="True">
+                        <Grid x:Name="grdMediosPago">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition MinHeight="50"/>
+                            </Grid.RowDefinitions>
+                            <Canvas Grid.Row="0">
+                                <Label Content="Medio de Pago" Padding="0"
+                					Canvas.Left="50" Canvas.Top="12"
+                					Style="{StaticResource RecFuenteNormal}"/>
+                                <TextBox x:Name="txtTipoMedPago" Canvas.Left="220" Canvas.Top="10" 
+                					Width="180" Text="{Binding NombreMedioPago}" 
+                					Background="Transparent"/>
+                                <Label Content="El Dinero ingreso a" Padding="0"
+                					Canvas.Left="50" Canvas.Top="41"
+                					Style="{StaticResource RecFuenteNormal}"/>
+                                <Label x:Name="txtNomCtaIngreso" Canvas.Left="220" 
+                					Canvas.Top="40" Width="480"
+                					Style="{StaticResource RecTxtSoloLectura}"/>
+                                <Label Content="Numero del Medio de Pago" Padding="0"
+                					Canvas.Left="50" Canvas.Top="72"
+                					Style="{StaticResource RecFuenteNormal}"/>
+                                <TextBox x:Name="txtNroMedPago" Canvas.Left="220" 
+                					Canvas.Top="70" Width="180" 
+                					Text="{Binding NumeroMedioPago}" Background="Transparent"/>
+                                <Label Content="Valor del Medio de Pago" Padding="0"
+                					Canvas.Left="420" Canvas.Top="12"
+                					Style="{StaticResource RecFuenteNormal}"/>
+                                <TextBox x:Name="txtValorMedPago" Canvas.Left="580" 
+                					Canvas.Top="10" Width="120" 
+                					Text="{Binding Valor, StringFormat=\{0:c\}}" 
+                					Background="Transparent"
+                					HorizontalContentAlignment="Right" RenderTransformOrigin="2.978,-2.15"/>
+                            </Canvas>
+                            <DataGrid x:Name="dgrMediosPago" Grid.Row="1" Margin="50,0,50,2"
+                				AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" 
+                				IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}"
+                				IsReadOnly="True" Background="Transparent" IsTabStop="False"
+                				Style="{StaticResource RecFuenteNormal}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Medio de Pago" Width="140">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False" 
+                									Text="{Binding NombreMedioPago}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Número Medio Pago" Width="135">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0"
+                									IsTabStop="False" 
+                									Text="{Binding NumeroMedioPago}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Cuenta Ingresó" Width="300">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False" 
+                									Text="{Binding NombreCuenta}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Cuenta Cont." Width="80">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False" 
+                									Text="{Binding IdCtaContIngreso}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Valor" Width="100">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									HorizontalContentAlignment="Right" 
+                									IsTabStop="False"
+                									Text="{Binding Valor, StringFormat=\{0:c\}}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="LightGray"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem x:Name="tbiNovedades" Header="Movimiento Contable" 
+                		Style="{StaticResource RecTabItem}" Width="200" d:IsHidden="True">
+                        <Grid x:Name="grdNovedades">
+                            <DataGrid x:Name="dgrNovedades" Margin="20,20,20,10" 
+                				IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False"
+                				ItemsSource="{Binding}" SelectionMode="Extended" 
+                				SelectionUnit="FullRow" IsReadOnly="True" 
+                				Background="Transparent" 
+                                ToolTip="De clic contrario en la fila seleccionada para abrir el documento afectado!"
+                				ScrollViewer.VerticalScrollBarVisibility="Visible"
+                				Style="{StaticResource RecFuenteNormal}">
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="LightGray"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Nro.Doc.Afectado" Width="110" x:Name="dgtNroFacNov">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False" HorizontalAlignment="Left" 
+                									IsReadOnly="True" Text="{Binding NroFac}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Item" Width="45">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False" 
+                									HorizontalAlignment="Left" IsReadOnly="True"
+                									Text="{Binding IdItemFactura}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Id." Width="40">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False" HorizontalAlignment="Left" 
+                									IsReadOnly="True" Text="{Binding IdNovedad}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Detalle" Width="290">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False" 
+                									HorizontalAlignment="Left" Text="{Binding Detalle}"
+                									IsReadOnly="True"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Cuenta Db" Width="95">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False"
+                									Text="{Binding IdCuentaDb}" IsReadOnly="True"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Cuenta Cr" Width="95">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False" Text="{Binding IdCuentaCr}" 
+                									IsReadOnly="True"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Valor" Width="140">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Background="Transparent" BorderThickness="0" 
+                									IsTabStop="False" 
+                									Text="{Binding Valor, StringFormat=\{0:c\}}" 
+                									HorizontalAlignment="Right" 
+                									IsReadOnly="True"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+            <Grid x:Name="grdPagoNuevo" Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="225"/>
+                    <ColumnDefinition Width="680*"/>
+                </Grid.ColumnDefinitions>
+                <Canvas x:Name="cnvDeuda" Grid.Column="0" Grid.ColumnSpan="2" d:IsHidden="True">
+                    <Label x:Name="lblCanvasDeuda" Content="DETALLES DE LA DEUDA" Canvas.Top="5" Canvas.Left="5" 
+            			FontWeight="Bold" d:IsHidden="True" />
+                    <DataGrid x:Name="dgrDeuda" Canvas.Left="70" Canvas.Top="40" Height="190"
+                    	AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" 
+                    	IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" 
+                    	IsReadOnly="True" Background="Transparent" IsTabStop="False">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Id.Documento" Width="110" x:Name="dgtNroFacDeuda">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                    						Text="{Binding NroFactura}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Fecha Doc." Width="90" x:Name="dgtFechaFac">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                    						Text="{Binding FechaFact, StringFormat=\{0:dd/MM/yyyy\}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Fecha Vence" Width="90">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                    						Text="{Binding FechaVence, StringFormat=\{0:dd/MM/yyyy\}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Valor Documento" Width="110" x:Name="dgtValor">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0"
+                    						HorizontalContentAlignment="Right"
+                    						Text="{Binding ValorFactura, StringFormat=\{0:c\}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Deuda Capital" Width="110">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                    						HorizontalContentAlignment="Right"
+                    						Text="{Binding DeudaCapital, StringFormat=\{0:c\}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Deuda Int.Mora" Width="110">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                    						HorizontalContentAlignment="Right"
+                    						Text="{Binding DeudaIntMoras, StringFormat=\{0:c\}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Total Deuda" Width="100">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+                    						HorizontalContentAlignment="Right"
+                    						Text="{Binding DeudaTotal, StringFormat=\{0:c\}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="LightGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                    </DataGrid>
+                </Canvas>
+                <Canvas x:Name="cnvDescuentos" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label Content="DESCUENTOS Y RETENCIONES" Canvas.Top="5" Canvas.Left="5" 
+            			FontWeight="Bold"/>
+                    <Label x:Name="lblTipoDcto" Content="Tipo de Descuento" Padding="0"
+            			Canvas.Left="20" Canvas.Top="41"/>
+                    <TextBox x:Name="txtTipoDcto" Canvas.Left="135" Canvas.Top="40" Width="260"
+                             Text="{Binding TipoDcto}" Background="Transparent"/>
+                    <ComboBox x:Name="cboTipoDsctoNuevo"  Canvas.Left="135" Canvas.Top="40" Width="260"
+            			Padding="6,1,1,1" Visibility="Collapsed" TabIndex="15"/>
+                    <Label x:Name="lblIdFactura" Content="Número Documento" Padding="0"
+                           Canvas.Left="20" Canvas.Top="67" />
+                    <TextBox x:Name="txtNroFactura" Canvas.Left="135" Canvas.Top="65" 
+                             Width="120" Text="{Binding NroFactura}" Background="Transparent"/>
+                    <ComboBox x:Name="cboNroFactNuevo"  Canvas.Left="135" Canvas.Top="65" Width="120"
+                              Padding="6,1,1,1" Visibility="Collapsed" TabIndex="16"/>
+                    <Label x:Name="lblItemFactura" Content="Item Documento" Padding="0"
+                           Canvas.Left="20" Canvas.Top="91"/>
+                    <TextBox x:Name="txtItemFactura" Canvas.Left="135" Canvas.Top="90" 
+                             Width="380" Text="{Binding IdItemFact}" Background="Transparent"/>
+                    <ComboBox x:Name="cboItemFactNuevo"  Canvas.Left="135" Canvas.Top="90" Width="380"
+            			Padding="6,1,1,1" Visibility="Collapsed" TabIndex="17"/>
+                    <Label x:Name="lblDeudaCap" Content="Deuda Capital" Padding="0"
+            			Canvas.Left="540" Canvas.Top="70"/>
+                    <Label x:Name="txtDeudaCap" Canvas.Left="540" Canvas.Top="90" Width="100" 
+            			Style="{StaticResource RecTxtSoloLectura}"
+            			HorizontalContentAlignment="Right"/>
+                    <Label x:Name="lblDeudaMora" Content="Deuda Int. Mora" Padding="0"
+            			Canvas.Left="650" Canvas.Top="70"/>
+                    <Label x:Name="txtDeudaMora" Canvas.Left="650" Canvas.Top="90" Width="100" 
+            			Style="{StaticResource RecTxtSoloLectura}"
+            			HorizontalContentAlignment="Right"/>
+                    <Label x:Name="lblValorDct" Content="Valor del Descuento" Padding="0"
+            			Canvas.Left="20" Canvas.Top="116"/>
+                    <TextBox x:Name="txtValorDcto" Canvas.Left="135" Canvas.Top="115" Width="100" 
+            			Text="{Binding Valor, StringFormat=\{0:c\}}" Background="Transparent"
+            			HorizontalContentAlignment="Right"/>
+                    <TextBox x:Name="txtValorDctoNuevo" Canvas.Left="135" Canvas.Top="115" Width="100" 
+            			HorizontalContentAlignment="Right"
+            			Visibility="Collapsed" TabIndex="18"/>
+                    <Button x:Name="bttNuevoDscto" Canvas.Left="540" Canvas.Top="10" Width="150" 
+                            Style="{StaticResource RecEstiloBttGen}"
+                            Height="24" TabIndex="14" >
+                        <DockPanel Width="145">
+                            <Label Content="Nuevo Descuento" Background="Transparent" Padding="0" 
+            					Margin="5,0,0,0" DockPanel.Dock="Left"
+            					VerticalContentAlignment="Center"
+            					IsTabStop="False"/>
+                            <Image Source="RecImagenes/nuevo.png" Width="20" Height="20" 
+            					HorizontalAlignment="Right" DockPanel.Dock="Right" 
+            					Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                    <Button x:Name="bttAceptarDscto" Canvas.Left="540" Canvas.Top="115" 
+            			Width="150" 
+            			Style="{StaticResource RecEstiloBttGen}"
+            			TabIndex="19" Height="24">
+                        <DockPanel Width="145">
+                            <Label Content="Aceptar Descuento" Background="Transparent" Padding="0" 
+            					Margin="5,0,0,0" DockPanel.Dock="Left"
+            					VerticalContentAlignment="Center"
+            					IsTabStop="False"/>
+                            <Image Source="RecImagenes/guardar.png" Width="20" Height="20" 
+            					HorizontalAlignment="Right" DockPanel.Dock="Right" 
+            					Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                    <Button x:Name="bttCancelarDscto" Canvas.Left="715" Canvas.Top="115" 
+                            Width="150" Style="{StaticResource RecEstiloBttGen}"
+                            TabIndex="20" Height="24">
+                        <DockPanel Width="145">
+                            <Label Content="Cancelar Descuento" Background="Transparent" Padding="0" 
+            					Margin="5,0,0,0" DockPanel.Dock="Left"
+            					VerticalContentAlignment="Center"
+            					IsTabStop="False"/>
+                            <Image Source="RecImagenes/suprimir.png" Width="20" Height="20" 
+            					HorizontalAlignment="Right" DockPanel.Dock="Right" 
+            					Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                    <Button x:Name="bttEliminarDscto" Canvas.Left="715" Canvas.Top="115" 
+                            Width="150" Style="{StaticResource RecEstiloBttGen}"
+                            TabIndex="16" Visibility="Collapsed" Height="24">
+                        <DockPanel Width="145">
+                            <Label Content="Eliminar Descuento" Background="Transparent" Padding="0" 
+            					Margin="5,0,0,0" DockPanel.Dock="Left"
+            					VerticalContentAlignment="Center"
+            					IsTabStop="False"/>
+                            <Image Source="RecImagenes/suprimir.png" Width="20" Height="20" 
+            					HorizontalAlignment="Right" DockPanel.Dock="Right" 
+            					Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                    <DataGrid x:Name="dgrDescuentos" Canvas.Left="25" Canvas.Top="150" Height="105"
+                              AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" 
+                              IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" 
+                              IsReadOnly="True" Background="Transparent" IsTabStop="False">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Nro Documento" Width="110" x:Name="dgtNroFacDcto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" 
+            								Text="{Binding NroFactura}" 
+            								IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Item Doc." Width="240" x:Name="dgtItemFacDcto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" 
+            								Text="{Binding IdItemFact}" 
+            								IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Tipo de Descuento" Width="210">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" 
+            								Text="{Binding TipoDcto}" 
+            								IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Base" Width="100">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" HorizontalContentAlignment="Right"
+            								Text="{Binding Base, StringFormat=\{0:c\}}" 
+            								IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Tasa" Width="60">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" HorizontalContentAlignment="Right"
+            								Text="{Binding Tasa, StringFormat=\{0:p\}}" 
+            								IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Valor" Width="100">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" HorizontalContentAlignment="Right"
+            								Text="{Binding Valor, StringFormat=\{0:c\}}" 
+            								IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="LightGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                    </DataGrid>
+                </Canvas>
+                <Canvas x:Name="cnvDetallePago" Grid.Column="0" d:IsHidden="True">
+                    <Label Content="INFORMACIÓN DEL PAGO" Canvas.Top="5" Canvas.Left="10" 
+            			FontWeight="Bold"/>
+                    <Label x:Name="lblTotalDeuda" Content="Total de la Deuda" Padding="0"
+                           Canvas.Left="10" Canvas.Top="41"/>
+                    <Label x:Name="txtDeuda" Canvas.Left="115" Canvas.Top="40" Width="100"
+                           HorizontalContentAlignment="Right"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label x:Name="lblValorRec" Content="Total Recibido" Padding="0"
+                           Canvas.Left="10" Canvas.Top="71"
+                           FontSize="13" FontWeight="SemiBold"/>
+                    <TextBox x:Name="txtValorRec" Canvas.Left="115" Canvas.Top="70" Width="100"
+                             HorizontalContentAlignment="Right" TabIndex="30"
+                             FontSize="13" FontWeight="SemiBold"/>
+                    <Label x:Name="lblVlrAnt" Content="Valor del Anticipo" Padding="0"
+                           Canvas.Left="10" Canvas.Top="101"/>
+                    <Label x:Name="txtValorAnt" Canvas.Left="115" Canvas.Top="100" Width="100"
+                           HorizontalContentAlignment="Right" 
+                           Style="{StaticResource RecTxtSoloLectura}" />
+                    <Label x:Name="lblSaldo" Content="Saldo pendiente" Padding="0" 
+                           Canvas.Left="10" Canvas.Top="131"
+                           ToolTip="Saldo pendiente después de aplicar el presente Pago"
+                           HorizontalContentAlignment="Right"/>
+                    <Label x:Name="txtSaldo" Canvas.Left="115" Canvas.Top="130" Width="100" 
+                           HorizontalContentAlignment="Right"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                    <Label x:Name="lblComentario" Content="Comentario" Padding="0"
+            			Canvas.Left="10" Canvas.Top="165"/>
+                    <TextBox x:Name="txtComentario" Canvas.Left="10" Canvas.Top="185" Width="200" 
+            			Height="70" TextAlignment="Justify" VerticalScrollBarVisibility="Visible"
+            			TextWrapping="Wrap" TabIndex="31"/>
+                </Canvas>
+                <Canvas x:Name="cnvMediosPagoNuevo" Grid.Column="1" d:IsHidden="True">
+                    <Label Content="MEDIOS DE PAGO" Canvas.Top="5" Canvas.Left="5"
+                           FontWeight="Bold"/>
+                    <TextBox x:Name="txtOrdinal" Canvas.Left="0" Canvas.Top="0" Width="5"
+                             Text="{Binding Ordinal}" Visibility="Hidden" IsTabStop="False"/>
+                    <Label x:Name="lblTipoMedPago" Content="Medio de Pago" Padding="0"
+            			Canvas.Left="55" Canvas.Top="41"/>
+                    <ComboBox x:Name="cboTipoMedPagoNuevo"  Canvas.Left="225" Canvas.Top="40" Width="180"
+            			Padding="6,1,1,1" TabIndex="32"/>
+                    <TextBox x:Name="txtTipoMedPagoCap" Canvas.Left="225" Canvas.Top="40" Width="180"
+                             Text="{Binding NombreMedioPago}" Background="Transparent" IsEnabled="False"
+                             Visibility="Collapsed"/>
+                    <Label x:Name="lblCtaContIngreso" Content="El Dinero ingreso a" Padding="0"
+            			Canvas.Left="55" Canvas.Top="66"/>
+                    <ComboBox x:Name="cboCuentaIngresoNuevo" Canvas.Left="225" Canvas.Top="65" 
+            			Width="350" Padding="6,1,1,1" TabIndex="33"/>
+                    <Label x:Name="txtCuentaIngreso" Canvas.Left="225" Canvas.Top="65"
+                           Width="350"  Style="{StaticResource RecTxtSoloLectura}" 
+                           Visibility="Collapsed"/>
+                    <Label x:Name="lblNumeroMedPago" Content="Numero del Medio de Pago" Padding="0"
+            			Canvas.Left="55" Canvas.Top="91"/>
+                    <TextBox x:Name="txtNroMedPagoNuevo" Canvas.Left="225" 
+                             Canvas.Top="90" Width="180" TabIndex="34"/>
+                    <TextBox x:Name="txtNroMedPagoCap" Canvas.Left="225" Canvas.Top="90" Width="180" 
+                             Text="{Binding NumeroMedioPago}" Background="Transparent"
+                             Visibility="Collapsed" IsEnabled="False"/>
+                    <Label x:Name="lblValorMedPago" Content="Valor del Medio de Pago" Padding="0"
+            			Canvas.Left="55" Canvas.Top="116"/>
+                    <TextBox x:Name="txtValorMedPagoNuevo" Canvas.Left="225" Canvas.Top="115" Width="100" 
+            			HorizontalContentAlignment="Right"
+            			TabIndex="35"/>
+                    <TextBox x:Name="txtValorMedPagoCap" Canvas.Left="225" Canvas.Top="115" Width="100" 
+                             Text="{Binding Valor, StringFormat=\{0:c\}}" Background="Transparent"
+                             HorizontalContentAlignment="Right" Visibility="Visible"
+                             IsEnabled="False"/>
+                    <Label x:Name="lblTotalMedPago" Content="Total Medios Pago" Padding="0"
+                           Canvas.Left="340" Canvas.Top="116"/>
+                    <Label x:Name="txtTotalMedPagoNuevo" Canvas.Left="455" Canvas.Top="115" Width="120" 
+            			HorizontalContentAlignment="Right" 
+            			Style="{StaticResource RecTxtSoloLectura}"/>
+                    <DataGrid x:Name="dgrMediosPagoNuevo" Canvas.Left="15" Canvas.Top="175" 
+                              Height="80"
+                              AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" 
+                              IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" 
+                              IsReadOnly="True" Background="Transparent" IsTabStop="False">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Medio de Pago" Width="130">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" 
+            								Text="{Binding NombreMedioPago}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Nro. M. Pago" Width="80">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" 
+            								Text="{Binding NumeroMedioPago}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Cuenta Ingresó" Width="215">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" 
+            								Text="{Binding NombreCuenta}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Cuenta Cont." Width="80">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								IsTabStop="False" 
+            								Text="{Binding IdCtaContIngreso}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Valor" Width="100">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Background="Transparent" BorderThickness="0" 
+            								HorizontalContentAlignment="Right" IsTabStop="False"
+            								Text="{Binding Valor, StringFormat=\{0:c\}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="LightGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                    </DataGrid>
+                    <Button x:Name="bttNuevoMedPago" Canvas.Left="265" Canvas.Top="6" Width="140" 
+            			Style="{StaticResource RecEstiloBttGen}" Height="24"
+            			TabIndex="36" >
+                        <DockPanel Width="140">
+                            <Label Content="Nuevo Med.Pago" Background="Transparent" Padding="0" 
+            					Margin="5,0,0,0" DockPanel.Dock="Left"
+            					VerticalContentAlignment="Center"
+            					IsTabStop="False"/>
+                            <Image Source="RecImagenes/nuevo.png" Width="20" Height="20" 
+            					HorizontalAlignment="Right" DockPanel.Dock="Right" 
+            					Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                    <Button x:Name="bttAceptarMedPago" Canvas.Left="265" Canvas.Top="142" Width="140"
+            			Style="{StaticResource RecEstiloBttGen}"
+            			TabIndex="37" Height="24">
+                        <DockPanel Width="140">
+                            <Label Content="Aceptar Med.Pago" Background="Transparent" Padding="0" 
+            					Margin="5,0,0,0" DockPanel.Dock="Left"
+            					VerticalContentAlignment="Center"
+            					IsTabStop="False"/>
+                            <Image Source="RecImagenes/guardar.png" Width="20" Height="20" 
+            					HorizontalAlignment="Right" DockPanel.Dock="Right" 
+            					Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                    <Button x:Name="bttCancelarMedPago" Canvas.Left="435" Canvas.Top="142" Width="140"
+                            Height="24" Style="{StaticResource RecEstiloBttGen}" TabIndex="37">
+                        <DockPanel Width="140">
+                            <Label Content="Cancelar Med.Pago" Background="Transparent" Padding="0" 
+            					Margin="5,0,0,0" DockPanel.Dock="Left"
+            					VerticalContentAlignment="Center"
+            					IsTabStop="False"/>
+                            <Image Source="RecImagenes/suprimir.png" Width="20" Height="20" 
+            					HorizontalAlignment="Right" DockPanel.Dock="Right" 
+            					Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                    <Button x:Name="bttEliminarMedPago" Canvas.Left="435" Canvas.Top="142" Width="140" 
+                            Height="24" Style="{StaticResource RecEstiloBttGen}" Visibility="Visible"
+                            TabIndex="38">
+                        <DockPanel Width="140">
+                            <Label Content="Eliminar Med.Pago" Background="Transparent" Padding="0" 
+            					Margin="5,0,0,0" DockPanel.Dock="Left"
+            					VerticalContentAlignment="Center"
+            					IsTabStop="False"/>
+                            <Image Source="RecImagenes/suprimir.png" Width="20" Height="20" 
+            					HorizontalAlignment="Right" DockPanel.Dock="Right" 
+            					Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                </Canvas>
+                <GridSplitter x:Name="grsPago" Grid.Column="0" Background="Gray" VerticalAlignment="Stretch" 
+            		HorizontalAlignment="Right" IsTabStop="False"
+            		Width="1" Opacity=".5" d:IsHidden="True"/>
+            </Grid>
+        </Grid>
+        <GridSplitter Background="Gray" VerticalAlignment="top" Grid.Row="2"
+                    	IsTabStop="False" HorizontalAlignment="Stretch"  
+                    	Height="2" Opacity=".5" Canvas.Top="514" Width="896"/>
+        <!--Area inferior de la ventana-->
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Canvas x:Name="cnvBotones" Grid.Row="0">
+                <Label x:Name="lblUsuarioGenero" Content="Usuario generó Recibo" 
+                           Canvas.Top="8" Canvas.Left="20"
+                           Padding="0"/>
+                <Label x:Name="txtUsuarioGenero" Canvas.Left="160" Canvas.Top="7" Width="120"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                <Label x:Name="lblUsuarioAnulo" Content="Usuario anuló Recibo" 
+                           Canvas.Top="8" Canvas.Left="310"
+                           Padding="0"/>
+                <Label x:Name="txtUsuarioAnulo" Canvas.Left="440" Canvas.Top="7" Width="120"
+                           Style="{StaticResource RecTxtSoloLectura}"/>
+                <Button x:Name="bttAnterior" Canvas.Right="380" Canvas.Top="5" 
+                        Width="85" Height="22" 
+                        Style="{StaticResource RecEstiloBttGen}"
+                        TabIndex="50">
+                    <DockPanel Width="85">
+                        <Image Source="RecImagenes/IrAnterior.png" Width="17" Height="17" 
+							HorizontalAlignment="Left" DockPanel.Dock="Left" Margin="3,0,0,0"/>
+                        <Label Content="Anterior" Background="Transparent" Padding="0" 
+							DockPanel.Dock="Right" Margin="0,0,8,0" 
+							VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                </Button>
+                <Button x:Name="bttSiguiente" Canvas.Right="280" Canvas.Top="5" 
+                        Width="85"
+                        Style="{StaticResource RecEstiloBttGen}"
+                        TabIndex="51">
+                    <DockPanel Width="85">
+                        <Label Content="Siguiente" Background="Transparent" Padding="0" 
+							DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left"
+							VerticalContentAlignment="Center" IsTabStop="False"/>
+                        <Image Source="RecImagenes/IrA.png" Width="17" Height="17" 
+							HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                    </DockPanel>
+                </Button>
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+            <StaticResource ResourceKey="RecDcpPiePaginaGral"/>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

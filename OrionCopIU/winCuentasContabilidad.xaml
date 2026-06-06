@@ -1,0 +1,100 @@
+﻿<src:ClsFormInterface x:Class="WinCuentasContabilidad"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
+    Title="Cuentas de Contabilidad" Height="540" Width="580" WindowStyle="SingleBorderWindow" 
+    WindowStartupLocation="CenterScreen" Icon="RecImagenes/cuentasContabilidad.png" FontSize="12">
+    <Grid Name="grdPpal" Control.LostFocus="OnPierdeFoco"
+          Control.GotFocus="OnCogerFoco">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"  Name="rwdControl"/>
+            <RowDefinition MinHeight="200"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0">
+            <!--ToolBar-->
+            <StaticResource ResourceKey="RecToolBarPan" />
+            <!--Label Notificaciones-->
+            <StaticResource ResourceKey="RecNotifica"/>
+            <!--Menu-->
+            <Menu Name="MenuVen"  DockPanel.Dock="Bottom" Height="25" Background="Gray"  
+                  VerticalAlignment="Center" MenuItem.Click="OnMenuClic" 
+                  TabIndex="1"/>
+        </DockPanel>
+        <Grid Name="grdCuentasContabilidad" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="400*"/>
+            </Grid.RowDefinitions>
+            <GridSplitter Grid.Row="1" Background="Gray" HorizontalAlignment="Stretch" 
+                          IsTabStop="False" VerticalAlignment="Top" ShowsPreview="True" 
+                          Height="2" Opacity=".5" TabIndex="2"/>
+            <Canvas Grid.Row="0">
+                <Label x:Name="lblCarpeta" Content="Carpeta del Plan de Cuentas" Canvas.Left="20" 
+                       Canvas.Top="10" Padding="0"
+                       TabIndex="2"/>
+                <Label x:Name="txtNombreCarpeta" Canvas.Left="200" Canvas.Top="10" Width="200" 
+                       Style="{StaticResource RecTxtSoloLectura}" 
+                       TabIndex="3"/>
+            </Canvas>
+            <Canvas Grid.Row="1">
+                <Label x:Name="lblIdCuenta" Content="Nú_mero Cuenta" Canvas.Left="30" Canvas.Top="21" 
+                       Padding="0" TabIndex="4" />
+                <TextBox x:Name="txtIdCuenta" Width="80" Canvas.Left="125" Canvas.Top="20"  
+                         Text="{Binding IdCuentaCont}" Background="Transparent" 
+                         TabIndex="5"/>
+                <TextBox x:Name="txtIdCuentaNueva" Width="80" Canvas.Left="130" Canvas.Top="20" 
+                         Visibility="Hidden" TabIndex="6"/>
+                <Label x:Name="lblNombreCuenta" Content="N_ombre Cuenta" Canvas.Left="225" Canvas.Top="21" 
+                       Padding="0" TabIndex="7"/>
+                <TextBox x:Name="txtNombre" Width="220" Canvas.Left="320" Canvas.Top="20" 
+                         Text="{Binding Nombre}" Background="Transparent" TabIndex="8"/>
+                <TextBox x:Name="txtNombreNuevo" Width="230" Canvas.Left="350" Canvas.Top="20" 
+                         Visibility="Hidden" TabIndex="9"/>
+                <DataGrid x:Name="dgrCuentasCont" Canvas.Left="30" Canvas.Top="55" Height="260" 
+                          AutoGenerateColumns="False" HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" 
+                          ItemsSource="{Binding}" SelectionMode="Extended" SelectionUnit="FullRow" 
+                          Background="Transparent" IsReadOnly="True" TabIndex="21" Width="510">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Número Cuenta" Width="140" Binding="{Binding IdCuentaCont}"/>
+                        <DataGridTextColumn Header="Nombre Cuenta" Width="390" Binding="{Binding Nombre}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Canvas>
+        </Grid>
+        <GridSplitter Grid.Row="2" Background="Gray" VerticalAlignment="Top" 
+				IsTabStop="False" HorizontalAlignment="Stretch"  TabIndex="22"
+				Height="2" Opacity=".5"/>
+        <Grid Grid.Row="2" x:Name="grdPieVentana">
+            <Canvas Name="cnvBotones" Grid.Row="0">
+                <Label x:Name="lblLocaliza" Content="Localizar Cuenta" Canvas.Left="20" 
+                       Canvas.Top="8" Padding="0" TabIndex="23" />
+                <TextBox x:Name="txtBuscar" Width="100" Canvas.Left="120" Canvas.Top="8" 
+                         Background="Transparent" TabIndex="24" />
+                <Button x:Name="bttIr" Canvas.Left="240" Canvas.Top="5" Padding="0" Margin="0"
+                        Width="50" Height="22" TabIndex="25">
+                    <DockPanel Width="45">
+                        <Label Content="Ir" Background="Transparent" Padding="0" 
+                                DockPanel.Dock="Left" Margin="5,0,0,0"
+                                VerticalContentAlignment="Center" IsTabStop="False"/>
+                        <Image Source="RecImagenes/IrA.png" Width="18" Height="18" 
+                                HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,3,0"/>
+                    </DockPanel>
+                </Button>
+                <StaticResource ResourceKey="RecCnvAceCan"/>
+            </Canvas>
+        </Grid>
+    </Grid>
+</src:ClsFormInterface>

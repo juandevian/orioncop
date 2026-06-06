@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Apell1" xml:space="preserve">
+    <value>"PersonFamilyName": </value>
+  </data>
+  <data name="Apell2" xml:space="preserve">
+    <value>"PersonFamilyName2": </value>
+  </data>
+  <data name="AddLin" xml:space="preserve">
+    <value>"AddressLine": </value>
+  </data>
+  <data name="DV" xml:space="preserve">
+    <value>"DV": </value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>"Email": </value>
+  </data>
+  <data name="Ident" xml:space="preserve">
+    <value>"Identification": </value>
+  </data>
+  <data name="IdReg" xml:space="preserve">
+    <value>"PartyTaxLevelCode": </value>
+  </data>
+  <data name="IdTipo" xml:space="preserve">
+    <value>"IdentificationType": </value>
+  </data>
+  <data name="Nom1" xml:space="preserve">
+    <value>"PersonFirstName": </value>
+  </data>
+  <data name="Nom2" xml:space="preserve">
+    <value>"PersonMiddleName": </value>
+  </data>
+  <data name="PagInt" xml:space="preserve">
+    <value>"WebSiteURI": </value>
+  </data>
+  <data name="Regist" xml:space="preserve">
+    <value>"RegistrationName": </value>
+  </data>
+  <data name="Teleph" xml:space="preserve">
+    <value>"Telephone": </value>
+  </data>
+  <data name="TipoId" xml:space="preserve">
+    <value>"IdentificationType": </value>
+  </data>
+  <data name="InfCli" xml:space="preserve">
+    <value>"CustomerInformation": {</value>
+  </data>
+  <data name="DiasVen" xml:space="preserve">
+    <value>"DaysOff": </value>
+  </data>
+  <data name="NroFac" xml:space="preserve">
+    <value>"InvoiceNumber": </value>
+  </data>
+  <data name="NroPreFac" xml:space="preserve">
+    <value>"PreinvoiceNumber": </value>
+  </data>
+  <data name="NroResAut" xml:space="preserve">
+    <value>"InvoiceAuthorizationNumber": </value>
+  </data>
+  <data name="Pref" xml:space="preserve">
+    <value>"Prefix": </value>
+  </data>
+  <data name="BaseImpto" xml:space="preserve">
+    <value>"TaxableAmount": </value>
+  </data>
+  <data name="CamposAdic" xml:space="preserve">
+    <value>"AdditionalFields": </value>
+  </data>
+  <data name="Cant" xml:space="preserve">
+    <value>"Quatity": </value>
+  </data>
+  <data name="ItemRef" xml:space="preserve">
+    <value>"ItemReference": </value>
+  </data>
+  <data name="CodMoneda" xml:space="preserve">
+    <value>"Currency": </value>
+  </data>
+  <data name="Dscto" xml:space="preserve">
+    <value>"Discount": </value>
+  </data>
+  <data name="EsImpto" xml:space="preserve">
+    <value>"TaxEvidenceIndicator": </value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>"Id": </value>
+  </data>
+  <data name="InfImptos" xml:space="preserve">
+    <value>"Taxes_Information": [</value>
+  </data>
+  <data name="InfItems" xml:space="preserve">
+    <value>"ItemInformation": [</value>
+  </data>
+  <data name="Nombre" xml:space="preserve">
+    <value>"Name": </value>
+  </data>
+  <data name="PayNot" xml:space="preserve">
+    <value>"PaymentNote": </value>
+  </data>
+  <data name="Precio" xml:space="preserve">
+    <value>"Price": </value>
+  </data>
+  <data name="PropAdiItemFac" xml:space="preserve">
+    <value>"AdditionalItemPropertyList": </value>
+  </data>
+  <data name="ResuPago" xml:space="preserve">
+    <value>"PaymentSummary": {</value>
+  </data>
+  <data name="Entrega" xml:space="preserve">
+    <value>"Delivery": {</value>
+  </data>
+  <data name="Tasa" xml:space="preserve">
+    <value>"Percent": </value>
+  </data>
+  <data name="PayTyp" xml:space="preserve">
+    <value>"PaymentType": </value>
+  </data>
+  <data name="MesUniCod" xml:space="preserve">
+    <value>"MeasureUnitCode": </value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>"Amount": </value>
+  </data>
+  <data name="VlrImpto" xml:space="preserve">
+    <value>"TaxAmount": </value>
+  </data>
+  <data name="Anticip" xml:space="preserve">
+    <value>"AdvancePayment": </value>
+  </data>
+  <data name="CampAdi" xml:space="preserve">
+    <value>"Additional_Fields":</value>
+  </data>
+  <data name="CanAdo" xml:space="preserve">
+    <value>"AttachmentQuantity": </value>
+  </data>
+  <data name="EsContin" xml:space="preserve">
+    <value>"IsContingency": </value>
+  </data>
+  <data name="EsExport" xml:space="preserve">
+    <value>"IsExport": </value>
+  </data>
+  <data name="Interes" xml:space="preserve">
+    <value>"Interest": </value>
+  </data>
+  <data name="Nota" xml:space="preserve">
+    <value>"Note": </value>
+  </data>
+  <data name="NotaFacCab" xml:space="preserve">
+    <value>"Invoice_Note": {</value>
+  </data>
+  <data name="Cufe" xml:space="preserve">
+    <value>"CUFE": </value>
+  </data>
+  <data name="InfFac" xml:space="preserve">
+    <value>"Invoice_Information": [</value>
+  </data>
+  <data name="CodConNota" xml:space="preserve">
+    <value>"ResponseCode": </value>
+  </data>
+  <data name="InfNota" xml:space="preserve">
+    <value>"Note_Information": {</value>
+  </data>
+  <data name="RegimenTri" xml:space="preserve">
+    <value>"PartyTaxLevelCode": </value>
+  </data>
+  <data name="TipoPers" xml:space="preserve">
+    <value>"PersonTypeID": </value>
+  </data>
+  <data name="ConNota" xml:space="preserve">
+    <value>"Note_Concept": {</value>
+  </data>
+  <data name="Descrip" xml:space="preserve">
+    <value>"Description": </value>
+  </data>
+  <data name="IdDoc" xml:space="preserve">
+    <value>"DocumentId": </value>
+  </data>
+  <data name="TipoDoc" xml:space="preserve">
+    <value>"DocumentType": </value>
+  </data>
+  <data name="InfImptosFac" xml:space="preserve">
+    <value>"TaxesInformation": [</value>
+  </data>
+  <data name="Adjunto" xml:space="preserve">
+    <value>"Attach": [</value>
+  </data>
+  <data name="NomArchivo" xml:space="preserve">
+    <value>"FileName": </value>
+  </data>
+  <data name="TipoArchivo" xml:space="preserve">
+    <value>"TypeFile": </value>
+  </data>
+  <data name="PaisDir" xml:space="preserve">
+    <value>"CountryCode": </value>
+  </data>
+  <data name="AddAcc" xml:space="preserve">
+    <value>"AdditionalAccountID": </value>
+  </data>
+  <data name="CitCod" xml:space="preserve">
+    <value>"CityCode": </value>
+  </data>
+  <data name="CitNam" xml:space="preserve">
+    <value>"CityName": </value>
+  </data>
+  <data name="CouNam" xml:space="preserve">
+    <value>"CountryName": </value>
+  </data>
+  <data name="CusCod" xml:space="preserve">
+    <value>"CustomerCode": </value>
+  </data>
+  <data name="SubCod" xml:space="preserve">
+    <value>"SubdivisionCode": </value>
+  </data>
+  <data name="SubNam" xml:space="preserve">
+    <value>"SubdivisionName": </value>
+  </data>
+  <data name="TaxLev" xml:space="preserve">
+    <value>"TaxLevelCodeListName": </value>
+  </data>
+  <data name="AddDoc" xml:space="preserve">
+    <value>"AdditionalDocument": [</value>
+  </data>
+  <data name="AddDocs" xml:space="preserve">
+    <value>"AdditionalDocuments": {</value>
+  </data>
+  <data name="AddPro" xml:space="preserve">
+    <value>"AdditionalProperty": [</value>
+  </data>
+  <data name="AddProFac" xml:space="preserve">
+    <value>"AdditionalProperty": [</value>
+  </data>
+  <data name="AddRef" xml:space="preserve">
+    <value>"AdditionalReference": [</value>
+  </data>
+  <data name="AllChar" xml:space="preserve">
+    <value>"AllowanceCharge": [</value>
+  </data>
+  <data name="AllCharReas" xml:space="preserve">
+    <value>"AllowanceChargeReason": </value>
+  </data>
+  <data name="BasAmo" xml:space="preserve">
+    <value>"BaseAmount":</value>
+  </data>
+  <data name="BasUniMeas" xml:space="preserve">
+    <value>"BaseUnitMeasure": </value>
+  </data>
+  <data name="CharInd" xml:space="preserve">
+    <value>"ChargeIndicator": </value>
+  </data>
+  <data name="ConPer" xml:space="preserve">
+    <value>"ContactPerson": </value>
+  </data>
+  <data name="DelCom" xml:space="preserve">
+    <value>"DeliveryCompany": </value>
+  </data>
+  <data name="DelDate" xml:space="preserve">
+    <value>"DeliveryDate": </value>
+  </data>
+  <data name="DesDocRef" xml:space="preserve">
+    <value>"DespatchDocumentReference": </value>
+  </data>
+  <data name="DocCod" xml:space="preserve">
+    <value>"DocumentCode": </value>
+  </data>
+  <data name="DocNum" xml:space="preserve">
+    <value>"DocumentNumber": </value>
+  </data>
+  <data name="ExchRate" xml:space="preserve">
+    <value>"ExchangeRate": </value>
+  </data>
+  <data name="ExchRateDate" xml:space="preserve">
+    <value>"ExchangeRateDate": </value>
+  </data>
+  <data name="FreOfChargeInd" xml:space="preserve">
+    <value>"FreeOFChargeIndicator": </value>
+  </data>
+  <data name="InvAllChar" xml:space="preserve">
+    <value>"InvoiceAllowanceCharge": [</value>
+  </data>
+  <data name="InvGralInf" xml:space="preserve">
+    <value>"InvoiceGeneralInformation": {</value>
+  </data>
+  <data name="LinAllTotal" xml:space="preserve">
+    <value>"LineAllowanceTotal": </value>
+  </data>
+  <data name="LinChrTotal" xml:space="preserve">
+    <value>"LineChargeTotal": </value>
+  </data>
+  <data name="LinExtAmo" xml:space="preserve">
+    <value>"LineExtensionAmount": </value>
+  </data>
+  <data name="LinTot" xml:space="preserve">
+    <value>"LineTotal": </value>
+  </data>
+  <data name="LinTotTax" xml:space="preserve">
+    <value>"LineTotalTaxes": </value>
+  </data>
+  <data name="MulFacNum" xml:space="preserve">
+    <value>"MultiplierFactorNumeric": </value>
+  </data>
+  <data name="OrdRef" xml:space="preserve">
+    <value>"OrderReference": </value>
+  </data>
+  <data name="PayMeans" xml:space="preserve">
+    <value>"PaymentMeans": </value>
+  </data>
+  <data name="PerUniAmo" xml:space="preserve">
+    <value>"PerUnitAmount": </value>
+  </data>
+  <data name="RecDocRef" xml:space="preserve">
+    <value>"ReceiptDocumentReference": </value>
+  </data>
+  <data name="RefCod" xml:space="preserve">
+    <value>"ReferenceCode": </value>
+  </data>
+  <data name="RefNum" xml:space="preserve">
+    <value>"ReferenceNumber": </value>
+  </data>
+  <data name="SalPer" xml:space="preserve">
+    <value>"SalesPerson": </value>
+  </data>
+  <data name="Valor" xml:space="preserve">
+    <value>"Value": </value>
+  </data>
+  <data name="AllTotAmo" xml:space="preserve">
+    <value>"AllowanceTotalAmount": </value>
+  </data>
+  <data name="ChaTotAmo" xml:space="preserve">
+    <value>"ChargeTotalAmount": </value>
+  </data>
+  <data name="InvTaxTot" xml:space="preserve">
+    <value>"InvoiceTaxTotal": [</value>
+  </data>
+  <data name="InvTotal" xml:space="preserve">
+    <value>"InvoiceTotal": {</value>
+  </data>
+  <data name="PayAmo" xml:space="preserve">
+    <value>"PayableAmount": </value>
+  </data>
+  <data name="PrePaiAmo" xml:space="preserve">
+    <value>"PrePaidAmount": </value>
+  </data>
+  <data name="TaxExcAmo" xml:space="preserve">
+    <value>"TaxExclusiveAmount": </value>
+  </data>
+  <data name="TaxIncAmo" xml:space="preserve">
+    <value>"TaxInclusiveAmount": </value>
+  </data>
+  <data name="NotGralInf" xml:space="preserve">
+    <value>"NoteGeneralInformation":{</value>
+  </data>
+  <data name="NotNum" xml:space="preserve">
+    <value>"NoteNumber": </value>
+  </data>
+  <data name="DisCod" xml:space="preserve">
+    <value>"DiscrepancyCode": </value>
+  </data>
+  <data name="RefId" xml:space="preserve">
+    <value>"ReferenceID": </value>
+  </data>
+  <data name="TaxInf" xml:space="preserve">
+    <value>"TaxesInformation": [</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>"Name": </value>
+  </data>
+  <data name="NotTaxTot" xml:space="preserve">
+    <value>"NoteTaxTotal": [</value>
+  </data>
+  <data name="NotTot" xml:space="preserve">
+    <value>"NoteTotal": {</value>
+  </data>
+  <data name="CiuDir" xml:space="preserve">
+    <value>"CityID": </value>
+  </data>
+  <data name="CodItem" xml:space="preserve">
+    <value>"ItemCode": </value>
+  </data>
+  <data name="Dir" xml:space="preserve">
+    <value>"AddressLine": </value>
+  </data>
+  <data name="DptoDir" xml:space="preserve">
+    <value>"RegionID": </value>
+  </data>
+  <data name="LineExtCant" xml:space="preserve">
+    <value>"LineExtensionAmount": </value>
+  </data>
+  <data name="RazonS" xml:space="preserve">
+    <value>"RegistrationName": </value>
+  </data>
+  <data name="TaxExclCant" xml:space="preserve">
+    <value>"TaxExclusiveAmount": </value>
+  </data>
+  <data name="Tel" xml:space="preserve">
+    <value>"Telephone": </value>
+  </data>
+  <data name="ValorItem" xml:space="preserve">
+    <value>"Amount": </value>
+  </data>
+  <data name="ExtGR" xml:space="preserve">
+    <value>"ExternalGR":  </value>
+  </data>
+  <data name="CurCod" xml:space="preserve">
+    <value>"CurrencyCode": </value>
+  </data>
+  <data name="CustInf" xml:space="preserve">
+    <value>"Customer_Information": {</value>
+  </data>
+  <data name="ItemInf" xml:space="preserve">
+    <value>"Item_Information": [</value>
+  </data>
+  <data name="PaymSum" xml:space="preserve">
+    <value>"Payment_Summary": {</value>
+  </data>
+  <data name="Quan" xml:space="preserve">
+    <value>"Quantity": </value>
+  </data>
+  <data name="CustomId" xml:space="preserve">
+    <value>"CustomizationID": </value>
+  </data>
+  <data name="IssDate" xml:space="preserve">
+    <value>"IssueDate": </value>
+  </data>
+  <data name="AddCus" xml:space="preserve">
+    <value>"AdditionalCustomer": </value>
+  </data>
+  <data name="FecVen" xml:space="preserve">
+    <value>"InvoiceDueDate": </value>
+  </data>
+  <data name="FisRes" xml:space="preserve">
+    <value>"FiscalResponsabilities": </value>
+  </data>
+  <data name="PartPer" xml:space="preserve">
+    <value>"PartecipationPercent": </value>
+  </data>
+  <data name="PosZon" xml:space="preserve">
+    <value>"PostalZone": </value>
+  </data>
+  <data name="TaxSchCod" xml:space="preserve">
+    <value>"TaxSchemeCode": </value>
+  </data>
+  <data name="TaxSchName" xml:space="preserve">
+    <value>"TaxSchemeName": </value>
+  </data>
+  <data name="FeccAvisRecibo" xml:space="preserve">
+    <value>"ReceiptDocumentIssueDate": </value>
+  </data>
+  <data name="FecOrdCompra" xml:space="preserve">
+    <value>"OrderReferenceIssueDate": </value>
+  </data>
+  <data name="FecOrdDespacho" xml:space="preserve">
+    <value>"DespatchDocumentIssueDate": </value>
+  </data>
+  <data name="CustomIdInv" xml:space="preserve">
+    <value>"CustomizationIDInvoice": </value>
+  </data>
+  <data name="IssDateNot" xml:space="preserve">
+    <value>"IssueDateNote": </value>
+  </data>
+  <data name="IssDateInv" xml:space="preserve">
+    <value>"IssueDateInvoice":</value>
+  </data>
+  <data name="PeriodoEnd" xml:space="preserve">
+    <value>"EndAffectedPeriod":</value>
+  </data>
+  <data name="PeriodoStart" xml:space="preserve">
+    <value>"StartAffectedPeriod":</value>
+  </data>
+</root>
