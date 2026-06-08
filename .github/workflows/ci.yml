@@ -22,5 +22,10 @@ jobs:
         run: nuget restore .\OrionCop.Net.sln
 
       - name: Build
-        run: msbuild .\OrionCop.Net.sln /p:Configuration=Release /m
+        run: msbuild .\OrionCop.Net.sln /p:Configuration=Release /p:Platform=x64 /m
 
+      - name: Upload OrionPlus artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: OrionPlus-native-x64
+          path: .\build\releases\orion-plus\**

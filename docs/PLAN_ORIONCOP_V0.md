@@ -1,6 +1,6 @@
 # Plan Maestro de orioncop
 
-> **Estado:** vigente para ejecución inicial (2026/06/07)  
+> **Estado:** inactivo (2026/06/07)  
 > **Ámbito:** solo este repositorio (`orioncop`)  
 > **Documento complementario:** `docs/ESTRATEGIA_REPOSITORIOS_GITHUB.md`
 

@@ -991,4 +991,14 @@
     <Resource Include="RecImagenes\Admin.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="CreateOrionPlusExecutable" AfterTargets="Build" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <ItemGroup>
+      <OrionPlusRuntimeFiles Include="$(TargetDir)**\*.*" Exclude="$(TargetDir)app.publish\**\*.*" />
+    </ItemGroup>
+    <MakeDir Directories="$(MSBuildProjectDirectory)\..\build\releases\orion-plus" />
+    <Copy SourceFiles="@(OrionPlusRuntimeFiles)"
+          DestinationFiles="@(OrionPlusRuntimeFiles->'$(MSBuildProjectDirectory)\..\build\releases\orion-plus\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFiles="$(MSBuildProjectDirectory)\..\build\releases\orion-plus\OrionPlus.exe" SkipUnchangedFiles="true" />
+  </Target>
 </Project>

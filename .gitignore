@@ -1,10 +1,26 @@
+# Build outputs
 bin/
 obj/
-.vs/
+build/
+
+# Dependency/cache folders
 packages/
+TestResults/
+
+# IDE/editor local state
+.vs/
+.vscode/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
+
+# Local machine and secrets
 *.pfx
 *.publishsettings
 appsettings.*.local.json
 
+# Common temporary/log files
+*.log
+*.tmp
+*.temp

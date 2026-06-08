@@ -63,6 +63,6 @@ Archivos o modulos principales modificados:
 ## 8. Checklist de cumplimiento
 
 - [ ] Alineado con `docs/ESTRATEGIA_REPOSITORIOS_GITHUB.md`.
-- [ ] Alineado con `docs/PLAN_MAESTRO.md`.
+- [ ] Alineado con `docs/PLAN_ORIONCOP_V1.md`.
 - [ ] Impacto cross-repo evaluado y documentado.
 - [ ] Plan de rollback viable.
