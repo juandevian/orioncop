@@ -28,15 +28,15 @@ function Get-IsccPath {
     throw "No se encontró ISCC.exe (Inno Setup). Instala Inno Setup 6 para generar el instalador."
 }
 
-$repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
+$repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..\..")
 Set-Location $repoRoot
 
 if (-not $SkipBuild) {
     Write-Host "==> Ejecutando build nativo de OrionPlus (default)..."
-    $buildScript = Join-Path $repoRoot "scripts\build.ps1"
+    $buildScript = Join-Path $repoRoot "scripts\build\build.ps1"
     & $buildScript -Configuration $Configuration -Platform $Platform -MsBuildPath $MsBuildPath
     if ($LASTEXITCODE -ne 0) {
-        throw "Falló scripts\build.ps1"
+        throw "Falló scripts\build\build.ps1"
     }
 }
 

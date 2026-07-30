@@ -35,13 +35,13 @@ Este es el flujo principal por defecto.
 ## Automatización local sin agentes
 1. Ejecutar script:
    ```powershell
-   .\scripts\build.ps1
+   .\scripts\build\build.ps1
    ```
 2. Opciones útiles:
    ```powershell
-   .\scripts\build.ps1 -Configuration Release -Platform x64
-   .\scripts\build.ps1 -SkipRestore
-   .\scripts\build.ps1 -MsBuildPath "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+   .\scripts\build\build.ps1 -Configuration Release -Platform x64
+   .\scripts\build\build.ps1 -SkipRestore
+   .\scripts\build\build.ps1 -MsBuildPath "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
    ```
 
 ## Verificación rápida

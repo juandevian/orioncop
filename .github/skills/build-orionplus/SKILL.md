@@ -10,9 +10,9 @@ repository: juandevian/orioncop
 ---
 
 ## Objetivo
-1. Ejecutar por defecto el build nativo (`scripts\build.ps1`) y producir `OrionPlus.exe` en `build\releases\orion-plus`.
+1. Ejecutar por defecto el build nativo (`scripts\build\build.ps1`) y producir `OrionPlus.exe` en `build\releases\orion-plus`.
 2. Capturar salida del script y validar artefacto + runtime requerido.
-3. Mantener Inno Setup como opción secundaria para QA (`scripts\build-installer.ps1`).
+3. Mantener Inno Setup como opción secundaria para QA (`scripts\installer\build-installer.ps1`).
 
 ## Prerrequisitos
 - Repositorio `orioncop` clonado junto con `..\Comunes`.
@@ -22,14 +22,14 @@ repository: juandevian/orioncop
 ## Flujo recomendado
 1. Build nativo por defecto:
    ```powershell
-   .\scripts\build.ps1
+   .\scripts\build\build.ps1
    ```
 2. Verificar salida esperada:
    - `.\build\releases\orion-plus\OrionPlus.exe`
    - DLL/config runtime en `.\build\releases\orion-plus\`
 3. Opcional QA (Inno):
    ```powershell
-   .\scripts\build-installer.ps1
+   .\scripts\installer\build-installer.ps1
    ```
    - Instalador QA: `.\build\installer\qa\OrionPlus-QA-Setup.exe`
 
