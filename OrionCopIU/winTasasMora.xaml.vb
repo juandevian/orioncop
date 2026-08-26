@@ -13,12 +13,14 @@ Public Class WinTasasMora
     Private MobjTasaMora As ClsTasaMora = Nothing
     Private ReadOnly MstrNombreVentana As String = My.Resources.NomTasMor
 #End Region
+
 #Region "Constructor"
     Public Sub New()
         InitializeComponent()
         HenuIdVentana = EnuIdVentanaDef.enuTasasMora
     End Sub
 #End Region
+
 #Region "Invalida metodos en la clase base que implementan la Interfaz"
     Protected Overrides Sub SLoad()
         SAdicioneControlRestringido(dgrTasasMora)
@@ -27,16 +29,19 @@ Public Class WinTasasMora
                 Nothing, dtpFechaDesde, False)
         SPuebleBarraEstado(HcolLabelsBarraEstado)
     End Sub
+
     Protected Overrides ReadOnly Property StrNombreVentana As String
         Get
             Return MstrNombreVentana
         End Get
     End Property
+
     Protected Overrides ReadOnly Property Enuidventana As EnuIdVentanaDef
         Get
             Return HenuIdVentana
         End Get
     End Property
+
     Protected Overrides Sub SInicialiceObjeto()
         If IsNothing(ObjObjetoWin) Then
             ObjObjetoWin = New ClsTasaMora(EnuModoInstanciaObjDef.enuNavegable)
@@ -45,6 +50,7 @@ Public Class WinTasasMora
         MobjTasaMora.SVayaAlPrimero()
         EnuTipoPermisoObjWin = MobjTasaMora.EnuPermisosObj
     End Sub
+
     Protected Overrides Sub SInicialiceControles()
         StcValidaControl(EnuValidEntrada.enuFechaDesde) = lblFechaDesde
         StcValidaControl(EnuValidEntrada.enuTasaMora) = lblTasaMora
@@ -56,10 +62,12 @@ Public Class WinTasasMora
         HbttAceptar.TabIndex = 19
         HbttCancelar.TabIndex = 20
     End Sub
+
     Protected Overrides Sub SMuestreDatos()
         If EnuOperacionEnWin <> EnuOperacionEnVentana.cenuConsultando AndAlso
                 MobjTasaMora IsNot Nothing Then
             dtpFechaDesdeNueva.Text = MobjTasaMora.ObjFechaDesdeTasaMoraDtm.ObjValorPro.ToString
+            txtFechaHasta.Text = MobjTasaMora.ObjFechaHastaTasaMoraDtm.ObjValorPro
             txtTasaMoraNueva.Text = Format(MobjTasaMora.ObjTasaMoraDbl.DblTasaMensual, "#0.000%")
             txtTasaEA.Content = Format(MobjTasaMora.ObjTasaMoraDbl.ObjValorPro, "#0.000%")
         ElseIf Not IsNothing(MobjTasaMora) Then
@@ -73,6 +81,7 @@ Public Class WinTasasMora
         End If
         SValide()
     End Sub
+
     Protected Overrides Sub SValide()
         With MobjTasaMora
             If GobjParametros.FdtbTasasMora.Rows.Count = 0 AndAlso EnuOperacionEnWin =
@@ -86,6 +95,7 @@ Public Class WinTasasMora
         SHabiliteBotonesTlb()
         FblnEstanTodosBien()
     End Sub
+
     Protected Overrides Sub SRegistre()
         With MobjTasaMora
             .ObjFechaDesdeTasaMoraDtm.ObjValorPro = dtpFechaDesdeNueva.SelectedDate
@@ -93,6 +103,7 @@ Public Class WinTasasMora
             .ObjTasaMoraDbl.ObjValorPro = FdblTasaMora()
         End With
     End Sub
+
     ''' <summary>
     ''' Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
     ''' ventana "objObjetoWin". 
@@ -102,6 +113,7 @@ Public Class WinTasasMora
         '
     End Sub
 #End Region
+
 #Region "Procedimientos invalidantes"
     ''' <summary>
     ''' Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
@@ -115,9 +127,12 @@ Public Class WinTasasMora
         End If
         MyBase.SCree()
         MobjTasaMora.ObjFechaDesdeTasaMoraDtm.ObjValorPro = ldtmFechaIni
+        Dim ldtmFechaHasta = DateSerial(Date.Today.Year, Date.Today.Month, Date.Today.Day)
+        MobjTasaMora.ObjFechaHastaTasaMoraDtm.ObjValorPro = ldtmFechaHasta
         SDeshabiliteControlesActuales()
         SCreeTasaMora()
     End Sub
+
     ''' <summary>
     ''' Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
     ''' de la clase base.
@@ -135,6 +150,7 @@ Public Class WinTasasMora
             SModifiqueTasaMora()
         End If
     End Sub
+
     Protected Overrides Sub SRefresqueWin()
         If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
             Mouse.OverrideCursor = Cursors.Wait
@@ -146,10 +162,12 @@ Public Class WinTasasMora
             Mouse.OverrideCursor = Cursors.Arrow
         End If
     End Sub
+
     Protected Overrides Sub SSuprima()
         MyBase.SSuprima()
         SRefresqueWin()
     End Sub
+
     Protected Overrides Sub SFinaliceOperacion()
         Dim lstrMens As String = "Los datos del objeto " & ObjObjetoWin.StrNombreClase &
                 " han cambiado!" & vbCrLf & "Desea guardar los cambios?"
@@ -193,6 +211,7 @@ Public Class WinTasasMora
         dgrTasasMora.IsEnabled = True
     End Sub
 #End Region
+
 #Region "Procedimientos Propios"
     Private Sub SModifiqueBarraHerramientas()
         HbttAlPrimero.Visibility = Visibility.Collapsed
@@ -220,11 +239,13 @@ Public Class WinTasasMora
         End If
         HmnuNavegar.Visibility = Visibility.Collapsed
     End Sub
+
     Private Sub SDeshabiliteControlesActuales()
         txtOrdinal.Style = FindResource("RecCtlNoHabilitado")
         dtpFechaDesde.Style = FindResource("RecCtlNoHabilitado")
         txtTasaMora.Style = FindResource("RecCtlNoHabilitado")
     End Sub
+
     Private Sub SHabiliteControlesNuevos(ablnHabilite As Boolean)
         SVisibiliceControlesNuevos(ablnHabilite)
         If EnuOperacionEnWin <> EnuOperacionEnVentana.cenuConsultando Then
@@ -232,6 +253,7 @@ Public Class WinTasasMora
             txtTasaMoraNueva.Style = FindResource("RecCtlHabilitado")
         End If
     End Sub
+
     Private Sub SVisibiliceControlesNuevos(ablnHabilite As Boolean)
         Dim lvisVisibilidadNuevos As Visibility
         Dim lvisVisibilidadActual As Visibility
@@ -247,12 +269,14 @@ Public Class WinTasasMora
         dtpFechaDesdeNueva.Visibility = lvisVisibilidadNuevos
         txtTasaMoraNueva.Visibility = lvisVisibilidadNuevos
     End Sub
+
     Private Sub SCreeTasaMora()
         SHabiliteControlesNuevos(True)
         dgrTasasMora.IsEnabled = False
         SMuestreDatos()
         dtpFechaDesdeNueva.Focus()
     End Sub
+
     Private Sub SModifiqueTasaMora()
         If Not IsNothing(MobjTasaMora) AndAlso MobjTasaMora.BlnExiste Then
             SHabiliteControlesNuevos(True)
@@ -260,6 +284,7 @@ Public Class WinTasasMora
             txtTasaMora.Focus()
         End If
     End Sub
+
     Private Function FdblTasaMora() As Double
         Dim lstrTasaMora = txtTasaMoraNueva.Text, ldblTasa As Double
         If String.IsNullOrEmpty(txtTasaMoraNueva.Text) Then
@@ -273,6 +298,7 @@ Public Class WinTasasMora
         Return Math.Round(ldblTasa, 6)
     End Function
 #End Region
+
 #Region "Eventos en la Ventana"
     Private Sub OnCogerFoco(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
@@ -281,6 +307,7 @@ Public Class WinTasasMora
             ltxtTextBox.SelectAll()
         End If
     End Sub
+
     Private Sub OnPierdeFoco(sender As Object, e As RoutedEventArgs)
         If Not HblnSeEstaCerrando Then
             Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
@@ -314,6 +341,7 @@ Public Class WinTasasMora
             End If
         End If
     End Sub
+
     Private Sub TxtOrdinal_TextChanged(sender As Object, e As TextChangedEventArgs) _
             Handles txtOrdinal.TextChanged
         If Not String.IsNullOrEmpty(txtOrdinal.Text) Then

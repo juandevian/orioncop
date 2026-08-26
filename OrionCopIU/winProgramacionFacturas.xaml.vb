@@ -983,6 +983,7 @@ Public Class WinProgramacionFacturas
             End Select
         End If
     End Sub
+
     Private Sub OnCogerFoco(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
         If TypeOf lelmElemento Is TextBox Then
@@ -994,6 +995,7 @@ Public Class WinProgramacionFacturas
             End If
         End If
     End Sub
+
     Private Sub OnPierdeFoco(sender As Object, e As RoutedEventArgs)
         If Not HblnSeEstaCerrando AndAlso Not HblnMostrandoDatos Then
             Dim lblnNoHayError = False
@@ -1036,6 +1038,7 @@ Public Class WinProgramacionFacturas
             End If
         End If
     End Sub
+
     Private Sub Txt_TextChanged(sender As Object, e As TextChangedEventArgs) Handles _
             txtIdDestinatario.TextChanged, txtOrigen.TextChanged
         Select Case True
@@ -1045,17 +1048,19 @@ Public Class WinProgramacionFacturas
                 SRefresqueObjetoWin()
         End Select
     End Sub
+
     Private Sub CboAno_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cboAno.SelectionChanged
         If Not MblnPoblandoCombo Then
             SVinculeControles()
         End If
     End Sub
+
     Private Sub Cbo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cboServicioNuevo.SelectionChanged,
             cboAnoPeriodoNuevo.SelectionChanged, cboMesPeriodoNuevo.SelectionChanged
         If Not MblnPoblandoCombo Then
             Dim lblnNoHayError = False
             Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
-            If EnuOperacionEnWin <> EnuOperacionEnVentana.cenuConsultando Then
+            If EnuOperacionEnWin <> EnuOperacionEnVentana.CenuConsultando Then
                 If TypeOf lelmElemento Is ComboBox Then
                     GobjPanDat.SControleProcesoObj(True)
                     With MobjItemProgramaFact
@@ -1077,6 +1082,7 @@ Public Class WinProgramacionFacturas
             End If
         End If
     End Sub
+
     Private Sub DgrItemsProgramaFact_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles dgrItemsProgramaFact.SelectionChanged
         Dim ldrvItemProgFac As DataRowView = dgrItemsProgramaFact.SelectedItem
         If Not IsNothing(ldrvItemProgFac) Then
@@ -1087,10 +1093,11 @@ Public Class WinProgramacionFacturas
         SMuestreConsumo()
         SValide()
     End Sub
+
     Private Sub ClsFormInterface_KeyDow(sender As Object, e As KeyEventArgs)
         If e.Key = Key.Return Then
             If txtIdDestinatario.IsFocused Then
-                If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
+                If EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
                     If rdbPredio.IsChecked Then
                         SAbraPredio()
                     Else
@@ -1100,6 +1107,7 @@ Public Class WinProgramacionFacturas
             End If
         End If
     End Sub
+
     Private Sub RdbPredio_Click(sender As Object, e As RoutedEventArgs) Handles rdbPredio.Click,
             rdbCliente.Click
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
@@ -1117,6 +1125,7 @@ Public Class WinProgramacionFacturas
             SMuestreDatos()
         End If
     End Sub
+
     Private Sub Txt_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles _
             txtIdDestinatario.MouseDoubleClick
         If Not String.IsNullOrEmpty(txtIdDestinatario.Text) Then

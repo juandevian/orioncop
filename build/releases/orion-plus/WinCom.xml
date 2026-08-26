@@ -1,0 +1,333 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+WinCom
+</name>
+</assembly>
+<members>
+<member name="T:OPT.OrionP.WinCom.My.MyWpfExtension">
+ <summary>
+ Módulo utilizado para definir las propiedades disponibles en el espacio de nombres My de WPF
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.MyWpfExtension.Application">
+ <summary>
+ Devuelve el objeto de aplicación de la aplicación en ejecución
+ </summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.MyWpfExtension.Computer">
+ <summary>
+ Devuelve información sobre el equipo host.
+ </summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.MyWpfExtension.User">
+ <summary>
+ Devuelve información sobre el usuario actual.  Si desea ejecutar la aplicación con las credenciales 
+ del usuario de Windows actual, llame a My.User.InitializeWithWindowsUser().
+ </summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.MyWpfExtension.Log">
+ <summary>
+ Devuelve el registro de la aplicación. El archivo de configuración de la aplicación puede configurar los clientes de escucha.
+ </summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.MyWpfExtension.Windows">
+ <summary>
+ Devuelve la colección de Windows definida en el proyecto.
+ </summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.My.Resources.Resources">
+<summary>
+  Clase de recurso fuertemente tipado, para buscar cadenas traducidas, etc.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.ResourceManager">
+<summary>
+  Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.Culture">
+<summary>
+  Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
+  búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.CerrarBtn">
+<summary>
+  Busca una cadena traducida similar a _Cerrar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.De">
+<summary>
+  Busca una cadena traducida similar a  de .
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.DosPuntosEspacio">
+<summary>
+  Busca una cadena traducida similar a : .
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.GuionSeparador">
+<summary>
+  Busca una cadena traducida similar a - .
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.ImportarObjeto">
+<summary>
+  Busca una cadena traducida similar a Importar Objeto .
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.NomBasDat">
+<summary>
+  Busca una cadena traducida similar a DEFINICION BASE DE DATOS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.NomCamCon">
+<summary>
+  Busca una cadena traducida similar a CAMBIO CONTRASEÑA.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.NomConSql">
+<summary>
+  Busca una cadena traducida similar a CONSULTAS SQL.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.NomCopSeg">
+<summary>
+  Busca una cadena traducida similar a COPIA DE SEGURIDAD.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.NomImp">
+<summary>
+  Busca una cadena traducida similar a IMPORTACIÓN.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.NomLogApp">
+<summary>
+  Busca una cadena traducida similar a REGISTRO ACCIONES EN LA APLICACION.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.NomTercer">
+<summary>
+  Busca una cadena traducida similar a TERCEROS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.NomUbica">
+<summary>
+  Busca una cadena traducida similar a UBICACION.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.RegProcesados">
+<summary>
+  Busca una cadena traducida similar a Registros Procesados: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.Tercero">
+<summary>
+  Busca una cadena traducida similar a Tercero.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.TipoArchivoImagen">
+<summary>
+  Busca una cadena traducida similar a Imagen(.jpg)|*.jpg.
+</summary>
+</member>
+<member name="P:OPT.OrionP.WinCom.My.Resources.Resources.TiposArchivosOrigen">
+<summary>
+  Busca una cadena traducida similar a Archivo Excel (*.xls, *.xlsx)|*.xls;*.xlsx|Archivo Access (*.mdb)|*.mdb|Todos los archivos (*.*)|*.*.
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.Application">
+<summary>
+Application
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.Application.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.WinBaseDatos">
+<summary>
+WinBaseDatos
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinBaseDatos.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinBaseDatos.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.WinCambioContrasena">
+<summary>
+WinCambioContrasena
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinCambioContrasena.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.WinConsultasSql">
+<summary>
+WinConsultasSql
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinConsultasSql.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinConsultasSql.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinConsultasSql.SModifique">
+ <summary>
+ Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
+ de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinConsultasSql.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.WinCopiaSeg">
+<summary>
+WinCopiaSeg
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinCopiaSeg.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinCopiaSeg.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinCopiaSeg.SGuarde">
+ <summary>
+ . Invalida el procedimiento "SGuarde" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinCopiaSeg.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.WinImportar">
+<summary>
+WinImportar
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinImportar.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinImportar.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.WinLogApp">
+<summary>
+WinLogApp
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinLogApp.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinLogApp.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.WinReasignaIdTercero">
+<summary>
+WinReasignaIdTercero
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinReasignaIdTercero.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.WinTerceros">
+<summary>
+WinTerceros
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinTerceros.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinTerceros.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinTerceros.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.WinCom.WinUbicacion">
+<summary>
+WinUbicacion
+</summary>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinUbicacion.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinUbicacion.SModifique">
+ <summary>
+ Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
+ de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.WinCom.WinUbicacion.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+</members>
+</doc>

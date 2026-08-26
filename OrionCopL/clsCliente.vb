@@ -988,6 +988,7 @@ Friend Class ClsCliente
             EnuTipoValor.enuDecimal)
         Return ldecDeudaMora
     End Function
+
     ''' <summary>
     ''' Devuelve un Array con los predios agrupadores del cliente que tienen Anticipos por aplicar.
     ''' </summary>
@@ -1471,6 +1472,7 @@ Friend Class ClsCliente
             Return lobjNuevaFactura
         End Get
     End Property
+
     Friend Function FdtbServiciosConDeuda(astrPredAgru As String()) As DataTable
         Dim lstrFiltro = " AND (", lblnUltimo As Boolean, i = 0
         For Each lstrPreAgr As String In astrPredAgru
@@ -2759,7 +2761,8 @@ Friend Class ClsCliente
         Dim ldtbDescuentos As DataTable = ClsOrionCop.FdtbDescuentos()
         If ObjEsAgenteReteFteBln.ObjValorPro OrElse ObjRetieneIcaBln.ObjValorPro OrElse
                 ObjRetieneIvaBln.ObjValorPro OrElse
-                GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro Then
+                GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                    EnuTipoIncentivo.EnuDescuentoPP Then
             Dim lcolFras = FcolFacturas(astrIdPrediosAgru, astrServicios, True)
             For Each lobjFac As ClsFactura In lcolFras
                 SPuebleDtbDescuentos(lobjFac, adtmFechaPago, astrServicios, ldtbDescuentos)

@@ -14,6 +14,7 @@
     Friend BlnCalculandoDesdeAno As Boolean = False
     Friend BlnCreandoAno As Boolean = False
 #End Region
+
 #Region "Constructores"
     ''' <summary>
     ''' Instancia un objeto Panorama.
@@ -51,6 +52,7 @@
         HcolTablas.Add(MCSTRNOMBRETABLA)
         HcolCamposSelect.Add(lstrCamposSelect)
     End Sub
+
     ''' <summary>
     ''' Instancia el objeto como un objeto no navegable, básicamente para formar parte de una colección
     ''' </summary>
@@ -70,6 +72,7 @@
         DtbTablaColeccion = DrwRegistroActual.Table
     End Sub
 #End Region
+
 #Region "Propiedades"
 #Region "Propiedades indentificadoras"
     Protected Overrides ReadOnly Property HstrNombreTabla As String
@@ -98,6 +101,7 @@
         End Get
     End Property
 #End Region
+
 #Region "Propiedades Prop"
     Friend ReadOnly Property ObjBaseMinimaReteFuenteDec As New ClsBaseMinimaReteFuenteDec(Me)
     Friend ReadOnly Property ObjBaseMinimaReteIcaDec As New ClsBaseMinimaReteIcaDec(Me)
@@ -243,21 +247,16 @@
         End Get
     End Property
 #End Region
+
 #Region "Otras propiedades"
-    Friend ReadOnly Property BlnFacturaAPropietario As Boolean
-        Get
-            Return ObjFactAPropYPreAgrBln.ObjValorPro
-        End Get
-    End Property
-    Friend ReadOnly Property DecValor As Decimal
-        Get
-            Dim ldecValor As Decimal = 0
-            For Each lobjModuloServicio As ClsModuloServicio In ColModulosServicio
-                ldecValor += lobjModuloServicio.ObjValorPres_ModuloServicioDec.ObjValorPro
-            Next
-            Return ldecValor
-        End Get
-    End Property
+    Friend Function FdecValor() As Decimal
+        Dim ldecValor As Decimal = 0
+        For Each lobjModuloServicio As ClsModuloServicio In ColModulosServicio
+            ldecValor += lobjModuloServicio.ObjValorPres_ModuloServicioDec.ObjValorPro
+        Next
+        Return ldecValor
+    End Function
+
     Friend ReadOnly Property DecValorAjuste As Decimal
         Get
             Dim ldecAjuste = 0D
@@ -267,6 +266,7 @@
             Return ldecAjuste
         End Get
     End Property
+
     Friend ReadOnly Property DtmFechaUltimaFactura As Date
         Get
             Dim lentDiaFactura As Integer = ObjDiaFacturaShr.ObjValorPro
@@ -277,6 +277,7 @@
             Return ldtmfechaUltiFact
         End Get
     End Property
+
     Friend ReadOnly Property StrPeriodoFinal As String
         Get
             Dim lstrPerFin = ClsOrionCop.FstrPeriodoFinal(ObjPeriodoInicioStr.ObjValorPro,
@@ -284,6 +285,7 @@
             Return lstrPerFin
         End Get
     End Property
+
     Friend ReadOnly Property ObjMiAno As ClsAno
         Get
             If BlnEsCuotaAdministracion Then
@@ -296,6 +298,7 @@
             Return MobjMiAno
         End Get
     End Property
+
     Friend ReadOnly Property BlnEsCuotaAdministracion As Boolean
         Get
             Dim lblnEs As Boolean
@@ -307,6 +310,7 @@
             Return lblnEs
         End Get
     End Property
+
     Friend ReadOnly Property DtmFechaFacturacionPeriodoActual As Date
         Get
             Dim ldtmFechaFact = GCDTMFECHANULA
@@ -328,11 +332,13 @@
             Return ldtmFechaFact
         End Get
     End Property
+
     Friend ReadOnly Property BlnEsImportado As Boolean
         Get
             Return ObjTipoBaseCalculoByt.ObjValorPro = EnuTipoBaseCalculo.EnuImportadas
         End Get
     End Property
+
     Friend Property DtmFechaVencePeriActual As Date
         Set(value As Date)
             MdtmFechaVence = value
@@ -356,6 +362,7 @@
             Return MdtmFechaVence
         End Get
     End Property
+
     Friend Property DtmFechaGraciaPeriActual As Date
         Set(value As Date)
             MdtmFechaGracia = value
@@ -395,6 +402,7 @@
             Return MdtmFechaGracia
         End Get
     End Property
+
     ''' <summary>
     ''' Fecha de gracia cuando la factura es manual y no auromática
     ''' </summary>
@@ -413,6 +421,7 @@
     End Function
 #End Region
 #End Region
+
 #Region "Procedimientos y funciones invalidantes"
     Protected Overrides Sub SVacie()
         MyBase.SVacie()
@@ -634,6 +643,7 @@
         End Get
     End Property
 #End Region
+
 #Region "Procedimientos del objeto"
     Private Sub SNumereObj()
         If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuCreando Then
@@ -825,6 +835,7 @@
         Return lblnCausa
     End Function
 #End Region
+
 #Region "Estado del Proceso de Calculo"
     Friend Function FblnEstaCalculadaCuotaAdmin() As Boolean
         Dim lblnEstaCalculada = False
@@ -860,6 +871,7 @@
         Return lblnDebeAjustar
     End Function
 #End Region
+
 #Region "Manejo Modulos del Servicio"
     Friend ReadOnly Property ColModulosServicio As Collection
         Get
@@ -1037,6 +1049,7 @@
         End If
     End Sub
 #End Region
+
 #Region "Manejo Historico"
     Friend Sub SGenereHistorico()
         If ObjIdTipoServicioByt.ObjValorPro = EnuTipoServicio.EnuPermanente AndAlso
@@ -1132,6 +1145,7 @@ Friend Class ClsBaseMinimaReteFuenteDec
         End If
     End Function
 End Class
+
 Friend Class ClsBaseMinimaReteIcaDec
     Inherits ClsCBPropiedad
     Public Sub New(aobjPadre As ClsCBObjetoPan)
@@ -1157,6 +1171,7 @@ Friend Class ClsBaseMinimaReteIcaDec
         End If
     End Function
 End Class
+
 Friend Class ClsCantiPeriodos_ServicioShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "CantidadPeriodos"
@@ -1224,6 +1239,7 @@ Friend Class ClsCantiPeriodos_ServicioShr
         End If
     End Function
 End Class
+
 Friend Class ClsCodigoCuentaCrStr
     Inherits ClsCBPropiedad
     Private MstrNombreCuenta As String = String.Empty
@@ -1270,6 +1286,7 @@ Friend Class ClsCodigoCuentaCrStr
         End If
     End Function
 End Class
+
 Friend Class ClsCodigoCuentaDbStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdCuentaDb"
@@ -1316,6 +1333,7 @@ Friend Class ClsCodigoCuentaDbStr
         End If
     End Function
 End Class
+
 Friend Class ClsCodigoCuentaDevStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdCtaDctoCapital"
@@ -1362,6 +1380,7 @@ Friend Class ClsCodigoCuentaDevStr
         End If
     End Function
 End Class
+
 Friend Class ClsCodigoCuentaIvaStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdCuentaIva"
@@ -1410,6 +1429,7 @@ Friend Class ClsCodigoCuentaIvaStr
         End If
     End Function
 End Class
+
 Friend Class ClsCodigoCuentaMoraStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdCtaMoraCr"
@@ -1456,6 +1476,7 @@ Friend Class ClsCodigoCuentaMoraStr
         End If
     End Function
 End Class
+
 Friend Class ClsConceptoServicioStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "ConceptoServicio"
@@ -1507,6 +1528,7 @@ Friend Class ClsConceptoServicioStr
         End If
     End Function
 End Class
+
 Friend Class ClsEsAjusteBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "EsAjuste"
@@ -1544,6 +1566,7 @@ Friend Class ClsEsAjusteBln
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsEsExcluidoIvaBln
     Inherits ClsCBPropiedad
     Public Sub New(aobjPadre As ClsCBObjetoPan)
@@ -1570,6 +1593,7 @@ Friend Class ClsEsExcluidoIvaBln
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsEsFactProgramableBln
     Inherits ClsCBPropiedad
     Public Sub New(aobjPadre As ClsCBObjetoPan)
@@ -1608,6 +1632,7 @@ Friend Class ClsEsFactProgramableBln
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsEsServicioIdBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "EsServicioId"
@@ -1664,6 +1689,7 @@ Friend Class ClsEsServicioIdBln
         End If
     End Function
 End Class
+
 Friend Class ClsEstaActivoServicioBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "Activo"
@@ -1690,6 +1716,7 @@ Friend Class ClsEstaActivoServicioBln
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsEstaAjustadoBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "EstaAjustado"
@@ -1718,6 +1745,7 @@ Friend Class ClsEstaAjustadoBln
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsEstaGenaradaProgramBln
     Inherits ClsCBPropiedad
     Public Sub New(aobjPadre As ClsCBObjetoPan)
@@ -1746,6 +1774,7 @@ Friend Class ClsEstaGenaradaProgramBln
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsGeneraProgramBln
     Inherits ClsCBPropiedad
     Private ReadOnly MobjPadre As ClsServicio = Nothing
@@ -1805,6 +1834,7 @@ Friend Class ClsGeneraProgramBln
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsGraciaFinMes_SerBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "GraciaFinMes"
@@ -1836,6 +1866,7 @@ Friend Class ClsGraciaFinMes_SerBln
         Return ClsPanorama.FstrBuleanoToString(HobjValorPro)
     End Function
 End Class
+
 Friend Class ClsIdAno_ServicioShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdAno"
@@ -1900,6 +1931,7 @@ Friend Class ClsIdAno_ServicioShr
         End If
     End Function
 End Class
+
 Friend Class ClsIdTerceroCtaCrDbl
     Inherits ClsCBPropiedad
     Private MstrNombreTercero As String = String.Empty
@@ -1979,6 +2011,7 @@ Friend Class ClsIdTerceroCtaCrDbl
         End If
     End Function
 End Class
+
 Friend Class ClsIdServicioShr
     Inherits ClsCBPropiedad
     Private ReadOnly MobjPadre As ClsServicio = Nothing
@@ -2041,6 +2074,7 @@ Friend Class ClsIdServicioShr
         End If
     End Function
 End Class
+
 Friend Class ClsIdServicioAjustadoShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdServicioAjustado"
@@ -2088,6 +2122,7 @@ Friend Class ClsIdServicioAjustadoShr
         End If
     End Function
 End Class
+
 Friend Class ClsTipoBaseCalculoByt
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdTipoBaseCalculo"
@@ -2156,6 +2191,7 @@ Friend Class ClsTipoBaseCalculoByt
         End If
     End Function
 End Class
+
 Friend Class ClsIdTipoServicioByt
     Inherits ClsCBPropiedad
     Private ReadOnly MobjPadre As ClsServicio = Nothing
@@ -2200,6 +2236,7 @@ Friend Class ClsIdTipoServicioByt
         End If
     End Function
 End Class
+
 Friend Class ClsIdTipoTerCtaCrSerByt
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdTipoTerCuentaCr"
@@ -2236,6 +2273,7 @@ Friend Class ClsIdTipoTerCtaCrSerByt
         End If
     End Function
 End Class
+
 Friend Class ClsNombreServicioStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "Nombre"
@@ -2270,6 +2308,7 @@ Friend Class ClsNombreServicioStr
         End If
     End Function
 End Class
+
 Friend Class ClsPeriodoInicioStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "PeriodoInicio"
@@ -2350,6 +2389,7 @@ Friend Class ClsPeriodoInicioStr
         End If
     End Function
 End Class
+
 Friend Class ClsTarifaIvaDbl
     Inherits ClsCBPropiedad
     Public Sub New(aobjPadre As ClsCBObjetoPan)
@@ -2394,6 +2434,7 @@ Friend Class ClsTarifaIvaDbl
         End If
     End Function
 End Class
+
 Friend Class ClsTarifaRetFteDbl
     Inherits ClsCBPropiedad
     Public Sub New(aobjPadre As ClsCBObjetoPan)
@@ -2422,6 +2463,7 @@ Friend Class ClsTarifaRetFteDbl
         End If
     End Function
 End Class
+
 Friend Class ClsTarifaRetIcaDbl
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "TarifaReteIca"
@@ -2457,6 +2499,7 @@ Friend Class ClsTarifaRetIcaDbl
         End If
     End Function
 End Class
+
 Friend Class ClsDiaFactura_SerShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "DiaFactura"
@@ -2485,6 +2528,7 @@ Friend Class ClsDiaFactura_SerShr
         End If
     End Function
 End Class
+
 Friend Class ClsDiasGracia_SerShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "DiasGracia"
@@ -2520,6 +2564,7 @@ Friend Class ClsDiasGracia_SerShr
         End If
     End Function
 End Class
+
 Friend Class ClsDiasVencimiento_SerShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "DiasVencimiento"
@@ -2556,6 +2601,7 @@ Friend Class ClsDiasVencimiento_SerShr
         End If
     End Function
 End Class
+
 Friend Class ClsFactAPropYPreAgrBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "FacturarPropConPreAgr"
@@ -2584,6 +2630,7 @@ Friend Class ClsFactAPropYPreAgrBln
         Return ClsPanorama.FstrBuleanoToString(HobjValorPro)
     End Function
 End Class
+
 Friend Class ClsVenceFinMes_SerBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "VenceFinMes"
@@ -2613,6 +2660,7 @@ Friend Class ClsVenceFinMes_SerBln
         Return ClsPanorama.FstrBuleanoToString(HobjValorPro)
     End Function
 End Class
+
 Friend Class ClsModoCausaInteresesByt
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdModoCausaMora"

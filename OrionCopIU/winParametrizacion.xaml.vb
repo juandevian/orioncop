@@ -970,7 +970,7 @@
             If .ObjEsAjusteBln.ObjValorPro Then
                 lvOrionCop.Items.Add(New ClsViewItemPar("Valor del Servicio", Format(.DecValorAjuste, "c")))
             Else
-                lvOrionCop.Items.Add(New ClsViewItemPar("Valor del Servicio", Format(.DecValor, "c")))
+                lvOrionCop.Items.Add(New ClsViewItemPar("Valor del Servicio", Format(.FdecValor, "c")))
             End If
             If .ObjGeneraProgramBln.ObjValorPro Then
                 Dim lshrIdAno As Short = MobjServicio.ObjIdAno_ServicioShr.ObjValorPro

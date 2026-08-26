@@ -4,6 +4,7 @@
     ' Constantes
     Private Const MCSTRNOMBRETABLA As String = "OriSectores"
 #End Region
+
 #Region "Constructores"
     ''' <summary>
     ''' Instancia un objeto Panorama
@@ -52,6 +53,7 @@
         DtbTablaColeccion = drwRegistroActual.Table
     End Sub
 #End Region
+
 #Region "Propiedades"
 #Region "Propiedades indentificadoras"
     Protected Overrides ReadOnly Property HstrNombreTabla As String
@@ -119,6 +121,7 @@
     End Property
 #End Region
 #End Region
+
 #Region "Procedimientos y funciones invalidantes"
     Protected Overrides Sub SActualice(ablnExigeRequeridos As Boolean)
         If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuCreando Then
@@ -149,6 +152,7 @@
         End Get
     End Property
 #End Region
+
 #Region "Procedimientos del objeto"
     Private Sub SNumereObj()
         If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuCreando Then
@@ -202,6 +206,7 @@
     End Function
 #End Region
 End Class
+
 #Region "Clases de Propiedad"
 Friend Class ClsDctoProntoPago_SecDbl
     Inherits ClsCBPropiedad
@@ -218,7 +223,8 @@ Friend Class ClsDctoProntoPago_SecDbl
         If IsNothing(HobjValorNew) Then HobjValorNew = 0
         Dim ldblValorMin = 0.0, ldblValorMax = 0.5
         If Not IsNothing(GobjParametros.ObjAnoActual) Then
-            HblnEsRequerido = GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro
+            HblnEsRequerido = GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                    EnuTipoIncentivo.EnuDescuentoPP
             If HblnEsRequerido Then
                 lenuTipoDsctoPP = GobjParametros.ObjAnoActual.ObjTipoDsctoPPByt.ObjValorPro
                 If lenuTipoDsctoPP = EnuTipoDsctoPP.EnuValorFijo Then
@@ -259,6 +265,7 @@ Friend Class ClsDctoProntoPago_SecDbl
         Return lstrValor
     End Function
 End Class
+
 Friend Class ClsIdSectorShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdSector"
@@ -288,6 +295,7 @@ Friend Class ClsIdSectorShr
         End If
     End Function
 End Class
+
 Friend Class ClsNombreSectorStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "Nombre"

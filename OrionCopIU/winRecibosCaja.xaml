@@ -4,7 +4,7 @@
     xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
-    Title="winReciboCaja" Height="600" Width="900" WindowStyle="SingleBorderWindow" 
+    Title="winReciboCaja" Height="610" Width="900" WindowStyle="SingleBorderWindow" 
     WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
     <Grid x:Name="grdPpal" ButtonBase.Click="OnBotonClic" 
           MenuItem.Click="OnMenuClic" GotFocus="OnCogerFoco">
@@ -113,7 +113,7 @@
                 </DataGrid.CellStyle>
             </DataGrid>
         </Canvas>
-        <Grid x:Name="grdRecCaja" Grid.Row="1" LostFocus="OnPierdeFoco" Visibility="Hidden"
+        <Grid x:Name="grdRecCaja" Grid.Row="1" LostFocus="OnPierdeFoco" Visibility="Visible"
                 ComboBox.SelectionChanged="OnCboCambio">
             <Grid.RowDefinitions>
                 <RowDefinition Height="155"/>
@@ -282,7 +282,7 @@
             <GridSplitter Grid.Row="1" Background="Gray" VerticalAlignment="Top" 
 				IsTabStop="False" HorizontalAlignment="Stretch"  
 				Height="2" Opacity=".5"/>
-            <Grid x:Name="grdConsulta" Grid.Row="1">
+            <Grid x:Name="grdConsulta" Grid.Row="1" d:IsHidden="True">
                 <TabControl x:Name="tbcRecibosCaja" Grid.Row="1" Style="{StaticResource RecTabCtrl}"
                             Margin="0,5,0,0" d:IsHidden="True">
                     <TabItem x:Name="tbiDetalles" Header="Detalles" 
@@ -559,14 +559,14 @@
                     </TabItem>
                 </TabControl>
             </Grid>
-            <Grid x:Name="grdPagoNuevo" Grid.Row="1" d:IsHidden="True" >
+            <Grid x:Name="grdPagoNuevo" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="225"/>
                     <ColumnDefinition Width="680*"/>
                 </Grid.ColumnDefinitions>
                 <Canvas x:Name="cnvDeuda" Grid.Column="0" Grid.ColumnSpan="2">
                     <Label x:Name="lblCanvasDeuda" Content="DETALLES DE LA DEUDA" Canvas.Top="5" Canvas.Left="5" 
-            			FontWeight="Bold" d:IsHidden="True" />
+            			FontWeight="Bold" />
                     <DataGrid x:Name="dgrDeuda" Canvas.Left="70" Canvas.Top="40" Height="190"
                     	AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" 
                     	IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" 
@@ -649,22 +649,22 @@
             			FontWeight="Bold"/>
                     <Label x:Name="lblTipoDcto" Content="Tipo de Descuento" Padding="0"
             			Canvas.Left="20" Canvas.Top="41"/>
-                    <TextBox x:Name="txtTipoDcto" Canvas.Left="135" Canvas.Top="40" Width="260"
-                             Text="{Binding TipoDcto}" Background="Transparent"/>
+                    <TextBox x:Name="txtTipoDcto" Canvas.Left="175" Canvas.Top="40" Width="260"
+                             Text="{Binding TipoDcto}" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <ComboBox x:Name="cboTipoDsctoNuevo"  Canvas.Left="135" Canvas.Top="40" Width="260"
             			Padding="6,1,1,1" Visibility="Collapsed" TabIndex="15"/>
                     <Label x:Name="lblIdFactura" Content="Número Documento" Padding="0"
                            Canvas.Left="20" Canvas.Top="67" />
-                    <TextBox x:Name="txtNroFactura" Canvas.Left="135" Canvas.Top="65" 
-                             Width="120" Text="{Binding NroFactura}" Background="Transparent"/>
-                    <ComboBox x:Name="cboNroFactNuevo"  Canvas.Left="135" Canvas.Top="65" Width="120"
-                              Padding="6,1,1,1" Visibility="Collapsed" TabIndex="16"/>
+                    <TextBox x:Name="txtNroFactura" Canvas.Left="175" Canvas.Top="65" 
+                             Width="120" Text="{Binding NroFactura}" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="cboNroFactNuevo"  Canvas.Left="175" Canvas.Top="65" Width="120"
+                              Padding="6,1,1,1" Visibility="Hidden" TabIndex="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label x:Name="lblItemFactura" Content="Item Documento" Padding="0"
                            Canvas.Left="20" Canvas.Top="91"/>
-                    <TextBox x:Name="txtItemFactura" Canvas.Left="135" Canvas.Top="90" 
-                             Width="380" Text="{Binding IdItemFact}" Background="Transparent"/>
-                    <ComboBox x:Name="cboItemFactNuevo"  Canvas.Left="135" Canvas.Top="90" Width="380"
-            			Padding="6,1,1,1" Visibility="Collapsed" TabIndex="17"/>
+                    <TextBox x:Name="txtItemFactura" Canvas.Left="175" Canvas.Top="90" 
+                             Width="360" Text="{Binding IdItemFact}" Background="Transparent"/>
+                    <ComboBox x:Name="cboItemFactNuevo"  Canvas.Left="175" Canvas.Top="90" Width="360"
+            			Padding="6,1,1,1" Visibility="Hidden" TabIndex="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Label x:Name="lblDeudaCap" Content="Deuda Capital" Padding="0"
             			Canvas.Left="540" Canvas.Top="70"/>
                     <Label x:Name="txtDeudaCap" Canvas.Left="540" Canvas.Top="90" Width="100" 
@@ -677,9 +677,9 @@
             			HorizontalContentAlignment="Right"/>
                     <Label x:Name="lblValorDct" Content="Valor del Descuento" Padding="0"
             			Canvas.Left="20" Canvas.Top="116"/>
-                    <TextBox x:Name="txtValorDcto" Canvas.Left="135" Canvas.Top="115" Width="100" 
+                    <TextBox x:Name="txtValorDcto" Canvas.Left="175" Canvas.Top="115" Width="100" 
             			Text="{Binding Valor, StringFormat=\{0:c\}}" Background="Transparent"
-            			HorizontalContentAlignment="Right"/>
+            			HorizontalContentAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <TextBox x:Name="txtValorDctoNuevo" Canvas.Left="135" Canvas.Top="115" Width="100" 
             			HorizontalContentAlignment="Right"
             			Visibility="Collapsed" TabIndex="18"/>

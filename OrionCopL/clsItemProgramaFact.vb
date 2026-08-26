@@ -1072,6 +1072,7 @@ Friend Class ClsIdPredio_ItemProgramaFactStr
         HshrLongitud = 20
         HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
     End Sub
+
     Public Overrides Sub SValide()
         If MobjPadre.EnuTipoDeudor = EnuTipoDeudorDef.EnuPredio Then
             HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 1, HshrLongitud, True)
@@ -1091,15 +1092,18 @@ Friend Class ClsIdPredio_ItemProgramaFactStr
             End If
         End If
     End Sub
+
     Private Sub EPosSetValor(sender As Object, e As ClsPanEventArgs) Handles Me.EvnPosSetValor
         Dim lobjPadre As ClsItemProgramaFact = ObjPadre
         lobjPadre.ObjIdCliente_ItemProgramaFactDbl.SValide()
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If Not IsNothing(ObjValorPro) Then
             Return HobjValorPro.ToString
@@ -1121,6 +1125,7 @@ Friend Class ClsIdServicio_ItemProgramaFactShr
         HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
         HblnEsRequerido = True
     End Sub
+
     Public Overrides Sub SValide()
         Dim lobjPredio As ClsPredio
         Dim lobjCliente As ClsCliente = Nothing
@@ -1128,7 +1133,7 @@ Friend Class ClsIdServicio_ItemProgramaFactShr
         HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 1, Short.MaxValue,
                     BlnEsRequerido, EnuTipoValor)
         If HblnEsValido Then
-            If MobjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuCreando Then
+            If MobjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuCreando Then
                 If MobjPadre.ObjIdAno_ItemProgramaFactShr.BlnEsValido Then
                     Dim lshrIdAno As Short = MobjPadre.ObjIdAno_ItemProgramaFactShr.ObjValorPro
                     Dim lstrKey = lshrIdAno.ToString & "," & HobjValorNew.ToString
@@ -1174,7 +1179,7 @@ Friend Class ClsIdServicio_ItemProgramaFactShr
                         HstrMens = "El Servicio ya está programado!"
                     End If
                 End If
-            ElseIf MobjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando Then
+            ElseIf MobjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando Then
                 HblnEsValido = (HobjValorOriginal = HobjValorNew)
                 If Not HblnEsValido Then
                     HstrMens = "No es permitido cambiar el Servicio!"
@@ -1185,6 +1190,7 @@ Friend Class ClsIdServicio_ItemProgramaFactShr
             End If
         End If
     End Sub
+
     Private Sub EPosSetValor(sender As Object, e As ClsPanEventArgs) Handles Me.EvnPosSetValor
         Dim lobjPadre As ClsItemProgramaFact = ObjPadre
         lobjPadre.ObjIdAno_ItemProgramaFactShr.SValide()

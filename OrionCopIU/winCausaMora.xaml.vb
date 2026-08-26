@@ -31,6 +31,7 @@
     '
     Private ReadOnly MstrArchivoCopia As String = String.Empty
 #End Region
+
 #Region "Constructor"
     Public Sub New(ablnCierrePeriodo As Boolean)
         InitializeComponent()
@@ -38,6 +39,7 @@
         MblnCierraMes = ablnCierrePeriodo
     End Sub
 #End Region
+
 #Region "Invalida metodos en la clase base que implementan la Interfaz"
     Protected Overrides Sub SLoad()
         Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lblnNoHayError = False
@@ -145,11 +147,13 @@
         '
     End Sub
 #End Region
+
 #Region "Procedimientos invalidantes"
     Protected Overrides Sub SCree()
         SFrmAdicione()
         EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando
     End Sub
+
     Protected Overrides Sub SGuarde()
         Dim lblnCauso = False, lblnNoHayError = False, lstrMensImp = String.Empty
         Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lenuSevNot = EnuSeveridadNot.None
@@ -212,8 +216,9 @@
             GblnOK = lblnCauso
         End Try
     End Sub
+
     Protected Overrides Sub SCancele()
-        If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
+        If EnuOperacionEnWin = EnuOperacionEnVentana.CenuCreando Then
             If GblnCausandoFM Then
                 MblnCancelando = True
             Else
@@ -224,11 +229,13 @@
             SCerrarClic()
         End If
     End Sub
+
     Protected Overrides Sub SCerrarClic()
         MyBase.SCerrarClic()
         MblnCancelando = False
     End Sub
 #End Region
+
 #Region "Procedimientos Propios"
     Private Sub SMuestreCtrls()
         Select Case MenuTipoAccion
@@ -240,12 +247,19 @@
                 lblTitulo.Content = "Causa Intereses de Mora y Cierra Mes ..."
         End Select
     End Sub
+
     Private Sub SCierreMes()
+        Dim lentItemsMulta = 0
         HbttAceptar.IsEnabled = False
         HbttCancelar.IsEnabled = False
         Mouse.OverrideCursor = Cursors.Wait
         SGenereBK()
-        SGenReportesFinMes()
+        If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuPenalización Then
+            Dim lobjOrionCop As New ClsOrionCop(GCOBJREGISTRO, False)
+            lobjOrionCop.SGenereItemsProgFactMulta(lentItemsMulta)
+        End If
+        SGenReportesFinMes(lentItemsMulta)
         Mouse.OverrideCursor = Cursors.Wait
         GobjParametros.SCierrePeriodo()
         If GobjParametros.ObjTipoInterfazByt.ObjValorPro <> EnuTipoInterfazDef.None Then
@@ -253,6 +267,7 @@
         End If
         Mouse.OverrideCursor = Cursors.Arrow
     End Sub
+
     ' Inicio causa mora FM
     Private Function FblnCausoMora(ByRef astrMens As String,
             ByRef aenuSeve As EnuSeveridadNot) As Boolean ' FM
@@ -281,6 +296,7 @@
         End If
         Return lblnCauso
     End Function
+
     Private Function FblnCerroYCauso(ByRef astrMens As String,
             ByRef aenuSeve As EnuSeveridadNot) As Boolean
         If ClsOrionCop.FblnDebeCrearAno() Then
@@ -293,11 +309,16 @@
         Dim lblnCauso = FblnCausoMora(astrMens, aenuSeve)
         Return lblnCauso
     End Function
-    Private Sub SGenReportesFinMes()
+
+    Private Sub SGenReportesFinMes(aentItemsMulta As Integer)
         Mouse.OverrideCursor = Cursors.Wait
         Dim ldtmFechaCierre As Date =
                 GobjParametros.ObjAnoActual.ObjPeriodoActual.DtmFechaFinPeriodo
         ldtmFechaCierre = ldtmFechaCierre.AddDays(1)
+        If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuPenalización AndAlso aentItemsMulta > 0 Then
+            MobjReportes.SGenereRepFacturasMultadas(ldtmFechaCierre)
+        End If
         Mouse.OverrideCursor = Cursors.Wait
         Dim NoUsado = MobjReportes.SGenereEdadCartera(GentLimite1, GentLimite2, GentLimite3,
                 GentLimite4, EnuTipoRepEdadCartera.enuResumido, ldtmFechaCierre,
@@ -305,12 +326,14 @@
         MobjReportes.SGenereAntPorAplicar(ldtmFechaCierre, True)
         Mouse.OverrideCursor = Cursors.Arrow
     End Sub
+
     Private Sub SGenereInterfazCon()
         Dim lwinIntCon As New WinInterfazCont(True) With {
             .WinPadre = Me
         }
         lwinIntCon.ShowDialog()
     End Sub
+
     Private Sub SProceseNotasApi()
         Dim lstrMens = String.Empty
         SProceseEFac(lstrMens)
@@ -319,15 +342,16 @@
         End If
     End Sub
 #End Region
+
 #Region "Eventos Causacion Mora"
     Private Sub SEvnInicio(aobjSender As Object, e As ClsPanEventArgs) Handles _
             MobjOrionCop.EvnInicio, MobjReportes.EvnInicio
         lblResultado.Visibility = Visibility.Visible
         pgbCausacion.Visibility = Visibility.Visible
         Select Case e.EnuProceso
-            Case EnuProcesoDef.enuBK
+            Case EnuProcesoDef.EnuBK
                 txtProceso.Content = My.Resources.GenBK
-            Case EnuProcesoDef.enuCausaMora
+            Case EnuProcesoDef.EnuCausaMora
                 txtProceso.Content = My.Resources.GenInte
             Case EnuProcesoDef.enuRepEdadCar
                 txtProceso.Content = My.Resources.GenEdadCar
@@ -343,6 +367,7 @@
         pgbCausacion.Maximum = e.DblCantAProcesar - 1
         pgbCausacion.Value = 0.0
     End Sub
+
     Private Sub SEvnAvance(aobjSender As Object, e As ClsPanEventArgs) Handles MobjOrionCop.EvnAvance,
             MobjReportes.EvnAvance
         If MblnCancelando Then
