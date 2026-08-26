@@ -45,6 +45,7 @@ Friend Enum EnuReporteDef As Integer
     enuPropietariosXCP_Res
     enuCuotasAdminPropi
     enuItemsProgramaFact
+    enuItemsProgFactPorPreAgru
     enuMovimCuenta
     enuMovimAntici
     enuDirTf
@@ -62,6 +63,7 @@ Friend Enum EnuReporteDef As Integer
     enuFacVivas
     enuValoresFacturados
     enuValoresFactTodos
+    enuFacturasMultadas
 End Enum
 
 Friend Enum EnuTipoRepEdadCartera As Integer

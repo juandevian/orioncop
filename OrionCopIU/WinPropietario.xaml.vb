@@ -14,6 +14,7 @@
     Private ReadOnly MobjPredio As ClsPredio = Nothing
     Private MblnModificandoNuevo As Boolean = False
 #End Region
+
 #Region "Constructor"
     Public Sub New(aobjProp As ClsPropietario, ablnNuevo As Boolean)
         InitializeComponent()
@@ -24,6 +25,7 @@
         GblnOK = False
     End Sub
 #End Region
+
 #Region "Invalida metodos en la clase base que implementan la Interfaz"
     Protected Overrides Sub SLoad()
         Dim lcolControlesLlave As New Collection From {
@@ -100,6 +102,7 @@
         '
     End Sub
 #End Region
+
 #Region "Invalida otros metodos de la clase base"
     Protected Overrides Sub SCree()
         MyBase.SCree()
@@ -143,6 +146,7 @@
         Close()
     End Sub
 #End Region
+
 #Region "Metodos"
     Private Sub SBusqueCliente()
         Cursor = Cursors.Wait
@@ -228,6 +232,7 @@
         End If
     End Sub
 #End Region
+
 #Region "Eventos en la Ventana"
     Private Sub OnCogerFoco(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)

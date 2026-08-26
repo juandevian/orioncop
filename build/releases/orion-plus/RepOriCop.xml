@@ -1,0 +1,294 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+RepOriCop
+</name>
+</assembly>
+<members>
+<member name="T:OPT.OrionP.RepOriCop.My.MyWpfExtension">
+ <summary>
+ Módulo utilizado para definir las propiedades disponibles en el espacio de nombres My de WPF
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.MyWpfExtension.Application">
+ <summary>
+ Devuelve el objeto de aplicación de la aplicación en ejecución
+ </summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.MyWpfExtension.Computer">
+ <summary>
+ Devuelve información sobre el equipo host.
+ </summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.MyWpfExtension.User">
+ <summary>
+ Devuelve información sobre el usuario actual. Si desea ejecutar la aplicación con las credenciales 
+ del usuario de Windows actual, llame a My.User.InitializeWithWindowsUser().
+ </summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.MyWpfExtension.Log">
+ <summary>
+ Devuelve el registro de la aplicación. El archivo de configuración de la aplicación puede configurar los agentes de escucha.
+ </summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.MyWpfExtension.Windows">
+ <summary>
+ Devuelve la colección de Windows definida en el proyecto.
+ </summary>
+</member>
+<member name="T:OPT.OrionP.RepOriCop.My.Resources.Resources">
+<summary>
+  Clase de recurso fuertemente tipado, para buscar cadenas traducidas, etc.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.ResourceManager">
+<summary>
+  Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.Culture">
+<summary>
+  Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
+  búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.Cancelar">
+<summary>
+  Busca una cadena traducida similar a _Cancelar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.excel">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.Ninguno">
+<summary>
+  Busca una cadena traducida similar a &lt;Ninguno&gt;.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCAbonoCap">
+<summary>
+  Busca una cadena traducida similar a Aplicado a Capital.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCAbonoMor">
+<summary>
+  Busca una cadena traducida similar a Aplicado a Int. de Mora.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCAnticipo">
+<summary>
+  Busca una cadena traducida similar a Anticipo recibido.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCDsctoCap">
+<summary>
+  Busca una cadena traducida similar a Descuento a Capital.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCDsctoMor">
+<summary>
+  Busca una cadena traducida similar a Descuento a Int. de Mora.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCDsctoPP">
+<summary>
+  Busca una cadena traducida similar a Descuento por Pronto Pago.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCRetCre">
+<summary>
+  Busca una cadena traducida similar a Retención del CREE.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCReteFte">
+<summary>
+  Busca una cadena traducida similar a Retención en la Fuente.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCRetIca">
+<summary>
+  Busca una cadena traducida similar a Retención de Industria y Comercio.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RCRetIva">
+<summary>
+  Busca una cadena traducida similar a Retención del IVA.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.RepAuxiliarCon">
+<summary>
+  Busca una cadena traducida similar a Auxiliar Contable.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.SinPredAgr">
+<summary>
+  Busca una cadena traducida similar a Sin Pred. Agr..
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.TituloRep">
+<summary>
+  Busca una cadena traducida similar a Reporte: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.Todos">
+<summary>
+  Busca una cadena traducida similar a &lt;Todos&gt;.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.VPImpresionAux">
+<summary>
+  Busca una cadena traducida similar a Vista Previa Impresión Auxiliar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.VPImpresionAuxTer">
+<summary>
+  Busca una cadena traducida similar a Vista Previa Impresión Auxiliar Terceros.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.VPImpresionFacturas">
+<summary>
+  Busca una cadena traducida similar a Vista Previa Impresión Facturas.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.VPImpresionNotasAplAnt">
+<summary>
+  Busca una cadena traducida similar a Vista Previa Impresión Notas Aplicación Anticipos.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.VPImpresionNotasCr">
+<summary>
+  Busca una cadena traducida similar a Vista Previa Impresión Nota Crédito.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.VPImpresionNotasDevAnt">
+<summary>
+  Busca una cadena traducida similar a Vista Previa Impresión Nota Reintegro Anticipos.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.VPImpresionNotasIntereses">
+<summary>
+  Busca una cadena traducida similar a Vista Previa Impresión Notas de Intereses.
+</summary>
+</member>
+<member name="P:OPT.OrionP.RepOriCop.My.Resources.Resources.VPImpresionRecibos">
+<summary>
+  Busca una cadena traducida similar a Vista Previa Impresión Recibos de Caja.
+</summary>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsExportToExcell.FblnExportToExcel(System.String,System.String,System.Windows.Controls.DataGrid,System.Data.DataTable,System.String[])">
+ <summary>
+ Exporta el contenido de un datagrid cuyo datacontext es un datatable a un archivo de Excel
+ </summary>
+ <param name="astrTitulo">Es el titulo que se pondra ebcima de todas las columnas de la hoja de excel</param>
+ <param name="astrArchivoExcel">Nombre del archivo de excel incluida su ruta.</param>
+ <param name="adgOrigenDatos">El datagrid del cual se exportaran los datos.</param>
+ <param name="adtbOrigenDatos">El datatable que es el datacontext del datagrid.</param>
+ <param name="astrMapeoColumnas">Es un array que contiene el mapeo del nombre de las columnas
+ en el datagrid con el nombre de las columnas en el datatable.</param>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.SExporteFactura(OPT.OrionP.OrionCopL.ClsFactura,OPT.OrionP.PanL.ClsTercero,System.Boolean)">
+ <summary>
+ Exporta a un archivo PDF una sola factura independiente de la ubicacion actual
+ </summary>
+ <param name="aobjFactura">Factura a ser exportada</param>
+ ''' <param name="ablnEnvioEmail">Indica si es para ser enviada por email</param>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.SExporteFactura(OPT.OrionP.OrionCopL.ClsFactura,OPT.OrionP.PanL.ClsTercero)">
+ <summary>
+ Exporta la factura pasada en el argumento a la carpeta de email para ser enviada 
+ al FTP de eFac
+ </summary>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.SExporteUnReciboCaja(OPT.OrionP.OrionCopL.ClsReciboCaja,OPT.OrionP.PanL.ClsTercero,System.Boolean)">
+ <summary>
+ Exporta un recibo de caja como .pdf a la carpetas de emails para ser enviado por internet
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.SComplementeTablaNovedades(System.Data.DataSet,System.String)">
+ <summary>
+ Complementa la tabla de novedades cuando es un reporte Auxiliar sin Tercero
+ </summary>
+ <param name="adsAuxiliarCont">DataSet que contiene la DataTable de Novedades(Movimiento Contable)</param>
+ <param name="astrIdCta">El código de la cuenta de Contabilidad que va ha ser complementada.</param>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.SInserteSaldoEnAux(System.String)">
+ <summary>
+ Inserta un nuevo datarow en la  datatable mdtbAuxiliarCon que contiene el saldo al fecha "strFechaDesde" 
+ menos un dia para la cuenta pasada en el argumento "astrIdCta" y devuelve su valor.
+ </summary>
+ <remarks>Debe ser el primer DataRow del DataTable</remarks>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.SInserteSaldoEnAux(System.String,System.Double,System.String,System.Decimal)">
+ <summary>
+ Calcula el saldo a la fecha "strFechaDesde" menos un dia para la cuenta y el predio agrupador 
+ pasados en los parametreos "astrIdCta" y "astrIdPredioAgr" repectivamente e inserta un nuevo 
+ registro en la tabla mdtbAuxiliarCon donde el campo "Saldo" se calcula con base en el valor 
+ del saldo calculado y el valor del saldo acumulado pasado en el argumento "adecSaldoAcum"
+ </summary>
+ <param name="astrIdCta"></param>
+ <param name="astrIdPredioAgr"></param>
+ <param name="adecSaldoAcum"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.SCopieNovedadesAux(System.Data.DataRow)">
+ <summary>
+ Copia el DataRow pasado en el argumento a la DataTable mdtbAuxiliarCon
+ </summary>
+ <param name="adrwNovedad">DataRow que sera copiado</param>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.FdecSaldoNov(System.String)">
+ <summary>
+ Devuelve el saldo de la cuenta pasada en el argumento "astrIdCuentaCont" 
+ a la fecha dada por el campo "strFechaDesde" menos un dia.
+ </summary>
+ <param name="astrIdCuentaCont">Id de la cuenta a la cual se le calcula el saldo.</param>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.FdecSaldoNov(System.String,System.Double,System.String)">
+ <summary>
+ Devuelve el saldo de la cuenta pasada en el argumento "astrIdCuentaCont" correspondiente al
+ predio agrupador pasado en el argumento "astrIdPredioAgrupador"
+ a la fecha dada por el campo "strFechaDesde" menos un dia.
+ </summary>
+ <param name="astrIdCuentaCont">Id de la cuenta a la cual se le calcula el saldo.</param>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.SInserteSaldoEnRes(System.String)">
+ <summary>
+ Inserta un nuevo datarow en la  datatable mdtbResumenAuxCont que contiene el saldo al fecha "strFechaDesde" 
+ menos un dia para la cuenta pasada en el argumento "astrIdCta" y devuelve su valor.
+ </summary>
+ <remarks>Debe ser el primer DataRow del DataTable</remarks>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.SCopieNovedadesRes(System.Data.DataRow)">
+ <summary>
+ Copia el DataRow pasado en el argumento a la DataTable mdtbResumenMovCont
+ </summary>
+ <param name="adrwResumenMovCont">DataRow que sera copiado</param>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.ClsRepOrionCop.FdecSaldoNovAnt(System.String)">
+ <summary>
+ Devuelve el saldo en la tabla NovedadesAnt de la cuenta pasada en el argumento "astrIdCuentaCont" 
+ a la fecha dada por el campo "strFechaDesde" menos un dia.
+ </summary> 
+ <param name="astrIdCuentaCont">Id de la cuenta a la cual se le calcula el saldo.</param>
+</member>
+<member name="T:OPT.OrionP.RepOriCop.WinParametrosRep">
+<summary>
+WinParametrosRep
+</summary>
+</member>
+<member name="M:OPT.OrionP.RepOriCop.WinParametrosRep.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+</members>
+</doc>

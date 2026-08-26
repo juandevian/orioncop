@@ -531,7 +531,7 @@ Public Class WinProcesaEFac
         Dim ldtmFechadesde = Today.AddDays(-6), ldtmFechaHasta = Today
         Dim lstrFechaDesde = ldtmFechadesde.Year.ToString & "-" &
                             Format(ldtmFechadesde.Month, "0#") & "-" &
-                            Format(ldtmFechadesde.Day - 1, "0#")
+                            Format(ldtmFechadesde.Day, "0#")
         Dim lstrFechaHasta = ldtmFechaHasta.Year.ToString & "-" &
                             Format(ldtmFechaHasta.Month, "0#") & "-" &
                             Format(ldtmFechaHasta.Day, "0#")

@@ -334,6 +334,20 @@ Public Class WinRecibosCaja
                     If MsgBox(lstrMensQ, vbYesNo + MsgBoxStyle.Question, "Imprimir Recibo Caja?") = vbYes Then
                         SImprima()
                     End If
+                    If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                            EnuTipoIncentivo.EnuPenalización Then
+                        Dim lstrMensPen = String.Empty, lobjFactura As ClsFactura = Nothing
+                        ClsOrionCop.SProcesePenalizacion(MobjObjetoWin, lobjFactura, lstrMensPen)
+                        If lobjFactura IsNot Nothing Then
+                            If MsgBox(lstrMensPen, vbYesNo + MsgBoxStyle.Question, "Imprimir documento") = vbYes Then
+                                lstrMensPen = String.Empty
+                                SImprimaFactura(lobjFactura, lstrMensPen)
+                            End If
+                            If Not String.IsNullOrEmpty(lstrMensPen) Then
+                                MsgBox(lstrMensPen, vbOKOnly, "Documento no impreso")
+                            End If
+                        End If
+                    End If
                 End If
                 lstrMens = FstrNombreDoc() & " fue creado exitosamente!"
                 If GobjParametros.BlnEFacAutorizado Then
@@ -835,6 +849,7 @@ Public Class WinRecibosCaja
         SAdicioneControlRestringido(bttEliminarMedPago)
         SAdicioneControlRestringido(bttEncontrarCliente)
     End Sub
+
     Private Sub SEstablezcaControlesActuales()
         Dim lstyEstiloNoHabilitado As Style = FindResource("RecCtlNoHabilitado")
         Dim lobjDocRec As ClsDocumento =
@@ -852,6 +867,7 @@ Public Class WinRecibosCaja
         bttAnterior.Visibility = Visibility.Collapsed
         bttSiguiente.Visibility = Visibility.Collapsed
     End Sub
+
     Private Sub SProceseControlesNuevos(ablnHabilite As Boolean)
         Dim lvisVisibilidadNuevos As Visibility
         Dim lvisVisibilidadActual As Visibility
@@ -892,6 +908,7 @@ Public Class WinRecibosCaja
         bttSiguiente.Visibility = lvisVisibilidadNuevos
         bttAnterior.Visibility = lvisVisibilidadNuevos
     End Sub
+
     ''' <summary>
     ''' Establece el estado de los controles (habilitado o deshabilitado) según el estado de captura
     ''' </summary>
@@ -933,6 +950,7 @@ Public Class WinRecibosCaja
                 SHabiliteCtlsMedPago()
         End Select
     End Sub
+
     Private Sub SHabiliteCtlsGrales(ablnHabilite As Boolean)
         Dim lstyCtlsDscto As Style = FindResource("RecCtlNoHabilitado")
         If ablnHabilite Then
@@ -956,6 +974,7 @@ Public Class WinRecibosCaja
             lsbServicios.Style = lstyCtlsDscto
         End If
     End Sub
+
     Private Sub SHabiliteCtlsDesctos()
         txtNroFactura.Visibility = Visibility.Collapsed
         txtItemFactura.Visibility = Visibility.Collapsed
@@ -992,18 +1011,21 @@ Public Class WinRecibosCaja
                 bttCancelarDscto.IsEnabled = True
         End Select
     End Sub
+
     Private Sub SHabiliteCtlsValores()
         cnvDetallePago.Visibility = Visibility.Visible
         SHabiliteControl(txtValorRec, True)
         SHabiliteControl(txtComentario, True)
         txtValorRec.Focus()
     End Sub
+
     Private Sub SInicialiceCtlsMediosPago(ablnHabilite As Boolean)
         SHabiliteControl(cboTipoMedPagoNuevo, ablnHabilite)
         SHabiliteControl(txtNroMedPagoNuevo, ablnHabilite)
         SHabiliteControl(cboCuentaIngresoNuevo, ablnHabilite)
         SHabiliteControl(txtValorMedPagoNuevo, ablnHabilite)
     End Sub
+
     Private Sub SHabiliteCtlsMedPago()
         cboTipoMedPagoNuevo.Visibility = Visibility.Collapsed
         txtTipoMedPagoCap.Visibility = Visibility.Collapsed
@@ -1042,6 +1064,7 @@ Public Class WinRecibosCaja
                 bttCancelarMedPago.IsEnabled = True
         End Select
     End Sub
+
     Private Sub SHabiliteControl(actlControl As Control, ablnHabilite As Boolean)
         If ablnHabilite Then
             actlControl.Style = FindResource("RecCtlHabilitado")
@@ -1049,6 +1072,7 @@ Public Class WinRecibosCaja
             actlControl.Style = FindResource("RecCtlNoHabilitado")
         End If
     End Sub
+
     Private Sub SHabiliteBotonesWin()
         If MenuEstadoDscto = EnuEstadoDsctoDef.enuCreandoDscto Then
             SValideDscto()
@@ -1058,6 +1082,7 @@ Public Class WinRecibosCaja
             bttAceptarMedPago.IsEnabled = FblnEsValidoMedPago()
         End If
     End Sub
+
     Private Sub TbcRecibosCaja_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles tbcRecibosCaja.SelectionChanged
         If Not IsNothing(MobjObjetoWin) Then
             If TypeOf e.Source Is TabControl Then
@@ -1065,23 +1090,24 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub SCambieNombresDocCobro()
         If GobjParametros.BlnEFacAutorizado Then
             dgtNroFac.Header = "Nro. Factura"
-            dgtNroFacNov.header = "Nro. Factura"
-            dgtNroFacDeuda.header = "Nro. Factura"
+            dgtNroFacNov.Header = "Nro. Factura"
+            dgtNroFacDeuda.Header = "Nro. Factura"
             dgtFechaFac.Header = "Fecha Fac."
-            dgtValor.header = "Valor Factura"
+            dgtValor.Header = "Valor Factura"
             lblIdFactura.Content = "Número Factura"
             lblItemFactura.Content = "Item Factura"
             dgtNroFacDcto.Header = "Nro. Factura"
             dgtItemFacDcto.Header = "Item Factura"
         Else
             dgtNroFac.Header = "Nro. C.Cobro"
-            dgtNroFacNov.header = "Nro. C.Cobro"
+            dgtNroFacNov.Header = "Nro. C.Cobro"
             dgtNroFacDeuda.Header = "Nro. Cuenta Cobro"
             dgtFechaFac.Header = "Fecha C.Cobro"
-            dgtValor.header = "Valor Cta.Cobro"
+            dgtValor.Header = "Valor Cta.Cobro"
             lblIdFactura.Content = "Número Cuenta Cobro"
             lblItemFactura.Content = "Item Cuenta Cobro"
             dgtNroFacDcto.Header = "Nro. Cuenta Cobro"
@@ -1099,6 +1125,7 @@ Public Class WinRecibosCaja
             SMuestreDescuentos()
         End If
     End Sub
+
     Private Sub SMuestreDescuentos()
         Dim ldtbDsctos = MobjObjetoWin.DtbDescuentos
         cnvDescuentos.DataContext = ldtbDsctos
@@ -1110,6 +1137,7 @@ Public Class WinRecibosCaja
             SMuestreSaldoAPagar()
         End If
     End Sub
+
     Private Sub SNuevoDscto()
         If FblnTienePermisoParaDscto() Then
             If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
@@ -1132,6 +1160,7 @@ Public Class WinRecibosCaja
             SLevanteEveNoti(lstrMens, String.Empty, 0, EnuSeveridadNot.EnuInformacion)
         End If
     End Sub
+
     Private Sub SAcepteDscto()
         SRegDscto()
         If MenuEstadoDscto = EnuEstadoDsctoDef.enuCreandoDscto AndAlso
@@ -1145,6 +1174,7 @@ Public Class WinRecibosCaja
             bttNuevoDscto.Focus()
         End If
     End Sub
+
     Private Sub SCanceleDscto()
         If dgrDescuentos.Items.Count > 0 Then
             dgrDescuentos.SelectedIndex = 0
@@ -1163,6 +1193,7 @@ Public Class WinRecibosCaja
         SValideDscto()
         SHabiliteCtlsDesctos()
     End Sub
+
     Private Sub SElimineDscto()
         If dgrDescuentos.Items.Count > 0 AndAlso Not IsNothing(dgrDescuentos.SelectedItem) Then
             Dim ldrvItemDscto As DataRowView = dgrDescuentos.SelectedItem
@@ -1172,6 +1203,7 @@ Public Class WinRecibosCaja
             SMuestreSaldoAPagar()
         End If
     End Sub
+
     Private Function FblnTienePermisoParaDscto() As Boolean
         Dim lblnTienePermisoDscto = FblnHabilitarMenuPan(HenuIdVentana, 3)
         If Not lblnTienePermisoDscto Then
@@ -1181,6 +1213,7 @@ Public Class WinRecibosCaja
         End If
         Return lblnTienePermisoDscto
     End Function
+
     Private Sub SMuestreComentario()
         Dim lstrComentario = "", lstrDscto As String
         Dim lenuTipodscto As EnuTipoDescuento
@@ -1188,7 +1221,7 @@ Public Class WinRecibosCaja
         Dim ldtbDsctos = MobjObjetoWin.DtbDescuentos
         For Each ldrwDscto As DataRow In ldtbDsctos.Rows
             lstrDscto = String.Empty
-            lenuTipodscto = ClsPanorama.FobjValorCampo(ldrwDscto("IdTipoDcto"), EnuTipoValor.enuByte)
+            lenuTipodscto = ClsPanorama.FobjValorCampo(ldrwDscto("IdTipoDcto"), EnuTipoValor.EnuByte)
             If lenuTipodscto = EnuTipoDescuento.EnuReteFuente Then
                 If Not lblnEfectuoDscto(0) Then
                     lstrDscto = "Reteción en la fuente"
@@ -1368,6 +1401,7 @@ Public Class WinRecibosCaja
         MblnPoblandoCbo = False
         GobjPanDat.SControleProcesoObj(False)
     End Sub
+
     Private Sub SMuestrePredAgru()
         Dim lstrPrediosAgr As String()
         If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
@@ -1398,6 +1432,7 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Function FstrPrediosAgrSele() As String
         Dim lstrPreAgr As String = String.Empty
         If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
@@ -1743,6 +1778,7 @@ Public Class WinRecibosCaja
             SValide()
         End If
     End Sub
+
     Private Sub SVerifiqueOtrasDeudas()
         Dim ldblIdTerceroDiffConDeuda As Double
         Dim lobjPredio As New ClsPredio(EnuModoInstanciaObjDef.enuUnico)
@@ -1776,6 +1812,7 @@ Public Class WinRecibosCaja
         End If
         SProceseIntereses()
     End Sub
+
     Private Sub SProceseIntereses()
         MdecIntPorCausar = MobjObjetoWin.DecInteresesPorCausar
         If MdecIntPorCausar > 0 Then
@@ -1790,6 +1827,7 @@ Public Class WinRecibosCaja
         End If
         StcValidValido(EnuValidEntradaDef.enuCausarInt) = MdecIntPorCausar = 0
     End Sub
+
     Private Sub SProceseDetalleDeuda()
         If MdecDeuda > 0 Then
             Dim lstrPredAgru = MobjObjetoWin.ObjIdPredioAgrupador_RecStr.ToString().Split(",")
@@ -1800,10 +1838,12 @@ Public Class WinRecibosCaja
             cnvDeuda.DataContext = Nothing
         End If
     End Sub
+
     Private Sub SMuestreSaldoAPagar()
         txtSaldo.Content = Format(MobjObjetoWin.FdecSaldoRC, "c")
         txtDeudaRecibo.Content = txtSaldo.Content
     End Sub
+
     Private Sub SCauseMora()
         Dim lblnNoHayError = False, ldecValorCausado = 0D
         Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lenuSevNot As EnuSeveridadNot
@@ -2295,6 +2335,7 @@ Public Class WinRecibosCaja
             End If
         End With
     End Sub
+
     Private Sub SRegCliente()
         With MobjObjetoWin
             If .ObjIdCliente_RecDbl.ToString().Trim <> txtIdCliente.Text.Trim Then
@@ -2314,6 +2355,7 @@ Public Class WinRecibosCaja
         lsbPrediosAgru.Focus()
         MblnPrimeraVezGrales = True
     End Sub
+
     Private Sub SRegServicios()
         Dim lstrServSele = FstrServiSele()
         MobjObjetoWin.ObjServicios_RecStr.ObjValorPro = lstrServSele
@@ -2323,6 +2365,7 @@ Public Class WinRecibosCaja
         SProceseGrales()
         SHabiliteControlesEstado()
     End Sub
+
     Private Sub SRegPrediosAgr(ByRef astrMens As String)
         If EnuOperacionEnWin <> EnuOperacionEnVentana.cenuConsultando Then
             MobjObjetoWin.ObjIdPredioAgrupador_RecStr.ObjValorPro = FstrPrediosAgrSele()
@@ -2350,12 +2393,14 @@ Public Class WinRecibosCaja
             SValideItemDscto()
         End If
     End Sub
+
     Private Sub SRegTipoDscto()
         If MenuEstadoDscto = EnuEstadoDsctoDef.enuCreandoDscto Then
             SPuebleFras()
             SValideTipoDscto()
         End If
     End Sub
+
     Private Sub SRegValorDscto()
         If IsNumeric(txtValorDctoNuevo.Text) Then
             Dim ldecVlrDcto As Decimal = CType(txtValorDctoNuevo.Text, Decimal)
@@ -2364,6 +2409,7 @@ Public Class WinRecibosCaja
         SValideDscto()
         MblnDejoUltimoControl = True
     End Sub
+
     Private Sub SRegDscto()
         SRegNroFactDscto()
         SRegValorDscto()
@@ -2410,6 +2456,7 @@ Public Class WinRecibosCaja
             End If
         End With
     End Sub
+
     Private Sub SRegTipoMedioPago()
         If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando AndAlso
                 MenuEstadoMedPago = EnuEstadoMedPagoDef.enuCreandoMedPago Then
@@ -2432,6 +2479,7 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub SRegCtaIngreso()
         If Not IsNothing(MobjMedioPago) Then
             Dim lstrIdCtaCont = FstrCtaContabilidadIngresos()
@@ -2439,12 +2487,14 @@ Public Class WinRecibosCaja
         End If
         SValideMedPago()
     End Sub
+
     Private Sub SRegNroMedioPago()
         If Not IsNothing(MobjMedioPago) Then
             MobjMedioPago.ObjNumeroMedPagoStr.ObjValorPro = txtNroMedPagoNuevo.Text
         End If
         SValideMedPago()
     End Sub
+
     Private Sub SRegValorMedioPago()
         If Not IsNothing(MobjMedioPago) Then
             MobjMedioPago.ObjValor_MedPagoDec.ObjValorPro = txtValorMedPagoNuevo.Text
@@ -2456,6 +2506,7 @@ Public Class WinRecibosCaja
         SMuestreMediosPago()
         MblnDejoUltimoControl = True
     End Sub
+
     Private Sub SRegMedPago()
         SRegTipoMedioPago()
         SRegCtaIngreso()
@@ -2502,6 +2553,7 @@ Public Class WinRecibosCaja
             End Select
         End If
     End Sub
+
     Private Sub OnMenuClic(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
         If TypeOf lelmElemento Is MenuItem Then
@@ -2538,6 +2590,7 @@ Public Class WinRecibosCaja
             End Try
         End If
     End Sub
+
     Private Sub OnCogerFoco(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
         If TypeOf lelmElemento Is TextBox Then
@@ -2555,6 +2608,7 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub OnPierdeFoco(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
         Dim lblnMostrarDatos = True
@@ -2608,6 +2662,7 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub OnCboCambio(sender As Object, e As RoutedEventArgs)
         If Not MblnPoblandoCbo Then
             Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
@@ -2659,6 +2714,7 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub OnCambioFecha(sender As Object, e As RoutedEventArgs)
         If TypeOf sender Is DatePicker Then
             If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando AndAlso
@@ -2677,8 +2733,9 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub ChkAnticipo_Click(sender As Object, e As RoutedEventArgs) Handles chkAnticipo.Click
-        If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando AndAlso
+        If EnuOperacionEnWin = EnuOperacionEnVentana.CenuCreando AndAlso
                 Not IsNothing(MobjCliente) Then
             Dim lstrMens = String.Empty
             MobjObjetoWin.BlnEsSoloAnticipo = chkAnticipo.IsChecked
@@ -2692,17 +2749,19 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub Txt_KeyDown(sender As Object, e As KeyEventArgs) Handles _
             txtNroRecCaja.KeyDown
-        If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
+        If EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
             If e.Key = Key.Return OrElse e.Key = Key.Tab Then
                 SAbraRecCaja()
             End If
         End If
     End Sub
+
     Private Sub DgrDescuentos_SelectedCellsChanged(sender As Object,
             e As SelectedCellsChangedEventArgs) Handles dgrDescuentos.SelectedCellsChanged
-        If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
+        If EnuOperacionEnWin = EnuOperacionEnVentana.CenuCreando Then
             If dgrDescuentos.Items.Count = 0 Then
                 cboNroFactNuevo.SelectedIndex = 0
                 cboTipoDsctoNuevo.SelectedIndex = 0
@@ -2716,8 +2775,9 @@ Public Class WinRecibosCaja
             SValideDscto()
         End If
     End Sub
+
     Private Sub DgrMediosPago_SelectedCellsChanged(sender As Object, e As SelectedCellsChangedEventArgs) Handles dgrMediosPago.SelectedCellsChanged
-        If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
+        If EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
             If Not MblnEliminandoMedPago Then
                 If Not IsNothing(dgrMediosPago.SelectedItem) Then
                     Dim ldrvMedioPago As DataRowView = dgrMediosPago.SelectedItem
@@ -2729,9 +2789,10 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub DgrMediosPagoNuevo_SelectedCellsChanged(sender As Object, e As SelectedCellsChangedEventArgs) _
             Handles dgrMediosPagoNuevo.SelectedCellsChanged
-        If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
+        If EnuOperacionEnWin = EnuOperacionEnVentana.CenuCreando Then
             If Not MblnEliminandoMedPago Then
                 If Not String.IsNullOrEmpty(txtOrdinal.Text) Then
                     Dim lentOrdinalMedPago As Integer = CType(txtOrdinal.Text, Integer)
@@ -2740,10 +2801,11 @@ Public Class WinRecibosCaja
                         MobjMedioPago = lcolMediosPago(lentOrdinalMedPago.ToString)
                     End If
                 End If
-                    SMuestreMediosPago()
+                SMuestreMediosPago()
             End If
         End If
     End Sub
+
     Private Sub Dgr_MouseRightButtonUp(sender As Object, e As MouseButtonEventArgs) Handles _
                 dgrNovedades.MouseRightButtonUp, dgrItems.MouseRightButtonUp,
                 dgrDeuda.MouseRightButtonUp
@@ -2786,6 +2848,7 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub Ctl_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles _
             txtIdAnticipo.MouseDoubleClick, txtNroNotaRCr.MouseDoubleClick, txtNroNotasCr.MouseDoubleClick
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
@@ -2824,11 +2887,12 @@ Public Class WinRecibosCaja
             SLevanteEveNoti(lstrMens, String.Empty, 0, EnuSeveridadNot.EnuInformacion)
         End If
     End Sub
+
     Private Sub Lsb_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles _
             lsbPrediosAgru.SelectionChanged, lsbServicios.SelectionChanged
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
         If TypeOf lelmElemento Is ListBox Then
-            If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
+            If EnuOperacionEnWin = EnuOperacionEnVentana.CenuCreando Then
                 If Not HblnMostrandoDatos Then
                     Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lblnNoHayError = False
                     Try
@@ -2869,6 +2933,7 @@ Public Class WinRecibosCaja
             End If
         End If
     End Sub
+
     Private Sub DgrRC_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) _
             Handles dgrRecsCaja.MouseDoubleClick
         Dim ldrvFilaActual As DataRowView
@@ -2887,6 +2952,7 @@ Public Class WinRecibosCaja
         End If
         SMuestreRecibos(False)
     End Sub
+
     Private Sub DgrRC_MouseRightButtonUp(sender As Object, e As MouseButtonEventArgs) Handles dgrRecsCaja.MouseRightButtonUp
         Dim ldrvFilaActual As DataRowView
         If TypeOf sender Is DataGrid Then

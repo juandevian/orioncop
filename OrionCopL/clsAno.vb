@@ -10,10 +10,10 @@
     Private MobjPeriodoActual As ClsPeriodo = Nothing
     Private McolServiciosAno As Collection = Nothing
 
-    Private MobjCuotaAdministracion As ClsServicio = Nothing
     Private ReadOnly MobjPadre As ClsCentroUtilOriCop = GobjParametros
     Private MstrMensaje As String = String.Empty
 #End Region
+
 #Region "Constructores"
     ''' <summary>
     ''' Instancia el objeto como un objeto no navegable, básicamente para formar parte de una colección
@@ -31,6 +31,7 @@
         DtbTablaColeccion = DrwRegistroActual.Table
     End Sub
 #End Region
+
 #Region "Propiedades"
 #Region "Propiedades indentificadoras"
     Protected Overrides ReadOnly Property HstrNombreTabla As String
@@ -54,32 +55,39 @@
         End Get
     End Property
 #End Region
+
 #Region "Propiedades Prop"
-    Friend ReadOnly Property ObjAplicaDsctoPPBln As New ClsAplicaDsctoPPBln(Me)
     Friend ReadOnly Property ObjDiasParaDsctoPPShr As New ClsDiasParaDsctoPPShr(Me)
+    Friend ReadOnly Property ObjDiasMultaExtShr As New ClsDiasMultaExtShr(Me)
     Friend ReadOnly Property ObjEstaCerradoAnoBln As New ClsEstaCerradoAnoBln(Me)
     Friend ReadOnly Property ObjFechaUltEstadoCtaDtm As New ClsFechaUltEstadoCtaDtm(Me)
     Friend ReadOnly Property ObjIdAnoShr As New ClsIdAnoShr(Me)
     Friend ReadOnly Property ObjIdCarpetaAnoShr As New ClsIdCarpetaShr(Me)
     Friend ReadOnly Property ObjIdCentroUtilAnoShr As New ClsIdCentroUtilShr(Me)
     Friend ReadOnly Property ObjModuloPorServicioBln As New ClsModuloPorServicioBln(Me)
+    Friend ReadOnly Property ObjIdServicioMultaShr As New ClsIdServicioMultaShr(Me)
     Friend ReadOnly Property ObjTipoCalculoCuotaByt As New ClsTipoCalculoCuotaByt(Me)
     Friend ReadOnly Property ObjTipoDsctoPPByt As New ClsTipoDsctoPPByt(Me)
+    Friend ReadOnly Property ObjTipoIncentivoByt As New ClsTipoIncentivoByt(Me)
     Friend ReadOnly Property ObjValorPres_AnoDec As New ClsValorPres_AnoDec(Me)
+    Friend ReadOnly Property ObjValorMultaPagoExtDec As New ClsValorMultaPagoExtDec(Me)
     Friend Overrides ReadOnly Property ColPropiedades As Collection
         Get
             If HcolPropiedades.Count = 0 Then
                 With HcolPropiedades
-                    .Add(ObjAplicaDsctoPPBln)
+                    .Add(ObjTipoIncentivoByt)
                     .Add(ObjDiasParaDsctoPPShr)
+                    .Add(ObjDiasMultaExtShr)
                     .Add(ObjEstaCerradoAnoBln)
                     .Add(ObjFechaUltEstadoCtaDtm)
                     .Add(ObjIdAnoShr)
                     .Add(ObjIdCarpetaAnoShr)
                     .Add(ObjIdCentroUtilAnoShr)
                     .Add(ObjModuloPorServicioBln)
+                    .Add(ObjIdServicioMultaShr)
                     .Add(ObjTipoCalculoCuotaByt)
                     .Add(ObjTipoDsctoPPByt)
+                    .Add(ObjValorMultaPagoExtDec)
                     .Add(ObjValorPres_AnoDec)
                 End With
             End If
@@ -87,6 +95,7 @@
         End Get
     End Property
 #End Region
+
 #Region "Otras propiedades"
     Friend Property BlnInicioMesActual As Boolean = Nothing
     Friend ReadOnly Property DtmFechaInicioAno As Date
@@ -94,11 +103,13 @@
             Return DateSerial(ObjIdAnoShr.ObjValorPro, 1, 1)
         End Get
     End Property
+
     Friend ReadOnly Property DtmFechaFinAno As Date
         Get
             Return DateSerial(ObjIdAnoShr.ObjValorPro, 12, 31)
         End Get
     End Property
+
     Friend ReadOnly Property ObjPeriodoActual As ClsPeriodo
         Get
             Dim lblnNoEstaCerrado = False
@@ -115,6 +126,7 @@
             Return MobjPeriodoActual
         End Get
     End Property
+
     ''' <summary>
     ''' Devuelve el nombre del mes actual seguido del año actual
     ''' </summary>
@@ -132,6 +144,7 @@
             Return lstrNombre
         End Get
     End Property
+
     ''' <summary>
     ''' Devuelve una cadena de seis caracteres formada por los cuatro caracteres del año actual y los dos
     ''' caracteres del mes actual. (yyyymm)
@@ -145,19 +158,10 @@
             Return lstrIdPeriodo
         End Get
     End Property
-    Friend ReadOnly Property ObjCuotaAdministracion As ClsServicio
-        Get
-            If IsNothing(MobjCuotaAdministracion) Then
-                If ColServiciosAno.Count > 0 Then
-                    Dim lstrKey = ObjIdAnoShr.ToString & ",1"
-                    MobjCuotaAdministracion = ColServiciosAno(lstrKey)
-                End If
-            End If
-            Return MobjCuotaAdministracion
-        End Get
-    End Property
 #End Region
+
 #End Region
+
 #Region "Procedimientos y funciones invalidantes"
     Protected Overrides Sub SVacie()
         MyBase.SVacie()
@@ -168,14 +172,12 @@
     Protected Overrides Sub SInicialiceObj()
         ObjIdCarpetaAnoShr.ObjValorPro = GshrIdCarpeta
         ObjIdCentroUtilAnoShr.ObjValorPro = GshrIdCentroUtil
-        ObjAplicaDsctoPPBln.ObjValorPro = False
+        ObjTipoIncentivoByt.ObjValorPro = 0
         ObjDiasParaDsctoPPShr.ObjValorPro = 0
         ObjEstaCerradoAnoBln.ObjValorPro = False
         ObjModuloPorServicioBln.ObjValorPro = False
         ObjTipoDsctoPPByt.ObjValorPro = 0
-        ObjAplicaDsctoPPBln.ObjValorPro = False
         ObjValorPres_AnoDec.ObjValorPro = 0
-        ObjAplicaDsctoPPBln.ObjValorPro = False
         ObjFechaUltEstadoCtaDtm.ObjValorPro = GCDTMFECHANULA
     End Sub
     Protected Overrides Sub SActualice(ablnExigeRequeridos As Boolean)
@@ -183,8 +185,8 @@
         Try
             GobjPanDat.SControleProcesoObj(True)
             GobjPanDat.SInicialiceTransaccion()
-            If EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuConsultando Then
-                If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuCreando Then
+            If EnuEstadoActualizacion <> EnuEstadoObjetoDef.EnuConsultando Then
+                If EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuCreando Then
                     SGenerePeriodos()
                 Else
                     SSincroniceServicios()
@@ -224,7 +226,7 @@
     End Function
     Friend Sub SSuprima(ByRef astrMens As String)
         MstrMensaje = String.Empty
-        EnuPermisosObj += EnuPermisosDef.enuSuprimir
+        EnuPermisosObj += EnuPermisosDef.EnuSuprimir
         If FblnEsSuprimible() Then
             If Not FblnSuprimio() Then
                 MstrMensaje = "No fue posible suprimir el año!"
@@ -237,13 +239,13 @@
         Dim lblnSuprimio = False, lblnNoHayError As Boolean
         Try
             GobjPanDat.SControleProcesoObj(True)
-            EnuPermisosObj += EnuPermisosDef.enuSuprimir
+            EnuPermisosObj += EnuPermisosDef.EnuSuprimir
             If FblnPermitidoSuprimir() Then
                 GobjPanDat.SInicialiceTransaccion()
                 lblnSuprimio = ClsPanorama.FblnSuprimioCol(ColPeriodos)
                 If lblnSuprimio Then
                     For Each lobjServicios As ClsServicio In ColServiciosAno
-                        lobjServicios.EnuPermisosObj += EnuPermisosDef.enuSuprimir
+                        lobjServicios.EnuPermisosObj += EnuPermisosDef.EnuSuprimir
                     Next
                     lblnSuprimio = ClsPanorama.FblnSuprimioCol(ColServiciosAno)
                 End If
@@ -307,7 +309,7 @@
         Try
             lblnEsCreable = FblnEsCreable(aobjValorLlave)
             If lblnEsCreable Then
-                EnuEstadoActualizacion = EnuEstadoObjetoDef.enuCreando
+                EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuCreando
                 SVacie()
                 SInicialiceObj()
                 ObjValorLlave = aobjValorLlave
@@ -328,6 +330,7 @@
         End Try
     End Sub
 #End Region
+
 #Region "Procedimientos del objeto"
     Friend Function FblnEsAnoActual() As Boolean
         Dim lshrIdAnoActual = 0S
@@ -336,19 +339,21 @@
         End If
         Return lshrIdAnoActual = ObjIdAnoShr.ObjValorPro
     End Function
+
     Friend Function FdecValorPresupuesto() As Decimal
         Dim ldecPres = 0D
         If ColServiciosAno.Count > 0 Then
             For Each lobjServicio As ClsServicio In ColServiciosAno
                 With lobjServicio
                     If .BlnEsCuotaAdministracion Then
-                        ldecPres += .DecValor
+                        ldecPres += .FdecValor
                     End If
                 End With
             Next
         End If
         Return ldecPres
     End Function
+
     ''' <summary>
     ''' Devuelve el valor real a cobrar en el año por la Cuota de Administración.
     ''' </summary>
@@ -366,6 +371,7 @@
         Next
         Return ldecVlrTot
     End Function
+
     Friend Function FblnDebeImportarAjuste() As Boolean
         Dim lblnDebeImporAjuste = False
         If ObjTipoCalculoCuotaByt.ObjValorPro = EnuTipoBaseCalculo.EnuImportadas Then
@@ -393,6 +399,7 @@
         End If
         Return lblnDebeImporAjuste
     End Function
+
     Friend Function FblnFacturacionGenerada() As Boolean
         Dim lblnFacturado = False
         If ColPeriodos IsNot Nothing Then
@@ -401,6 +408,7 @@
         End If
         Return lblnFacturado
     End Function
+
     Friend Function FstrUltimoPerFacturado() As String
         Dim lstrUltPerFac = String.Empty
         Dim lobjPeriodo As ClsPeriodo
@@ -428,19 +436,7 @@
         End If
         Return lstrUltPerFac
     End Function
-    Friend Function FentCantPeriXFact() As Integer
-        Dim lstrUltPerFac = FstrUltimoPerFacturado()
-        Dim lentUltPerFac As EnuDocsIntegridad
-        Dim lstrPerHoy = ClsPanorama.FstrPeriodo(Today)
-        Dim lentPerHoy = CInt(lstrPerHoy.Substring(4))
-        If String.IsNullOrEmpty(lstrUltPerFac) Then
-            lentUltPerFac = 0
-        Else
-            lentUltPerFac = CInt(lstrUltPerFac.Substring(4))
-        End If
-        Dim lentPerPorFac = 12 - lentUltPerFac
-        Return lentPerPorFac
-    End Function
+
     Friend Function FblnEstaGenCuota() As Boolean
         Dim lblnEstaGen = False
         If ColServiciosAno.Count > 0 Then
@@ -453,6 +449,7 @@
         End If
         Return lblnEstaGen
     End Function
+
     Friend Function FblnValorPresExigeCero() As Boolean
         Dim lblnExige = False
         Dim lobjPrimerAno As ClsAno = GobjParametros.ColAnos(1)
@@ -462,6 +459,7 @@
         End If
         Return lblnExige
     End Function
+
     ''' <summary>
     ''' Determina si el cálculo de la cuota de administración se hace con base en el coeficiente
     ''' de propiedad o con base en el porcentaje de participacón de los sectores; se hace con base 
@@ -481,13 +479,15 @@
         Next
         Return lblnSi
     End Function
+
     Friend Sub SActualiceFechaGenEstados(adtmFechaUltGenEtados As Date)
-        If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando Then
-            EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+        If EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
+            EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
         End If
         ObjFechaUltEstadoCtaDtm.ObjValorPro = adtmFechaUltGenEtados
         SActualice(True)
     End Sub
+
     Friend Sub SVerifiqueApp()
         Dim lstrMens = GobjParametros.SVerifiqueApp(False, True)
         If Not String.IsNullOrEmpty(lstrMens) Then
@@ -496,6 +496,7 @@
             SLevanteEventoNot(lstrMens, String.Empty, 0, EnuSeveridadNot.EnuOk)
         End If
     End Sub
+
     Friend Function FblnAnoEsModificable(ByRef astrMens As String) As Boolean
         Dim lblnEsModi = FblnEsAnoActual() OrElse ObjIdAnoShr.ObjValorPro >
                 GobjParametros.ObjAnoActual.ObjIdAnoShr.ObjValorPro
@@ -512,11 +513,23 @@
         End If
         Return lblnEsModi
     End Function
+
+    Friend Function FobjServicioMulta() As ClsServicio
+        Dim lobjSerMulta As ClsServicio = Nothing
+        If GobjParametros.ColServiciosPer.Count > 0 Then
+            Dim lstrKey = "0," & ObjIdServicioMultaShr.ObjValorPro.ToString
+            If GobjParametros.ColServiciosPer.Contains(lstrKey) Then
+                lobjSerMulta = GobjParametros.ColServiciosPer(lstrKey)
+            End If
+        End If
+        Return lobjSerMulta
+    End Function
 #End Region
+
 #Region "Manejo Periodos"
     Friend ReadOnly Property ColPeriodos As Collection
         Get
-            If ObjIdAnoShr.BlnEsValido AndAlso EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuCreando Then
+            If ObjIdAnoShr.BlnEsValido AndAlso EnuEstadoActualizacion <> EnuEstadoObjetoDef.EnuCreando Then
                 If IsNothing(McolPeriodos) Then
                     McolPeriodos = New Collection
                     Dim ldtbPeriodos = FdtbPeriodos()
@@ -558,7 +571,7 @@
         For i As Short = 1 To 12
             ldrwPeriodo = ldtbPeriodos.NewRow
             Dim lobjPeriodo As New ClsPeriodo(Me, ldrwPeriodo)
-            lobjPeriodo.EnuPermisosObj += EnuPermisosDef.enuCrear
+            lobjPeriodo.EnuPermisosObj += EnuPermisosDef.EnuCrear
             With lobjPeriodo
                 .SCreeObj(Nothing)
                 .ObjIdCarpetaPeriodoShr.ObjValorPro = GshrIdCarpeta
@@ -581,9 +594,9 @@
                     If Not lobjServicio.ObjEsAjusteBln.ObjValorPro Then
                         With lobjServicio
                             If lobjServicio.EnuEstadoActualizacion =
-                                    EnuEstadoObjetoDef.enuConsultando Then
+                                    EnuEstadoObjetoDef.EnuConsultando Then
                                 .EnuEstadoActualizacion =
-                                        EnuEstadoObjetoDef.enuModificando
+                                        EnuEstadoObjetoDef.EnuModificando
                             End If
                             .ObjTipoBaseCalculoByt.ObjValorPro =
                                     ObjTipoCalculoCuotaByt.ObjValorPro
@@ -600,8 +613,8 @@
                         With lobjServicio
                             If Not ClsOrionCop.BlnProcesoEspecial Then
                                 If lobjServicio.EnuEstadoActualizacion =
-                                        EnuEstadoObjetoDef.enuConsultando Then
-                                    .EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+                                        EnuEstadoObjetoDef.EnuConsultando Then
+                                    .EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
                                 End If
                                 .ObjEstaGenaradaProgramBln.ObjValorPro = False
                                 .ObjEstaAjustadoBln.ObjValorPro = Not lblCtasYaGeneradas
@@ -614,10 +627,10 @@
         End If
     End Sub
     Private Sub SActualiceDsctoPPSect()
-        If Not ObjAplicaDsctoPPBln.ObjValorPro Then
+        If Not ObjTipoIncentivoByt.ObjValorPro = EnuTipoIncentivo.EnuDescuentoPP Then
             For Each lobjSector As ClsSector In GobjParametros.ColSectores
                 If lobjSector.ObjDctoProntoPago_SecDbl.ObjValorPro > 0 Then
-                    lobjSector.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+                    lobjSector.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
                     lobjSector.ObjDctoProntoPago_SecDbl.ObjValorPro = 0
                     lobjSector.SActualice(True)
                 End If
@@ -679,14 +692,15 @@
     End Sub
     Friend Sub SCierrePeriodoActual()
         With ObjPeriodoActual
-            If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando Then
-                .EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+            If EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
+                .EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
             End If
             .ObjEstaCerradoPeriodoBln.ObjValorPro = True
             .SActualice(True)
         End With
     End Sub
 #End Region
+
 #Region "Manejo Servicios Ano"
     Friend ReadOnly Property ColServiciosAno As Collection
         Get
@@ -724,14 +738,14 @@
         End If
         Dim lobjNuevoServicioAno = New ClsServicio(Me, ldrwServicioNuevo)
         With lobjNuevoServicioAno
-            If ablnAjuste AndAlso Not CType(.EnuPermisosObj And EnuPermisosDef.enuCrear, Boolean) Then
-                .EnuPermisosObj += EnuPermisosDef.enuCrear
+            If ablnAjuste AndAlso Not CType(.EnuPermisosObj And EnuPermisosDef.EnuCrear, Boolean) Then
+                .EnuPermisosObj += EnuPermisosDef.EnuCrear
                 lblnModificoPermiso = True
             End If
             .SCreeObj(Nothing)
             .BlnCreandoAno = True
             If lblnModificoPermiso Then
-                .EnuPermisosObj -= EnuPermisosDef.enuCrear
+                .EnuPermisosObj -= EnuPermisosDef.EnuCrear
             End If
         End With
         Return lobjNuevoServicioAno
@@ -807,12 +821,12 @@
     ''' </summary>
     ''' <remarks>Siempre que hay un cambio en el valor de un servicio se debe ajustar aqui en el año</remarks>
     Friend Sub SAjustePresupuesto()
-        If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando AndAlso
+        If EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando AndAlso
                 Not ObjModuloPorServicioBln.ObjValorPro Then
             SRefresqueObj()
             Dim ldecPreSer = FdecValorPresupuesto()
             If ldecPreSer <> ObjValorPres_AnoDec.ObjValorPro Then
-                EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+                EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
                 ObjValorPres_AnoDec.ObjValorPro = ldecPreSer
                 SActualice(True)
             End If
@@ -827,12 +841,12 @@
             Dim lblnHayFactAno = FblnHayFacsEnAno()
             For Each lobjSer As ClsServicio In ColServiciosAno
                 If Not lobjSer.ObjEsAjusteBln.ObjValorPro Then
-                    If lobjSer.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando Then
-                        If Not lobjSer.EnuPermisosObj And EnuPermisosDef.enuModificar Then
-                            lobjSer.EnuPermisosObj += EnuPermisosDef.enuModificar
+                    If lobjSer.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
+                        If Not lobjSer.EnuPermisosObj And EnuPermisosDef.EnuModificar Then
+                            lobjSer.EnuPermisosObj += EnuPermisosDef.EnuModificar
                         End If
-                        lobjSer.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
-                    ElseIf lobjSer.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando Then
+                        lobjSer.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
+                    ElseIf lobjSer.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando Then
                         If Not lblnHayFactAno OrElse FdecValorCuotaAdminAno() = 0 Then
                             lobjSer.ObjEstaAjustadoBln.ObjValorPro = True
                         ElseIf Not GblnImportando Then
@@ -852,7 +866,7 @@
         Dim lstrFiltro = ClsOrionCop.StrFiltroUbicacion & " AND YEAR(" &
                 ClsFechaFacturaDtm.SstrNombreCampoBd & ") = " & ObjIdAnoShr.ObjValorPro
         Dim ldtbFacs = ClsPanorama.FdtbDataTable(lstrTabla, lstrCampSele, lstrOrden, lstrFiltro)
-        Dim lblnHay = ClsPanorama.FobjValorCampo(ldtbFacs.Rows(0)(0), EnuTipoValor.enuInteger) > 0
+        Dim lblnHay = ClsPanorama.FobjValorCampo(ldtbFacs.Rows(0)(0), EnuTipoValor.EnuInteger) > 0
         Return lblnHay
     End Function
     Friend Function FblnModuloYaContribuye(ashrIdServicio As Short) As Boolean
@@ -864,6 +878,7 @@
         Return lblnYaCont
     End Function
 #End Region
+
 #Region "Estado del Proceso de Calculo"
     Friend Function FblnCalculoCuotasAdmin(ByRef astrMens As String)
         Dim lblnCalculo = False
@@ -921,12 +936,12 @@
             For Each lobjSer As ClsServicio In ColServiciosAno
                 If Not lobjSer.ObjEsAjusteBln.ObjValorPro Then
                     lblnPresOk = If(lobjSer.ObjMiAno.ObjTipoCalculoCuotaByt.ObjValorPro <>
-                            EnuTipoBaseCalculo.EnuImportadas, lobjSer.DecValor > 0,
-                            lobjSer.DecValor = 0)
+                            EnuTipoBaseCalculo.EnuImportadas, lobjSer.FdecValor > 0,
+                            lobjSer.FdecValor = 0)
                     If Not lblnPresOk Then
                         If (lobjSer.ObjMiAno.ObjTipoCalculoCuotaByt.ObjValorPro =
                                 EnuTipoBaseCalculo.EnuCoeficientePro AndAlso
-                                lobjSer.DecValor = 0) Then
+                                lobjSer.FdecValor = 0) Then
                             astrMens = "Se debe ingresar los valores de los módulos de contribuciòn!"
                         End If
                         Exit For
@@ -950,7 +965,7 @@
     End Function
     Private Sub SRegisCalculo()
         For Each lobjSer As ClsServicio In ColServiciosAno
-            lobjSer.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+            lobjSer.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
             lobjSer.ObjEstaGenaradaProgramBln.ObjValorPro = True
             lobjSer.SActualice(True)
         Next
@@ -990,71 +1005,36 @@
     End Function
 #End Region
 End Class
+
 #Region "Clases de Propiedad"
-Friend Class ClsAplicaDsctoPPBln
-    Inherits ClsCBPropiedad
-    Private Const MCSTRNOMBRECAMPOBD As String = "AplicaProntoPago"
-    Private ReadOnly MobjPadre As ClsAno = Nothing
-    Public Sub New(aobjPadre As ClsCBObjetoPan)
-        MyBase.New(aobjPadre)
-        MobjPadre = aobjPadre
-        HstrNombre = "Aplica Descuento por Pronto Pago"
-        HenuTipoValor = EnuTipoValor.enuBoolean
-        HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
-        HblnRegistrarLogCambio = True
-    End Sub
-    Public Overrides Sub SValide()
-        HblnEsValido = ClsPanorama.FblnEsValidoBuleano(HobjValorNew)
-        If HblnEsValido Then
-            If MobjPadre.EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuConsultando Then
-                If HobjValorNew AndAlso
-                        String.IsNullOrEmpty(GobjParametros.ObjIdCtaDescuentosPPStr.ObjValorPro) Then
-                    HblnEsValido = False
-                    HstrMens = "Antes de habilitar el Descuento por Pronto Pago debe crear " &
-                            "la Cuenta Contable respectiva!"
-                    SNotifiqueDatInv()
-                End If
-            End If
-        End If
-    End Sub
-    Friend Shared ReadOnly Property SstrNombreCampoBd As String
-        Get
-            Return MCSTRNOMBRECAMPOBD
-        End Get
-    End Property
-    Private Sub EPosSetValor(sender As Object, e As ClsPanEventArgs) Handles Me.EvnPosSetValor
-        If MobjPadre.EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuConsultando Then
-            MobjPadre.ObjTipoDsctoPPByt.SValide()
-        End If
-    End Sub
-    Public Overrides Function ToString() As String
-        Return ClsPanorama.FstrBuleanoToString(HobjValorPro)
-    End Function
-End Class
 Friend Class ClsDiasParaDsctoPPShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "DiasDescuentoPP"
     Private ReadOnly MobjPadre As ClsAno = Nothing
+
     Public Sub New(aobjPadre As ClsCBObjetoPan)
         MyBase.New(aobjPadre)
         MobjPadre = aobjPadre
         HstrNombre = "Dias para descuento Pronto Pago"
-        HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
-        HenuTipoValor = EnuTipoValor.enuShort
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HenuTipoValor = EnuTipoValor.EnuShort
         HblnRegistrarLogCambio = True
-        HblnEsRequerido = True
     End Sub
+
     Public Overrides Sub SValide()
         If IsNothing(HobjValorNew) Then HobjValorNew = 0
-        HblnEsRequerido = MobjPadre.ObjAplicaDsctoPPBln.ObjValorPro
+        HblnEsRequerido = MobjPadre.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuDescuentoPP
         HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 1,
                 Short.MaxValue, BlnEsRequerido, EnuTipoValor)
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If IsNothing(ObjValorPro) Then
             Return ""
@@ -1063,6 +1043,48 @@ Friend Class ClsDiasParaDsctoPPShr
         End If
     End Function
 End Class
+
+Friend Class ClsDiasMultaExtShr
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "DiasPExtemporaneo"
+    Private ReadOnly MobjPadre As ClsAno = Nothing
+
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        MobjPadre = aobjPadre
+        HstrNombre = "Dias para pago extemporáneo"
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HenuTipoValor = EnuTipoValor.EnuShort
+        HblnRegistrarLogCambio = True
+    End Sub
+
+    Public Overrides Sub SValide()
+        If IsNothing(HobjValorNew) Then HobjValorNew = 0
+        HblnEsRequerido = MobjPadre.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuPenalización
+        HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 1,
+                30, BlnEsRequerido, EnuTipoValor)
+        If HblnEsValido AndAlso HobjValorNew > 0 Then
+            HblnEsValido = MobjPadre.ObjTipoIncentivoByt.ObjValorPro =
+                    EnuTipoIncentivo.EnuPenalización
+        End If
+    End Sub
+
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+
+    Public Overrides Function ToString() As String
+        If IsNothing(ObjValorPro) Then
+            Return ""
+        Else
+            Return HobjValorPro.ToString
+        End If
+    End Function
+End Class
+
 Friend Class ClsEstaCerradoAnoBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "EstaCerrado"
@@ -1081,6 +1103,7 @@ Friend Class ClsEstaCerradoAnoBln
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsFechaUltEstadoCtaDtm
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "FechaUltimoEstadoCta"
@@ -1118,6 +1141,7 @@ Friend Class ClsFechaUltEstadoCtaDtm
         End If
     End Function
 End Class
+
 Friend Class ClsIdAnoShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdAno"
@@ -1173,6 +1197,7 @@ Friend Class ClsIdAnoShr
         End If
     End Function
 End Class
+
 Friend Class ClsModuloPorServicioBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "ModuloPorServicio"
@@ -1186,13 +1211,13 @@ Friend Class ClsModuloPorServicioBln
         HblnEsRequerido = True
         HblnRegistrarLogCambio = True
     End Sub
+
     Public Overrides Sub SValide()
-        Dim lobjPadre As ClsAno = ObjPadre
         HblnEsValido = ClsPanorama.FblnEsValidoBuleano(HobjValorNew)
         If Not BlnLeyendoOrigen Then
             If HblnEsValido Then
                 If HobjValorNew Then
-                    For Each lobjServicio As ClsServicio In lobjPadre.ColServiciosAno
+                    For Each lobjServicio As ClsServicio In MobjPadre.ColServiciosAno
                         If Not lobjServicio.ObjEsAjusteBln.ObjValorPro AndAlso
                                 lobjServicio.ColModulosServicio.Count > 1 Then
                             HblnEsValido = False
@@ -1213,20 +1238,74 @@ Friend Class ClsModuloPorServicioBln
             End If
         End If
     End Sub
+
     Private Sub EPosSetValor(sender As Object, e As ClsPanEventArgs) Handles Me.EvnPosSetValor
         If MobjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando Then
             MobjPadre.ObjValorPres_AnoDec.SValide()
         End If
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         Return ClsPanorama.FstrBuleanoToString(HobjValorPro)
     End Function
 End Class
+
+Friend Class ClsIdServicioMultaShr
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "IdServicioMulta"
+    Private ReadOnly MobjPadre As ClsAno = Nothing
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        MobjPadre = aobjPadre
+        HstrNombre = "Servicio Multa"
+        HenuTipoValor = EnuTipoValor.EnuShort
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HblnRegistrarLogCambio = True
+    End Sub
+
+    Public Overrides Sub SValide()
+        HblnEsRequerido = MobjPadre.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuPenalización
+        HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 1, Short.MaxValue,
+                BlnEsRequerido, EnuTipoValor.EnuShort)
+        If Not BlnLeyendoOrigen Then
+            If HblnEsValido AndAlso MobjPadre.EnuEstadoActualizacion <>
+                    EnuEstadoObjetoDef.EnuConsultando Then
+                If HblnEsValido AndAlso BlnEsRequerido Then
+                    Dim LstrKey = "0," & HobjValorNew.ToString()
+                    HblnEsValido = GobjParametros.ColServiciosPer.Contains(LstrKey)
+                    If Not HblnEsValido Then
+                        HstrMens = "El Servicio ingresado para la Multa no existe!"
+                        SNotifiqueDatInv()
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub EPosSetValor(sender As Object, e As ClsPanEventArgs) Handles Me.EvnPosSetValor
+        If MobjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando Then
+            MobjPadre.ObjValorPres_AnoDec.SValide()
+        End If
+    End Sub
+
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+
+    Public Overrides Function ToString() As String
+        Return ClsPanorama.FstrBuleanoToString(HobjValorPro)
+    End Function
+End Class
+
 Friend Class ClsTipoCalculoCuotaByt
     Inherits ClsCBPropiedad
     Private ReadOnly MobjPadre As ClsAno = Nothing
@@ -1288,7 +1367,7 @@ Friend Class ClsTipoCalculoCuotaByt
                 Next
             End If
         Else
-                HstrMens = "El Dato ingresado no es válido!"
+            HstrMens = "El Dato ingresado no es válido!"
         End If
         If Not String.IsNullOrEmpty(HstrMens) Then
             SNotifiqueDatInv()
@@ -1307,35 +1386,22 @@ Friend Class ClsTipoCalculoCuotaByt
         End If
     End Function
 End Class
-Friend Class ClsTipoDsctoPPByt
+
+Friend Class ClsTipoIncentivoByt
     Inherits ClsCBPropiedad
-    Private Const MCSTRNOMBRECAMPOBD As String = "IdTipoDsctoPP"
+    Private Const MCSTRNOMBRECAMPOBD As String = "IdTipoIncentivo"
     Private ReadOnly MobjPadre As ClsAno = Nothing
     Public Sub New(aobjPadre As ClsCBObjetoPan)
         MyBase.New(aobjPadre)
         MobjPadre = aobjPadre
-        HstrNombre = "Tipo Descuento Pronto Pago"
-        HenuTipoValor = EnuTipoValor.enuByte
-        HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HstrNombre = "Tipo Incentivo al pago"
+        HenuTipoValor = EnuTipoValor.EnuByte
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
         HblnRegistrarLogCambio = True
-    End Sub
-    Protected Overrides Sub SVaciePropiedad()
-        HobjValorNew = EnuTipoDsctoPP.None
-        HobjValorPro = EnuTipoDsctoPP.None
     End Sub
     Public Overrides Sub SValide()
         HblnEsValido = ClsPanorama.FblnEsValidoEnumByte(HobjValorNew,
-                EnuTipoDsctoPP.None, EnuTipoDsctoPP.EnuValorFijo, BlnEsRequerido)
-        If HblnEsValido Then
-            If MobjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando Then
-                If MobjPadre.ObjAplicaDsctoPPBln.ObjValorPro Then
-                    HblnEsValido = (HobjValorNew > EnuTipoDsctoPP.None) AndAlso
-                            (HobjValorNew <= EnuTipoDsctoPP.EnuValorFijo)
-                Else
-                    HblnEsValido = (HobjValorNew = EnuTipoDsctoPP.None)
-                End If
-            End If
-        End If
+                EnuTipoIncentivo.None, EnuTipoIncentivo.EnuPenalización, BlnEsRequerido)
     End Sub
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
@@ -1350,6 +1416,96 @@ Friend Class ClsTipoDsctoPPByt
         End If
     End Function
 End Class
+
+Friend Class ClsTipoDsctoPPByt
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "IdTipoDsctoPP"
+    Private ReadOnly MobjPadre As ClsAno = Nothing
+
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        MobjPadre = aobjPadre
+        HstrNombre = "Tipo Descuento Pronto Pago"
+        HenuTipoValor = EnuTipoValor.EnuByte
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HblnRegistrarLogCambio = True
+    End Sub
+
+    Protected Overrides Sub SVaciePropiedad()
+        HobjValorNew = EnuTipoDsctoPP.None
+        HobjValorPro = EnuTipoDsctoPP.None
+    End Sub
+
+    Public Overrides Sub SValide()
+        HblnEsValido = ClsPanorama.FblnEsValidoEnumByte(HobjValorNew,
+                EnuTipoDsctoPP.None, EnuTipoDsctoPP.EnuValorFijo, BlnEsRequerido)
+        If HblnEsValido Then
+            If MobjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando Then
+                If MobjPadre.ObjTipoIncentivoByt.ObjValorPro =
+                        EnuTipoIncentivo.EnuDescuentoPP Then
+                    HblnEsValido = (HobjValorNew > EnuTipoDsctoPP.None) AndAlso
+                            (HobjValorNew <= EnuTipoDsctoPP.EnuValorFijo)
+                Else
+                    HblnEsValido = (HobjValorNew = EnuTipoDsctoPP.None)
+                End If
+            End If
+        End If
+    End Sub
+
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+
+    Public Overrides Function ToString() As String
+        If IsNothing(HobjValorPro) Then
+            Return ""
+        Else
+            Return HobjValorPro.ToString
+        End If
+    End Function
+End Class
+
+Friend Class ClsValorMultaPagoExtDec
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "ValorMultaPExtemporaneo"
+    Private ReadOnly MobjPadre As ClsAno = Nothing
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        MobjPadre = aobjPadre
+        HstrNombre = "Valor Multa Pago Extemporáneo"
+        HenuTipoValor = EnuTipoValor.EnuDecimal
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HblnEsRequerido = True
+        HblnRegistrarLogCambio = True
+    End Sub
+    Public Overrides Sub SValide()
+        If IsNothing(HobjValorNew) Then HobjValorNew = 0
+        HblnEsRequerido = MobjPadre.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuPenalización
+        HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 1,
+                    Decimal.MaxValue, BlnEsRequerido, HenuTipoValor)
+        If Not HblnEsValido Then
+            HstrMens = "El valor de la multa por pago extemporáneo debe ser mayor a cero!"
+            SNotifiqueDatInv()
+        End If
+    End Sub
+
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+    Public Overrides Function ToString() As String
+        If IsNothing(ObjValorPro) Then
+            Return ""
+        Else
+            Return Format(HobjValorPro, "c")
+        End If
+    End Function
+End Class
+
 Friend Class ClsValorPres_AnoDec
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "ValorPresIng"

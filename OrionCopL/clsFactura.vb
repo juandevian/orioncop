@@ -114,6 +114,7 @@ Friend Class ClsFactura
     Friend ReadOnly Property ObjFechaAnulacion_FactDtm As New ClsFechaAnulacion_FactDtm(Me)
     Friend ReadOnly Property ObjFechaCancelacion_FactDtm As New ClsFechaCancelacion_FactDtm(Me)
     Friend ReadOnly Property ObjFechaDctoProntoPagoDtm As New ClsFechaDctoProntoPagoDtm(Me)
+    Friend ReadOnly Property ObjFechaMultaDtm As New ClsFechaMultaDtm(Me)
     Friend ReadOnly Property ObjFechaEmisionEFacStr As New ClsFechaEmisionEFacStr(Me)
     Friend ReadOnly Property ObjFechaFacturaDtm As New ClsFechaFacturaDtm(Me)
     Friend ReadOnly Property ObjFechaGraciaDtm As New ClsFechaGraciaDtm(Me)
@@ -129,8 +130,10 @@ Friend Class ClsFactura
     Friend ReadOnly Property ObjIdPredioAgrupador_FacStr As New ClsIdPredioAgrupador_FacStr(Me)
     Friend ReadOnly Property ObjIdCliente_FactDbl As New ClsIdCliente_FactDbl(Me)
     Friend ReadOnly Property ObjIdUsuario_FactStr As New ClsIdUsuarioStr(Me)
+    Friend ReadOnly Property ObjMultadalBln As New ClsMultadalBln(Me)
     Friend ReadOnly Property ObjNumeroResolAutoStr As New ClsNumeroResolAutoStr(Me)
     Friend ReadOnly Property ObjPieFacturaDos_FactStr As New ClsPieFacturaDos_FactStr(Me)
+    Friend ReadOnly Property ObjPieFacturaTres_FactStr As New ClsPieFacturaTres_FactStr(Me)
     Friend ReadOnly Property ObjPieFacturaUno_FactStr As New ClsPieFacturaUno_FactStr(Me)
     Friend ReadOnly Property ObjPrefijo_FactStr As New ClsPrefijo_FactStr(Me)
     Friend ReadOnly Property ObjReferenciaPago_FacStr As New ClsReferenciaPago_FacStr(Me)
@@ -154,6 +157,7 @@ Friend Class ClsFactura
                 HcolPropiedades.Add(ObjFechaEmisionEFacStr)
                 HcolPropiedades.Add(ObjFechaFacturaDtm)
                 HcolPropiedades.Add(ObjFechaGraciaDtm)
+                HcolPropiedades.Add(ObjFechaMultaDtm)
                 HcolPropiedades.Add(ObjFechaVencimientoDtm)
                 HcolPropiedades.Add(ObjIdCarpeta_FactShr)
                 HcolPropiedades.Add(ObjIdCentroUtil_FactShr)
@@ -165,7 +169,9 @@ Friend Class ClsFactura
                 HcolPropiedades.Add(ObjIdPredioAgrupador_FacStr)
                 HcolPropiedades.Add(ObjIdCliente_FactDbl)
                 HcolPropiedades.Add(ObjIdUsuario_FactStr)
+                HcolPropiedades.Add(ObjMultadalBln)
                 HcolPropiedades.Add(ObjPieFacturaDos_FactStr)
+                HcolPropiedades.Add(ObjPieFacturaTres_FactStr)
                 HcolPropiedades.Add(ObjPieFacturaUno_FactStr)
                 HcolPropiedades.Add(ObjPrefijo_FactStr)
                 HcolPropiedades.Add(ObjValor_FactDec)
@@ -193,6 +199,7 @@ Friend Class ClsFactura
             Return MobjClienteFactura
         End Get
     End Property
+
     Friend ReadOnly Property ObjNotaCrAnulo As ClsNotaCr
         Get
             If IsNothing(MobjNotaCrAnulo) AndAlso ObjAnuladoBln.ObjValorPro Then
@@ -213,6 +220,7 @@ Friend Class ClsFactura
             Return MobjNotaCrAnulo
         End Get
     End Property
+
     ''' <summary>
     ''' Devuelve uns string compuesto por el prefijo de la factura y el id de la factura separados por un
     ''' guion. Si no existe el prefijo devuelve solo el id de la factura
@@ -225,6 +233,7 @@ Friend Class ClsFactura
             Return lstrNumeroFactura
         End Get
     End Property
+
     Friend ReadOnly Property ObjPredioAgrFactura As ClsPredio
         Get
             If IsNothing(MobjPredioAgrFac) Then
@@ -242,6 +251,7 @@ Friend Class ClsFactura
             Return MobjPredioAgrFac
         End Get
     End Property
+
     Friend ReadOnly Property StrNombrePredioAgr As String
         Get
             Dim lstrNombreredioAgr As String
@@ -284,6 +294,7 @@ Friend Class ClsFactura
             Return lenuEstado
         End Get
     End Property
+
     Friend ReadOnly Property DtmFechaPlazo As Date
         Get
             If ColItemsFactura.Count = 0 Then
@@ -295,16 +306,18 @@ Friend Class ClsFactura
             Return ldtmFechaVence.AddDays(lshrDiasGracia)
         End Get
     End Property
+
     Friend ReadOnly Property BlnEnviarPorCorreo As Boolean
         Get
             Return ObjClienteFactura.ObjRecibeDocsPorEmailBln.ObjValorPro
         End Get
     End Property
-    Friend ReadOnly Property BlnEsAdministracion As Boolean
+
+    Friend ReadOnly Property BlnDeudaEsAdmi As Boolean
         Get
             Dim lblnEs = False
             For Each lobjItemFac As ClsItemFactura In ColItemsFactura
-                lblnEs = lobjItemFac.ObjServicio.BlnEsCuotaAdministracion
+                lblnEs = lobjItemFac.BlnDeudaEsCuotaAdmin
                 If lblnEs Then
                     Exit For
                 End If
@@ -312,6 +325,7 @@ Friend Class ClsFactura
             Return lblnEs
         End Get
     End Property
+
     Friend ReadOnly Property BlnFacturaPorServicio As Boolean
         Get
             Return If(ObjPredioAgrFactura IsNot Nothing,
@@ -319,12 +333,14 @@ Friend Class ClsFactura
                     ObjClienteFactura.ObjFactPorServicio_CliBln.ObjValorPro)
         End Get
     End Property
+
     Friend ReadOnly Property BlnFacturaAPropYPreAgr As Boolean
         Get
             Dim lobjItemFac As ClsItemFactura = ColItemsFactura(1)
             Return lobjItemFac.ObjServicio.ObjFactAPropYPreAgrBln.ObjValorPro
         End Get
     End Property
+
     Friend ReadOnly Property StrKeySerUnico As String
         Get
             Dim lstrKeySer = String.Empty
@@ -355,6 +371,7 @@ Friend Class ClsFactura
         MobjNotaCrAnulo = Nothing
         MobjPredioAgrFac = Nothing
     End Sub
+
     Public Overrides Function FblnEsAnulable() As Boolean
         Dim lblnEsAnulable = BlnEsAnulable
         lblnEsAnulable = lblnEsAnulable AndAlso Not ObjAnuladoBln.ObjValorPro AndAlso
@@ -374,6 +391,7 @@ Friend Class ClsFactura
         End If
         Return lblnEsAnulable
     End Function
+
     Protected Overrides Sub SActualice(ablnExigeRequeridos As Boolean)
         Dim lblnNoHayError = False
         GobjPanDat.SControleProcesoObj(True)
@@ -420,6 +438,7 @@ Friend Class ClsFactura
             End If
         End Try
     End Sub
+
     Protected Overrides Function SAnuleEnObj() As Boolean
         Dim lblnAnulado = FblnEsAnulable()
         If lblnAnulado Then
@@ -465,6 +484,7 @@ Friend Class ClsFactura
         End If
         Return lblnAnulado
     End Function
+
     Protected Overrides Sub SInicialiceObj()
         MyBase.SInicialiceObj()
         ObjAnuladoBln.ObjValorPro = False
@@ -479,6 +499,7 @@ Friend Class ClsFactura
         ObjIdEstadoEDocEnt.ObjValorPro = EnuEstadoEDoc.EnuNoEDoc
         ObjCUFEStr.ObjValorPro = ""
     End Sub
+
     Friend Overrides ReadOnly Property StrIdObjeto As String
         Get
             Dim lstrIdIbjeto = ObjIdFacturaEnt.ToString
@@ -573,7 +594,8 @@ Friend Class ClsFactura
 
     Private Function FblnAplicaDsctoPP() As Boolean
         Dim lblnAplica As Boolean
-        lblnAplica = GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro AndAlso
+        lblnAplica = GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuDescuentoPP AndAlso
                  ObjIdModoFacturacionByt.ObjValorPro = EnuModoFacturacionDef.EnuSistema
         If lblnAplica Then
             For Each lobjItemFactura As ClsItemFactura In ColItemsFactura
@@ -1000,7 +1022,7 @@ Friend Class ClsFactura
                             Dim lobjItemFact As New ClsItemFactura(Me, ldrwItemFact)
                             lobjItemFact.SLeaValores(True)
                             McolItemsFactura.Add(lobjItemFact,
-                                    lobjItemFact.ObjIdItemFacturaShr.ToString)
+                                    lobjItemFact.ObjIdItemFacturaShr.ToString())
                         Next
                     End If
                 End If
@@ -1039,7 +1061,8 @@ Friend Class ClsFactura
             With aobjNuevoItemFactura
                 .ObjIdItemFacturaShr.ObjValorPro = lshrIdItemFac
                 .ObjDebitos_ItemFactDec.ObjValorPro = .ObjValor_ItemFactDec.ObjValorPro
-                .ObjEsExcluidoIva_ItemFactBln.ObjValorPro = .ObjServicio.ObjEsExcluidoIvaBln.ObjValorPro
+                .ObjEsExcluidoIva_ItemFactBln.ObjValorPro =
+                        .ObjServicio.ObjEsExcluidoIvaBln.ObjValorPro
                 .ObjTarifaIva_ItemFactDbl.ObjValorPro = .ObjServicio.ObjTarifaIvaDbl.ObjValorPro
             End With
             ColItemsFactura.Add(aobjNuevoItemFactura,
@@ -1132,6 +1155,7 @@ Friend Class ClsFactura
         If ColItemsFactura.Count > 0 Then
             ObjPieFacturaUno_FactStr.ObjValorPro = GobjParametros.ObjPieFacturaUnoStr.ToString
             ObjPieFacturaDos_FactStr.ObjValorPro = GobjParametros.ObjPieFacturaDosStr.ToString
+            ObjPieFacturaTres_FactStr.ObjValorPro = GobjParametros.ObjPieFacturaTresStr.ToString
         End If
     End Sub
     ''' <summary>
@@ -1980,9 +2004,9 @@ Friend Class ClsFactura
             ObjCreditos_FactDec.ObjValorPro += ldecValor
             Dim ldecDeuAdmi As Decimal
             For Each lobjItFac As ClsItemFactura In ColItemsFactura
-                If lobjItemFac.ObjServicio.ObjIdTipoServicioByt.ObjValorPro =
+                If lobjItFac.ObjServicio.ObjIdTipoServicioByt.ObjValorPro =
                         EnuTipoServicio.EnuAnual Then
-                    ldecDeuAdmi += lobjItemFac.DecDeuda
+                    ldecDeuAdmi += lobjItFac.DecDeuda
                 End If
             Next
             If ldecDeuAdmi = 0 Then
@@ -2103,7 +2127,8 @@ Friend Class ClsFactura
     Private Function FdtmFechaDsctoPP() As Date
         Dim ldtmFechaDsctoPP = GCDTMFECHANULA
         Dim ldtmFechaFac As Date = ObjFechaFacturaDtm.ObjValorPro
-        If GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro Then
+        If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuDescuentoPP Then
             ldtmFechaDsctoPP = ldtmFechaFac.AddDays(
                     GobjParametros.ObjAnoActual.ObjDiasParaDsctoPPShr.ObjValorPro - 1)
         End If
@@ -2875,6 +2900,46 @@ Friend Class ClsFechaGraciaDtm
     End Function
 End Class
 
+Friend Class ClsFechaMultaDtm
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "FechaMulta"
+    Private ReadOnly MobjPadre As ClsFactura = Nothing
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        MobjPadre = aobjPadre
+        HstrNombre = "Fecha Multa"
+        HenuTipoValor = EnuTipoValor.EnuDate
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
+    End Sub
+    Public Overrides Sub SValide()
+        Dim ldtmFechaMin As Date = Date.Today.AddMonths(-2)
+        Dim ldtmFechaMax As Date = Date.Today
+        HblnEsValido = ClsPanorama.FblnEsValidoFecha(HobjValorNew, ldtmFechaMin, ldtmFechaMax, BlnEsRequerido)
+        HstrMens = String.Empty
+        If Not HblnEsValido Then
+            HstrMens = "La fecha de la multa no puede ser anterior a hace dos meses!"
+        End If
+        If Not String.IsNullOrEmpty(HstrMens) Then
+            SNotifiqueDatInv()
+        End If
+    End Sub
+
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+
+    Public Overrides Function ToString() As String
+        If Not IsNothing(HobjValorPro) Then
+            Return Format(HobjValorPro, GCSTRFMTFECHASIMPLE)
+        Else
+            Return Format(GCDTMFECHANULA, GCSTRFMTFECHASIMPLE)
+        End If
+    End Function
+End Class
+
+
 Friend Class ClsFechaVencimientoDtm
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "FechaVencimiento"
@@ -3200,7 +3265,7 @@ Friend Class ClsIdModoFacturacionByt
     End Sub
     Public Overrides Sub SValide()
         HblnEsValido = ClsPanorama.FblnEsValidoEnumByte(HobjValorNew, EnuModoFacturacionDef.EnuManual,
-                EnuModoFacturacionDef.EnuContingencia, BlnEsRequerido)
+                EnuModoFacturacionDef.EnuMulta, BlnEsRequerido)
     End Sub
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
@@ -3276,6 +3341,29 @@ Friend Class ClsIdPredioAgrupador_FacStr
     End Function
 End Class
 
+Friend Class ClsMultadalBln
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "Multada"
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        HstrNombre = "Multada"
+        HenuTipoValor = EnuTipoValor.EnuBoolean
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HblnEsRequerido = True
+    End Sub
+    Public Overrides Sub SValide()
+        HblnEsValido = ClsPanorama.FblnEsValidoBuleano(HobjValorNew)
+    End Sub
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+    Public Overrides Function ToString() As String
+        Return ClsPanorama.FstrBuleanoToString(HobjValorPro)
+    End Function
+End Class
+
 Friend Class ClsNumeroResolAutoStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "NumeroResolAuto"
@@ -3317,6 +3405,33 @@ Friend Class ClsPieFacturaDos_FactStr
         HshrLongitud = 230
         HenuTipoValor = EnuTipoValor.enuString
         HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
+    End Sub
+    Public Overrides Sub SValide()
+        HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 3, ShrLongitud, BlnEsRequerido)
+    End Sub
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+    Public Overrides Function ToString() As String
+        If IsNothing(HobjValorPro) Then
+            Return ""
+        Else
+            Return HobjValorPro.ToString
+        End If
+    End Function
+End Class
+
+Friend Class ClsPieFacturaTres_FactStr
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "PieFacturaTres"
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        HstrNombre = "PieFacturaTres"
+        HshrLongitud = 1200
+        HenuTipoValor = EnuTipoValor.EnuString
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
     End Sub
     Public Overrides Sub SValide()
         HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 3, ShrLongitud, BlnEsRequerido)

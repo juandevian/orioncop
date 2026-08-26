@@ -45,22 +45,26 @@
             Return MCSTRNOMBRETABLA
         End Get
     End Property
+
     Protected Overrides ReadOnly Property HenuIdClase As EnuIdClasesPanDef
         Get
             Return EnuIdClasesPanDef.EnuCenutiliOriCop
         End Get
     End Property
+
     Protected Overrides ReadOnly Property HstrNombreClase As String
         Get
             Return "Copropiedad Orión Plus"
         End Get
     End Property
+
     Friend Shared ReadOnly Property SstrNombreTabla As String
         Get
             Return MCSTRNOMBRETABLA
         End Get
     End Property
 #End Region
+
 #Region "Propiedades Prop"
     Friend ReadOnly Property ObjAutorizaEFacBln As New ClsAutorizaEFacBln(Me)
     Friend ReadOnly Property ObjIdAppContableByt As New ClsIdAppContableByt(Me)
@@ -100,6 +104,7 @@
     Friend ReadOnly Property ObjParametrizacionOkBln As New ClsParametrizacionOkBln(Me)
     Friend ReadOnly Property ObjPermiteAnticipoPorServicioBln As New ClsPermiteAnticipoPorServicioBln(Me)
     Friend ReadOnly Property ObjPieFacturaDosStr As New ClsPieFacturaDos_CUStr(Me)
+    Friend ReadOnly Property ObjPieFacturaTresStr As New ClsPieFacturaTres_CUStr(Me)
     Friend ReadOnly Property ObjPieFacturaUnoStr As New ClsPieFacturaUno_CUStr(Me)
     Friend ReadOnly Property ObjPlazoDefectoFacManualShr As New ClsPlazoDefectoFacManualShr(Me)
     Friend ReadOnly Property ObjPrefijoFactContStr As New ClsPrefijoFactContStr(Me)
@@ -156,6 +161,7 @@
                 HcolPropiedades.Add(ObjPermiteAnticipoPorServicioBln)
                 HcolPropiedades.Add(ObjPrefijoFactContStr)
                 HcolPropiedades.Add(ObjPieFacturaDosStr)
+                HcolPropiedades.Add(ObjPieFacturaTresStr)
                 HcolPropiedades.Add(ObjPieFacturaUnoStr)
                 HcolPropiedades.Add(ObjPlazoDefectoFacManualShr)
                 HcolPropiedades.Add(ObjRangoFraConFinEnt)
@@ -174,6 +180,7 @@
         End Get
     End Property
 #End Region
+
 #Region "Otras propiedades"
     Friend Property EnuEstadoAplicacion As EnuEstadoAplicacionDef = EnuEstadoAplicacionDef.None
     Friend Property BlnImportarFacturas As Boolean = True
@@ -271,6 +278,7 @@
         MdtbServiciosPer = Nothing
         MobjProveedorEFac = Nothing
     End Sub
+
     Protected Overrides Sub SModifique()
         Dim lblnNoHayError = False
         Try
@@ -305,6 +313,7 @@
             End If
         End Try
     End Sub
+
     Protected Overrides Sub SActualice(ablnExigeRequeridos As Boolean)
         Dim lblnNoHayError = False
         Try
@@ -343,6 +352,7 @@
             End If
         End Try
     End Sub
+
     Protected Overrides Sub SInicialiceObj()
         ObjFechaResolucionFactDtm.ObjValorPro = GCDTMFECHANULA
         ObjFechaVenceResolFactDtm.ObjValorPro = GCDTMFECHANULA
@@ -368,6 +378,7 @@
         ObjTarifaReteIvaDbl.ObjValorPro = 0
         ObjIdAppContableByt.ObjValorPro = 0
         ObjPieFacturaDosStr.ObjValorPro = String.Empty
+        ObjPieFacturaTresStr.ObjValorPro = String.Empty
         ObjPieFacturaUnoStr.ObjValorPro = String.Empty
         ObjFirmaRCeMail.ObjValorPro = False
         McolAnos = Nothing
@@ -381,6 +392,7 @@
         ObjURLStr.ObjValorPro = String.Empty
         ObjSubirFacBln.ObjValorPro = False
     End Sub
+
     Friend Overrides Sub SRefresqueObj()
         Dim ldtbTablaColeccion = ClsPanorama.FdtbDataTable(ClsCentroUtilOriCop.SstrNombreTabla,
                 {"*"}, Nothing, ClsOrionCop.StrFiltroUbicacion)
@@ -391,15 +403,17 @@
             SLeaValores(True)
             GobjAdministrador.BlnNotificacionSonora = ObjNotificacionesSonorasBln.ObjValorPro
         Else
-            EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando
+            EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando
             MyBase.SRefresqueObj()
         End If
     End Sub
+
     Friend Overrides ReadOnly Property StrIdObjeto As String
         Get
             Return ""
         End Get
     End Property
+
     Friend Overrides Function FblnNotificaOk(aenuIdMensNot As EnuIdMens) As Boolean
         Dim lblnNotOk = False
         If aenuIdMensNot = EnuIdMens.EnuMensInicio Then
@@ -442,6 +456,7 @@
             Return McolAnos
         End Get
     End Property
+
     Friend Function SCreeAno(ablnInicioMesActual As Boolean, adblIncrementoCA As Double,
             aenuTipoCalCuota As EnuTipoBaseCalculo) As ClsAno
         Dim lblnNoHayError = False
@@ -484,6 +499,7 @@
         End Try
         Return lobjAno
     End Function
+
     ''' <summary>
     ''' Crea el primer Año de Orión y lo adiciona a la colección de años. 
     ''' </summary>
@@ -521,6 +537,7 @@
         End With
         Return lobjNuevoAno
     End Function
+
     Private Function FobjAnoSiguiente(adrwNuevoAno As DataRow, adblIncremento As Double,
             aenuTipoCalCuota As EnuTipoBaseCalculo) As ClsAno
         Dim lobjNuevoAno As New ClsAno(Me, adrwNuevoAno)
@@ -531,12 +548,17 @@
         With lobjNuevoAno
             .SCreeObj(Nothing)
             .ObjIdAnoShr.ObjValorPro = lshrIdNuevoAno
-            .ObjAplicaDsctoPPBln.ObjValorPro = lobjAnoAnteriorAEste.ObjAplicaDsctoPPBln.ObjValorPro
+            .ObjTipoIncentivoByt.ObjValorPro =
+                    lobjAnoAnteriorAEste.ObjTipoIncentivoByt.ObjValorPro
             .ObjDiasParaDsctoPPShr.ObjValorPro =
                     lobjAnoAnteriorAEste.ObjDiasParaDsctoPPShr.ObjValorPro
             .ObjModuloPorServicioBln.ObjValorPro =
                     lobjAnoAnteriorAEste.ObjModuloPorServicioBln.ObjValorPro
-            .ObjTipoDsctoPPByt.ObjValorPro = lobjAnoAnteriorAEste.ObjTipoDsctoPPByt.ObjValorPro
+            .ObjDiasMultaExtShr.ObjValorPro = lobjAnoAnteriorAEste.ObjDiasMultaExtShr.ObjValorPro
+            .ObjIdServicioMultaShr.ObjValorPro =
+                    lobjAnoAnteriorAEste.ObjIdServicioMultaShr.ObjValorPro
+            .ObjValorMultaPagoExtDec.ObjValorPro =
+                    lobjAnoAnteriorAEste.ObjValorMultaPagoExtDec.ObjValorPro
             If GblnOK Then
                 .ObjValorPres_AnoDec.ObjValorPro = ldecValorPres
             Else
@@ -559,6 +581,7 @@
         End If
         Return lobjNuevoAno
     End Function
+
     Friend Function FblnEsElUltimoAno(ashrIdAno As Short)
         Dim lblnEs = False
         If ColAnos.Count > 0 Then
@@ -569,6 +592,7 @@
         End If
         Return lblnEs
     End Function
+
     Friend Function FblnEsElPrimerAno(ashrIdAno As Short)
         Dim lblnEs = False
         If ColAnos.Count > 0 Then
@@ -579,6 +603,7 @@
         End If
         Return lblnEs
     End Function
+
     ''' <summary>
     ''' Indica si el año actual es el primer año en el cual se van a generar facturas
     ''' </summary>
@@ -596,6 +621,7 @@
         End If
         Return lblnEsElPrimero
     End Function
+
     Private Function FdtbAnos() As DataTable
         Dim lstrFiltro As String = ClsOrionCop.StrFiltroUbicacion
         Dim ldtbAnos = ClsPanorama.FdtbDataTable(ClsAno.SstrNombreTabla, {"*"},
@@ -604,17 +630,7 @@
                     {ClsIdAnoShr.SstrNombreCampoBd, "ASC"}}, lstrFiltro)
         Return ldtbAnos
     End Function
-    Friend Function FblnExisteServicioAno(astrKeyServicio As String) As Boolean
-        Dim lstrPartes() As String = astrKeyServicio.Split(",")
-        Dim lstrIdano As String = lstrPartes(0)
-        Dim lobjAno As ClsAno
-        If ColAnos.Contains(lstrIdano) Then
-            lobjAno = ColAnos(lstrIdano)
-        Else
-            Throw New ErrorInesperadoPanLException("El año no existe!")
-        End If
-        Return lobjAno.ColServiciosAno.Contains(astrKeyServicio)
-    End Function
+
     Friend Function FblnPuedeCrearSerAnual(ashrIdAno As Short) As Boolean
         Dim lblnPuede As Boolean
         Dim lobjAno As ClsAno = ColAnos(ashrIdAno.ToString)
@@ -631,6 +647,7 @@
         End If
         Return lblnPuede
     End Function
+
     Private Shared Sub SAdicioneServiciosAno(aobjAnoAnterior As ClsAno,
             aobjAnoNuevo As ClsAno, adblIncrementoCA As Double)
         Dim lcolServiciosAnoAnte As Collection = aobjAnoAnterior.ColServiciosAno
@@ -722,12 +739,7 @@
             Return McolServiciosPer
         End Get
     End Property
-    Friend Function FblnExisteNombreServicio(astrNombreServicio As String) As Boolean
-        SCargueDtbServiciosPer()
-        Dim lstrFiltro = ClsNombreServicioStr.SstrNombreCampoBd & " = '" & astrNombreServicio & "'"
-        Dim ldrwServicios() As DataRow = MdtbServiciosPer.Select(lstrFiltro)
-        Return (ldrwServicios.Length > 0)
-    End Function
+
     ''' <summary>
     ''' Devuelve el nombre del Servicio Permanente identificado con "ashrIdServicio".
     ''' </summary>
@@ -744,29 +756,7 @@
         Next
         Return lstrNombreServicio
     End Function
-    ''' <summary>
-    ''' Devuelve el nombre del Servicio Anual del año "ashrIdAno" e identificado con "ashrIdServicio".
-    ''' </summary>
-    ''' <param name="ashrIdAno">Identidad del año al cual pertenece el servicio.</param>
-    ''' <param name="ashrIdServicio">Identidad del servicio del cual se devolverá el nombre.</param>
-    ''' <returns>Nombre del servicio (String)</returns>
-    ''' <remarks>Si no existe el Servicio se devuelve una cadena vacia.</remarks>
-    Friend Function FstrNombreServicio(ashrIdAno As Short, ashrIdServicio As Short) As String
-        Dim lstrNombreServicio As String
-        If ashrIdAno = 0 Then
-            If ashrIdServicio = "999" Then
-                lstrNombreServicio = "Intereses de mora"
-            Else
-                lstrNombreServicio = FstrNombreServicio(ashrIdServicio)
-            End If
-        Else
-            Dim lobjAno As ClsAno = ColAnos(ashrIdAno.ToString)
-            Dim lstrKey = ashrIdAno.ToString & "," & ashrIdServicio.ToString
-            Dim lobjServicio As ClsServicio = lobjAno.ColServiciosAno(lstrKey)
-            lstrNombreServicio = lobjServicio.ObjNombreServicioStr.ObjValorPro
-        End If
-        Return lstrNombreServicio
-    End Function
+
     ''' <summary>
     ''' Devuelve el Id. del Servicio que tiene como nombre el argumento "astrNombreServicio"
     ''' </summary>
@@ -790,6 +780,7 @@
         Next
         Return lshrIdServicio
     End Function
+
     Friend Function FblnHayOtroServicioId(ashrIdServicio As Short) As Boolean
         Dim lblnHaySerId = False
         For Each lobjServicio As ClsServicio In ColServiciosPer
@@ -800,6 +791,7 @@
         Next
         Return lblnHaySerId
     End Function
+
     Friend Function FblnHayServicioId() As Boolean
         Dim lblnHaySerId = False
         For Each lobjServicio As ClsServicio In ColServiciosPer
@@ -808,6 +800,7 @@
         Next
         Return lblnHaySerId
     End Function
+
     Friend Function FobjServicioId() As ClsServicio
         Dim lobjServicio As ClsServicio = Nothing
         For Each lobjSer As ClsServicio In ColServiciosPer
@@ -818,6 +811,20 @@
         Next
         Return lobjServicio
     End Function
+
+    Friend Function FobjServicioMulta() As ClsServicio
+        Dim lobjServicio As ClsServicio = Nothing
+        For Each lobjSer As ClsServicio In ColServiciosPer
+            If lobjSer.ObjIdAno_ServicioShr.ObjValorPro = 0 AndAlso
+                    lobjSer.ObjIdServicioShr.ObjValorPro =
+                    ObjAnoActual.ObjIdServicioMultaShr.ObjValorPro Then
+                lobjServicio = lobjSer
+                Exit For
+            End If
+        Next
+        Return lobjServicio
+    End Function
+
     Private Sub SCargueDtbServiciosPer()
         If IsNothing(MdtbServiciosPer) Then
             Dim lstrFiltro As String = ClsOrionCop.StrFiltroUbicacion & " AND " &
@@ -847,6 +854,7 @@
             Return McolModulos
         End Get
     End Property
+
     Friend Function FdtbModulos() As DataTable
         Dim lstrCamposSelect() As String = {StrCampoCarpeta,
                 StrCampoCentroUtil,
@@ -860,6 +868,7 @@
                 lstrCamposSelect, lstrIndice, ClsOrionCop.StrFiltroUbicacion)
         Return ldtbModulos
     End Function
+
     ''' <summary>
     ''' Calcula y devuelve el total de la base de participación con el factor de ponderación
     ''' aplicado
@@ -875,6 +884,7 @@
         Next
         Return ldblTotalBasePart
     End Function
+
     ''' <summary>
     ''' Indica si el módulo de contribución identificado por el argumento "ashrIdModulo" contribuye
     ''' con un servicio cuota de administración e indica ademas en el argumento "ablnSoloAUnServicio" 
@@ -920,14 +930,16 @@
             Return McolSectores
         End Get
     End Property
+
     Friend Function FshrIdSector(astrNombreSector As String) As Short
         Dim ldtbSectores = FdtbSectores()
         Dim lstrFiltro As String = ClsNombreSectorStr.SstrNombreCampoBd & " = '" &
                 astrNombreSector & "'"
         Dim ldrwSectores As DataRow() = ldtbSectores.Select(lstrFiltro)
         Return ClsPanorama.FobjValorCampo(ldrwSectores(0)(ClsIdSectorShr.SstrNombreCampoBd),
-                EnuTipoValor.enuShort)
+                EnuTipoValor.EnuShort)
     End Function
+
     Friend Function FdtbSectores() As DataTable
         Dim lstrCamposSelect() As String = {StrCampoCarpeta,
                 StrCampoCentroUtil,
@@ -944,15 +956,16 @@
         SComplementeDtbSectores(ldtbSectores)
         Return ldtbSectores
     End Function
+
     Private Sub SComplementeDtbSectores(adtbSectores As DataTable)
         If (Not IsNothing(ObjAnoActual)) AndAlso adtbSectores.Rows.Count > 0 Then
             Dim lenuTipoDsctoPP = ObjAnoActual.ObjTipoDsctoPPByt.ObjValorPro
             Dim lstrValorDscto As String, ldblDscto As Double
-            Dim lobjSector As New ClsSector(EnuModoInstanciaObjDef.enuUnico)
+            Dim lobjSector As New ClsSector(EnuModoInstanciaObjDef.EnuUnico)
             Dim lshrIdSector As Short, lobjValorLlave As Object(), ldblAreaSector As Double
             For Each ldrwSector As DataRow In adtbSectores.Rows
                 ldblDscto = ClsPanorama.FobjValorCampo(ldrwSector("DctoProntoPago"),
-                        EnuTipoValor.enuDouble)
+                        EnuTipoValor.EnuDouble)
                 If lenuTipoDsctoPP = EnuTipoDsctoPP.EnuProcentaje Then
                     lstrValorDscto = Format(ldblDscto, "p")
                 ElseIf lenuTipoDsctoPP = EnuTipoDsctoPP.EnuValorFijo Then
@@ -962,7 +975,7 @@
                 End If
                 ldrwSector("DsctoForma") = lstrValorDscto
                 lshrIdSector = ClsPanorama.FobjValorCampo(ldrwSector(ClsIdSectorShr.SstrNombreCampoBd),
-                        EnuTipoValor.enuShort)
+                        EnuTipoValor.EnuShort)
                 lobjValorLlave = {GshrIdCarpeta, GshrIdCentroUtil, lshrIdSector}
                 lobjSector.SAbra(lobjValorLlave)
                 ldblAreaSector = lobjSector.FdblTotalAreaPrediosSector()
@@ -994,6 +1007,7 @@
         End If
         Return ldtbTasasMora
     End Function
+
     Friend Function FdblTasaMoraFecha(adtmFecha As Date) As Double
         Dim ldblTasa = 0.0
         Dim ldtbTasasMora = FdtbTasasMora()
@@ -1001,17 +1015,18 @@
         adtmFecha = adtmFecha.AddDays(-1)
         For Each ldrwTasaMora As DataRow In ldtbTasasMora.Rows
             ldtmFechaDesde = ClsPanorama.FobjValorCampo(ldrwTasaMora(
-                    ClsFechaDesdeTasaMoraDtm.SstrNombreCampoBd), EnuTipoValor.enuDate)
+                    ClsFechaDesdeTasaMoraDtm.SstrNombreCampoBd), EnuTipoValor.EnuDate)
             ldtmFechaHasta = ClsPanorama.FobjValorCampo(ldrwTasaMora(
-                    ClsFechaHastaTasaMoraDtm.SstrNombreCampoBd), EnuTipoValor.enuDate)
+                    ClsFechaHastaTasaMoraDtm.SstrNombreCampoBd), EnuTipoValor.EnuDate)
             If adtmFecha >= ldtmFechaDesde AndAlso adtmFecha <= ldtmFechaHasta Then
                 ldblTasa = ClsPanorama.FobjValorCampo(ldrwTasaMora(
-                        ClsTasaMoraDbl.SstrNombreCampoBd), EnuTipoValor.enuDouble)
+                        ClsTasaMoraDbl.SstrNombreCampoBd), EnuTipoValor.EnuDouble)
                 Exit For
             End If
         Next
         Return ldblTasa
     End Function
+
     Friend Function FdblTasaMoraPeriodoActual() As Double
         Dim ldtmFechaFinPeriodo = ObjAnoActual.ObjPeriodoActual.DtmFechaFinPeriodo
         Dim ldblTasa = FdblTasaMoraFecha(ldtmFechaFinPeriodo)
@@ -1034,6 +1049,7 @@
         End If
         Return lcolCuentasBanco
     End Function
+
     Friend Function FblnEsCuentaBanco(astrIdCta As String) As Boolean
         Dim lblEsCtaBco = False
         Dim lcolCtasBanco = FcolCuentasBanco()
@@ -1045,6 +1061,7 @@
         Next
         Return lblEsCtaBco
     End Function
+
     Friend Function FdtbCuentasBanco() As DataTable
         Dim lstrFiltro = ClsOrionCop.StrFiltroUbicacion
         Dim lstrCamposSelect = {"*"}
@@ -1076,6 +1093,7 @@
             Return McolDocumentos
         End Get
     End Property
+
     Friend ReadOnly Property ObjDocumento(aenuIdDocumento As EnuIdDocumentoDef) As ClsDocumento
         Get
             ObjDocumento = Nothing
@@ -1092,6 +1110,7 @@
             Return ObjDocumento
         End Get
     End Property
+
     Friend Function FobjNuevoDocumento() As ClsDocumento
         Dim lobjNuevoDoc As ClsDocumento = Nothing
         Dim lenuIdSigDoc = FenuIdSiguienteDocumento()
@@ -1111,6 +1130,7 @@
         End If
         Return lobjNuevoDoc
     End Function
+
     Friend Function FobjNuevoDocumento(aenuIdDocumento As EnuIdDocumentoDef) As ClsDocumento
         Dim lobjNuevoDoc As ClsDocumento = Nothing
         Dim ldtbDocs = FdtbDocumentos()
@@ -1128,6 +1148,7 @@
         End With
         Return lobjNuevoDoc
     End Function
+
     Friend Sub SAdicioneNuevoDocumento(aobjNuevoDocumento As ClsDocumento)
         If Not IsNothing(aobjNuevoDocumento) Then
             If Not ColDocumentos.Contains(aobjNuevoDocumento.ObjIdDocumentoEnt.ToString) Then
@@ -1135,9 +1156,11 @@
             End If
         End If
     End Sub
+
     Friend Function FblnHayDocumentosPorCrear() As Boolean
         Return (ColDocumentos.Count < 9)
     End Function
+
     Friend Function FblnDocumentosPorDefinir() As Boolean
         Dim lblnDocPorDocPorDefinir As Boolean, lobjDoc As ClsDocumento
         If ObjTipoInterfazByt.ObjValorPro = EnuTipoInterfazDef.None Then
@@ -1156,6 +1179,7 @@
         End If
         Return lblnDocPorDocPorDefinir
     End Function
+
     Private Function FenuIdSiguienteDocumento() As EnuIdDocumentoDef
         Dim lenuIdSiguiDoc = EnuIdDocumentoDef.None
         McolDocumentos = Nothing
@@ -1166,6 +1190,7 @@
         End If
         Return lenuIdSiguiDoc
     End Function
+
     Friend Shared Function FstrNombreDoc(aenuIdDocumento As EnuIdDocumentoDef) As String
         Dim lstrNombreDoc = String.Empty
         Select Case aenuIdDocumento
@@ -1194,11 +1219,13 @@
         End Select
         Return lstrNombreDoc
     End Function
+
     Friend Function FdtbDocumentos() As DataTable
         Dim ldtbDocumentos = ClsPanorama.FdtbDataTable(ClsDocumento.SstrNombreTabla, {"*"},
                 {{ClsIdDocumentoEnt.SstrNombreCampoBd, ""}}, ClsOrionCop.StrFiltroUbicacion)
         Return ldtbDocumentos
     End Function
+
     Friend Function FstrPrefijoDoc(aenuIdDocumento As EnuIdDocumentoDef) As String
         Dim lstrPref = String.Empty
         If ColDocumentos.Count > 0 Then
@@ -1209,14 +1236,17 @@
         End If
         Return lstrPref
     End Function
+
     Friend Function FentNumeracionInicialDoc(aenuIdDocumento As EnuIdDocumentoDef) As Integer
         MobjDocumento = ColDocumentos(CType(aenuIdDocumento, Integer).ToString)
         Return MobjDocumento.ObjNumeroInicial_DocEnt.ObjValorPro
     End Function
+
     Friend Function FstrTipoDoc(aenuIdDocumento As EnuIdDocumentoDef) As String
         MobjDocumento = ColDocumentos(CType(aenuIdDocumento, Integer).ToString)
         Return MobjDocumento.ObjTipoDocumentoStr.ObjValorPro
     End Function
+
     Private Sub SCreeDocumentos()
         McolDocumentos = ColDocumentos
         If McolDocumentos.Count = 0 Then
@@ -1249,6 +1279,7 @@
         ObjConsolidaItemsFacBln.ObjValorPro = False
         SAsigneVlaloresDefectoPro()
     End Sub
+
     ''' <summary>
     ''' Devuleve el servicio identificado por el paramentro lstrKey el cual es un string compuesto por el
     ''' año del servicio y el id del servicio separados por una coma: (IdAno,IdServicio). Si el servicio
@@ -1273,6 +1304,7 @@
         End If
         Return lobjServicio
     End Function
+
     Friend Sub SCierrePeriodo()
         Dim lstrPeriodoActual = ObjAnoActual.StrIdPeriodoActual
         Dim lstrPeriodoHoy = ClsOrionCop.FstrPeriodoDeFecha(Date.Today)
@@ -1283,8 +1315,8 @@
             ObjAnoActual.SCierrePeriodoActual()
             If lblnCerrarAno Then
                 With ObjAnoActual
-                    If .EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando Then
-                        .EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+                    If .EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
+                        .EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
                     End If
                     .ObjEstaCerradoAnoBln.ObjValorPro = True
                     .SActualice(True)
@@ -1294,6 +1326,7 @@
         McolAnos = Nothing
         Me.SRefresqueObj()
     End Sub
+
     Friend Sub SAbraPeriodoAnterior()
         Dim lshrIdAnoActual As Short = ObjAnoActual.ObjIdAnoShr.ObjValorPro
         Dim lstrPeriodoActual = ObjAnoActual.StrIdPeriodoActual
@@ -1306,8 +1339,8 @@
             If GobjParametros.ColAnos.Contains(lshrIdAnoPerAnt.ToString) Then
                 Dim lobjAnoAnt As ClsAno = GobjParametros.ColAnos(lshrIdAnoPerAnt.ToString)
                 With lobjAnoAnt
-                    If .EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando Then
-                        .EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+                    If .EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
+                        .EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
                     End If
                     .ObjEstaCerradoAnoBln.ObjValorPro = False
                     .SActualice(True)
@@ -1319,27 +1352,30 @@
         Else
             lobjPerAnt = ObjAnoActual.ColPeriodos(lstrIdPerAnt)
         End If
-        lobjPerAnt.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+        lobjPerAnt.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
         lobjPerAnt.ObjEstaCerradoPeriodoBln.ObjValorPro = False
         lobjPerAnt.SActualice(True)
     End Sub
+
     Friend Sub SRegistreFechaUltCausa(adtmfechaUltCausa As Date)
-        If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando Then
-            EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+        If EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
+            EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
             ObjFechaUltCausacionGralDtm.ObjValorPro = adtmfechaUltCausa
             SActualice(True)
         End If
     End Sub
+
     Friend Sub SRegistreFechaFacturación()
         Dim lobjPeriodoActual = ObjAnoActual.ObjPeriodoActual
         With lobjPeriodoActual
-            If .EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando Then
-                .EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+            If .EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
+                .EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
             End If
             .ObjFechaFacturacionPeriodoDtm.ObjValorPro = Date.Today
             .SActualice(True)
         End With
     End Sub
+
     ''' <summary>
     ''' Indica si los sectores, modulos de contribución y los servicios estan bien parametrizados.
     ''' </summary>
@@ -1395,6 +1431,7 @@
         End If
         Return lblnParaOk
     End Function
+
     ''' <summary>
     ''' Indica si todos los sectores contribuyen con la cuota de administración
     ''' </summary>
@@ -1414,6 +1451,7 @@
         Next
         Return lblnContr
     End Function
+
     ''' <summary>
     ''' Indica si el sector identificado con el argumento "ashrIdSector" contribuye al servicio
     ''' Cuota de administración y si la tasa de contribución es mayor a cero en el argumento
@@ -1441,6 +1479,7 @@
         Next
         Return lblnContribuye
     End Function
+
     ''' <summary>
     ''' Indica si las cuotas de administración se calculan con base en el area ponderada de 
     ''' cada predio
@@ -1452,9 +1491,11 @@
         lblnSi = lobjAno.FblnCalcularCuotaAdminPorCP
         Return lblnSi
     End Function
+
     Private Function FblnDsctoPPSectoresOk() As Boolean
         If ObjAnoActual IsNot Nothing Then
-            If ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro Then
+            If ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                    EnuTipoIncentivo.EnuDescuentoPP Then
                 For Each lobjModuCont As ClsModuloContribucion In ColModulos
                     If lobjModuCont.ObjContribuyeCuotaAdminBln.ObjValorPro Then
                         If Not FblnDsctoPPSecModuloOK(lobjModuCont) Then
@@ -1466,6 +1507,7 @@
         End If
         Return True
     End Function
+
     ''' <summary>
     ''' Indica si un sector de un módulo que contribuye a la administración tiene definido
     ''' el descuento por pronto pago.
@@ -1482,6 +1524,7 @@
         Next
         Return ldblDscto <> 0
     End Function
+
     Private Shared Function FblnHayUnModuloPorServicio(ByRef astrMens As String) As Boolean
         Dim lblnHay = True
         If Not IsNothing(GobjParametros.ObjAnoActual) Then
@@ -1500,6 +1543,7 @@
         End If
         Return lblnHay
     End Function
+
     Friend Function FblnPerActEsDicPrimerAno()
         Dim lblnCierto = False
         If Not IsNothing(ObjAnoActual) Then
@@ -1516,6 +1560,7 @@
         End If
         Return lblnCierto
     End Function
+
     ''' <summary>
     ''' Devuelve el pie factura construido a partir de la resolución de autorización de facturas 
     ''' </summary>
@@ -1553,6 +1598,7 @@
         End If
         Return lstrPieFac
     End Function
+
     ''' <summary>
     ''' Devuelve el pie factura construido a partir de la resolución de autorización de facturas 
     ''' </summary>
@@ -1585,11 +1631,13 @@
         End If
         Return lstrPieFac
     End Function
+
     Friend Sub SActualicePieFactura()
-        EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+        EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
         ObjPieFacturaUnoStr.ObjValorPro = FstrPieFacturaRes()
         SActualice(True)
     End Sub
+
     ''' <summary>
     ''' Indica si ya existe un concepto permanente con el concepto pasado en el argumento
     ''' </summary>
@@ -1652,6 +1700,7 @@
             Return McolFechasServicio
         End Get
     End Property
+
     Friend Function FarlFechasAFActurarHoy() As ArrayList
         Dim lshrIdAno As Short, lshrIdSer As Short, lstrKeySer As String
         Dim ldtmFecFac As Date, lobjServicio As ClsServicio
@@ -1661,10 +1710,10 @@
         For Each ldrwSerPorFac As DataRow In ldtbServPorFact.Rows
             lshrIdAno = ClsPanorama.FobjValorCampo(ldrwSerPorFac(
                             ClsIdAno_ItemProgramaFactShr.SstrNombreCampoBd),
-                            EnuTipoValor.enuShort)
+                            EnuTipoValor.EnuShort)
             lshrIdSer = ClsPanorama.FobjValorCampo(ldrwSerPorFac(
                             ClsIdServicio_ItemProgramaFactShr.SstrNombreCampoBd),
-                            EnuTipoValor.enuShort)
+                            EnuTipoValor.EnuShort)
             lstrKeySer = lshrIdAno.ToString() & "," & lshrIdSer.ToString()
             lobjServicio = FobjServicio(lstrKeySer)
             ldtmFecFac = lobjServicio.DtmFechaFacturacionPeriodoActual
@@ -1677,6 +1726,7 @@
         larlFecAFac.Sort()
         Return larlFecAFac
     End Function
+
     Friend Sub SEstablezcaFechasServicios(adtmFecha As Date, ablnVence As Boolean)
         McolFechasServicio = Nothing
         If ablnVence Then
@@ -1695,6 +1745,7 @@
             Next
         End If
     End Sub
+
     Private Function FblnExisteEnFechasSer(aobjServicio As ClsServicio) As Boolean
         Dim ldtmFecFac = aobjServicio.DtmFechaFacturacionPeriodoActual
         Dim lstrKeySer As String
@@ -1710,6 +1761,7 @@
         Next
         Return lblnExiste
     End Function
+
     Friend Function FblnFechaFacturacionUnica(ByRef adtmFechaFacturacion As Date) As Boolean
         Dim ldtmFecFac As Date = GCDTMFECHANULA, lblnFechaUnica = True
         For Each lobjFechasSer As ClsFechasServicio In ColFechasServicio
@@ -1727,6 +1779,7 @@
         End If
         Return lblnFechaUnica
     End Function
+
     Friend Function FblnFechaVenceUnica(ByRef adtmFechaVence As Date) As Boolean
         Dim ldtmFecVen As Date = GCDTMFECHANULA, ldtmFecVenSer As Date
         Dim lblnFechaUnica As Boolean
@@ -1750,6 +1803,7 @@
         lblnFechaUnica = ldtmFecVen <> GCDTMFECHANULA
         Return lblnFechaUnica
     End Function
+
     ''' <summary>
     ''' Devuelve la fecha de vencimiento de los servicios que incluye la fecha de facturación incluidos
     ''' en al paramentro aobjFechasSer. Si no es la misma fecha para todos los servicios devuelve
@@ -1772,6 +1826,7 @@
         Next
         Return ldtmFechaVence
     End Function
+
     Friend Function FblnFechaGraciaUnica(ByRef adtmFechaGracia As Date) As Boolean
         Dim ldtmFecGra As Date = GCDTMFECHANULA, ldtmFecGraSer As Date
         Dim lblnFechaUnica As Boolean
@@ -1795,6 +1850,7 @@
         lblnFechaUnica = ldtmFecGra <> GCDTMFECHANULA
         Return lblnFechaUnica
     End Function
+
     ''' <summary>
     ''' Devuelve la fecha de gracia de los servicios que incluye la fecha de facturación incluidos
     ''' en al paramentro aobjFechasSer. Si no es la misma fecha para todos los servicios devuelve
@@ -1817,6 +1873,7 @@
         Next
         Return ldtmFechaGracia
     End Function
+
     Friend Function FblnFechaGraciaValida(aobjFechasFact As ClsFechasServicio,
             adtmFechaGracia As Date) As Boolean
         Dim lobjServicio As ClsServicio, lblnEsValida As Boolean
@@ -3385,7 +3442,8 @@ Friend Class ClsIdCtaDescuentosPPStr
         MstrNombreCuenta = String.Empty
         Dim lobjPadre As ClsCentroUtilOriCop = ObjPadre
         If Not IsNothing(lobjPadre.ObjAnoActual) Then
-            HblnEsRequerido = GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro
+            HblnEsRequerido = lobjPadre.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                    EnuTipoIncentivo.EnuDescuentoPP
         End If
         HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 4, ShrLongitud, BlnEsRequerido)
         If ObjPadre.EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuConsultando Then
@@ -4022,6 +4080,35 @@ Friend Class ClsPieFacturaDos_CUStr
     End Sub
     Public Overrides Sub SValide()
         HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 3, ShrLongitud, BlnEsRequerido)
+    End Sub
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+    Public Overrides Function ToString() As String
+        If IsNothing(HobjValorPro) Then
+            Return String.Empty
+        Else
+            Return HobjValorPro.ToString().Trim
+        End If
+    End Function
+End Class
+
+Friend Class ClsPieFacturaTres_CUStr
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "PieFacturaTres"
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        HstrNombre = "PieFacturaTres"
+        HshrLongitud = 1200
+        HenuTipoValor = EnuTipoValor.EnuString
+        HStrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HblnRegistrarLogCambio = True
+    End Sub
+    Public Overrides Sub SValide()
+        HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 3, ShrLongitud,
+                BlnEsRequerido)
     End Sub
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get

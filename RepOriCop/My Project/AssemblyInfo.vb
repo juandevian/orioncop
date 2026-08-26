@@ -14,7 +14,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyProduct("OrionCop")>
 <Assembly: AssemblyCopyright("Copyright © OPTIMUSOFT 2017")>
 <Assembly: AssemblyTrademark("Orión Plus")>
-<Assembly: ComVisible(True)>
+<Assembly: ComVisible(False)>
 
 'Para comenzar a compilar aplicaciones que se puedan traducir, establezca 
 '<UICulture>CultureYouAreCodingWith</UICulture> en el archivo .vbproj
@@ -52,7 +52,7 @@ Imports System.Runtime.InteropServices
 ' mediante el asterisco ('*'), como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("7.28.172.1436")>
-<Assembly: AssemblyFileVersion("7.28.172.1436")>
+<Assembly: AssemblyVersion("7.30.177.1448")>
+<Assembly: AssemblyFileVersion("7.30.177.1448")>
 
 <Assembly: NeutralResourcesLanguageAttribute("es-CO")>

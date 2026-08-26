@@ -68,6 +68,7 @@ Friend Class ClsItemFactura
         End Get
     End Property
 #End Region
+
 #Region "Propiedades Prop"
     Friend ReadOnly Property ObjCreditos_ItemFactDec As New ClsCreditos_ItemFactDec(Me)
     Friend ReadOnly Property ObjDebitos_ItemFactDec As New ClsDebitos_ItemFactDec(Me)
@@ -118,6 +119,7 @@ Friend Class ClsItemFactura
         End Get
     End Property
 #End Region
+
 #Region "Otras propiedades"
     ''' <summary>
     ''' Devuelve uns string compuesto por el prefijo de la factura y el id de la factura separados por un
@@ -131,6 +133,7 @@ Friend Class ClsItemFactura
             Return lstrNroFactura
         End Get
     End Property
+
     Friend ReadOnly Property ObjServicio As ClsServicio
         Get
             If ObjIdAno_ServicioItemFactShr.BlnEsValido AndAlso ObjIdServicio_ItemFactShr.BlnEsValido Then
@@ -147,11 +150,13 @@ Friend Class ClsItemFactura
             Return MobjServicio
         End Get
     End Property
+
     Friend ReadOnly Property ShrDiasGracia As Short
         Get
             Return ObjServicio.ObjDiasGraciaShr.ObjValorPro
         End Get
     End Property
+
     Friend ReadOnly Property ObjSector As ClsSector
         Get
             If IsNothing(MobjSector) AndAlso ObjIdPredio_ItemFactStr.ToString.Length > 0 Then
@@ -163,6 +168,7 @@ Friend Class ClsItemFactura
             Return MobjSector
         End Get
     End Property
+
     Friend ReadOnly Property StrServicio As String
         Get
             Dim lstrServ As String
@@ -174,6 +180,7 @@ Friend Class ClsItemFactura
             Return lstrServ
         End Get
     End Property
+
     Friend ReadOnly Property ObjMiFactura As ClsFactura
         Get
             If BlnExiste AndAlso IsNothing(MobjMiFactura) Then
@@ -183,6 +190,16 @@ Friend Class ClsItemFactura
                 MobjMiFactura = lobjFactura
             End If
             Return MobjMiFactura
+        End Get
+    End Property
+
+    Friend ReadOnly Property BlnDeudaEsCuotaAdmin As Boolean
+        Get
+            Dim lblnEs As Boolean = False
+            If ObjDebitos_ItemFactDec.ObjValorPro > ObjCreditos_ItemFactDec.ObjValorPro Then
+                lblnEs = If(ObjIdAno_ServicioItemFactShr.ObjValorPro > 0, True, False)
+            End If
+            Return lblnEs
         End Get
     End Property
 #End Region
@@ -1132,8 +1149,8 @@ Friend Class ClsItemFactura
     ''' <remarks>Se calcula al momento de generar la factura.</remarks>
     Friend Function FdecDsctoPPPosible() As Decimal
         Dim ldecDsctoPP = 0D
-        If GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro AndAlso
-                Not IsNothing(ObjSector) Then
+        If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuDescuentoPP AndAlso Not IsNothing(ObjSector) Then
             Dim lobjPredio As New ClsPredio(EnuModoInstanciaObjDef.EnuUnico)
             Dim lobjValorLlave = {GshrIdCarpeta, GshrIdCentroUtil,
                         ObjIdPredio_ItemFactStr.ObjValorPro}

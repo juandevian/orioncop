@@ -559,7 +559,8 @@ Friend Module mOrionCopIU
                 Dim lentIdFacUltima = CType(lstrFacts(2), Integer)
                 Dim lobjParaFact As New ClsParametrosReportesDocs(lstrPrefFact,
                     lentIdFacPrimera, lentIdFacUltima)
-                If GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro Then
+                If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                        EnuTipoIncentivo.EnuDescuentoPP Then
                     lobjRep.EnuReporte = EnuReporteDef.enuFacturaDscto
                 ElseIf GobjParametros.BlnEFacAutorizado Then
                     lobjRep.EnuReporte = EnuReporteDef.enuFacturaEFac
@@ -581,6 +582,37 @@ Friend Module mOrionCopIU
         Finally
             Mouse.OverrideCursor = Cursors.Arrow
         End Try
+    End Sub
+
+    Friend Sub SImprimaFactura(aobjFactura As ClsFactura, ByRef astrMens As String)
+        Dim lblnPuede = aobjFactura.BlnEstaRegEFac OrElse Not aobjFactura.BlnEsFacEle
+        If lblnPuede Then
+            Dim lstrPrefFact = aobjFactura.ObjPrefijo_FactStr.ObjValorPro
+            Dim lentIdFacPrimera = aobjFactura.ObjIdFacturaEnt.ObjValorPro
+            Dim lentIdFacUltima = aobjFactura.ObjIdFacturaEnt.ObjValorPro
+            Dim lobjParaFact As New ClsParametrosReportesDocs(lstrPrefFact, lentIdFacPrimera,
+                    lentIdFacUltima)
+            Dim lobjRep = New ClsRepOrionCop(GCOBJREGISTRO) With {
+                    .ObjParRepDocs = lobjParaFact
+                }
+            If aobjFactura.BlnEsFacEle Then
+                lobjRep.EnuReporte = EnuReporteDef.enuFacturaEFac
+            Else
+                If aobjFactura.ObjIdModoFacturacionByt.ObjValorPro = EnuModoFacturacionDef.EnuImportada Then
+                    lobjRep.EnuReporte = EnuReporteDef.enuFactImportada
+                Else
+                    If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                            EnuTipoIncentivo.EnuDescuentoPP Then
+                        lobjRep.EnuReporte = EnuReporteDef.enuFacturaDscto
+                    Else
+                        lobjRep.EnuReporte = EnuReporteDef.enuFactura
+                    End If
+                End If
+            End If
+            lobjRep.SGenereReporte()
+        Else
+            astrMens = "La Factura no se puede imprimir porque aún no está registrada en API de EFac!"
+        End If
     End Sub
 
     Friend Sub SImprimaCtasCobro(aobjRepo As ClsRepOrionCop)

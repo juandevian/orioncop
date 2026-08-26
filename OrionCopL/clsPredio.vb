@@ -20,6 +20,7 @@
     Private MshrIdAno As Short = -1
     Private MblnSoloVivasColeccion As Boolean = False
 #End Region
+
 #Region "Constructores"
     ''' <summary>
     ''' Instancia un objeto Predio.
@@ -65,6 +66,7 @@
         DtbTablaColeccion = DrwRegistroActual.Table
     End Sub
 #End Region
+
 #Region "Propiedades"
 #Region "Propiedades indentificadoras"
     Protected Overrides ReadOnly Property HstrNombreTabla As String
@@ -93,9 +95,11 @@
         End Get
     End Property
 #End Region
+
 #Region "Propiedades Prop"
     Friend ReadOnly Property ObjAliasContStr As New ClsAliasContStr(Me)
     Friend ReadOnly Property ObjAreaPredioDec As New ClsAreaPredioDec(Me)
+    Friend ReadOnly Property ObjCentroCostosStr As New ClsCentroCostosStr(Me)
     Friend ReadOnly Property ObjCoeficientePropiedadDec As New ClsCoeficientePropiedadDec(Me)
     Friend ReadOnly Property ObjComentarioStr As New ClsComentarioStr(Me)
     Friend ReadOnly Property ObjEmailAdiStr As New ClsEmailAdiStr(Me)
@@ -124,6 +128,7 @@
             If HcolPropiedades.Count = 0 Then
                 HcolPropiedades.Add(ObjAliasContStr)
                 HcolPropiedades.Add(ObjAreaPredioDec)
+                HcolPropiedades.Add(ObjCentroCostosStr)
                 HcolPropiedades.Add(ObjCoeficientePropiedadDec)
                 HcolPropiedades.Add(ObjComentarioStr)
                 HcolPropiedades.Add(ObjEmailAdiStr)
@@ -152,6 +157,7 @@
         End Get
     End Property
 #End Region
+
 #Region "Otras Propiedades"
     ''' <summary>
     ''' Devuelve un arreglo que contiene la identificación de los predios agrupados, incluido el predio
@@ -232,6 +238,7 @@
     End Property
 #End Region
 #End Region
+
 #Region "Procedimientos y funciones invalidantes"
     Protected Overrides Sub SVacie()
         MyBase.SVacie()
@@ -249,6 +256,7 @@
         MobjSector = Nothing
         MshrIdAno = -1
     End Sub
+
     Protected Overrides Sub SActualice(ablnExigeRequeridos As Boolean)
         GobjPanDat.SControleProcesoObj(True)
         Dim lblnNoHayError = False, lblnPropValidos = True
@@ -306,6 +314,7 @@
             End If
         End Try
     End Sub
+
     Protected Overrides Sub SInicialiceObj()
         MyBase.SInicialiceObj()
         ObjIdCarpeta_PredioShr.ObjValorPro = GshrIdCarpeta
@@ -315,6 +324,7 @@
         ObjNoConsolidarItemsFacBln.ObjValorPro = True
         ObjFacturarPorServicio_PreBln.ObjValorPro = False
     End Sub
+
     Protected Overrides Function FblnSuprimio() As Boolean
         Dim lblnSuprimio = FblnEsSuprimible()
         If lblnSuprimio Then
@@ -326,6 +336,7 @@
         End If
         Return lblnSuprimio
     End Function
+
     Friend Overrides Function FblnEsSuprimible() As Boolean
         Dim lblnEsSuprimible = FblnPermitidoSuprimir()
         If lblnEsSuprimible Then
@@ -340,14 +351,17 @@
         End If
         Return lblnEsSuprimible
     End Function
+
     Friend Overrides ReadOnly Property StrIdObjeto As String
         Get
             Return ObjIdPredioStr.ToString
         End Get
     End Property
+
     Friend Overrides Function FblnSonValidosDatosOrigen(adtbOrigen As DataTable,
             astrColumnasRelacionadas As String(), ablnReinicie As Boolean,
             ByRef astrMens As String) As Boolean
+        Dim lstrIdPredio As String, lstrIdPredioAgr As String
         Dim lblnEsValido = False, i = 0, ldblFactPondCP As Double, lstrRefPago As String,
                 lstrColumnaOrigen As String
         Dim lbytIdCar As Byte, lbytIdCenutil As Byte, lbytIdSector As Byte,
@@ -356,6 +370,14 @@
         Dim lobjValorLlave As Object()
         For Each ldrwOrigen As DataRow In adtbOrigen.Rows
             i += 1
+            lstrColumnaOrigen = FstrColumnaOrigen(astrColumnasRelacionadas,
+                    ClsIdPredioStr.SstrNombreCampoBd)
+            lstrIdPredio = ClsPanorama.FobjValorCampo(ldrwOrigen(lstrColumnaOrigen),
+                    EnuTipoValor.EnuString)
+            lstrColumnaOrigen = FstrColumnaOrigen(astrColumnasRelacionadas,
+                    ClsIdPredioAgrupadorStr.SstrNombreCampoBd)
+            lstrIdPredioAgr = ClsPanorama.FobjValorCampo(ldrwOrigen(lstrColumnaOrigen),
+                    EnuTipoValor.EnuString)
             lstrColumnaOrigen = FstrColumnaOrigen(astrColumnasRelacionadas,
                     ClsIdCarpetaShr.SstrNombreCampoBd)
             lbytIdCar = ClsPanorama.FobjValorCampo(ldrwOrigen(lstrColumnaOrigen),
@@ -401,20 +423,25 @@
             End If
             If i = 1 Then
                 lblnConRefPago = Not String.IsNullOrEmpty(lstrRefPago)
-            Else
-                If lblnConRefPago Then
+            End If
+            If lblnConRefPago Then
+                If lstrIdPredio = lstrIdPredioAgr Then
                     lblnEsValido = Not String.IsNullOrEmpty(lstrRefPago)
                 Else
                     lblnEsValido = String.IsNullOrEmpty(lstrRefPago)
                 End If
-                If Not lblnEsValido Then
-                    astrMens = "La Referencia de Pago en el registro" & i.ToString & " no es valida"
-                    Exit For
-                End If
+            Else
+                lblnEsValido = String.IsNullOrEmpty(lstrRefPago)
+            End If
+            If Not lblnEsValido Then
+                astrMens = "La Referencia de Pago en el registro" & i.ToString &
+                        " no es valida"
+                Exit For
             End If
         Next
         Return lblnEsValido
     End Function
+
     Private Function FblnCambioPropietario() As Boolean
         Dim lblnCambio = False
         If EnuEstadoActualizacion <> EnuEstadoObjetoDef.EnuConsultando Then
@@ -428,6 +455,7 @@
         Return lblnCambio
     End Function
 #End Region
+
 #Region "Procedimientos del objeto"
     ''' <summary>
     ''' Cambia el propietario de los predios agrupados cuando el propietario del predio agrupador
@@ -459,6 +487,7 @@
                 lcolCamposRef, lcolDatosRef)
 
     End Sub
+
     Private Sub SActualicePrediosAgrupados()
         For Each lobjPredio As ClsPredio In ColPrediosAgrupados
             If lobjPredio.ObjIdPredioStr.ObjValorPro <>
@@ -500,6 +529,7 @@
             End If
         Next
     End Sub
+
     Private Sub SActualicePropPredios()
         For Each lobjPredio As ClsPredio In ColPrediosAgrupados
             If lobjPredio.ObjIdPredioStr.ObjValorPro <> ObjIdPredioAgrupadorStr.ObjValorPro Then
@@ -507,6 +537,7 @@
             End If
         Next
     End Sub
+
     Friend Sub SActualiceProp(acolNewProp As Collection)
         EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
         For Each lobjProp As ClsPropietario In ColPropietarios
@@ -529,6 +560,7 @@
         Next
         SActualice(True)
     End Sub
+
     Private Sub SPueblePrediosAgrupados()
         Dim lstrFiltro = ClsOrionCop.StrFiltroUbicacion & " AND " &
                 ClsIdPredioAgrupadorStr.SstrNombreCampoBd & " = '" &
@@ -546,6 +578,7 @@
             End If
         End If
     End Sub
+
     Private Sub SPuebleTablaPrediosAgrupados()
         If IsNothing(MdtbPrediosAgrupados) Then
             Dim lstrFiltro = ClsOrionCop.StrFiltroUbicacion & " AND " &
@@ -560,6 +593,7 @@
             MdtbPrediosAgrupados = ClsPanorama.FdtbDataTable(SstrNombreTabla, {"*"}, lstrIndice, lstrFiltro)
         End If
     End Sub
+
     Friend Function FdtbFacturasPredio(aenuEstadoFactura As EnuEstadoFacturaDef) As DataTable
         Dim ldtbFacturasPredi As DataTable
         Dim lstrTablaPri = ClsItemFactura.SstrNombreTabla
@@ -602,6 +636,7 @@
         SComplementeTablaFact(ldtbFacturasPredi)
         Return ldtbFacturasPredi
     End Function
+
     Private Shared Sub SComplementeTablaFact(adtbFacturasPredio As DataTable)
         Dim lstrPref As String, lentIdFact As Integer
         For Each ldrwFact As DataRow In adtbFacturasPredio.Rows
@@ -611,6 +646,7 @@
             ldrwFact("NroFact") = lstrNtoFact
         Next
     End Sub
+
     ''' <summary>
     ''' Devuelve el Id del Cliente del Cliente con un Id diferente al pasado en el argumento "adblIdCliente"
     ''' que tiene deuda con el PredioAgrupador actual.
@@ -633,6 +669,7 @@
         End If
         Return ldblIdClienteDif
     End Function
+
     ''' <summary>
     ''' Devuelve un ArrayList con el Id de los Clientes que tienen o han tenido deudas con
     ''' este predio como predio agrupador. 
@@ -657,6 +694,7 @@
         GobjPanDat.SControleProcesoObj(False)
         Return ldblIdClientes
     End Function
+
     Private Function FdtbClientesDelPredio() As DataTable
         Dim lstrCamposSelect = {ClsIdCliente_FactDbl.SstrNombreCampoBd,
                 "SUM(" & ClsDebitos_FactDec.SstrNombreCampoBd & " - " &
@@ -668,6 +706,7 @@
                 {{"Saldo", "DESC"}}, lstrFiltro, False, {ClsIdCliente_FactDbl.SstrNombreCampoBd})
         Return ldtbCliePre
     End Function
+
     Friend Function FdecSaldoDeudaPredio(astrIdPredio As String) As Decimal
         Dim lstrTabla = ClsItemFactura.SstrNombreTabla
         Dim lstrCampsoSelect As String() = {"SUM(" & ClsDebitos_ItemFactDec.SstrNombreCampoBd &
@@ -680,6 +719,7 @@
                     EnuTipoValor.EnuDecimal)
         Return ldecSaldo
     End Function
+
     Friend Function FblnEstaPazYSalvo(ByRef astrMens As String) As Boolean
         Dim lstrPredioNoPazySalvo As String() = {}, i = -1
         Dim lstrIdPredio As String, lblnEstaPazYSalvo = True
@@ -715,6 +755,7 @@
         End If
         Return lblnEstaPazYSalvo
     End Function
+
     Friend Function FblnPropsValidos() As Boolean
         Dim lcolPropPred As Collection
         Dim lblnEsValido = ObjIdPredioAgrupadorStr.ObjValorPro =
@@ -739,17 +780,20 @@
         End If
         Return lblnEsValido
     End Function
+
     Friend Sub SModifiqueParaEstado()
         HblnEsAnulable = False
         HblnEsCreable = False
         HblnEsSuprimible = False
         HblnEsModificable = False
     End Sub
+
     Friend Function FdecDesctoPP_Prop(adblIdProp As Double, adecValorItemFac As Decimal) As Decimal
         Dim ldecDsctoPP As Decimal
         Dim ldecDctoCli As Decimal = 0.0
         Dim ldblPorPar As Double
-        If GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro Then
+        If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuDescuentoPP Then
             If GobjParametros.ObjAnoActual.ObjTipoDsctoPPByt.ObjValorPro =
                         EnuTipoDsctoPP.EnuValorFijo Then
                 ldecDsctoPP = ObjSector.ObjDctoProntoPago_SecDbl.ObjValorPro
@@ -772,6 +816,7 @@
         End If
         Return ldecDctoCli
     End Function
+
     Friend Function FshrIdSerAdminContribuye() As Short
         Dim lshrIdModContr = FShrIdModuloContribuye(), lshrIdServicio = 0S
         For Each lobjSerAdm As ClsServicio In GobjParametros.ObjAnoActual.ColServiciosAno
@@ -784,6 +829,7 @@
         Next
         Return lshrIdServicio
     End Function
+
     Private Function FblnModuloContAServicio(aobjServicio As ClsServicio,
             ashrIdModulo As Short) As Boolean
         Dim lblnSi = False
@@ -795,6 +841,7 @@
         Next
         Return lblnSi
     End Function
+
     Private Function FShrIdModuloContribuye() As Short
         Dim lshrIdModulo As Short, lobjModuloContr As ClsModuloContribucion
         Dim lstrTabla = ClsSectorModulo.SstrNombreTabla
@@ -813,6 +860,7 @@
         Next
         Return lshrIdModulo
     End Function
+
     ''' <summary>
     ''' Indica si el string pasado en el argumento ya existe
     ''' </summary>
@@ -830,6 +878,7 @@
         Dim lblnExiste As Boolean = ldtbRes.Rows.Count > 0
         Return lblnExiste
     End Function
+
     ''' <summary>
     ''' Indica si todos los predios agrupadores tienen referencia de pago o 
     ''' si ninguno tiene referencia de pago.
@@ -848,6 +897,7 @@
         Return lblnConRefPago
     End Function
 #End Region
+
 #Region "Items Programa Facturacion"
     Friend ReadOnly Property ColItemsProgramaFact(ashrIdAno As Short) As Collection
         Get
@@ -1115,6 +1165,7 @@
         adrwItemOrigramaFac("NombreOrigen") = lstrNombreOrigen
     End Sub
 #End Region
+
 #Region "ItemsFactura"
     Friend ReadOnly Property DecSaldoPredio As Decimal
         Get
@@ -1172,6 +1223,7 @@
         End If
     End Sub
 #End Region
+
 #Region "Propietarios"
     Friend ReadOnly Property ColPropietarios As Collection
         Get
@@ -1208,6 +1260,7 @@
                 lstrCampSelSec, lstrCampRelPri, lstrCampRelsec, lstrOrden, lstrFiltro, {}, False)
         Return ldtbProp
     End Function
+
     Friend Function FobjNewPropietario() As ClsPropietario
         Dim ldtbProp As DataTable = FdtbPropietarios()
         Dim ldrwNewProp = ldtbProp.NewRow
@@ -1219,12 +1272,14 @@
         lobjNewProp.ObjPorcentajePartiDbl.ObjValorPro = 0
         Return lobjNewProp
     End Function
+
     Friend Sub SAdicioneNewProp(aobjNewProp As ClsPropietario)
         If EnuEstadoActualizacion <> EnuEstadoObjetoDef.EnuConsultando Then
             aobjNewProp.ObjIdPredio_PropStr.ObjValorPro = ObjIdPredioStr.ObjValorPro
             McolPropietarios.Add(aobjNewProp, aobjNewProp.ObjIdCliente_PropDbl.ToString())
         End If
     End Sub
+
     Friend Sub SActualiceProp(adblIdCliente As Double, adblPorcientoPart As Double)
         Dim lobjProp As ClsPropietario = ColPropietarios(adblIdCliente.ToString())
         If lobjProp.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
@@ -1232,11 +1287,13 @@
         End If
         lobjProp.ObjPorcentajePartiDbl.ObjValorPro = adblPorcientoPart
     End Sub
+
     Friend Sub SDesvinculeProp(astrIdProp As String)
         If ColPropietarios.Contains(astrIdProp) Then
             ColPropietarios.Remove(astrIdProp)
         End If
     End Sub
+
     Friend Function FenuEstadoSugeridoDeuda() As EnuEstadoDeudaDef
         Dim lenuEstadoDeu As EnuEstadoDeudaDef = EnuEstadoDeudaDef.None
         Dim lenuEstSugDeuda As EnuEstadoDeudaDef
@@ -1311,6 +1368,7 @@
         Next
         Return lblnEsValido
     End Function
+
     Friend Function FblnPropietariosCambiaron() As Boolean
         Dim lblnSi As Boolean
         For Each lobjPropietario As ClsPropietario In ColPropietarios
@@ -1321,6 +1379,7 @@
     End Function
 #End Region
 End Class
+
 #Region "Clases de Propiedad"
 Friend Class ClsAliasContStr
     Inherits ClsCBPropiedad
@@ -1350,6 +1409,7 @@ Friend Class ClsAliasContStr
         End If
     End Function
 End Class
+
 Friend Class ClsAreaPredioDec
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "Area"
@@ -1396,6 +1456,29 @@ Friend Class ClsAreaPredioDec
         End If
     End Function
 End Class
+
+Friend Class ClsCentroCostosStr
+    Inherits ClsCBPropiedad
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        HstrNombre = "Centro de costos"
+        HshrLongitud = 10
+        HenuTipoValor = EnuTipoValor.EnuString
+        HStrNombreCampoBd = "CentroCostos"
+        HblnRegistrarLogCambio = True
+    End Sub
+    Public Overrides Sub SValide()
+        HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 2, ShrLongitud, BlnEsRequerido)
+    End Sub
+    Public Overrides Function ToString() As String
+        If Not IsNothing(ObjValorPro) Then
+            Return HobjValorPro.ToString
+        Else
+            Return ""
+        End If
+    End Function
+End Class
+
 Friend Class ClsCoeficientePropiedadDec
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "CoeficientePropiedad"
@@ -1423,6 +1506,7 @@ Friend Class ClsCoeficientePropiedadDec
         End If
     End Function
 End Class
+
 Friend Class ClsComentarioStr
     Inherits ClsCBPropiedad
     Public Sub New(aobjPadre As ClsCBObjetoPan)
@@ -1444,6 +1528,7 @@ Friend Class ClsComentarioStr
         End If
     End Function
 End Class
+
 Friend Class ClsEmailAdiStr
     Inherits ClsCBPropiedad
     Private ReadOnly MobjPadre As ClsPredio = Nothing
@@ -1487,6 +1572,7 @@ Friend Class ClsEmailAdiStr
         End If
     End Function
 End Class
+
 Friend Class ClsFactorPonderaCPDbl
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "FactorPonderacionCP"
@@ -1531,6 +1617,7 @@ Friend Class ClsFactorPonderaCPDbl
         End If
     End Function
 End Class
+
 Friend Class ClsFacturarPorServicio_PreBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "FacturarPorServicio"
@@ -1554,6 +1641,7 @@ Friend Class ClsFacturarPorServicio_PreBln
         Return ClsPanorama.FstrBuleanoToString(HobjValorPro)
     End Function
 End Class
+
 Friend Class ClsIdClienteAdministradorDbl
     Inherits ClsCBPropiedad
     Private MstrNombreCliente As String = String.Empty
@@ -1614,6 +1702,7 @@ Friend Class ClsIdClienteAdministradorDbl
         End If
     End Function
 End Class
+
 Friend Class ClsIdClienteArrendatarioDbl
     Inherits ClsCBPropiedad
     Private ReadOnly MobjPadre As ClsPredio = Nothing
@@ -1662,6 +1751,7 @@ Friend Class ClsIdClienteArrendatarioDbl
         End If
     End Function
 End Class
+
 Friend Class ClsIdClienteRepLegArrendatariodbl
     Inherits ClsCBPropiedad
     Private MstrNombreCliente As String = String.Empty
@@ -1722,6 +1812,7 @@ Friend Class ClsIdClienteRepLegArrendatariodbl
         End If
     End Function
 End Class
+
 Friend Class ClsIdEstadoDeuda_PredioByt
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdEstadoDeuda"
@@ -1750,6 +1841,7 @@ Friend Class ClsIdEstadoDeuda_PredioByt
         End If
     End Function
 End Class
+
 Friend Class ClsIdFichaCatastralStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdFichaCatastral"
@@ -1777,6 +1869,7 @@ Friend Class ClsIdFichaCatastralStr
         End If
     End Function
 End Class
+
 Friend Class ClsIdMatriculaInmobiliariaStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdMatriculaInmobiliaria"
@@ -1804,6 +1897,7 @@ Friend Class ClsIdMatriculaInmobiliariaStr
         End If
     End Function
 End Class
+
 Friend Class ClsIdPredioAgrupadorStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdPredioAgrupador"
@@ -1823,7 +1917,7 @@ Friend Class ClsIdPredioAgrupadorStr
         If HblnEsValido Then
             Dim lobjPadre As ClsPredio = ObjPadre
             Dim lobjValorLlave() = {GshrIdCarpeta, GshrIdCentroUtil, HobjValorNew}
-            If lobjPadre.EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuConsultando Then
+            If lobjPadre.EnuEstadoActualizacion <> EnuEstadoObjetoDef.EnuConsultando Then
                 HstrMens = String.Empty
                 If lobjPadre.ObjIdPredioStr.ToString.ToUpper <> HobjValorNew.ToString.ToUpper Then
                     If Not lobjPadre.FblnExisteLlave(lobjValorLlave) Then
@@ -1832,7 +1926,7 @@ Friend Class ClsIdPredioAgrupadorStr
                         HblnEsValido = False
                     Else
                         Dim lobjPredioAgr As ClsPredio =
-                                ClsOrionCop.FobjNuevoPredio(EnuModoInstanciaObjDef.enuUnico)
+                                ClsOrionCop.FobjNuevoPredio(EnuModoInstanciaObjDef.EnuUnico)
                         lobjPredioAgr.SAbra(lobjValorLlave)
                         HblnEsValido = lobjPredioAgr.ObjIdPredioAgrupadorStr.ObjValorPro =
                                 lobjPredioAgr.ObjIdPredioStr.ObjValorPro
@@ -1841,7 +1935,7 @@ Friend Class ClsIdPredioAgrupadorStr
                                     ", no es un predio agrupador!"
                         Else
                             HobjValorNew = lobjPredioAgr.ObjIdPredioStr.ObjValorPro
-                            If HobjValorNew <> HobjValorOriginal Then
+                            If Not GblnImportando AndAlso HobjValorNew <> HobjValorOriginal Then
                                 lobjPadre.SActualicePropDelPredio(lobjPredioAgr)
                             End If
                         End If
@@ -1897,6 +1991,7 @@ Friend Class ClsIdPredioAgrupadorStr
         End If
     End Function
 End Class
+
 Friend Class ClsIdPredioStr
     'Herencia
     Inherits ClsCBPropiedad
@@ -1963,6 +2058,7 @@ Friend Class ClsIdPredioStr
         End If
     End Function
 End Class
+
 Friend Class ClsIdRegistroMercantilStr
     Inherits ClsCBPropiedad
     Public Sub New(aobjPadre As ClsCBObjetoPan)
@@ -1984,6 +2080,7 @@ Friend Class ClsIdRegistroMercantilStr
         End If
     End Function
 End Class
+
 Friend Class ClsIdSector_PredioShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdSector"
@@ -2038,6 +2135,7 @@ Friend Class ClsIdSector_PredioShr
         End If
     End Sub
 End Class
+
 Friend Class ClsIdTipoDestinatarioFacturaByt
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdTipoDestinatarioFactura"
@@ -2084,6 +2182,7 @@ Friend Class ClsIdTipoDestinatarioFacturaByt
         End If
     End Function
 End Class
+
 Friend Class ClsNoConsolidarItemsFacBln
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "NoConsItemsFac"
@@ -2107,6 +2206,7 @@ Friend Class ClsNoConsolidarItemsFacBln
         Return ClsPanorama.FstrBuleanoToString(HobjValorPro)
     End Function
 End Class
+
 Friend Class ClsNombreComercialStr
     Inherits ClsCBPropiedad
     Public Sub New(aobjPadre As ClsCBObjetoPan)
@@ -2128,6 +2228,7 @@ Friend Class ClsNombreComercialStr
         End If
     End Function
 End Class
+
 Friend Class ClsNombrePredioStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "NombrePredio"
@@ -2157,6 +2258,7 @@ Friend Class ClsNombrePredioStr
         End If
     End Function
 End Class
+
 Friend Class ClsReferenciaPagoStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "ReferenciaPago"
@@ -2165,11 +2267,12 @@ Friend Class ClsReferenciaPagoStr
         MyBase.New(aobjPadre)
         MobjPadre = aobjPadre
         HstrNombre = "Referencia  Pago"
-        HshrLongitud = 8
+        HshrLongitud = 25
         HenuTipoValor = EnuTipoValor.EnuString
         HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
         HblnRegistrarLogCambio = True
     End Sub
+
     Public Overrides Sub SValide()
         HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 1, ShrLongitud,
                     BlnEsRequerido)
@@ -2197,11 +2300,13 @@ Friend Class ClsReferenciaPagoStr
             SNotifiqueDatInv()
         End If
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If Not IsNothing(ObjValorPro) Then
             Return HobjValorPro.ToString
@@ -2210,6 +2315,7 @@ Friend Class ClsReferenciaPagoStr
         End If
     End Function
 End Class
+
 Friend Class ClsValorServicioIdDec
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "ValorServicioId"

@@ -594,7 +594,7 @@ Public Class WinFacturas
                     If tbiEstadoCuenta.IsSelected Then
                         SImprimaEstadoCta()
                     Else
-                        SImprimaFac()
+                        SImprimaFactura(MobjObjetoWin, lstrMens)
                     End If
                 End If
             Else
@@ -666,40 +666,6 @@ Public Class WinFacturas
                 }
                 lobjRep.SGenereReporte()
             End If
-        End If
-    End Sub
-
-    Private Sub SImprimaFac()
-        Dim lstrMens = String.Empty
-        Dim lblnPuede = MobjObjetoWin.BlnEstaRegEFac OrElse Not MobjObjetoWin.BlnEsFacEle
-        If lblnPuede Then
-            Dim lstrPrefFact = MobjObjetoWin.ObjPrefijo_FactStr.ObjValorPro
-            Dim lentIdFacPrimera = MobjObjetoWin.ObjIdFacturaEnt.ObjValorPro
-            Dim lentIdFacUltima = MobjObjetoWin.ObjIdFacturaEnt.ObjValorPro
-            Dim lobjParaFact As New ClsParametrosReportesDocs(lstrPrefFact, lentIdFacPrimera,
-                    lentIdFacUltima)
-            Dim lobjRep = New ClsRepOrionCop(GCOBJREGISTRO) With {
-                    .ObjParRepDocs = lobjParaFact
-                }
-            If MobjObjetoWin.BlnEsFacEle Then
-                lobjRep.EnuReporte = EnuReporteDef.enuFacturaEFac
-            Else
-                If MobjObjetoWin.ObjIdModoFacturacionByt.ObjValorPro = EnuModoFacturacionDef.EnuImportada Then
-                    lobjRep.EnuReporte = EnuReporteDef.enuFactImportada
-                Else
-                    If GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro Then
-                        lobjRep.EnuReporte = EnuReporteDef.enuFacturaDscto
-                    Else
-                        lobjRep.EnuReporte = EnuReporteDef.enuFactura
-                    End If
-                End If
-            End If
-            lobjRep.SGenereReporte()
-        Else
-            lstrMens = "La Factura no se puede imprimir porque aún no está registrada en API de EFac!"
-        End If
-        If Not String.IsNullOrEmpty(lstrMens) Then
-            SLevanteEveNoti(lstrMens, String.Empty, 0, EnuSeveridadNot.EnuInformacion)
         End If
     End Sub
 #End Region

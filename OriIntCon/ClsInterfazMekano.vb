@@ -10,11 +10,13 @@ Friend Class ClsInterfazMekano
     Private MdtmFechaFinInterfazAnterior As Date = GCDTMFECHANULA
     Private ReadOnly MstbInterfaz As New StringBuilder
 #End Region
+
 #Region "Constructores"
     Friend Sub New(aobjRegistro As Object)
         MyBase.New(aobjRegistro)
     End Sub
 #End Region
+
 #Region "Interfaz"
     Friend Overrides Sub SGenerereInterfazContable(ablnFinMes As Boolean, ByRef astrMens As String)
         Dim lblnNoHayError = False
@@ -68,6 +70,7 @@ Friend Class ClsInterfazMekano
             End If
         End Try
     End Sub
+
     Private Sub SGenereIntMekano(ByRef astrMens As String)
         Dim ldtbMovi = FdtbMovimiento()
         Try
@@ -91,6 +94,7 @@ Friend Class ClsInterfazMekano
             End If
         End Try
     End Sub
+
     Private Sub SProceseDoc(adtbMovi As DataTable, aenuIdDocumento As EnuIdDocumentoDef,
             aswInterfaz As StreamWriter)
         Dim ldecValor As Decimal
@@ -102,10 +106,10 @@ Friend Class ClsInterfazMekano
         For Each ldrwNov As DataRow In ldrwMvimDoc
             If aenuIdDocumento = EnuIdDocumentoDef.EnuFacturaVenta Then
                 lstrPref = CType(ClsPanorama.FobjValorCampo(ldrwNov(
-                    ClsPrefijoDocOrigen_NovStr.SstrNombreCampoBd), EnuTipoValor.enuString), String)
+                    ClsPrefijoDocOrigen_NovStr.SstrNombreCampoBd), EnuTipoValor.EnuString), String)
                 If String.IsNullOrEmpty(lstrPref) Then lstrPref = String.Empty
                 lentIdFra = CType(ClsPanorama.FobjValorCampo(ldrwNov(
-                        ClsIdDocOrigenEnt.SstrNombreCampoBd), EnuTipoValor.enuInteger), Integer)
+                        ClsIdDocOrigenEnt.SstrNombreCampoBd), EnuTipoValor.EnuInteger), Integer)
                 lstrNroFac = ClsPanorama.FstrNumeroDcto(lstrPref, lentIdFra)
                 If lstrNroFacAnt <> lstrNroFac Then
                     SProceseFactura(adtbMovi, lstrPref, lentIdFra, aswInterfaz)
@@ -113,12 +117,13 @@ Friend Class ClsInterfazMekano
                 End If
             Else
                 ldecValor = ClsPanorama.FobjValorCampo(ldrwNov(ClsValor_NovDec.SstrNombreCampoBd),
-                        EnuTipoValor.enuDecimal)
+                        EnuTipoValor.EnuDecimal)
                 SEscribaMovDoc(ldrwNov, lstrTipoDoc, ldecValor, True, aswInterfaz)
                 SEscribaMovDoc(ldrwNov, lstrTipoDoc, ldecValor, False, aswInterfaz)
             End If
         Next
     End Sub
+
     Private Sub SProceseFactura(adtbMovi As DataTable, astrPref As String,
             aentIdFact As Integer, aswInterfaz As StreamWriter)
         Dim lstrFiltro = ClsIdTipoDocOrigenByt.SstrNombreCampoBd & " = " &
@@ -136,19 +141,19 @@ Friend Class ClsInterfazMekano
         Do
             ldrwNov = ldrwNovsFra(i)
             lenuTipoNovDbFra = ClsPanorama.FobjValorCampo(ldrwNov(
-                    ClsIdTipoNovedadByt.SstrNombreCampoBd), EnuTipoValor.enuByte)
+                    ClsIdTipoNovedadByt.SstrNombreCampoBd), EnuTipoValor.EnuByte)
             If lstrIdCtaDb <> ClsPanorama.FobjValorCampo(ldrwNov(
-                    ClsIdCuentaDb_NovStr.SstrNombreCampoBd), EnuTipoValor.enuString) Then
+                    ClsIdCuentaDb_NovStr.SstrNombreCampoBd), EnuTipoValor.EnuString) Then
                 If Not String.IsNullOrEmpty(lstrIdCtaDb) Then
                     SEscribaMovDoc(ldrwNovsFra(i - 1), lstrTipoDoc, ldecValorFra, True, aswInterfaz)
                 End If
                 lstrIdCtaDb = ClsPanorama.FobjValorCampo(ldrwNov(
-                        ClsIdCuentaDb_NovStr.SstrNombreCampoBd), EnuTipoValor.enuString)
+                        ClsIdCuentaDb_NovStr.SstrNombreCampoBd), EnuTipoValor.EnuString)
                 ldecValorFra = ClsPanorama.FobjValorCampo(ldrwNov(
-                        ClsValor_NovDec.SstrNombreCampoBd), EnuTipoValor.enuDecimal)
+                        ClsValor_NovDec.SstrNombreCampoBd), EnuTipoValor.EnuDecimal)
             Else
                 ldecValorFra += ClsPanorama.FobjValorCampo(ldrwNov(
-                        ClsValor_NovDec.SstrNombreCampoBd), EnuTipoValor.enuDecimal)
+                        ClsValor_NovDec.SstrNombreCampoBd), EnuTipoValor.EnuDecimal)
             End If
             If lenuTipoNovDbFra = EnuTipoNov.EnuDbCap Then
                 ldrwNovDbFra = ldrwNov
@@ -160,9 +165,9 @@ Friend Class ClsInterfazMekano
         Loop While i < ldrwNovsFra.Length
         For Each ldrwNovFac As DataRow In ldrwNovsFra
             ldecValor = ClsPanorama.FobjValorCampo(ldrwNovFac(ClsValor_NovDec.SstrNombreCampoBd),
-                        EnuTipoValor.enuDecimal)
+                        EnuTipoValor.EnuDecimal)
             lshrIdItemFac = ClsPanorama.FobjValorCampo(ldrwNovFac(ClsIdItemFacturaShr.SstrNombreCampoBd),
-                    EnuTipoValor.enuShort)
+                    EnuTipoValor.EnuShort)
             lobjValorLlave = {GshrIdCarpeta, GshrIdCentroUtil, astrPref, aentIdFact}
             lobjFactura.SAbra(lobjValorLlave)
             lstrIdTerceroCtaCr = lobjFactura.FstrIdTerceroCtaCr(lshrIdItemFac)
@@ -173,6 +178,7 @@ Friend Class ClsInterfazMekano
             End If
         Next
     End Sub
+
     Private Sub SProceseRecibosCaja(aswInterfaz As StreamWriter)
         Dim lstrTipoDoc = GobjParametros.FstrTipoDoc(EnuIdDocumentoDef.EnuReciboCaja)
         Dim lstrPrefRC = String.Empty, lentIdRC = 0, lstrPrefRCNov As String, lentIdRCNov As Integer
@@ -181,11 +187,11 @@ Friend Class ClsInterfazMekano
         Dim ldtbMovRC = FdtbMoviRC()
         For Each ldrwNov As DataRow In ldtbMovRC.Rows
             lstrPrefRCNov = ClsPanorama.FobjValorCampo(ldrwNov(ClsPrefijoDocOrigen_NovStr.SstrNombreCampoBd),
-                    EnuTipoValor.enuString)
+                    EnuTipoValor.EnuString)
             lentIdRCNov = ClsPanorama.FobjValorCampo(ldrwNov(ClsIdDocOrigenEnt.SstrNombreCampoBd),
-                    EnuTipoValor.enuInteger)
+                    EnuTipoValor.EnuInteger)
             lstrIdCuentaDbNov = ClsPanorama.FobjValorCampo(ldrwNov(ClsIdCuentaDb_NovStr.SstrNombreCampoBd),
-                    EnuTipoValor.enuString)
+                    EnuTipoValor.EnuString)
             If lstrPrefRC <> lstrPrefRCNov OrElse lentIdRC <> lentIdRCNov OrElse
                     lstrIdCuentaDb <> lstrIdCuentaDbNov Then
                 lstrFiltro = ClsPrefijoDocOrigen_NovStr.SstrNombreCampoBd & " = '" & lstrPrefRCNov &
@@ -200,45 +206,49 @@ Friend Class ClsInterfazMekano
             End If
         Next
     End Sub
+
     Private Sub SProceseRecCaja(adrwMoviRC As DataRow(), astrTipoDoc As String,
             aswInterfaz As StreamWriter)
         Dim ldecValor = 0D, ldecValorNov As Decimal
         ' Calcular valor debito 
         For Each ldrwMovNov As DataRow In adrwMoviRC
             ldecValorNov = ClsPanorama.FobjValorCampo(ldrwMovNov(ClsValor_NovDec.SstrNombreCampoBd),
-                    EnuTipoValor.enuDecimal)
+                    EnuTipoValor.EnuDecimal)
             ldecValor += ldecValorNov
         Next
         SEscribaMovDoc(adrwMoviRC(0), astrTipoDoc, ldecValor, True, aswInterfaz)
         For Each ldrwMovNov As DataRow In adrwMoviRC
             ldecValorNov = ClsPanorama.FobjValorCampo(ldrwMovNov(ClsValor_NovDec.SstrNombreCampoBd),
-                    EnuTipoValor.enuDecimal)
+                    EnuTipoValor.EnuDecimal)
             SEscribaMovDoc(ldrwMovNov, astrTipoDoc, ldecValorNov, False, aswInterfaz)
         Next
     End Sub
+
     Private Sub SProceseNotaR(aenuIdDocumento As EnuIdDocumentoDef, aswInterfaz As StreamWriter)
         Dim ldecValor As Decimal
         Dim lstrTipoDoc = GobjParametros.FstrTipoDoc(aenuIdDocumento)
         Dim ldtbMovAntR = FdtbMoviAnt(aenuIdDocumento)
         For Each ldrwNov As DataRow In ldtbMovAntR.Rows
             ldecValor = ClsPanorama.FobjValorCampo(ldrwNov(ClsValor_NovDec.SstrNombreCampoBd),
-                    EnuTipoValor.enuDecimal)
+                    EnuTipoValor.EnuDecimal)
             SEscribaMovDoc(ldrwNov, lstrTipoDoc, ldecValor, True, aswInterfaz)
             SEscribaMovDoc(ldrwNov, lstrTipoDoc, ldecValor, False, aswInterfaz)
         Next
     End Sub
+
     Private Sub SProceseNotasAjuste(aswInterfaz As StreamWriter)
         Dim lstrTipoDoc = GobjParametros.FstrTipoDoc(EnuIdDocumentoDef.EnuNotaAjuste)
         Dim ldecValor As Decimal
         Dim ldtbMovNA = FdtbMoviNotaAjuste()
         For Each ldrwNov As DataRow In ldtbMovNA.Rows
             ldecValor = ClsPanorama.FobjValorCampo(ldrwNov(ClsValor_NovDec.SstrNombreCampoBd),
-                        EnuTipoValor.enuDecimal)
+                        EnuTipoValor.EnuDecimal)
             SEscribaMovDoc(ldrwNov, lstrTipoDoc, ldecValor, True, aswInterfaz)
             SEscribaMovDoc(ldrwNov, lstrTipoDoc, ldecValor, False, aswInterfaz)
         Next
     End Sub
 #End Region
+
 #Region "Archivo Excell"
     Private Sub SEscribaEncabezado(aswInterfaz As StreamWriter)
         With MstbInterfaz
@@ -252,31 +262,33 @@ Friend Class ClsInterfazMekano
         End With
         aswInterfaz.WriteLine(MstbInterfaz.ToString())
     End Sub
+
     Private Sub SEscribaMovDoc(adrwMov As DataRow, astrTipoDoc As String,
             adecValor As Decimal, ablnDb As Boolean, aswInterfaz As StreamWriter)
-        Dim ldecDb As Decimal, ldecCr As Decimal
+        Dim ldecDb As Decimal, ldecCr As Decimal, lstrCenCos = String.Empty
+        Dim lstrNombreCenCostos As String = String.Empty
         Dim lentIdDocumento = ClsPanorama.FobjValorCampo(adrwMov(ClsIdDocOrigenEnt.SstrNombreCampoBd),
-                EnuTipoValor.enuInteger)
+                EnuTipoValor.EnuInteger)
         Dim lstrPref As String = ClsPanorama.FobjValorCampo(adrwMov(
-                ClsPrefijoDocOrigen_NovStr.SstrNombreCampoBd), EnuTipoValor.enuString)
+                ClsPrefijoDocOrigen_NovStr.SstrNombreCampoBd), EnuTipoValor.EnuString)
         Dim lstrNombreCliente As String
         Dim lstrCuentaCont As String
         If ablnDb Then
             ldecDb = adecValor
             ldecCr = 0
             lstrCuentaCont = ClsPanorama.FobjValorCampo(adrwMov(
-                    ClsIdCuentaDb_NovStr.SstrNombreCampoBd), EnuTipoValor.enuString)
+                    ClsIdCuentaDb_NovStr.SstrNombreCampoBd), EnuTipoValor.EnuString)
         Else
             ldecDb = 0
             ldecCr = adecValor
             lstrCuentaCont = ClsPanorama.FobjValorCampo(adrwMov(
-                    ClsIdCuentaCr_NovStr.SstrNombreCampoBd), EnuTipoValor.enuString)
+                    ClsIdCuentaCr_NovStr.SstrNombreCampoBd), EnuTipoValor.EnuString)
         End If
         Dim lblnEsCajaBancos = (lstrCuentaCont = GobjParametros.ObjIdCtaCajaStr.ObjValorPro) OrElse
                 GobjParametros.FblnEsCuentaBanco(lstrCuentaCont)
         ' Fecha
         Dim ldtmFechaMov As Date = ClsPanorama.FobjValorCampo(adrwMov(
-                ClsFechaNovedadDtm.SstrNombreCampoBd), EnuTipoValor.enuDate)
+                ClsFechaNovedadDtm.SstrNombreCampoBd), EnuTipoValor.EnuDate)
         Dim lstrFechaMov = ClsPanoramaDat.FstrFechaNormalizada(ldtmFechaMov)
         Dim lstrIdTer As String
         If lblnEsCajaBancos Then
@@ -284,9 +296,14 @@ Friend Class ClsInterfazMekano
             lstrNombreCliente = FstrNombreTerceroCajaBancos(adrwMov)
         Else
             lstrIdTer = ClsPanorama.FobjValorCampo(adrwMov(ClsAliasCont_NovStr.SstrNombreCampoBd),
-                        EnuTipoValor.enuString)
+                        EnuTipoValor.EnuString)
             lstrNombreCliente = ClsPanorama.FobjValorCampo(adrwMov(
-                    ClsNombreCompletoStr.SstrNombreCampoBd), EnuTipoValor.enuString)
+                    ClsNombreCompletoStr.SstrNombreCampoBd), EnuTipoValor.EnuString)
+        End If
+        Dim lstrPredioAgr As String = ClsPanorama.FobjValorCampo(adrwMov(
+                ClsIdPredioAgrupador_NovStr.SstrNombreCampoBd), EnuTipoValor.EnuString)
+        If Not String.IsNullOrEmpty(lstrPredioAgr) Then
+            lstrCenCos = ClsOrionCop.FstrCenCostos(lstrPredioAgr, lstrNombreCenCostos)
         End If
         Dim lstrDetalle = FstrDetalle(adrwMov)
         ' 
@@ -294,13 +311,14 @@ Friend Class ClsInterfazMekano
             .Clear().Append(astrTipoDoc).Append(CHSTRCOMA).Append(lstrPref).Append(CHSTRCOMA)
             .Append(lentIdDocumento).Append(CHSTRCOMA).Append(lstrFechaMov).Append(CHSTRCOMA)
             .Append(lstrCuentaCont).Append(CHSTRCOMA).Append(lstrIdTer).Append(CHSTRCOMA)
-            .Append(String.Empty).Append(CHSTRCOMA).Append(lstrDetalle).Append(CHSTRCOMA)
+            .Append(lstrCenCos).Append(CHSTRCOMA).Append(lstrDetalle).Append(CHSTRCOMA)
             .Append(ldecDb).Append(CHSTRCOMA).Append(ldecCr).Append(CHSTRCOMA).Append(0)
             .Append(CHSTRCOMA).Append(GstrIdUsuario).Append(CHSTRCOMA).Append(lstrNombreCliente)
-            .Append(CHSTRCOMA).Append(String.Empty)
+            .Append(CHSTRCOMA).Append(lstrNombreCenCostos)
         End With
         aswInterfaz.WriteLine(MstbInterfaz.ToString())
     End Sub
+
     ''' <summary>
     ''' Escribe el movimiento CR de un item de factura cuando el tercero es diferente del cliente;
     ''' es decir es un proveedor
@@ -343,6 +361,7 @@ Friend Class ClsInterfazMekano
         aswInterfaz.WriteLine(MstbInterfaz.ToString())
     End Sub
 #End Region
+
 #Region "Generales"
     Friend Overrides ReadOnly Property DtmFechaFinInterfazAnterior() As Date
         Get
@@ -359,6 +378,7 @@ Friend Class ClsInterfazMekano
             Return MdtmFechaFinInterfazAnterior
         End Get
     End Property
+
     Private Sub SLeaUltimoRegInteAnterExcel()
         If Not MblnLeidoUltimoRegistro Then
             MdtmFechaFinInterfazAnterior = GCDTMFECHAMAXI

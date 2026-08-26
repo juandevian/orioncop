@@ -52,6 +52,7 @@
     ' Manejo Ubicacion
     Private ReadOnly MstrNombreVentana As String = My.Resources.NomPre
 #End Region
+
 #Region "Constructor"
     Public Sub New()
         InitializeComponent()
@@ -59,6 +60,7 @@
         MenuTamanoIcono = GenuTamanoIcono
     End Sub
 #End Region
+
 #Region "Invalida metodos en la clase base que implementan la Interfaz"
     Protected Overrides Sub SLoad()
         SAdicionesCtlsRestringidos()
@@ -71,16 +73,19 @@
         SMuestrePropietarios()
         lblNotaProp.Visibility = Visibility.Collapsed
     End Sub
+
     Protected Overrides ReadOnly Property StrNombreVentana As String
         Get
             Return MstrNombreVentana
         End Get
     End Property
+
     Protected Overrides ReadOnly Property Enuidventana As EnuIdVentanaDef
         Get
             Return HenuIdVentana
         End Get
     End Property
+
     Protected Overrides Sub SInicialiceObjeto()
         If IsNothing(ObjObjetoWin) Then
             ObjObjetoWin = ClsOrionCop.FobjNuevoPredio(EnuModoInstanciaObjDef.EnuNavegable)
@@ -92,6 +97,7 @@
         MdtbProp = MobjObjetoWin.FdtbPropietarios
         EnuTipoPermisoObjWin = MobjObjetoWin.EnuPermisosObj
     End Sub
+
     Protected Overrides Sub SInicialiceControles()
         chkFacturarSer.IsChecked = False
         chkNoConsItemsFac.IsChecked = True
@@ -123,6 +129,7 @@
         HbttAceptar.TabIndex = 80
         HbttCancelar.TabIndex = 81
     End Sub
+
     Protected Overrides Sub SMuestreDatos()
         HblnMostrandoDatos = True
         MblnEsPredioAgru = MobjObjetoWin.ObjIdPredioStr.ToString().ToUpper =
@@ -139,6 +146,7 @@
             txtIdPredio.Text = .ObjIdPredioStr.ObjValorPro
             txtNombrePredio.Text = .ObjNombrePredioStr.ObjValorPro
             txtIdPredioAgr.Text = .ObjIdPredioAgrupadorStr.ObjValorPro
+            txtCentroCostos.Text = .ObjCentroCostosStr.ObjValorPro
             txtFichaCatastral.Text = .ObjIdFichaCatastralStr.ToString
             txtMatInmobiliaria.Text = .ObjIdMatriculaInmobiliariaStr.ToString
             txtAliasCont.Text = .ObjAliasContStr.ToString
@@ -158,6 +166,7 @@
         End If
         HblnMostrandoDatos = False
     End Sub
+
     Protected Overrides Sub SValide()
         Dim lblnNoHayDatos = Not BlnVentanaAux AndAlso ObjObjetoWin.FblnEstaVacioOrigenDatos
         If lblnNoHayDatos AndAlso EnuOperacionEnWin =
@@ -215,6 +224,7 @@
             SHabiliteMenuItem(False, MnuCalcularCP)
         End If
     End Sub
+
     Protected Overrides Sub SRegistre()
         With MobjObjetoWin
             If Not String.IsNullOrEmpty(txtAliasCont.Text) Then
@@ -224,6 +234,7 @@
             .ObjNoConsolidarItemsFacBln.ObjValorPro = chkNoConsItemsFac.IsChecked
             .ObjIdFichaCatastralStr.ObjValorPro = txtFichaCatastral.Text
             .ObjIdMatriculaInmobiliariaStr.ObjValorPro = txtMatInmobiliaria.Text
+            .ObjCentroCostosStr.ObjValorPro = txtCentroCostos.Text
             .ObjIdPredioAgrupadorStr.ObjValorPro = txtIdPredioAgr.Text
             .ObjAreaPredioDec.ObjValorPro = txtArea.Text
             .ObjFactorPonderaCPDbl.ObjValorPro = FdblTasa(txtFactorPond.Text)
@@ -240,6 +251,7 @@
             .ObjEmailAdiStr.ObjValorPro = txtEMailAdi.Text
         End With
     End Sub
+
     Protected Overrides Sub SConfigureMenuesPropios()
         ' Adicionar menú Importar
         MnuImportarPredio = FmnuiMenuItemPan("MnuImportarPredio", "_Importar Predios",
@@ -294,6 +306,7 @@
         lmnuReportes.Items.Add(lsep1)
         lmnuReportes.Items.Add(lmnuItem)
     End Sub
+
     Private Sub SAsigneMenuContextual()
         Dim lmnuMenuContextual As ContextMenu = FindResource("RecMnuPrediosAgruMC")
         lsbPrediosAgrupados.ContextMenu = lmnuMenuContextual
@@ -307,6 +320,7 @@
         Next
     End Sub
 #End Region
+
 #Region "Invalida otros metodos de la clase base"
     Protected Overrides Sub SHabiliteMenues()
         MyBase.SHabiliteMenues()
@@ -376,6 +390,7 @@
         bttEncontrarRepL.Visibility = Visibility.Collapsed
     End Sub
 #End Region
+
 #Region "Busqueda"
     Protected Overrides Sub SBuscar()
         MyBase.SBuscar()
@@ -480,6 +495,7 @@
         End If
     End Sub
 #End Region
+
 #Region "Procedimientos Propios"
     Private Sub SAdicioneCtlsRestingidos()
         SAdicioneControlRestringido(dgrFacturas)
@@ -652,6 +668,8 @@
                     .ObjIdFichaCatastralStr.ObjValorPro = txtFichaCatastral.Text
                 Case "txtMatInmobiliaria"
                     .ObjIdMatriculaInmobiliariaStr.ObjValorPro = txtMatInmobiliaria.Text
+                Case "txtCentroCostos"
+                    .ObjCentroCostosStr.ObjValorPro = txtCentroCostos.Text
                 Case "txtIdPredioAgr"
                     .ObjIdPredioAgrupadorStr.ObjValorPro = txtIdPredioAgr.Text
                     If EnuOperacionEnWin = EnuOperacionEnVentana.CenuModificando AndAlso
@@ -960,6 +978,7 @@
         Return lblnPrediosIntegros
     End Function
 #End Region
+
 #Region "Propietarios"
     Private Sub SHabiliteBttsProp()
         If EnuOperacionEnWin <> EnuOperacionEnVentana.CenuConsultando Then
@@ -1100,6 +1119,7 @@
         Return lblnOk
     End Function
 #End Region
+
 #Region "Eventos en la Ventana"
     Private Sub OnBotonClic(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)

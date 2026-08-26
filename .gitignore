@@ -7,4 +7,5 @@ packages/
 *.pfx
 *.publishsettings
 appsettings.*.local.json
+release-process.md
 

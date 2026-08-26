@@ -46,6 +46,7 @@ Public Class WinCentroUtilidadOriCop
         EnuExiFechaHoyDocs
         EnuPieFacUno
         EnuPieFacDos
+        EnuPieFacTres
     End Enum
 #End Region
     ' Variables
@@ -66,7 +67,7 @@ Public Class WinCentroUtilidadOriCop
 #Region "Invalida metodos en la clase base que implementan la Interfaz"
     Protected Overrides Sub SLoad()
         SAdicioneCtlsRestringidos()
-        SCargueForma(EnuElementosAdicionalesDef.None, 41, Nothing, txtPersuasivo, False)
+        SCargueForma(EnuElementosAdicionalesDef.None, 42, Nothing, txtPersuasivo, False)
         SPuebleBarraEstado(HcolLabelsBarraEstado)
     End Sub
 
@@ -136,6 +137,7 @@ Public Class WinCentroUtilidadOriCop
         StcValidaControl(EnuValidEntrada.EnuExiFechaHoyDocs) = chkExigeFechaHoyDocs
         StcValidaControl(EnuValidEntrada.EnuPieFacUno) = lblPieFra1
         StcValidaControl(EnuValidEntrada.EnuPieFacDos) = lblPieFra2
+        StcValidaControl(EnuValidEntrada.EnuPieFacTres) = lblPieFra3
         '
         SVisibiliceBttEncontrar(EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando)
         '
@@ -211,6 +213,7 @@ Public Class WinCentroUtilidadOriCop
             StcValidValido(EnuValidEntrada.EnuExiFechaHoyDocs) = .ObjExigeFechaHoyDocsBln.BlnEsValido
             StcValidValido(EnuValidEntrada.EnuPieFacUno) = .ObjPieFacturaUnoStr.BlnEsValido
             StcValidValido(EnuValidEntrada.EnuPieFacDos) = .ObjPieFacturaDosStr.BlnEsValido
+            StcValidValido(EnuValidEntrada.EnuPieFacTres) = .ObjPieFacturaTresStr.BlnEsValido
         End With
         '
         FblnEstanTodosBien()
@@ -264,6 +267,7 @@ Public Class WinCentroUtilidadOriCop
                 .ObjRangoFraConIniEnt.ObjValorPro = txtNroFraIniCon.Text
                 .ObjPieFacturaDosStr.ObjValorPro = txtPieFac2.Text
                 .ObjPieFacturaUnoStr.ObjValorPro = txtPieFac1.Text
+                .ObjPieFacturaTresStr.ObjValorPro = txtPieFac3.Text
                 SRegistre_ProvEFac()
             End With
         End If
@@ -482,6 +486,7 @@ Public Class WinCentroUtilidadOriCop
     Private Sub SMuestrePieFactura()
         txtPieFac1.Text = MobjObjetoWin.ObjPieFacturaUnoStr.ObjValorPro
         txtPieFac2.Text = MobjObjetoWin.ObjPieFacturaDosStr.ObjValorPro
+        txtPieFac3.Text = MobjObjetoWin.ObjPieFacturaTresStr.ObjValorPro
     End Sub
 
     Private Sub SMuestreContabilidad()
@@ -571,6 +576,8 @@ Public Class WinCentroUtilidadOriCop
                             .ObjPieFacturaUnoStr.ObjValorPro = txtPieFac1.Text
                         Case "txtPieFac2"
                             .ObjPieFacturaDosStr.ObjValorPro = txtPieFac2.Text
+                        Case "txtPieFac3"
+                            .ObjPieFacturaTresStr.ObjValorPro = txtPieFac3.Text
                         Case Else
                             lblnRegistroIn = False
                     End Select

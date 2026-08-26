@@ -270,6 +270,7 @@
         End If
         Return lblnEsValida
     End Function
+
     Friend Function FblnEsValidoDscto(adecValorDscto As Decimal,
                 ByRef astrMens As String) As Boolean
         GobjPanDat.SControleProcesoObj(True)
@@ -320,6 +321,7 @@
         GobjPanDat.SControleProcesoObj(False)
         Return lblnEsValido
     End Function
+
     Friend Function FblnEsValidoItemDscto(aenuIdTipoDscto As EnuTipoDescuento,
                 ByRef astrMens As String) As Boolean
         Dim lblnEsValido As Boolean = True
@@ -336,8 +338,10 @@
         GobjPanDat.SControleProcesoObj(False)
         Return lblnEsValido
     End Function
-    Friend Function FblbEsValidDsctoPP() As Boolean
-        Dim lblnEsValido = GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro
+
+    Friend Function FblnEsValidoDsctoPP() As Boolean
+        Dim lblnEsValido = GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                EnuTipoIncentivo.EnuDescuentoPP
         If lblnEsValido Then
             If Not IsNothing(ObjFactura) AndAlso Not IsNothing(ObjItemFac) Then
                 lblnEsValido = ObjItemFac.ObjServicio.BlnEsCuotaAdministracion
@@ -345,50 +349,52 @@
         End If
         Return lblnEsValido
     End Function
+
     Friend Function FenuTipoNovedad() As EnuTipoNov
         Dim lenuTipoDscto As EnuTipoDescuento = ObjIdTipoDscto_ItemNotaCrByt.ObjValorPro
         Dim lenuTipoNov As EnuTipoNov = EnuTipoNov.None
         Select Case lenuTipoDscto
-            Case EnuTipoDescuento.enuDsctoCapital
+            Case EnuTipoDescuento.EnuDsctoCapital
                 If MobjPadre.BlnAnulandoFac Then
                     If ObjEsReversionIvaBln.ObjValorPro Then
                         lenuTipoNov = EnuTipoNov.EnuRDbIva
                     Else
-                        lenuTipoNov = EnuTipoNov.enuRDbCap
+                        lenuTipoNov = EnuTipoNov.EnuRDbCap
                     End If
                 Else
-                    lenuTipoNov = EnuTipoNov.enuCrDctoCap
+                    lenuTipoNov = EnuTipoNov.EnuCrDctoCap
                 End If
-            Case EnuTipoDescuento.enuDsctoIntMora
-                lenuTipoNov = EnuTipoNov.enuCrDctoInt
-            Case EnuTipoDescuento.enuReteCree
-                lenuTipoNov = EnuTipoNov.enuCrRetCre
-            Case EnuTipoDescuento.enuReteFuente
-                lenuTipoNov = EnuTipoNov.enuCrRetFte
-            Case EnuTipoDescuento.enuReteIca
-                lenuTipoNov = EnuTipoNov.enuCrRetIca
-            Case EnuTipoDescuento.enuReteIva
-                lenuTipoNov = EnuTipoNov.enuCrRetIva
-            Case EnuTipoDescuento.enuDsctoPP
-                lenuTipoNov = EnuTipoNov.enuCrDctoCap
-            Case EnuTipoDescuento.enuCancelaIva
-                lenuTipoNov = EnuTipoNov.enuCrIvaGas
+            Case EnuTipoDescuento.EnuDsctoIntMora
+                lenuTipoNov = EnuTipoNov.EnuCrDctoInt
+            Case EnuTipoDescuento.EnuReteCree
+                lenuTipoNov = EnuTipoNov.EnuCrRetCre
+            Case EnuTipoDescuento.EnuReteFuente
+                lenuTipoNov = EnuTipoNov.EnuCrRetFte
+            Case EnuTipoDescuento.EnuReteIca
+                lenuTipoNov = EnuTipoNov.EnuCrRetIca
+            Case EnuTipoDescuento.EnuReteIva
+                lenuTipoNov = EnuTipoNov.EnuCrRetIva
+            Case EnuTipoDescuento.EnuDsctoPP
+                lenuTipoNov = EnuTipoNov.EnuCrDctoCap
+            Case EnuTipoDescuento.EnuCancelaIva
+                lenuTipoNov = EnuTipoNov.EnuCrIvaGas
         End Select
         Return lenuTipoNov
     End Function
+
     Friend Function FblnEsDscto() As Boolean
         Dim lenuTipoItem As EnuTipoDescuento = ObjIdTipoDscto_ItemNotaCrByt.ObjValorPro
         Return (lenuTipoItem = EnuTipoDescuento.enuDsctoCapital) OrElse
                 (lenuTipoItem = EnuTipoDescuento.enuDsctoIntMora) OrElse
                 (lenuTipoItem = EnuTipoDescuento.enuDsctoPP)
     End Function
+
     Friend Function FblnEsRetencion() As Boolean
         Dim lenuTipoItem As EnuTipoDescuento = ObjIdTipoDscto_ItemNotaCrByt.ObjValorPro
         Return (lenuTipoItem > EnuTipoDescuento.EnuDsctoIntMora) AndAlso
                 (lenuTipoItem < EnuTipoDescuento.EnuDsctoPP)
     End Function
 #End Region
-
 End Class
 
 #Region "Clases de Propiedad"
@@ -642,7 +648,7 @@ Friend Class ClsIdTipoDscto_ItemNotaCrByt
                 Dim lenuTipoDscto As EnuTipoDescuento = HobjValorNew
                 HblnEsValido = MobjPadre.FblnEsValidoItemDscto(lenuTipoDscto, HstrMens)
                 If HblnEsValido AndAlso lenuTipoDscto = EnuTipoDescuento.EnuDsctoPP Then
-                    HblnEsValido = MobjPadre.FblbEsValidDsctoPP()
+                    HblnEsValido = MobjPadre.FblnEsValidoDsctoPP()
                     If Not HblnEsValido Then
                         HstrMens = "El Descuento por Pronto Pago solo se aplica " &
                             " a las Cuotas de Administración!"

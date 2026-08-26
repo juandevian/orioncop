@@ -48,6 +48,7 @@ Public Class WinServicios
     Private ReadOnly MstrNombreVentana As String = My.Resources.NomSer
     Private ReadOnly MenuTamanoIcono As EnuTamanoIconos
     Private ReadOnly MshrIdServicio As Short = 0
+    Private ReadOnly MstrNombreServicio As String = String.Empty
     Private MshrIdModuloSel As Short = 0
     Private MobjModuloSel As ClsModuloServicio = Nothing
     Private MdtbModulosSer As DataTable = Nothing
@@ -64,6 +65,17 @@ Public Class WinServicios
         MenuTamanoIcono = GenuTamanoIcono
         GenuTamanoIcono = EnuTamanoIconos.EnuMediano
     End Sub
+
+    Friend Sub New(ashrIdServicio As Short, astrNombreSer As String, aobjAno As ClsAno)
+        InitializeComponent()
+        HenuIdVentana = EnuIdVentanaDef.EnuServicios
+        MobjAno = aobjAno
+        MshrIdServicio = ashrIdServicio
+        MstrNombreServicio = astrNombreSer
+        MenuTamanoIcono = GenuTamanoIcono
+        GenuTamanoIcono = EnuTamanoIconos.EnuMediano
+    End Sub
+
 #End Region
 
 #Region "Invalida metodos en la clase base que implementan la Interfaz"
@@ -75,16 +87,19 @@ Public Class WinServicios
         SCargueForma(EnuElementosAdicionalesDef.None, 29, lcolCtrlsLlave, txtNombreServicio, False)
         SPuebleBarraEstado(HcolLabelsBarraEstado)
     End Sub
+
     Protected Overrides ReadOnly Property StrNombreVentana As String
         Get
             Return MstrNombreVentana
         End Get
     End Property
+
     Protected Overrides ReadOnly Property EnuIdVentana As EnuIdVentanaDef
         Get
             Return HenuIdVentana
         End Get
     End Property
+
     Protected Overrides Sub SInicialiceObjeto()
         Dim lshrIdAno As Short
         If MobjAno IsNot Nothing Then
@@ -94,19 +109,22 @@ Public Class WinServicios
             ' Servicio Permanente
             lshrIdAno = 0
         End If
-        MobjObjetoWin = New ClsServicio(MobjAno, EnuModoInstanciaObjDef.enuNavegable)
-        If Not MobjObjetoWin.FblnEstaVacioOrigenDatos Then
-            If MshrIdServicio > 0 Then
-                Dim lobjValorLlave As Object() = {GshrIdCarpeta, GshrIdCentroUtil, lshrIdAno,
-                        MshrIdServicio}
-                MobjObjetoWin.SAbra(lobjValorLlave)
-            Else
-                MobjObjetoWin.SVayaAlPrimero()
+        If ObjObjetoWin Is Nothing Then
+            MobjObjetoWin = New ClsServicio(MobjAno, EnuModoInstanciaObjDef.EnuNavegable)
+            If Not MobjObjetoWin.FblnEstaVacioOrigenDatos Then
+                If MshrIdServicio > 0 Then
+                    Dim lobjValorLlave As Object() = {GshrIdCarpeta, GshrIdCentroUtil, lshrIdAno,
+                            MshrIdServicio}
+                    MobjObjetoWin.SAbra(lobjValorLlave)
+                Else
+                    MobjObjetoWin.SVayaAlPrimero()
+                End If
             End If
+            ObjObjetoWin = MobjObjetoWin
         End If
-        ObjObjetoWin = MobjObjetoWin
         EnuTipoPermisoObjWin = MobjObjetoWin.EnuPermisosObj
     End Sub
+
     Protected Overrides Sub SInicialiceControles()
         StcValidaControl(EnuValidEntrada.enuBaseRetFte) = lblBaseRetefuente
         StcValidaControl(EnuValidEntrada.enuBaseRetIca) = lblBaseReteIca
@@ -150,6 +168,7 @@ Public Class WinServicios
             SHabiliteMenuItem(False, HmnuModificar)
         End If
     End Sub
+
     Protected Overrides Sub SMuestreDatos()
         Dim lblnNoHayDatos = Not BlnVentanaAux AndAlso ObjObjetoWin.FblnEstaVacioOrigenDatos
         Dim lstrMens = String.Empty
@@ -196,6 +215,7 @@ Public Class WinServicios
         End If
         HblnMostrandoDatos = False
     End Sub
+
     Protected Overrides Sub SValide()
         Dim lblnNoHayDatos = Not BlnVentanaAux AndAlso ObjObjetoWin.FblnEstaVacioOrigenDatos
         If lblnNoHayDatos AndAlso EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
@@ -244,6 +264,7 @@ Public Class WinServicios
             Dim lblnNo = FblnModulosSerOk()
         End If
     End Sub
+
     Protected Overrides Sub SRegistre()
         With MobjObjetoWin
             .ObjIdCarpeta_ServicioShr.ObjValorPro = GshrIdCarpeta
@@ -285,6 +306,7 @@ Public Class WinServicios
         End With
         SValide()
     End Sub
+
     ''' <summary>
     ''' Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
     ''' ventana "objObjetoWin". 
@@ -293,9 +315,13 @@ Public Class WinServicios
     Protected Overrides Sub SConfigureMenuesPropios()
         ' Adicionar Menues Reportes
         MnuReporte = FmnuiMenuItem("MnuReportes", "R_eportes", "RecMnuItemPriInf")
-        Dim lmnuVlrPorPredio = FmnuiMenuItem("MnuValorPredio", "_Valores a Cobrar", "RecMnuItemSec")
+        Dim lmnuVlrPorPredio = FmnuiMenuItem("MnuValorPorPredio", "_Valores a Cobrar", "RecMnuItemSec")
         lmnuVlrPorPredio.ToolTip = "Genera un Listado del Valor que debe pagar cada Predio."
+        Dim lmnuVlrPorPreAgru = FmnuiMenuItem("MnuValorPorPreAgru",
+                "_Valores a Cobrar por Predio Agrupador", "RecMnuItemSec")
+        lmnuVlrPorPreAgru.ToolTip = "Genera un Listado del Valor que debe pagar cada Predio Agrupador."
         MnuReporte.Items.Add(lmnuVlrPorPredio)
+        MnuReporte.Items.Add(lmnuVlrPorPreAgru)
         MenuVen.Items.Insert(1, MnuReporte)
         MnuCalcular = FmnuiMenuItemPan("MnuCalcular", "_Calcular Valores a cobrar", 2, "")
         MnuLimpiar = FmnuiMenuItemPan("MnuLimpiar", "_Eliminar Valores a cobrar", 3, "")
@@ -332,6 +358,7 @@ Public Class WinServicios
             End If
         End With
     End Sub
+
     Protected Overrides Sub SCree()
         Dim lblnCrear As Boolean = True
         If MobjAno IsNot Nothing Then
@@ -364,6 +391,7 @@ Public Class WinServicios
             txtNombreServicio.Focus()
         End If
     End Sub
+
     Protected Overrides Sub SModifique()
         MyBase.SModifique()
         SVisibiliceBotonesEncontrar()
@@ -375,14 +403,17 @@ Public Class WinServicios
             MnuReporte.IsEnabled = False
         End If
     End Sub
+
     Protected Overrides Sub SGuarde()
         MyBase.SGuarde()
         SRefresqueWin()
     End Sub
+
     Protected Overrides Sub SEstablezcaWinConsultando()
         MyBase.SEstablezcaWinConsultando()
         MdtbModulosSer = Nothing
     End Sub
+
     Protected Overrides Sub SFinaliceOperacion()
         MyBase.SFinaliceOperacion()
         SHabiliteReporte()
@@ -390,23 +421,12 @@ Public Class WinServicios
             MnuReporte.IsEnabled = True
         End If
     End Sub
+
     Protected Overrides Sub SRefresqueWin()
         MyBase.SRefresqueWin()
         tbiGenerales.IsSelected = True
         SHabiliteMenues()
         SHabiliteReporte()
-    End Sub
-    Private Sub SHabiliteReporte()
-        If MobjObjetoWin.ObjGeneraProgramBln.ObjValorPro OrElse
-                (MobjObjetoWin.ObjEsFactProgramableBln.ObjValorPro AndAlso
-                MobjObjetoWin.BlnEsImportado) Then
-            MnuReporte.Visibility = Visibility.Visible
-            If EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
-                MnuReporte.IsEnabled = True
-            End If
-        Else
-            MnuReporte.Visibility = Visibility.Collapsed
-        End If
     End Sub
 #End Region
 
@@ -445,7 +465,7 @@ Public Class WinServicios
     Private Sub SMuestreValores()
         Dim lblnMostrarModulos = False
         If MobjObjetoWin.ObjGeneraProgramBln.ObjValorPro Then
-            txtValorPres.Content = Format(MobjObjetoWin.DecValor, "c")
+            txtValorPres.Content = Format(MobjObjetoWin.FdecValor, "c")
             lblnMostrarModulos = True
             SEstablezcaModuloSel()
         ElseIf MobjObjetoWin.ObjEsFactProgramableBln.ObjValorPro AndAlso
@@ -550,6 +570,7 @@ Public Class WinServicios
         HwinBusqueda = Nothing
         Me.Cursor = Cursors.Arrow
     End Sub
+
     Private Sub SBusqueTer()
         If EnuOperacionEnWin <> EnuOperacionEnVentana.CenuConsultando Then
             StrResultadoBusqueda = String.Empty
@@ -573,6 +594,7 @@ Public Class WinServicios
             End If
         End If
     End Sub
+
     Protected Overrides Function FblnDefinioBusqueda() As Boolean
         If bttEncontrarTerCr.IsFocused Then
             SDefineBusquedaApe()
@@ -583,6 +605,7 @@ Public Class WinServicios
         End If
         Return True
     End Function
+
     Private Sub SDefineCuentaCont()
         Dim lstrCamposMostrar As String() = {ClsIdCuentaContStr.SstrNombreCampoBd,
                                                  ClsNombreCuentaStr.SstrNombreCampoBd}
@@ -594,6 +617,7 @@ Public Class WinServicios
         HwinBusqueda.SDefinaBusqueda("Nombre Cuenta", lstrTabla, lstrCamposMostrar,
                 lstrCampoBusqueda, lstrCampoRetornar, lstrFiltro)
     End Sub
+
     Private Sub SDefineBusquedaNom()
         Dim lstrCamposMostrar As String() = {ClsIdTerceroDbl.SstrNombreCampoBd,
                 ClsNombrePrimeroStr.SstrNombreCampoBd, ClsNombreSegundoStr.SstrNombreCampoBd,
@@ -605,6 +629,7 @@ Public Class WinServicios
         HwinBusqueda.SDefinaBusqueda("Primer Nombre", lstrTabla, lstrCamposMostrar,
                 lstrCampoBusqueda, lstrCampoRetornar, lstrFiltro)
     End Sub
+
     Private Sub SDefineBusquedaApe()
         Dim lstrCamposMostrar As String() = {ClsIdTerceroDbl.SstrNombreCampoBd,
                 ClsNombrePrimeroStr.SstrNombreCampoBd, ClsNombreSegundoStr.SstrNombreCampoBd,
@@ -616,6 +641,7 @@ Public Class WinServicios
         HwinBusqueda.SDefinaBusqueda("Primer Apellido", lstrTabla, lstrCamposMostrar,
                 lstrCampoBusqueda, lstrCampoRetornar, lstrFiltro)
     End Sub
+
     Private Sub SDefineBusquedaNomRS()
         Dim lstrCamposMostrar As String() = {ClsIdTerceroDbl.SstrNombreCampoBd,
                 ClsRazonSocialStr.SstrNombreCampoBd}
@@ -938,7 +964,7 @@ Public Class WinServicios
                 End If
             End If
             If lblnCalcular Then
-                If MobjObjetoWin.DecValor = 0 Then
+                If MobjObjetoWin.FdecValor = 0 Then
                     lblnCalcular = MsgBox("Realmente quiere eliminar la programación de este servicio?",
                         vbYesNo, "Eliminar programación")
                     If lblnCalcular Then
@@ -1009,7 +1035,7 @@ Public Class WinServicios
                 End If
             End If
             If lblnLimpiar Then
-                If MobjObjetoWin.DecValor > 0 AndAlso
+                If MobjObjetoWin.FdecValor > 0 AndAlso
                         MobjObjetoWin.ObjEstaGenaradaProgramBln.ObjValorPro Then
                     lblnLimpiar = MsgBox("Realmente quiere eliminar la programación de este servicio?",
                             vbYesNo, "Eliminar programación")
@@ -1243,7 +1269,7 @@ Public Class WinServicios
         End If
     End Sub
 
-    Private Sub SGenereReporte()
+    Private Sub SGenereRepValorPorPredio()
         Mouse.OverrideCursor = Cursors.Wait
         Dim lstrMens As String
         Dim lobjRep = New ClsRepOrionCop(GCOBJREGISTRO) With {
@@ -1260,6 +1286,23 @@ Public Class WinServicios
         End If
     End Sub
 
+    Private Sub SGenereRepVlrPorPredioAgr()
+        Mouse.OverrideCursor = Cursors.Wait
+        Dim lstrMens As String
+        Dim lobjRep = New ClsRepOrionCop(GCOBJREGISTRO) With {
+            .ShrIdAno = MobjObjetoWin.ObjIdAno_ServicioShr.ObjValorPro,
+            .EntIdServicio = MobjObjetoWin.ObjIdServicioShr.ObjValorPro,
+            .EnuReporte = EnuReporteDef.enuItemsProgFactPorPreAgru
+            }
+        lstrMens = lobjRep.SGenereItemsProgFactXPreAgr()
+        Mouse.OverrideCursor = Cursors.Arrow
+        If Not String.IsNullOrEmpty(lstrMens) Then
+            SLevanteEveNoti(lstrMens, String.Empty, 0, EnuSeveridadNot.EnuInformacion)
+        Else
+            SLevanteEveNoti(lstrMens, String.Empty, 0, EnuSeveridadNot.EnuOk)
+        End If
+    End Sub
+
     Protected Overrides Function FblnNotificaOk(aenuIdMens As EnuIdMens) As Boolean
         Dim lblnOk = False
         If aenuIdMens = EnuIdMens.EnuModSinSector Then
@@ -1267,6 +1310,19 @@ Public Class WinServicios
         End If
         Return lblnOk
     End Function
+
+    Private Sub SHabiliteReporte()
+        If MobjObjetoWin.ObjGeneraProgramBln.ObjValorPro OrElse
+                (MobjObjetoWin.ObjEsFactProgramableBln.ObjValorPro AndAlso
+                MobjObjetoWin.BlnEsImportado) Then
+            MnuReporte.Visibility = Visibility.Visible
+            If EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
+                MnuReporte.IsEnabled = True
+            End If
+        Else
+            MnuReporte.Visibility = Visibility.Collapsed
+        End If
+    End Sub
 #End Region
 
 #Region "Modulos del servicio"
@@ -1291,6 +1347,7 @@ Public Class WinServicios
             MshrIdModuloSel = 0
         End If
     End Sub
+
     Friend Sub SAcepteModuloSer(ablnVinculando As Boolean, ByRef astrMens As String)
         If ablnVinculando Then
             Dim lblnVincule As Boolean
@@ -1323,6 +1380,7 @@ Public Class WinServicios
         End If
         Dim NoUsado = FblnModulosSerOk()
     End Sub
+
     Private Function FblnModulosSerOk()
         Dim lblnOk = True
         If MobjObjetoWin.ObjGeneraProgramBln.ObjValorPro Then
@@ -1351,6 +1409,7 @@ Public Class WinServicios
         End If
         Return lblnOk
     End Function
+
     Private Sub SActualiceTblModSer()
         If MdtbModulosSer Is Nothing Then
             MdtbModulosSer = MobjObjetoWin.FdtbModulosServicio
@@ -1359,7 +1418,7 @@ Public Class WinServicios
             For Each lobjModuloSer As ClsModuloServicio In MobjObjetoWin.ColModulosServicio
                 Dim ldrwNewFila As DataRow = MdtbModulosSer.NewRow
                 ldrwNewFila(StrCampoCarpeta) = GshrIdCarpeta
-                ldrwNewFila(StrCampoCentroutil) = GshrIdCentroUtil
+                ldrwNewFila(StrCampoCentroUtil) = GshrIdCentroUtil
                 ldrwNewFila(ClsIdAno_ModuloServicioShr.SstrNombreCampoBd) =
                         lobjModuloSer.ObjIdAno_ModuloServicioShr.ObjValorPro
                 ldrwNewFila(ClsIdServicio_ModuloServicioShr.SstrNombreCampoBd) =
@@ -1373,6 +1432,7 @@ Public Class WinServicios
             MobjObjetoWin.SRepuebleNombresModulos(MdtbModulosSer)
         End If
     End Sub
+
     Private Sub SAgregarCont()
         MobjModuloSel = MobjObjetoWin.FobjNewModuloSer()
         Dim lwinModuloSer As New WinModulosServicios(MobjModuloSel, True) With {
@@ -1385,11 +1445,12 @@ Public Class WinServicios
         SHabiliteCtrlsValores()
         SEstablezcaModuloSel()
     End Sub
+
     Private Sub SModificarCont()
         If MshrIdModuloSel > 0 Then
             SEstablezcaModuloSel()
-            If MobjModuloSel.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuConsultando Then
-                MobjModuloSel.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+            If MobjModuloSel.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
+                MobjModuloSel.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
             End If
             SLevanteEveOk()
             Dim lwinModuloSer As New WinModulosServicios(MobjModuloSel, False) With {
@@ -1399,6 +1460,7 @@ Public Class WinServicios
         End If
         SHabiliteCtrlsValores()
     End Sub
+
     Private Sub SElimineModCont()
         If MshrIdModuloSel > 0 Then
             MobjObjetoWin.SElimineModuloSer(MshrIdModuloSel)
@@ -1466,10 +1528,14 @@ Public Class WinServicios
                     SCalculeValoresACobrar()
                 Case "MnuLimpiar"
                     SlimpieValoresACobrar()
-                Case "MnuValorPredio"
+                Case "MnuValorPorPredio"
                     Dim lstrMens = "Se esta generando el Reporte!"
                     SLevanteEveNoti(lstrMens, String.Empty, 0, EnuSeveridadNot.EnuInformacion)
-                    SGenereReporte()
+                    SGenereRepValorPorPredio()
+                Case "MnuValorPorPreAgru"
+                    Dim lstrMens = "Se esta generando el Reporte!"
+                    SLevanteEveNoti(lstrMens, String.Empty, 0, EnuSeveridadNot.EnuInformacion)
+                    SGenereRepVlrPorPredioAgr()
             End Select
         End If
     End Sub
