@@ -118,6 +118,8 @@
                         .ObjIdUsuario_FactStr.ObjValorPro = GstrIdUsuario
                         .ObjPieFacturaDos_FactStr.ObjValorPro =
                                 GobjParametros.ObjPieFacturaDosStr.ToString()
+                        .ObjPieFacturaTres_FactStr.ObjValorPro =
+                                GobjParametros.ObjPieFacturaTresStr.ToString()
                         .ObjPieFacturaUno_FactStr.ObjValorPro =
                                 GobjParametros.ObjPieFacturaUnoStr.ToString()
                         .ObjPrefijo_FactStr.ObjValorPro = lstrPrefFact

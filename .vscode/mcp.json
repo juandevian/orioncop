@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "github": {
+      "type": "stdio",
+      "command": "github-mcp-server",
+      "args": [],
+      "env": {
+        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}"
+      }
+    }
+  }
+}

@@ -56,17 +56,20 @@ Friend Enum EnuAppConta As Byte
     EnuMekano
     EnuPodium
 End Enum
+
 Friend Enum EnuDestinatarioFacturaDef As Byte
     None = 0
     EnuPropietario
     EnuArrendatario
 End Enum
+
 Friend Enum EnuDestiItemProgramaFact As Byte
     None = 0
     EnuPredio
     EnuCliente
     EnuTodos
 End Enum
+
 <Flags()>
 Friend Enum EnuDocsIntegridad As Short
     None = 0
@@ -85,6 +88,7 @@ Friend Enum EnuDocReversado As Byte
     EnuReciboC
     EnuNotaCr
 End Enum
+
 Friend Enum EnuEstadoAplicacionDef As Byte
     None = 0
     EnuCrearServicioAno
@@ -110,15 +114,17 @@ Friend Enum EnuEstadoAplicacionDef As Byte
     EnuSectoresSinDsctoPP
     EnuNormal
 End Enum
+
 Friend Enum EnuEstadoDeudaDef As Byte
-	None = 0
-	EnuNormal
-	EnuPersuasivo
-	EnuPrejuridico
-	EnuJuridico
-	EnuPerdida
-	EnuSuspendida
+    None = 0
+    EnuNormal
+    EnuPersuasivo
+    EnuPrejuridico
+    EnuJuridico
+    EnuPerdida
+    EnuSuspendida
 End Enum
+
 Friend Enum EnuEstadoEDoc As Short
     None = -1
     EnuErrorFtp = 0
@@ -132,6 +138,7 @@ Friend Enum EnuEstadoEDoc As Short
     EnuOtro
     EnuNoEDoc = 10
 End Enum
+
 Friend Enum EnuEstadoFacturaDef As Byte
     None = 0
     EnuNormal
@@ -140,6 +147,7 @@ Friend Enum EnuEstadoFacturaDef As Byte
     EnuVencida
     EnuAnulada
 End Enum
+
 Friend Enum EnuEstadoInstalacion As Integer
     None = 0
     CuentasCont = 1
@@ -160,6 +168,7 @@ Friend Enum EnuEstadoInstalacion As Integer
     SerId = 32768
     Todos = 65535
 End Enum
+
 Friend Enum EnuEstadoItemTareaDef As Byte
     None = 0
     EnuNormal
@@ -168,6 +177,7 @@ Friend Enum EnuEstadoItemTareaDef As Byte
     EnuCancelada
     EnuTodos
 End Enum
+
 Friend Enum EnuEstadoResDian
     EnuOk
     EnuSinResVigente
@@ -177,17 +187,20 @@ Friend Enum EnuEstadoResDian
     EnuNumPorAgotarse
     EnuNumAgotada
 End Enum
+
 Friend Enum EnuEstadoTareaDef As Byte
     None = 0
     EnuVigente
     EnuTerminada
     EnuCancelada
 End Enum
+
 Friend Enum EnuFormaPago As Byte
     None = 0
     EnuContado
     EnuCredito
 End Enum
+
 Friend Enum EnuGrupoConstantesOriDef As Byte
     None = 0
     EnuDestinatarioFactura
@@ -209,7 +222,10 @@ Friend Enum EnuGrupoConstantesOriDef As Byte
     EnuDocReversado
     EnuFormaPago
     EnuModoNotaCr
+    EnuTipoIncentivo
+    EnuTipoDsctoPP
 End Enum
+
 Friend Enum EnuIdDocumentoDef As Byte
     None = 0
     EnuFacturaVenta
@@ -222,6 +238,7 @@ Friend Enum EnuIdDocumentoDef As Byte
     EnuNotaAjuste
     EnuComprobanteInterfaz
 End Enum
+
 <Flags()>
 Friend Enum EnuIntervaloDiaDef As Integer
     None = 0
@@ -234,6 +251,7 @@ Friend Enum EnuIntervaloDiaDef As Integer
     EnuDomingo = 64
     EnuTodos = 127
 End Enum
+
 <Flags()>
 Friend Enum EnuIntervaloMesDef As Integer
     None = 0
@@ -251,6 +269,7 @@ Friend Enum EnuIntervaloMesDef As Integer
     EnuDic = 2048
     EnuTodos = 4095
 End Enum
+
 Friend Enum EnuModoCausaMora
     None
     EnuNoCausa
@@ -259,34 +278,41 @@ Friend Enum EnuModoCausaMora
     EnuUltimoDia
     EnuAlReciboCaja
 End Enum
+
 Friend Enum EnuModoFacturacionDef As Byte
     None = 0
     EnuManual
     EnuSistema
     EnuImportada
     EnuContingencia
+    EnuMulta
 End Enum
+
 Friend Enum EnuModoNotaCr As Byte
     None
     EnuPorFactura
     EnuPorValor
 End Enum
+
 Friend Enum EnuModoPagoIntereses As Byte
     None = 0
     EnuVencido
     EnuAnticipado
 End Enum
+
 Friend Enum EnuOrigenItemProgramaFactDef
     None = 0
     EnuAplicacion
     EnuUsuario
     EnuImportado
 End Enum
+
 Friend Enum EnuOrigenNotaDb
     None = 0
     EnuAplicacion
     EnuImportado
 End Enum
+
 Friend Enum EnuPeriodicidadDePagoDef
     None = 0
     EnuDiaria = 1
@@ -296,15 +322,18 @@ Friend Enum EnuPeriodicidadDePagoDef
     EnuSemestral = 180
     EnuAnual = 360
 End Enum
+
 Friend Enum EnuProveedorEFac
     None
     EnuProtecdataMisFac
 End Enum
+
 Friend Enum EnuRegimenVentasDef As Byte
     None = 0
     EnuNoResponsable
     EnuResponsable
 End Enum
+
 Friend Enum EnuTipoBaseCalculo As Byte
     None = 0
     EnuCoeficientePro
@@ -312,6 +341,13 @@ Friend Enum EnuTipoBaseCalculo As Byte
     EnuCuotaAnterior
     EnuImportadas
 End Enum
+
+Friend Enum EnuTipoIncentivo
+    None = 0
+    EnuDescuentoPP
+    EnuPenalización
+End Enum
+
 Friend Enum EnuTipoCorreoE As Byte
     None = 0
     EnuSoloMens
@@ -325,6 +361,7 @@ Friend Enum EnuTipoCorreoE As Byte
     EnuRecibos
     EnuCobroPers
 End Enum
+
 Friend Enum EnuTipoDescuento As Byte
     None = 0
     EnuDsctoCapital
@@ -336,11 +373,13 @@ Friend Enum EnuTipoDescuento As Byte
     EnuDsctoPP
     EnuCancelaIva
 End Enum
+
 Friend Enum EnuTipoDeudorDef As Byte
     None = 0
     EnuPredio
     EnuCliente
 End Enum
+
 Friend Enum EnuTipoDocOri As Byte
     None = 0
     EnuFactura
@@ -352,21 +391,25 @@ Friend Enum EnuTipoDocOri As Byte
     EnuNotaRevCr
     EnuNotaAjuste
 End Enum
+
 Friend Enum EnuTipoDsctoPP As Byte
     None = 0
     EnuProcentaje
     EnuValorFijo
 End Enum
+
 Friend Enum EnuTipoInteres As Byte
     None = 0
     EnuInteresSimple
     EnuInteresCompuesto
 End Enum
+
 Friend Enum EnuTipoInterfazDef As Byte
     None = 0
     EnuPorComprobante
     EnuPorDocumento
 End Enum
+
 Friend Enum EnuTipoItemNotaConDef As Byte
     None
     EnuAplicaAntCap
@@ -376,6 +419,7 @@ Friend Enum EnuTipoItemNotaConDef As Byte
     EnuReteIca
     EnuReteIva
 End Enum
+
 Friend Enum EnuTipoItemRecCajaDef As Byte
     None = 0
     EnuAbonoCapital
@@ -389,6 +433,7 @@ Friend Enum EnuTipoItemRecCajaDef As Byte
     EnuReteCree
     EnuDsctoPP
 End Enum
+
 Friend Enum EnuTipoMedioPagoDef As Byte
     None = 0
     EnuEfectivo
@@ -398,12 +443,14 @@ Friend Enum EnuTipoMedioPagoDef As Byte
     EnuConsignacion
     EnuTransferencia
 End Enum
+
 Friend Enum EnuTipoNotaCrDef As Byte
     None = 0
     EnuDescuento
     EnuAnulaFac
     EnuRetenciones
 End Enum
+
 Friend Enum EnuTipoNov As Byte
     None = 0
     EnuDbCap        '1  Db a CxC Servicio; Cr a Ingresos Servicio o equivalente (Cuentas definidas en el Servicio facturado) 
@@ -448,22 +495,26 @@ Friend Enum EnuTipoNov As Byte
     EnuDbIvaInt      '35 Db a CxC Intereses; Cr a Iva Generado (Cuentas definidas en el Servicio facturado)
     EnuRDbIvaInt     '36 Cr a CxC Intereses; Db a IvaGenerado
 End Enum
+
 Friend Enum EnuTipoServicio As Byte
     None = 0
     EnuAnual
     EnuPermanente
 End Enum
+
 Friend Enum EnuTipoTerceroCajaDef As Byte
     None = 0
     EnuSinTercero
     EnuCopropiedad
     EnuCliente
 End Enum
+
 Friend Enum EnuTipoTerCtaCrServicio As Byte
     None = 0
     EnuProveedor
     EnuCliente
 End Enum
+
 Friend Enum EnuVerEFac As Byte
     EnuNinguna = 0
     EnuV1

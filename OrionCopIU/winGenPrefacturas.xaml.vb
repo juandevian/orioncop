@@ -12,6 +12,7 @@
     Private MdgtPgbActualiza As SdgtActualizaProgressBar = Nothing
     Private MdgtLblActualiza As SdgtActualizaLabel = Nothing
 #End Region
+
 #Region "Enumeradores"
     Private Enum EnuValidEntradaDef As Integer
         enuPermitido = 0
@@ -47,6 +48,7 @@
         SPuebleBarraEstado(HcolLabelsBarraEstado)
         SCrearClic()
     End Sub
+
     Protected Overrides ReadOnly Property StrNombreVentana As String
         Get
             If Not GobjParametros.BlnEFacAutorizado Then
@@ -55,11 +57,13 @@
             Return MstrNombreVentana
         End Get
     End Property
+
     Protected Overrides ReadOnly Property Enuidventana As EnuIdVentanaDef
         Get
             Return HenuIdVentana
         End Get
     End Property
+
     Protected Overrides Sub SInicialiceObjeto()
         If IsNothing(ObjObjetoWin) Then
             ObjObjetoWin = New ClsFactura()
@@ -69,6 +73,7 @@
         MdgtPgbActualiza = New SdgtActualizaProgressBar(AddressOf pgbAvance.SetValue)
         MdgtLblActualiza = New SdgtActualizaLabel(AddressOf lblAvance.SetValue)
     End Sub
+
     Protected Overrides Sub SInicialiceControles()
         StcValidaControl(EnuValidEntradaDef.enuPermitido) = lblTitulo
         StcValidaControl(EnuValidEntradaDef.enuFechaVen) = lblFechaVen
@@ -77,6 +82,7 @@
         HbttAceptar.TabIndex = 10
         HbttCancelar.TabIndex = 11
     End Sub
+
     Protected Overrides Sub SMuestreDatos()
         txtPeriodoFact.Content = GobjParametros.ObjAnoActual.StrNombrePeriodoActual.ToUpper
         txtFechaFact.Content = If(MblnFechaFacUnica, Format(MdtmFechaFac, GCSTRFMTFECHASIMPLE),
@@ -93,6 +99,7 @@
         End If
         SValide()
     End Sub
+
     Protected Overrides Sub SValide()
         Dim lblnFecVenVal = FblnFechaVenValida()
         Dim lblnFecGraVal = FblnFechaGraValida()
@@ -109,9 +116,11 @@
                 EnuSeveridadNot.EnuInformacion)
         End If
     End Sub
+
     Protected Overrides Sub SRegistre()
         '
     End Sub
+
     ''' <summary>
     ''' Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
     ''' ventana "objObjetoWin". 
@@ -140,6 +149,7 @@
             End If
         End If
     End Sub
+
     Protected Overrides Sub SGuarde()
         Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lblnNoHayError = False,
                 lblnGuardo = False
@@ -192,6 +202,7 @@
             HbttAceptar.IsEnabled = True
         End Try
     End Sub
+
     Protected Overrides Sub SCancele()
         If ClsOrionCop.BlnPreFacturando Then
             MblnCancelando = True
@@ -199,6 +210,7 @@
             SCerrarClic()
         End If
     End Sub
+
     Protected Overrides Sub SRefresqueWin()
         SHabiliteWin(False)
     End Sub
@@ -216,6 +228,7 @@
         End If
 
     End Sub
+
     Private Sub SRegistreFechas()
         MblnFechaFacUnica = GobjParametros.FblnFechaFacturacionUnica(MdtmFechaFac)
         MblnFechaVenUnica = GobjParametros.FblnFechaVenceUnica(MdtmFechaVen)
@@ -223,6 +236,7 @@
         SMuestreControles()
         SMuestreDatos()
     End Sub
+
     Private Sub SMuestreControles()
         If MblnFechaFacUnica AndAlso MblnFechaVenUnica Then
             dtpFechaVen.Visibility = Visibility.Visible
@@ -245,6 +259,7 @@
             lblFechaGraTxt.Visibility = Visibility.Visible
         End If
     End Sub
+
     Private Function FblnFechaVenValida() As Boolean
         Dim lblnEsValida = True
         If MblnFechaVenUnica Then
@@ -255,6 +270,7 @@
         End If
         Return lblnEsValida
     End Function
+
     Private Function FblnFechaGraValida() As Boolean
         Dim lblnEsValida = True
         If MblnFechaGraUnica Then
@@ -285,6 +301,7 @@
         pgbAvance.Maximum = e.DblCantAProcesar
         pgbAvance.Value = 0.0
     End Sub
+
     Private Sub SEvnAvance(aobjSender As Object, e As ClsPanEventArgs) Handles MobjOrionCop.EvnAvance
         If MblnCancelando Then
             e.BlnCancele = True

@@ -255,6 +255,7 @@ Friend Class ClsIdCliente_PropDbl
         HblnEsLlave = True
         HbytPosicionLlave = 3
     End Sub
+
     Public Overrides Sub SValide()
         HstrMens = String.Empty
         HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, GCDBLMINTERC,
@@ -263,8 +264,8 @@ Friend Class ClsIdCliente_PropDbl
         Dim lobjPredio As ClsPredio = lobjPadre.ObjPadre
         If HblnEsValido Then
             If Not BlnLeyendoOrigen Then
-                If ObjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuCreando Then
-                    Dim lobjCliente As New ClsCliente(EnuModoInstanciaObjDef.enuUnico)
+                If ObjPadre.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuCreando Then
+                    Dim lobjCliente As New ClsCliente(EnuModoInstanciaObjDef.EnuUnico)
                     Dim lobjValorLlave As Object() = {GshrIdCarpeta, GshrIdCentroUtil, HobjValorNew}
                     lobjCliente.SAbra(lobjValorLlave)
                     lobjPadre.BlnExisteCliente = lobjCliente.BlnExiste
@@ -294,11 +295,13 @@ Friend Class ClsIdCliente_PropDbl
             SNotifiqueDatInv()
         End If
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Friend ReadOnly Property StrNombreCli As String
         Get
             If BlnEsValido Then
@@ -308,6 +311,7 @@ Friend Class ClsIdCliente_PropDbl
             End If
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If IsNothing(HobjValorPro) Then
             Return ""
@@ -316,6 +320,7 @@ Friend Class ClsIdCliente_PropDbl
         End If
     End Function
 End Class
+
 Friend Class ClsIdPredio_PropStr
     'Herencia
     Inherits ClsCBPropiedad
@@ -330,6 +335,7 @@ Friend Class ClsIdPredio_PropStr
         HblnEsLlave = True
         HbytPosicionLlave = 2
     End Sub
+
     Public Overrides Sub SValide()
         HstrMens = String.Empty
         HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 2, ShrLongitud,
@@ -346,11 +352,13 @@ Friend Class ClsIdPredio_PropStr
             lobjPredio.SLevanteEventoNot(Me, HstrMens, "", 0, EnuSeveridadNot.EnuInformacion)
         End If
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If Not IsNothing(ObjValorPro) Then
             Return HobjValorPro.ToString
@@ -359,6 +367,7 @@ Friend Class ClsIdPredio_PropStr
         End If
     End Function
 End Class
+
 Friend Class ClsNombreCompleto_PropStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "NombreCompleto"
@@ -369,14 +378,17 @@ Friend Class ClsNombreCompleto_PropStr
         HenuTipoValor = EnuTipoValor.enuString
         HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
     End Sub
+
     Public Overrides Sub SValide()
         HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 2, ShrLongitud, BlnEsRequerido)
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If IsNothing(HobjValorPro) Then
             Return ""
@@ -385,6 +397,7 @@ Friend Class ClsNombreCompleto_PropStr
         End If
     End Function
 End Class
+
 Friend Class ClsPorcentajePartiDbl
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "PorcentajeParticipacion"
@@ -396,6 +409,7 @@ Friend Class ClsPorcentajePartiDbl
         HblnEsRequerido = True
         HblnRegistrarLogCambio = True
     End Sub
+
     Public Overrides Sub SValide()
         Dim lobjPadre As ClsPropietario = ObjPadre
         Dim lobjPredio As ClsPredio = lobjPadre.ObjPadre
@@ -409,11 +423,13 @@ Friend Class ClsPorcentajePartiDbl
                     EnuSeveridadNot.EnuInformacion)
         End If
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If IsNothing(ObjValorPro) Then
             Return ""

@@ -5,6 +5,25 @@
 
 En términos prácticos, este proyecto concentra la operación principal del negocio y la experiencia de usuario del módulo; `docs/` guarda la documentación técnica y operativa, `src/` está reservado para estabilización gradual del código y `build/` aloja artefactos y salidas de compilación no versionadas. Leer `README.md` antes de operar y mantener alineación con la estrategia multi-repo del proyecto.
 
+## Regla de seguridad antes de PR o release
+Antes de crear una PR o un release, el primer paso obligatorio es revisar el estado del repositorio:
+
+```bash
+git status --short --branch
+git status
+```
+
+Si existen archivos en `staging`, modificados o sin seguimiento (por ejemplo `M`, `A`, `??`), el proceso debe detenerse y mostrar una advertencia clara:
+
+> Se detectaron cambios pendientes en el repositorio que no forman parte del commit actual. Revisa los archivos en staging o sin seguimiento antes de continuar.
+
+Después de la advertencia, el responsable debe elegir una de estas opciones:
+1. Continuar solo si se confirma explícitamente que esos archivos NO deben incluirse en la versión actual.
+2. Hacer un commit primero con todos los archivos relevantes antes de abrir la PR o crear el release.
+3. Si hay archivos no deseados o temporales, dejarlos fuera del commit y validarlos antes de continuar.
+
+No se debe crear PR ni release si el repositorio no está limpio o si no se ha explicitado el alcance real del commit.
+
 ## Regla obligatoria
 `main` está protegida. No se acepta push directo a `main`.
 Todo cambio debe entrar por una rama de trabajo y una PR hacia `main`.

@@ -5,6 +5,7 @@
     Private Const MCSTRNOMBRETABLA As String = "OriPeriodos"
     ' Variables de modulo
 #End Region
+
 #Region "Constructores"
     ''' <summary>
     ''' Instancia el objeto como un objeto no navegable, básicamente para formar parte de una colección
@@ -22,6 +23,7 @@
         HenuTipoPermiso = EnuPermisosDef.enuHeredado
     End Sub
 #End Region
+
 #Region "Propiedades"
 #Region "Propiedades indentificadoras"
     Protected Overrides ReadOnly Property HstrNombreTabla As String
@@ -92,6 +94,7 @@
     End Property
 #End Region
 #End Region
+
 #Region "Procedimientos y funciones invalidantes"
     Friend Overrides Function FblnEsSuprimible() As Boolean
         Dim lobjAno As ClsAno = HobjPadre
@@ -103,6 +106,7 @@
         End Get
     End Property
 #End Region
+
 #Region "Procedimientos del objeto"
     '
 #End Region
@@ -125,6 +129,7 @@ Friend Class ClsEstaCerradoPeriodoBln
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsFechaFacturacionPeriodoDtm
     Inherits ClsCBPropiedad
     Private ReadOnly MobjPadre As ClsPeriodo = Nothing
@@ -158,6 +163,7 @@ Friend Class ClsFechaFacturacionPeriodoDtm
         Return HobjValorPro.ToString
     End Function
 End Class
+
 Friend Class ClsIdAnoPeriodoShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdAno"
@@ -200,6 +206,7 @@ Friend Class ClsIdAnoPeriodoShr
         End If
     End Function
 End Class
+
 Friend Class ClsIdPeriodoShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdPeriodo"

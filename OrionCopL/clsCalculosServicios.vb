@@ -38,6 +38,7 @@
         End Try
         Return lblnCalculo
     End Function
+
     ''' <summary>
     ''' Elimina los ítems del programa de facturación correspondientes al servicio pasado en
     ''' el argumento
@@ -47,6 +48,7 @@
         Dim lobjServicio As ClsServicio = GobjParametros.FobjServicio(astrKeySer)
         SElimineItemsServicio(lobjServicio)
     End Sub
+
     Friend Shared Sub SElimineItemsServicio(aobjServicio As ClsServicio)
         Dim lstrTabla = ClsItemProgramaFact.SstrNombreTabla
         Dim lstrIdAno As String = aobjServicio.ObjIdAno_ServicioShr.ToString()
@@ -59,6 +61,7 @@
         Dim lentCantEli = GobjPanDat.SEjecuteSentenciaSql(lstrExpSqlEli)
         aobjServicio.SActuEstaGeneradoProgramaFact(False)
     End Sub
+
     Friend Shared Sub SLimpieItemsServicio(aobjServicio As ClsServicio)
         Dim lstrTabla = ClsItemProgramaFact.SstrNombreTabla
         Dim lstrIdAno As String = aobjServicio.ObjIdAno_ServicioShr.ToString()
@@ -73,11 +76,12 @@
                 lstrFiltro
         Dim lentReg = GobjPanDat.SEjecuteSentenciaSql(lstrExpSqlAct)
         If lentReg > 0 Then
-            aobjServicio.EnuEstadoActualizacion = EnuEstadoObjetoDef.enuModificando
+            aobjServicio.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
             aobjServicio.ObjEstaGenaradaProgramBln.ObjValorPro = False
             aobjServicio.SActualice(True)
         End If
     End Sub
+
     ''' <summary>
     ''' Calcula la contribucion de los Sectores que contribuyen con los Modulos que a su vez
     ''' contribuyen con el Servicio pasado en el Argumento
@@ -100,6 +104,7 @@
             End If
         Next
     End Sub
+
     ''' <summary>
     ''' Calcula la contribucion de cada uno de los Sectores que contribuyen al Módulo del Servicio
     ''' pasado en el argumento y actualiza los objetos "SectorModuloServicio".
@@ -157,6 +162,7 @@
             End If
         Next
     End Sub
+
     Private Shared Function FblnCreoItemsPrograma(aobjServicio As ClsServicio) As Boolean
         Dim lblnCreo = False
         Dim ldtbSecServicio = aobjServicio.FdtbSectoresServicio()
@@ -173,6 +179,7 @@
         Next
         Return lblnCreo
     End Function
+
     ''' <summary>
     ''' Crea o actualiza los items del programa de facturacion para los predios de un sector que contribuyen con el
     ''' servicio pasado en el argumento
@@ -234,6 +241,7 @@
         Next
         Return lblnActualizo
     End Function
+
     Private Shared Function FblnCreoItemProgramaFactPredio(aobjServicio As ClsServicio,
             adrwNewItemProgFact As DataRow, adecValorSectorAno As Decimal,
             adecBaseParticipacionSector As Decimal, ashrPeriodosDistribuir As Short,
@@ -258,8 +266,8 @@
                 EnuTipoDeudorDef.EnuPredio, adrwNewItemProgFact)
         Dim lblnCambioPermiso = False
         With lobjItemProgramFact
-            If Not CType(.EnuPermisosObj And EnuPermisosDef.enuCrear, Boolean) Then
-                .EnuPermisosObj += EnuPermisosDef.enuCrear
+            If Not CType(.EnuPermisosObj And EnuPermisosDef.EnuCrear, Boolean) Then
+                .EnuPermisosObj += EnuPermisosDef.EnuCrear
                 lblnCambioPermiso = True
             End If
             .SCreeObj(Nothing)
@@ -279,7 +287,7 @@
                 .SActualice(True)
                 lblnCreo = True
                 If lblnCambioPermiso Then
-                    .EnuPermisosObj -= EnuPermisosDef.enuCrear
+                    .EnuPermisosObj -= EnuPermisosDef.EnuCrear
                 End If
             Else
                 Dim lstrMens = "Propiedad no valida. " & lobjItemProgramFact.HstrPropiedadNoValida
@@ -288,6 +296,7 @@
         End With
         Return lblnCreo
     End Function
+
     Private Shared Sub SElimineSectoresModuloServicio(aobjServicio As ClsServicio)
         Dim lstbFiltro As New System.Text.StringBuilder
         With lstbFiltro
@@ -302,6 +311,7 @@
                 ClsSectorModuloServicio.SstrNombreTabla, lstrFiltro)
         GobjPanDat.SEjecuteSentenciaSql(lstrSql)
     End Sub
+
     Private Shared Sub SElimineSectoresServiciosAno(ashrIdAno As Short)
         Dim lstbFiltro As New System.Text.StringBuilder
         With lstbFiltro

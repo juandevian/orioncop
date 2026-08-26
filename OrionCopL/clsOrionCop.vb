@@ -216,19 +216,22 @@ Friend Class ClsOrionCop
             Return MobjRegistro
         End Get
     End Property
+
     Friend ReadOnly Property ShrIdApp As Short Implements IPanDat.ShrIdApp
         Get
             Return EnuListaAplicaciones.EnuOrionCop
         End Get
     End Property
+
     Friend ReadOnly Property StrNombreArchivos As String Implements IPanDat.StrNombreArchivos
         Get
             Return "OrionCop_Net"
         End Get
     End Property
+
     Friend ReadOnly Property EntVersionBDEnProg As Integer Implements IPanDat.EntVersionBDEnProg
         Get
-            Return 264
+            Return 267
         End Get
     End Property
 #End Region
@@ -291,6 +294,7 @@ Friend Class ClsOrionCop
         BlnPreFacturando = False
         Return lblnPuede
     End Function
+
     ''' <summary>
     ''' Indica si en el momento existe algún servicio que genera programa de facturación, que aún no haya
     ''' generado los items del programa.
@@ -315,6 +319,7 @@ Friend Class ClsOrionCop
         End If
         Return lblnHay
     End Function
+
     Friend Sub SGenerePrefacturas()
         Dim lblnNoHayError = False
         GobjPanDat.SControleProcesoObj(True)
@@ -357,6 +362,7 @@ Friend Class ClsOrionCop
             End If
         End Try
     End Sub
+
     ''' <summary>
     ''' Indica si estan dadas las condiciones para generara las Pre-Facturas
     ''' </summary>
@@ -375,6 +381,7 @@ Friend Class ClsOrionCop
         Dim ldblClientesAFac = FdblClientesAFac(ldtbItemsProgAPreFact)
         SPrefAClientes(adtmFechaFac, ldtbItemsProgAPreFact, ldblClientesAFac)
     End Sub
+
     Private Sub SPrefPrediosAgrAProp(adtmFecha As Date, adtbItemsProgAFac As DataTable,
             astrIdPredsAgrAFac As List(Of String))
         Dim lobjPredAgr As New ClsPredio(EnuModoInstanciaObjDef.EnuUnico)
@@ -413,6 +420,7 @@ Friend Class ClsOrionCop
             Next
         End If
     End Sub
+
     Private Sub SPrefAPredios(adtmfechaFac As Date, adtbItemsProgAFac As DataTable,
             astrIdPredsAgrAFac As List(Of String))
         Dim lobjPredAgr As New ClsPredio(EnuModoInstanciaObjDef.EnuUnico)
@@ -471,6 +479,7 @@ Friend Class ClsOrionCop
             Next
         End If
     End Sub
+
     Private Shared Sub SPreFactureAPredio(aobjPredioAgr As ClsPredio,
             adrwItemsAFact As DataRow(), adtmFecha As Date, ablnAPropietario As Boolean)
         Dim lobjCliente As ClsCliente = Nothing
@@ -520,6 +529,7 @@ Friend Class ClsOrionCop
             lobjFact.SActualice(True)
         Next
     End Sub
+
     Private Shared Sub SPreFactureAPredioAgrConsol(aobjPredioAgr As ClsPredio,
             adrwItemsAFact As DataRow(), adtmFecha As Date, ablnAPropietario As Boolean)
         Dim lobjCliente As ClsCliente = Nothing
@@ -588,6 +598,7 @@ Friend Class ClsOrionCop
             lobjFact.SActualice(True)
         Next
     End Sub
+
     Private Sub SPrefAClientes(adtmFechaFac As Date,
             adtbItemsProgAFac As DataTable, adblClientesAFac As List(Of Double))
         Dim lobjCliente As New ClsCliente(EnuModoInstanciaObjDef.EnuUnico)
@@ -635,6 +646,7 @@ Friend Class ClsOrionCop
             Next
         End If
     End Sub
+
     Private Shared Sub SPreFactureACliente(aobjCliente As ClsCliente,
             adrwItemsAFact As DataRow(), adtmFecha As Date)
         Dim lobjFactura = FobjNuevaFact(aobjCliente, "", adtmFecha)
@@ -659,6 +671,7 @@ Friend Class ClsOrionCop
         Next
         lobjFactura.SActualice(True)
     End Sub
+
     Private Shared Sub SInserteItemsFact(acolProps As Collection,
             acolFacturas As Collection, acolVlrItemProps As Collection,
             astrIdPredio As String, astrKeySer As String)
@@ -673,6 +686,7 @@ Friend Class ClsOrionCop
             End If
         Next
     End Sub
+
     Private Shared Sub SInserteItemsFact(aobjCliente As ClsCliente,
             acolFacturas As Collection, acolVlrItemProps As Collection,
             astrIdPredio As String, astrKeySer As String)
@@ -685,6 +699,7 @@ Friend Class ClsOrionCop
             SAddItemFact(lobjFact, astrIdPredio, astrKeySer, ldecVlrItemProp)
         End If
     End Sub
+
     ' Método modificado por JSV
     Private Shared Sub SAddItemFact(aobjFactura As ClsFactura, astrIdPredio As String,
             astrKeyServ As String, adecValor As Decimal)
@@ -749,6 +764,7 @@ Friend Class ClsOrionCop
         End With
         aobjFactura.SAdicioneNuevoItem(lobjItemFact)
     End Sub
+
     ' Función escrita por JSV
     Private Shared Function FblnHayConsumoOk(astrIdPredio As String, ashrIdServ As Short) As Boolean
         Dim lstrCamposSelect As String() = {ClsConsumo_ItemProgramaFactDec.SstrNombreCampoBd}
@@ -768,6 +784,7 @@ Friend Class ClsOrionCop
             Return True
         End If
     End Function
+
     Private Shared Function FdtbItemsAPreFactPredios() As DataTable
         Dim lshrIdAnoActual As Short =
                 GobjParametros.ObjAnoActual.ObjIdAnoShr.ObjValorPro
@@ -810,6 +827,7 @@ Friend Class ClsOrionCop
         Dim ldtbRes = ClsPanorama.FdtbDataTable(lstrSql)
         Return ldtbRes
     End Function
+
     ''' <summary>
     ''' Devuelve una datatable donde se consolidad los valores de los items a facturar
     ''' de los predios en el predio agrupador
@@ -841,6 +859,7 @@ Friend Class ClsOrionCop
         Dim ldtbRes = ClsPanorama.FdtbDataTable(lstrSql)
         Return ldtbRes
     End Function
+
     Private Shared Sub SActualiceItemsProgFac(adrwItemsProgFac As DataRow(),
         ablnPredio As Boolean)
         Dim lstrTabla = ClsItemProgramaFact.SstrNombreTabla
@@ -886,6 +905,7 @@ Friend Class ClsOrionCop
             GobjPanDat.SEjecuteSentenciaSql(lstrExpSql)
         Next
     End Sub
+
     Private Shared Function FstrServiciosAFact(adtmFechaFac As Date,
             ablnSoloProp As Boolean) As List(Of String)
         Dim lstrKeySer As New List(Of String)
@@ -918,6 +938,7 @@ Friend Class ClsOrionCop
         Next
         Return lstrKeySer
     End Function
+
     Private Shared Function FstrPredAgrAFac(adtbItemsAFac As DataTable) As List(Of String)
         Dim lstrPredAFac As New List(Of String), lstrIdpreAgr As String
         For Each ldrwITemAFac As DataRow In adtbItemsAFac.Rows
@@ -929,6 +950,7 @@ Friend Class ClsOrionCop
         Next
         Return lstrPredAFac
     End Function
+
     Private Shared Function FdblClientesAFac(adtbItemsAFac As DataTable) As List(Of Double)
         Dim ldblCliAFac As New List(Of Double), ldblIdCliente As Double
         For Each ldrwITemAFac As DataRow In adtbItemsAFac.Rows
@@ -942,6 +964,7 @@ Friend Class ClsOrionCop
         ldblCliAFac.Sort()
         Return ldblCliAFac
     End Function
+
     Private Shared Function FstrFiltroPredYServicios(astrIdpredAgr As String,
             astrKeysSer As List(Of String)) As String
         Dim lstrFiltro = "IdPreAgr = '" & astrIdpredAgr & "' AND (("
@@ -962,6 +985,7 @@ Friend Class ClsOrionCop
         Next
         Return lstrFiltro
     End Function
+
     Private Shared Function FstrFiltroPredYServicio(astrIdpredAgr As String,
             astrKeySer As String) As String
         Dim lstrIdAno As String, lstrIdSer As String, lstrFiltro As String
@@ -980,6 +1004,7 @@ Friend Class ClsOrionCop
         End If
         Return lstrFiltro
     End Function
+
     Private Shared Function FstrFiltroClieYServicios(adblIdCliente As Double,
             astrKeysSer As List(Of String)) As String
         Dim lstrFiltro = ClsIdCliente_ItemProgramaFactDbl.SstrNombreCampoBd & " = " &
@@ -1010,6 +1035,7 @@ Friend Class ClsOrionCop
         End If
         Return lstrFiltro
     End Function
+
     Private Shared Function FstrFiltroCliYServicio(adblIdCliente As Double,
             astrKeySer As String) As String
         Dim lstrIdAno As String, lstrIdSer As String, lstrFiltro As String
@@ -1022,6 +1048,7 @@ Friend Class ClsOrionCop
                 " = " & lstrIdSer
         Return lstrFiltro
     End Function
+
     Private Shared Function FobjNuevaFact(aobjCliente As ClsCliente, astrIdPredAgru As String,
             adtmFechaFact As Date) As ClsFactura
         Dim lobjFactura = aobjCliente.ObjNuevaFactura(EnuModoFacturacionDef.EnuSistema)
@@ -1035,6 +1062,7 @@ Friend Class ClsOrionCop
         End With
         Return lobjFactura
     End Function
+
     Private Shared Function FcolVlrItemPropietarios(aobjPredioAgr As ClsPredio,
             adecValorItem As Decimal, ablnAPropietaro As Boolean) As Collection
         Dim i = 0, lcolVlrItemProp As New Collection, ldblPorPart As Double
@@ -1116,8 +1144,21 @@ Friend Class ClsOrionCop
         SReverseItemsProgramaFactPredios()
         SReverseItemsProgramaFactClientes()
     End Sub
+
     Private Shared Sub SReverseItemsProgramaFactPredios()
-        Dim lstrSql = "SELECT DISTINCT P." & ClsIdPredioStr.SstrNombreCampoBd & ", " &
+        Dim lstrPeridoAct = GobjParametros.ObjAnoActual.StrIdPeriodoActual
+        Dim lstrSql = "UPDATE " & ClsItemProgramaFact.SstrNombreTabla & " SET " &
+                ClsSaldo_ItemProgramaFactDec.SstrNombreCampoBd & " = " &
+                ClsSaldo_ItemProgramaFactDec.SstrNombreCampoBd & " + " &
+                ClsValorPeriodo_ItemProgramaFactDec.SstrNombreCampoBd & " WHERE " &
+                ClsIdCarpetaShr.SstrNombreCampoBd & " = " & GshrIdCarpeta & " AND " &
+                ClsIdCentroUtilShr.SstrNombreCampoBd & " = " & GshrIdCentroUtil & " AND " &
+                ClsIdPredio_ItemProgramaFactStr.SstrNombreCampoBd & " <> '' " & " AND " &
+                ClsIdAno_ItemProgramaFactShr.SstrNombreCampoBd & " = " &
+                GobjParametros.ObjAnoActual.ObjIdAnoShr.ToString()
+        Dim lentRes = GobjPanDat.SEjecuteSentenciaSql(lstrSql)
+
+        lstrSql = "SELECT DISTINCT P." & ClsIdPredioStr.SstrNombreCampoBd & ", " &
                 ClsIdPredioAgrupadorStr.SstrNombreCampoBd & ", " &
                 ClsIdAno_ServicioItemFactShr.SstrNombreCampoBd & "," &
                 ClsIdServicio_ItemFactShr.SstrNombreCampoBd & " FROM (SELECT " &
@@ -1134,7 +1175,8 @@ Friend Class ClsOrionCop
                 ClsIdPredioStr.SstrNombreCampoBd & " = I." &
                 ClsIdPredio_ItemFactStr.SstrNombreCampoBd & " WHERE " &
                 ClsPrefijo_ItemFactStr.SstrNombreCampoBd & " = '" & GCSTRPREFPREFACTURA &
-                "' ORDER BY " & ClsIdPredioStr.SstrNombreCampoBd
+                "' AND I." & ClsIdAno_ServicioItemFactShr.SstrNombreCampoBd & " = 0 ORDER BY " &
+                ClsIdPredioStr.SstrNombreCampoBd
         Dim ldtbResul = ClsPanorama.FdtbDataTable(lstrSql)
         Dim lstrIdPredio As String, lshrIdAno As Short, lshrIdSer As Short
         For Each ldrwRes As DataRow In ldtbResul.Rows
@@ -1147,9 +1189,12 @@ Friend Class ClsOrionCop
             lshrIdSer = ClsPanorama.FobjValorCampo(ldrwRes(
                     ClsIdServicio_ItemFactShr.SstrNombreCampoBd),
                     EnuTipoValor.EnuString)
-            SReverseItemProgFact(0, lstrIdPredio, lshrIdAno, lshrIdSer)
+            If lshrIdAno = 0 Then
+                SReverseItemProgFact(0, lstrIdPredio, lshrIdAno, lshrIdSer)
+            End If
         Next
     End Sub
+
     Private Shared Sub SReverseItemsProgramaFactClientes()
         Dim lstrTablaPri = ClsItemFactura.SstrNombreTabla
         Dim lstrTablaSec = ClsFactura.SstrNombreTabla
@@ -2162,6 +2207,361 @@ Friend Class ClsOrionCop
     End Sub
 #End Region
 
+#Region "Facturas penalización pago extemporaneo"
+    Friend Sub SGenereItemsProgFactMulta(ByRef aentItemsMulta As Integer)
+        Dim lshrIdSerMulta = GobjParametros.ObjAnoActual.ObjIdServicioMultaShr.ObjValorPro
+        Dim larlPrdiosAgr As New ArrayList, ldrwFactsAMultar As DataRow(),
+                lstrPrefijo As String, lentIdFact As Integer, lstrNroFac As String,
+                lstrIdPreAgr As String, lstrFiltro As String
+        Dim ldtmFechaMulta As Date =
+                GobjParametros.ObjAnoActual.ObjPeriodoActual.DtmFechaFinPeriodo.AddDays(1)
+        Dim larlFactAMultar As New ArrayList
+        ClsCalculosServicios.SElimineItemsServicio("0," & lshrIdSerMulta.ToString())
+        Dim ldtbFacsMultar = FdtbFacturasAMultarFM()
+        For Each ldrwFact As DataRow In ldtbFacsMultar.Rows
+            lstrIdPreAgr = ClsPanorama.FobjValorCampo(ldrwFact(
+                    ClsIdPredioAgrupador_FacStr.SstrNombreCampoBd), EnuTipoValor.EnuString)
+            If Not larlPrdiosAgr.Contains(lstrIdPreAgr) Then
+                larlPrdiosAgr.Add(lstrIdPreAgr)
+            End If
+        Next
+        For Each lstrIdPreAgr In larlPrdiosAgr
+            lstrFiltro = ClsIdPredioAgrupador_FacStr.SstrNombreCampoBd & " = '" &
+                    lstrIdPreAgr & "'"
+            larlFactAMultar.Clear()
+            ldrwFactsAMultar = ldtbFacsMultar.Select(lstrFiltro)
+            For Each ldrwFacAMultar As DataRow In ldrwFactsAMultar
+                lstrPrefijo = ClsPanorama.FobjValorCampo(ldrwFacAMultar(
+                    ClsPrefijo_FactStr.SstrNombreCampoBd), EnuTipoValor.EnuString)
+                lentIdFact = ClsPanorama.FobjValorCampo(ldrwFacAMultar(
+                    ClsIdFacturaEnt.SstrNombreCampoBd), EnuTipoValor.EnuInteger)
+                lstrNroFac = ClsPanorama.FstrNumeroDcto(lstrPrefijo, lentIdFact)
+                If FblnMultarFact(lstrPrefijo, lentIdFact, ldtmFechaMulta) Then
+                    larlFactAMultar.Add(lstrNroFac)
+                End If
+            Next
+            If larlFactAMultar.Count > 0 Then
+                SGenereItemProgFactMulta(lstrIdPreAgr, larlFactAMultar)
+                SMarqueFrasMultadas(larlFactAMultar, ldtmFechaMulta)
+                aentItemsMulta += larlFactAMultar.Count
+            End If
+        Next
+    End Sub
+
+    Private Shared Function FdtbFacturasAMultarFM() As DataTable
+        Dim ldtmFechaFinPer = GobjParametros.ObjAnoActual.ObjPeriodoActual.DtmFechaFinPeriodo
+        Dim lshrDiasMulta = GobjParametros.ObjAnoActual.ObjDiasMultaExtShr.ObjValorPro
+        Dim ldtmFechaLimite = ldtmFechaFinPer.AddDays(-lshrDiasMulta)
+        Dim lstrFechaLimite = ClsPanoramaDat.FstrFechaNormalizada(ldtmFechaLimite.ToString())
+        lstrFechaLimite = "'" & lstrFechaLimite & "'"
+        Dim lstrTabla = ClsFactura.SstrNombreTabla
+        Dim lstrCampSel As String() = {ClsIdPredioAgrupador_FacStr.SstrNombreCampoBd,
+                ClsIdCliente_FactDbl.SstrNombreCampoBd,
+                ClsPrefijo_FactStr.SstrNombreCampoBd,
+                ClsIdFacturaEnt.SstrNombreCampoBd}
+        Dim lstrOrden As String(,) = {{ClsIdPredioAgrupador_FacStr.SstrNombreCampoBd, "ASC"},
+                {ClsIdCliente_FactDbl.SstrNombreCampoBd, "ASC"},
+                {ClsPrefijo_FactStr.SstrNombreCampoBd, "ASC"},
+                {ClsIdFacturaEnt.SstrNombreCampoBd, "ASC"}}
+        Dim lstrFiltro = StrFiltroUbicacion & " AND " &
+                ClsIdPredioAgrupador_FacStr.SstrNombreCampoBd & " <> ''" & " AND " &
+                ClsDebitos_FactDec.SstrNombreCampoBd & " > " &
+                ClsCreditos_FactDec.SstrNombreCampoBd & " AND " &
+                ClsFechaVencimientoDtm.SstrNombreCampoBd & " < " & lstrFechaLimite & " AND " &
+                ClsMultadalBln.SstrNombreCampoBd & " = FALSE"
+        Dim ldtbRes = ClsPanorama.FdtbDataTable(lstrTabla, lstrCampSel, lstrOrden, lstrFiltro)
+        Return ldtbRes
+    End Function
+
+    Private Shared Sub SGenereItemProgFactMulta(astrIdpredAgr As String,
+            aarlFactAMultar As ArrayList)
+        Dim lshrIdServMulta As Short =
+                GobjParametros.ObjAnoActual.ObjIdServicioMultaShr.ObjValorPro
+        Dim lobjServicio As ClsServicio = GobjParametros.ColServiciosPer("0," & lshrIdServMulta)
+        Dim ldecValorMulta = GobjParametros.ObjAnoActual.ObjValorMultaPagoExtDec.ObjValorPro
+        Dim lShrIdAnoFact = GobjParametros.ObjAnoActual.ObjIdAnoShr.ObjValorPro
+        Dim lshrIdPeriodoFact = GobjParametros.ObjAnoActual.ObjPeriodoActual.
+                ObjIdPeriodoShr.ObjValorPro
+        Dim lobjPredio As New ClsPredio(EnuModoInstanciaObjDef.EnuUnico)
+        lobjPredio.SAbra({GshrIdCarpeta, GshrIdCentroUtil, astrIdpredAgr})
+        If lshrIdPeriodoFact = 12 Then
+            lshrIdPeriodoFact = 1
+            lShrIdAnoFact += 1
+        Else
+            lshrIdPeriodoFact += 1
+        End If
+        Dim lstrPeriodo = lShrIdAnoFact.ToString & Format(lshrIdPeriodoFact, "0#")
+        ldecValorMulta *= aarlFactAMultar.Count
+        Dim ldrwNewItemProgramaFact = FdrwNewItemProgramaFact()
+        Dim lobjItemProgramFact As New ClsItemProgramaFact(lobjPredio,
+                EnuTipoDeudorDef.EnuPredio, ldrwNewItemProgramaFact)
+        With lobjItemProgramFact
+            .SCreeObj(Nothing)
+            .ObjIdCliente_ItemProgramaFactDbl.ObjValorPro = 0
+            .ObjIdPredio_ItemProgramaFactStr.ObjValorPro = astrIdpredAgr
+            .ObjIdAno_ItemProgramaFactShr.ObjValorPro =
+                    lobjServicio.ObjIdAno_ServicioShr.ObjValorPro
+            .ObjIdServicio_ItemProgramaFactShr.ObjValorPro =
+                    lobjServicio.ObjIdServicioShr.ObjValorPro
+            .ObjCantidadPeriodosShr.ObjValorPro = 1
+            .ObjAnuladoBln.ObjValorPro = False
+            .ObjOrigen_ItemProgramaFacByt.ObjValorPro =
+                    EnuOrigenItemProgramaFactDef.EnuAplicacion
+            .ObjIdCarpeta_ItemProgramaFactShr.ObjValorPro = GshrIdCarpeta
+            .ObjIdCentroUtil_ItemProgramaFactShr.ObjValorPro = GshrIdCentroUtil
+            .ObjPeriodoIni_ItemProgStr.ObjValorPro = lstrPeriodo
+            .ObjValorPeriodo_ItemProgramaFactDec.ObjValorPro = ldecValorMulta
+            .SActualice(True)
+        End With
+    End Sub
+
+    Friend Shared Sub SProcesePenalizacion(aobjRecCaja As ClsReciboCaja,
+            ByRef aobjFactura As ClsFactura, ByRef astrMens As String)
+        Dim lstrIdPreAgr As String = aobjRecCaja.ObjIdPredioAgrupador_RecStr.ObjValorPro
+        Dim ldblIdCliente As Double = aobjRecCaja.ObjIdCliente_RecDbl.ObjValorPro
+        Dim lblnNoHayError = False
+        Try
+            GobjPanDat.SControleProcesoObj(True)
+            Dim larlNrosFacsAMultarEnRC As ArrayList = FarlNrosFacsEnRecCajaAMultar(aobjRecCaja)
+            Dim larlNrosFacsAMultar As ArrayList = FarlNrosFactAMultar(aobjRecCaja)
+            For Each lstrNroFact In larlNrosFacsAMultarEnRC
+                If Not larlNrosFacsAMultar.Contains(lstrNroFact) Then
+                    larlNrosFacsAMultar.Add(lstrNroFact)
+                End If
+            Next
+            ' Genera factura
+            Dim lobjfactura = FobjFacturaMulta(aobjRecCaja.ObjClienteRecibo,
+                    aobjRecCaja.ObjIdPredioAgrupador_RecStr.ObjValorPro,
+                    aobjRecCaja.ObjFechaRecDtm.ObjValorPro,
+                    larlNrosFacsAMultar, astrMens)
+            SMarqueFrasMultadas(larlNrosFacsAMultar, aobjRecCaja.ObjFechaRecDtm.ObjValorPro)
+            aobjFactura = lobjfactura
+            lblnNoHayError = True
+        Catch ex As ErrorInesperadoPanDatException
+            Throw
+        Catch ex As ErrorInesperadoPanLException
+            Throw
+        Catch ex As ArgumentException
+            Throw
+        Catch ex As ConexionBdPanException
+            Throw
+        Catch ex As Exception
+            Throw
+        Finally
+            If lblnNoHayError Then
+                GobjPanDat.SControleProcesoObj(False)
+            Else
+                GobjPanDat.SControleProcesoObj(False, True)
+            End If
+        End Try
+    End Sub
+
+    Private Shared Function FobjFacturaMulta(aobjClienteFact As ClsCliente,
+            astrIdPredAgr As String, adtmFechaFact As Date, aarlNrosFacsAMultar As ArrayList,
+            ByRef astrMens As String) As ClsFactura
+        Dim lobjFactura As ClsFactura = Nothing
+        If aarlNrosFacsAMultar.Count > 0 Then
+            lobjFactura = aobjClienteFact.ObjNuevaFactura(EnuModoFacturacionDef.EnuMulta)
+            Dim lobjSerMulta = GobjParametros.FobjServicioMulta
+            Dim lstrPeriodo = GobjParametros.ObjAnoActual.ObjPeriodoActual.
+                        ObjIdPeriodoShr.ToString()
+            Dim lstrPrefFact = GobjParametros.FstrPrefijoDoc(EnuTipoDocOri.EnuFactura)
+            Dim ldtmFechaVence As Date = adtmFechaFact.AddDays(
+                        lobjSerMulta.ObjDiasVencimientoShr.ObjValorPro)
+            Dim ldtmFechaPagoSinMora = lobjSerMulta.FdtmFechaGracias(ldtmFechaVence)
+            Dim lentFormaPago As Integer = EnuFormaPago.EnuCredito
+            Dim lentMedioPago As Integer = GobjParametros.ObjIdMedioPagoDefectoByt.ObjValorPro
+            With lobjFactura
+                .ObjFechaFacturaDtm.ObjValorPro = adtmFechaFact
+                .ObjFechaGraciaDtm.ObjValorPro = ldtmFechaPagoSinMora
+                .ObjFechaVencimientoDtm.ObjValorPro = ldtmFechaVence
+                .ObjEsPreFacturaBln.ObjValorPro = False
+                .ObjCreditos_FactDec.ObjValorPro = 0
+                .ObjIdUsuario_FactStr.ObjValorPro = GstrIdUsuario
+                .ObjPieFacturaDos_FactStr.ObjValorPro =
+                                GobjParametros.ObjPieFacturaDosStr.ToString()
+                .ObjPieFacturaTres_FactStr.ObjValorPro =
+                                GobjParametros.ObjPieFacturaTresStr.ToString()
+                .ObjPieFacturaUno_FactStr.ObjValorPro =
+                                GobjParametros.ObjPieFacturaUnoStr.ToString()
+                .ObjPrefijo_FactStr.ObjValorPro = lstrPrefFact
+                .ObjOrigenInstanciaStr.ObjValorPro = GstrOrigenActual
+                .ObjIdPredioAgrupador_FacStr.ObjValorPro = astrIdPredAgr
+                .ObjIdFormaPagoByt.ObjValorPro = lentFormaPago
+                .ObjIdMedioPagoByt.ObjValorPro = lentMedioPago
+            End With
+            For Each lstrNroFact As String In aarlNrosFacsAMultar
+                Dim lobjItemFact As ClsItemFactura = FobjNuevoItemFacMultada(lobjFactura,
+                            astrIdPredAgr, lstrNroFact)
+                lobjFactura.SAdicioneNuevoItem(lobjItemFact)
+            Next
+            Dim lobjEstadoCta As ClsEstadoCuenta = FobjEstadoCuenta(aobjClienteFact,
+                    adtmFechaFact, astrIdPredAgr)
+            lobjFactura.SActualice(True)
+            If lobjEstadoCta.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuConsultando Then
+                lobjEstadoCta.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
+            End If
+            lobjEstadoCta.ObjPrefijoFac_EstadoStr.ObjValorPro =
+                    lobjFactura.ObjPrefijo_FactStr.ObjValorPro
+            lobjEstadoCta.ObjIdFactura_EstadoEnt.ObjValorPro =
+                    lobjFactura.ObjIdFacturaEnt.ObjValorPro
+            lobjEstadoCta.SActualice(True)
+            Dim lstrNomDcto As String
+            If GobjParametros.BlnEFacAutorizado Then
+                lstrNomDcto = " factura "
+            Else
+                lstrNomDcto = " cuenta de cobro "
+            End If
+            astrMens = "Se generó" & lstrNomDcto & "de penalización" & vbCrLf &
+                    "por pago extemporáneo: " & lobjFactura.StrNumeroFactura & "." & vbCrLf &
+                    "Desea imprimirla?"
+        End If
+        Return lobjFactura
+    End Function
+
+    Private Shared Sub SMarqueFrasMultadas(aarlFactsMultadas As ArrayList,
+            adtmFechMulta As Date)
+        Dim lstrPrefFac As String, lentIdFact As Integer, lobjValorLlave As Object()
+        Dim lobjFac As New ClsFactura()
+        For Each lstrNroFact As String In aarlFactsMultadas
+            lstrPrefFac = ClsPanorama.FstrPrefijoDcto(lstrNroFact)
+            lentIdFact = ClsPanorama.FentIdDcto(lstrNroFact)
+            lobjValorLlave = {GshrIdCarpeta, GshrIdCentroUtil, lstrPrefFac, lentIdFact}
+            lobjFac.SAbra(lobjValorLlave)
+            lobjFac.EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
+            lobjFac.ObjMultadalBln.ObjValorPro = True
+            lobjFac.ObjFechaMultaDtm.ObjValorPro = adtmFechMulta
+            lobjFac.SActualice(True)
+        Next
+    End Sub
+
+    Private Shared Function FobjEstadoCuenta(aobjCliente As ClsCliente, adtmFechafac As Date,
+                astrIdPredioAgr As String) As ClsEstadoCuenta
+        Dim ldblIdCliente As Double = aobjCliente.ObjIdClienteDbl.ObjValorPro
+        Dim lobjEstadoCta As ClsEstadoCuenta
+        Dim ldtbItemsFacVivas As DataTable
+        If String.IsNullOrEmpty(astrIdPredioAgr) Then
+            ldtbItemsFacVivas = FdtbItemsFacVivas(ldblIdCliente, 0)
+            lobjEstadoCta = FobjEstCtaClieNoPorSer(aobjCliente, adtmFechafac, ldtbItemsFacVivas,
+                        "", 0)
+        Else
+            ldtbItemsFacVivas = FdtbItemsFacVivas(ldblIdCliente, astrIdPredioAgr, "A")
+            lobjEstadoCta = FobjEstCtaPredNoPorSer(ldblIdCliente, astrIdPredioAgr, adtmFechafac,
+                        ldtbItemsFacVivas, "", 0)
+        End If
+        Return lobjEstadoCta
+    End Function
+
+    Private Shared Function FarlNrosFactAMultar(aobjRecCaja As ClsReciboCaja) As ArrayList
+        Dim larlIdFactPenalizacion As New ArrayList, lstrPrefijoFac As String,
+                lentIdFactura As Integer, lstrNroFact As String
+        Dim ldblIdCliente As Double = aobjRecCaja.ObjIdCliente_RecDbl.ObjValorPro
+        Dim lstrIdPreAgr As String = aobjRecCaja.ObjIdPredioAgrupador_RecStr.ObjValorPro
+        Dim ldtmFechaPago As Date = aobjRecCaja.ObjFechaRecDtm.ObjValorPro
+        Dim lstrTabla = ClsFactura.SstrNombreTabla
+        Dim lstrCamposSelect = {ClsPrefijo_FactStr.SstrNombreCampoBd,
+                ClsIdFacturaEnt.SstrNombreCampoBd}
+        Dim lstrFiltro = StrFiltroUbicacion & " AND " &
+                ClsIdCliente_FactDbl.SstrNombreCampoBd & " = " & ldblIdCliente & " AND " &
+                ClsIdPredioAgrupador_FacStr.SstrNombreCampoBd & " = '" & lstrIdPreAgr &
+                "' AND " & ClsDebitos_FactDec.SstrNombreCampoBd & " > " &
+                ClsCreditos_FactDec.SstrNombreCampoBd
+        Dim lstrOrden = {{ClsPrefijo_FactStr.SstrNombreCampoBd, "ASC"},
+                {ClsIdFacturaEnt.SstrNombreCampoBd, "ASC"}}
+        Dim ldtbIdFacts = ClsPanorama.FdtbDataTable(lstrTabla, lstrCamposSelect, lstrOrden,
+                lstrFiltro)
+        For Each ldrwIdFact As DataRow In ldtbIdFacts.Rows
+            lstrPrefijoFac = ClsPanorama.FobjValorCampo(ldrwIdFact(
+                    ClsPrefijo_FactStr.SstrNombreCampoBd), EnuTipoValor.EnuString)
+            lentIdFactura = ClsPanorama.FobjValorCampo(ldrwIdFact(
+                    ClsIdFacturaEnt.SstrNombreCampoBd), EnuTipoValor.EnuInteger)
+            lstrNroFact = ClsPanorama.FstrNumeroDcto(lstrPrefijoFac, lentIdFactura)
+            If FblnMultarFact(lstrPrefijoFac, lentIdFactura, ldtmFechaPago) Then
+                If Not larlIdFactPenalizacion.Contains(lstrNroFact) Then
+                    larlIdFactPenalizacion.Add(lstrNroFact)
+                End If
+            End If
+        Next
+        Return larlIdFactPenalizacion
+    End Function
+
+    Private Shared Function FarlNrosFacsEnRecCajaAMultar(aobjRecCaja As ClsReciboCaja) As ArrayList
+        Dim larlNrosFactsAMultar As New ArrayList
+        Dim lstrPrefijoFac As String, lentIdFactura As Integer
+        Dim lstrNroFac As String, ldtmFechaPago = aobjRecCaja.ObjFechaRecDtm.ObjValorPro
+        For Each lobjitemRecCaja As ClsItemRecCaja In aobjRecCaja.ColItemsRecCaja
+            lstrPrefijoFac = lobjitemRecCaja.ObjPrefijoFact_ItemRecStr.ObjValorPro
+            lentIdFactura = lobjitemRecCaja.ObjIdFactura_ItemRecEnt.ObjValorPro
+            lstrNroFac = ClsPanorama.FstrNumeroDcto(lstrPrefijoFac, lentIdFactura)
+            If FblnMultarFact(lobjitemRecCaja, ldtmFechaPago) Then
+                If Not larlNrosFactsAMultar.Contains(lstrNroFac) Then
+                    larlNrosFactsAMultar.Add(lstrNroFac)
+                End If
+            End If
+        Next
+        Return larlNrosFactsAMultar
+    End Function
+
+    Private Shared Function FblnMultarFact(astrPrefFact As String,
+            aentIdFact As Integer, adtmFecha As Date) As Boolean
+        Dim ldtmFechaVence As Date, lblnMultarFact = False
+        Dim lentDiasMulta As Integer =
+                GobjParametros.ObjAnoActual.ObjDiasMultaExtShr.ObjValorPro
+        Dim lobjFactura As New ClsFactura(), lobjValorLlave As Object()
+        lobjValorLlave = {GshrIdCarpeta, GshrIdCentroUtil, astrPrefFact, aentIdFact}
+        lobjFactura.SAbra(lobjValorLlave)
+        If lobjFactura.BlnDeudaEsAdmi AndAlso
+                    Not lobjFactura.ObjMultadalBln.ObjValorPro Then
+            ldtmFechaVence = lobjFactura.ObjFechaVencimientoDtm.ObjValorPro
+            lblnMultarFact = adtmFecha >= ldtmFechaVence.AddDays(lentDiasMulta)
+        End If
+        Return lblnMultarFact
+    End Function
+
+    Private Shared Function FblnMultarFact(aobjItemRec As ClsItemRecCaja,
+            adtmFechaPago As Date) As Boolean
+        Dim lblnMultar As Boolean = False
+        Dim lentDiasMulta As Integer =
+                GobjParametros.ObjAnoActual.ObjDiasMultaExtShr.ObjValorPro
+        Dim lstrPrefFact = aobjItemRec.ObjPrefijoFact_ItemRecStr.ToString()
+        Dim lentIdFact As Integer = aobjItemRec.ObjIdFactura_ItemRecEnt.ObjValorPro
+        Dim lshrIdItemFac As Short = aobjItemRec.ObjIdItemFac_ItemRecShr.ObjValorPro
+        Dim lobjFactura As New ClsFactura, lobjItemFac As ClsItemFactura
+        If lshrIdItemFac > 0 Then
+            lobjFactura.SAbra({GshrIdCarpeta, GshrIdCentroUtil, lstrPrefFact, lentIdFact})
+            If Not lobjFactura.ObjMultadalBln.ObjValorPro Then
+                Dim ldtmFechaVence = lobjFactura.ObjFechaVencimientoDtm.ObjValorPro
+                lblnMultar = adtmFechaPago >= ldtmFechaVence.AddDays(lentDiasMulta)
+                If lblnMultar Then
+                    lobjItemFac = lobjFactura.ColItemsFactura(lshrIdItemFac.ToString())
+                    lblnMultar = lobjItemFac.ObjIdAno_ServicioItemFactShr.ObjValorPro > 0
+                End If
+            End If
+        End If
+        Return lblnMultar
+    End Function
+    Private Shared Function FobjNuevoItemFacMultada(aobjFactura As ClsFactura, astrIdPredio As String,
+            astrNroFactMultada As String) As ClsItemFactura
+        Dim lshrIdServMulta = GobjParametros.ObjAnoActual.ObjIdServicioMultaShr.ObjValorPro
+        Dim lstrKeyServ = "0," & lshrIdServMulta
+        Dim lobjServicio As ClsServicio = GobjParametros.FobjServicio(lstrKeyServ)
+        Dim lstrDetalle = "Multa por pago extemporaneo a Factura: " & astrNroFactMultada
+        Dim ldecValor = GobjParametros.ObjAnoActual.ObjValorMultaPagoExtDec.ObjValorPro
+        Dim lobjItemFact As ClsItemFactura = aobjFactura.FobjNuevoItemFactura
+        With lobjItemFact
+            .ObjFechaGraciaIFDtm.ObjValorPro = aobjFactura.ObjFechaGraciaDtm.ObjValorPro
+            .ObjFechaVencimientoIFDtm.ObjValorPro = aobjFactura.ObjFechaVencimientoDtm.ObjValorPro
+            .ObjEsPrefactura_ItemFactBln.ObjValorPro = False
+            .ObjDetalle_ItemFactStr.ObjValorPro = lstrDetalle
+            .ObjIdAno_ServicioItemFactShr.ObjValorPro = 0
+            .ObjIdServicio_ItemFactShr.ObjValorPro = lshrIdServMulta
+            .ObjIdPredio_ItemFactStr.ObjValorPro = astrIdPredio
+            .ObjValor_ItemFactDec.ObjValorPro = ldecValor
+        End With
+        Return lobjItemFact
+    End Function
+#End Region
+
 #Region "Importar Facturas Contingencia"
     Friend Function FblnImportoFrasCon(ByRef astrMens As String) As Boolean
         Dim lblnNoHayError = False, lblnImportoFras = False
@@ -2195,6 +2595,7 @@ Friend Class ClsOrionCop
         End Try
         Return lblnImportoFras
     End Function
+
     Private Function FblnImportoFrasCon(adtbFras As DataTable, ByRef astrMens As String) As Boolean
         Dim lblnImporto = True
         If FblnEstaArchImpFacOK(adtbFras, astrMens) Then
@@ -2305,6 +2706,7 @@ Friend Class ClsOrionCop
         End If
         Return lblnImporto
     End Function
+
     Private Shared Function FblnEstaArchImpFacOK(adtbFacturasCon As DataTable,
             ByRef astrMens As String) As Boolean
         Dim lblnEstaOk = (adtbFacturasCon.Rows.Count > 0)
@@ -2316,6 +2718,7 @@ Friend Class ClsOrionCop
         End If
         Return lblnEstaOk
     End Function
+
     Private Shared Function FblnCamposOk(adtbFacturasCon As DataTable,
             ByRef astrMens As String) As Boolean
         Dim lobjCliente As New ClsCliente(EnuModoInstanciaObjDef.EnuUnico)
@@ -2383,6 +2786,7 @@ Friend Class ClsOrionCop
         Next
         Return lblnEstaOk
     End Function
+
     Private Shared Function FblnClienYPredioOk(adrwItemFact As DataRow, aobjCliente As ClsCliente,
             aobjPredio As ClsPredio, ByRef astrMens As String) As Boolean
         Dim ldblIdCliente As Double = ClsPanorama.FobjValorCampo(adrwItemFact("IdCliente"),
@@ -2439,6 +2843,7 @@ Friend Class ClsOrionCop
         End If
         Return lblnEstaOk
     End Function
+
     Private Shared Function FblnNroFacYFechaOk(adrwItemFact As DataRow, aobjFactura As ClsFactura,
             ByRef astrMens As String) As Boolean
         Dim lstrPrefFac As String = ClsPanorama.FobjValorCampo(adrwItemFact("PrefFactura"),
@@ -2497,6 +2902,7 @@ Friend Class ClsOrionCop
         End If
         Return lblnEstaOk
     End Function
+
     Private Shared Function FblnFechaFacConOk(adrwItemFact As DataRow, ByRef astrMens As String) As Boolean
         Dim lblnOk As Boolean
         Dim lentIdInfCon = ClsPanorama.FobjValorCampo(adrwItemFact("NroInformeCont"),
@@ -2528,6 +2934,7 @@ Friend Class ClsOrionCop
         End If
         Return lblnOk
     End Function
+
     Private Shared Function FblnRegVacio(ldrw As DataRow) As Boolean
         Dim lentNroInfCon As Integer = ClsPanorama.FobjValorCampo(ldrw("NroInformeCont"),
                 EnuTipoValor.EnuInteger)
@@ -2547,6 +2954,7 @@ Friend Class ClsOrionCop
         lobjAnticipo = New ClsAnticipo(EnuModoInstanciaObjDef.EnuNavegable)
         Return lobjAnticipo
     End Function
+
     Private Shared Function FcolAnticipo(aobjFact As ClsFactura) As Collection
         Dim lcolAnticipos As New Collection
         Dim lobjAnt As ClsAnticipo
@@ -2564,6 +2972,7 @@ Friend Class ClsOrionCop
         End If
         Return lcolAnticipos
     End Function
+
     Friend Shared Function FstrNombreModoFacturacion(aenuModoFacturacion As EnuModoFacturacionDef)
         Dim lstrNombre = String.Empty
         Select Case aenuModoFacturacion
@@ -2580,6 +2989,7 @@ Friend Class ClsOrionCop
         End Select
         Return lstrNombre
     End Function
+
     ''' <summary>
     ''' Devuelve una tabla con datos de los items del programa de facturación que tienen saldo mayor a cero,
     ''' pertenecena la ubicación actual y el año del servicio es cero o, menor o igual al año actual.
@@ -2645,6 +3055,7 @@ Friend Class ClsOrionCop
         GobjPanDat.SControleProcesoObj(False)
         Return lstrUltimasFacturas
     End Function
+
     ''' <summary>
     ''' Indica la cantidad de numeros disponibles para facturas según la Resolución de La Dian
     ''' </summary>
@@ -2662,6 +3073,7 @@ Friend Class ClsOrionCop
         lentCan = lentLimiteSupRes - lentIdUltFac
         Return lentCan
     End Function
+
     ''' <summary>
     ''' Indica la cantidad de días que restan para el vencimiento de la Reolución de la Dian
     ''' </summary>
@@ -2671,12 +3083,14 @@ Friend Class ClsOrionCop
         Dim lentDias As Integer = ClsPanorama.FentDiasEntreFechas(Date.Today, ldtmFechaVenRes)
         Return lentDias
     End Function
+
     Friend Shared Function FblnHayResVigente() As Boolean
         Dim ldtmFechaVenRes As Date = GobjParametros.ObjFechaVenceResolFactDtm.ObjValorPro
         Dim ldtmFechaRes As Date = GobjParametros.ObjFechaResolucionFactDtm.ObjValorPro
         Dim lblnHayRes As Boolean = Date.Now >= ldtmFechaRes AndAlso ldtmFechaVenRes >= Date.Now
         Return lblnHayRes
     End Function
+
     ''' <summary>
     ''' devuelve un string que contiene los numeros de la primera y la ultima cta cobro generadas, 
     ''' separadas por un punto y coma.
@@ -2714,6 +3128,7 @@ Friend Class ClsOrionCop
         GobjPanDat.SControleProcesoObj(False)
         Return lstrIdUltimasCtasCobro
     End Function
+
     ''' <summary>
     ''' devuelve un string que contiene elprefijo y los numeros de la primera y las ultimas notas db
     ''' generadas en el período actual, separadas por un punto y coma.
@@ -2756,6 +3171,7 @@ Friend Class ClsOrionCop
         GobjPanDat.SControleProcesoObj(False)
         Return lstrIdUltimasNotasDb
     End Function
+
     Friend Shared Function FdtbPrefacturas() As DataTable
         Dim lstrFiltro = StrFiltroUbicacion & " AND " & ClsEsPreFacturaBln.SstrNombreCampoBd &
                 " = True"
@@ -2765,6 +3181,7 @@ Friend Class ClsOrionCop
                 {"*"}, lstrIndice, lstrFiltro)
         Return ldtbPrefacturas
     End Function
+
     ''' <summary>
     ''' Devuelve un DataTable que contiene las cuentas bancarias y la cuenta de Caja.
     ''' </summary>
@@ -2809,6 +3226,7 @@ Friend Class ClsOrionCop
         End If
         Return ldtbCuentasIngresos
     End Function
+
     ''' <summary>
     ''' Indica si la Copropiedad actual ya tiene creado el registro en OriCentrosUtilidad
     ''' </summary>
@@ -3304,7 +3722,7 @@ Friend Class ClsOrionCop
             lobjEstadoCuenta.SActualice(True)
         End If
     End Sub
-    Private Function FobjEstCtaClieNoPorSer(aobjClliente As ClsCliente, adtmFechaEstado As Date,
+    Private Shared Function FobjEstCtaClieNoPorSer(aobjClliente As ClsCliente, adtmFechaEstado As Date,
             adtbItemsFacVivas As DataTable, astrPrefijo As String, aentIdPrefac As Integer)
         Dim lobjFactura As New ClsFactura
         Dim lstrPrefFacViva As String, lentIdFacViva As Integer, lstrIdFacPro As String
@@ -3409,6 +3827,7 @@ Friend Class ClsOrionCop
         Return lobjEstadoCuenta
     End Function
 #End Region
+
 #Region "Estado de Cuenta de Predios"
     Private Sub SGenereEstadoCtaPrediosAgr(adtmFechaEstados As Date)
         Dim lstrIdPreAgr As String, i = 0
@@ -3433,6 +3852,7 @@ Friend Class ClsOrionCop
             End If
         Next
     End Sub
+
     Private Sub SGenereEstadoCuentaPredAgr(aobjPredio As ClsPredio, adtmFechaEstado As Date)
         Dim ldblIdCliente As Double
         Dim lobjPrefact As New ClsFactura, lentIdPrefact As Integer
@@ -3456,6 +3876,7 @@ Friend Class ClsOrionCop
         End If
         SGenereEstaCtaPredSinFac(aobjPredio, ldtbItemsFacVivas, adtmFechaEstado)
     End Sub
+
     Private Sub SGenereEstCtaPreAgrPorSer(aobjPreFactura As ClsFactura, adtbFactVivas As DataTable,
             adtmFechaEstado As Date)
         Dim lobjFactViva As New ClsFactura
@@ -3496,12 +3917,14 @@ Friend Class ClsOrionCop
             lobjEstadoCuenta.SActualice(True)
         End If
     End Sub
+
     Private Function FblnEsServicioAjuste(ashrIdAno As Short, ashrIdServicio As Short) As Boolean
         Dim lobjAno As ClsAno = GobjParametros.ColAnos(ashrIdAno.ToString())
         Dim lstrKeySer = ashrIdAno.ToString() & "," & ashrIdServicio.ToString()
         Dim lobjServicio As ClsServicio = lobjAno.ColServiciosAno(lstrKeySer)
         Return lobjServicio.ObjEsAjusteBln.ObjValorPro()
     End Function
+
     Private Sub SGenereEstCtaPredAgrNoPorSer(aobjPrefact As ClsFactura, adtbItemsFacVivas As DataTable,
                 adtmFechaEstado As Date)
         Dim lobjFactViva As New ClsFactura
@@ -3538,6 +3961,7 @@ Friend Class ClsOrionCop
             lobjEstadoCuenta.SActualice(True)
         End If
     End Sub
+
     ''' <summary>
     ''' Genera el estado de cuenta para toas aquella deudas del predio agrupador a las cuales
     ''' no les corresponde una prefactura
@@ -3580,6 +4004,7 @@ Friend Class ClsOrionCop
             lobjEstadoCuenta.SActualice(True)
         End If
     End Sub
+
     Private Sub SGenereEstCtaPredNoPorSer(astrIdPredAgru As String, adtmFechaEstado As Date,
             adtbItemsFacVivas As DataTable, astrPrefijo As String, aentIdFact As Integer)
         Dim lobjFactViva As New ClsFactura
@@ -3608,7 +4033,8 @@ Friend Class ClsOrionCop
             lobjEstadoCuenta.SActualice(True)
         End If
     End Sub
-    Private Function FobjEstCtaPredNoPorSer(adblIdCliente As Double, astrIdPredAgru As String,
+
+    Private Shared Function FobjEstCtaPredNoPorSer(adblIdCliente As Double, astrIdPredAgru As String,
             adtmFechaEstado As Date, adtbItemsFacVivas As DataTable, astrPrefijo As String,
             aentIdFact As Integer) As ClsEstadoCuenta
         Dim lobjFactura As New ClsFactura
@@ -3636,6 +4062,7 @@ Friend Class ClsOrionCop
         End If
         Return lobjEstadoCuenta
     End Function
+
     Private Sub SGenereEstCtaAPropYPreAgr(adtmFechaEstado As Date,
             adtbItemsFacVivas As DataTable, aobjFact As ClsFactura)
         Dim lstrPrefFacViva As String, lentIdFacViva As Integer, lstrIdFacPro As String
@@ -3680,6 +4107,7 @@ Friend Class ClsOrionCop
             lobjEstadoCuenta.SActualice(True)
         End If
     End Sub
+
     Private Sub SGenereEstCtaPredPorSer(adtmFechaEstado As Date,
             adtbItemsFacVivas As DataTable, aobjPrefac As ClsFactura)
         Dim lobjFactura As New ClsFactura
@@ -3718,6 +4146,7 @@ Friend Class ClsOrionCop
             lobjEstadoCuenta.SActualice(True)
         End If
     End Sub
+
     Private Shared Function FdtbPrediosAgrConDeuda() As DataTable
         Dim lstrTabla = ClsFactura.SstrNombreTabla
         Dim lstrCampSele = {"DISTINCT " & ClsIdPredioAgrupador_FacStr.SstrNombreCampoBd}
@@ -3734,6 +4163,7 @@ Friend Class ClsOrionCop
                 lstrOrden, lstrFiltro, False, Array.Empty(Of String))
         Return ldtbPrediosConDeuda
     End Function
+
     Friend Shared Function FdtbPrediosAgrMorosos(aentDiasVencido As Integer,
             adblUltimoClientenviado As Double) As DataTable
         Dim ldtmFechaEstaVen = Date.Today.AddDays(-aentDiasVencido)
@@ -4711,7 +5141,8 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
                 End If
                 Dim ldrwPredios As DataRow() = ldtbPreConDscto.Select(lstrFiltro2)
                 If ldrwPredios.Length > 0 Then
-                    If GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro Then
+                    If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                            EnuTipoIncentivo.EnuDescuentoPP Then
                         ldecValorDscto = FdecSaldoDsctoPredio_NoPP(lstrPredio)
                     Else
                         ldecValorDscto = FdecSaldoDsctoPredio(lstrPredio)
@@ -4967,9 +5398,10 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
     End Function
 
     ''' <summary>
-    ''' Devuelve el valor descontado a los servicios de cuota de administración desde el primero del año
-    ''' actual para tenerlo en cuenta en el calculo del ajuste cuando la nueva cuota es menor a lo que
-    ''' se estaba conrando desde enros del año.Se utiliza solo cuando hay descuentos por pronto pago!
+    ''' Devuelve el valor descontado a los servicios de cuota de administración desde el 
+    ''' primero del año actual para tenerlo en cuenta en el calculo del ajuste cuando la nueva 
+    ''' cuota es menor a lo que se estaba conrando desde enero del año.
+    ''' Se utiliza solo cuando hay descuentos por pronto pago!
     ''' </summary>
     ''' <param name="astrIdPredio">Id del Predio para el cual se calcula el valor del descuento</param>
     ''' <returns></returns>
@@ -6270,6 +6702,20 @@ aobjSerAjuste.ObjIdServicioShr.ToString
                 ClsIdPredioAgrupadorStr.SstrNombreCampoBd
         Dim ldtbCPP = ClsPanorama.FdtbDataTable(lstrExpSql)
         Return ldtbCPP
+    End Function
+
+    Friend Shared Function FstrCenCostos(astrIdPredio As String,
+                ByRef astrNombreCC As String) As String
+        Dim lstrCenCostos As String = String.Empty
+        If astrIdPredio = String.Empty Then
+            Return lstrCenCostos
+        End If
+        Dim lobjPredio As New ClsPredio(EnuModoInstanciaObjDef.EnuUnico)
+        Dim lobjValorLlave As Object() = {GshrIdCarpeta, GshrIdCentroUtil, astrIdPredio}
+        lobjPredio.SAbra(lobjValorLlave)
+        lstrCenCostos = lobjPredio.ObjCentroCostosStr.ToString()
+        astrNombreCC = lobjPredio.ObjNombrePredioStr.ToString()
+        Return lstrCenCostos
     End Function
 
     Private Shared Function FstrNombres() As String
@@ -8142,7 +8588,9 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
             Else
                 lobjServicio = GobjParametros.ObjAnoActual.ColServiciosAno(lstrKey)
             End If
-            lblnHay = lobjServicio.DtmFechaFacturacionPeriodoActual <= Date.Today
+            lblnHay = lobjServicio.DtmFechaFacturacionPeriodoActual <= Date.Today AndAlso
+                    lobjServicio.DtmFechaFacturacionPeriodoActual <=
+                    GobjParametros.ObjAnoActual.ObjPeriodoActual.DtmFechaFinPeriodo
             If lblnHay Then Exit For
         Next
         Return lblnHay

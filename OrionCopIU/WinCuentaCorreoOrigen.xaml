@@ -4,7 +4,7 @@
         xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" Title="Cuenta Curreo Origen" Height="460" Width="400"
+        mc:Ignorable="d" Title="Cuenta Correo Origen" Height="460" Width="400"
         WindowState="Normal" WindowStartupLocation="CenterScreen" 
         Icon="RecImagenes/orionLogo24.png" FontSize="12">
     <Grid x:Name="grdPpal"  Control.GotFocus="OnCogerFoco" Control.LostFocus="OnPierdeFoco"

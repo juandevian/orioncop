@@ -155,6 +155,12 @@
                                  Height="36" HorizontalAlignment="Left" TextAlignment="Justify" 
                                  TextWrapping="Wrap" TabIndex="2"
                                   Style="{StaticResource RecFuenteNormal}"/>
+                        <Label x:Name="lblPieFra3" Content="Pie de Factura Tres" Canvas.Left="20"
+                               Canvas.Top="140" Padding="0"  Style="{StaticResource RecFuenteNormal}"/>
+                        <TextBox x:Name="txtPieFac3" Canvas.Left="140" Canvas.Top="140" Width="680" 
+                                 Height="160" HorizontalAlignment="Left" TextAlignment="Justify" 
+                                 TextWrapping="Wrap" TabIndex="2" AcceptsReturn="True"
+                                  Style="{StaticResource RecFuenteNormal}"/>
                     </Canvas>
                 </TabItem>
                 <TabItem x:Name="tbiAspectosCont" Header="Aspectos Contables" 

@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:src="clr-namespace:OPT.OrionP.OriWin;assembly=OriWin"
-    Title="Año" Height="530" Width="550" WindowStyle="SingleBorderWindow" 
+    Title="Año" Height="560" Width="550" WindowStyle="SingleBorderWindow" 
     WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png" FontSize="12">
     <Grid Name="grdPpal" MenuItem.Click="OnMenuClic" 
           Control.GotFocus="OnCogerFoco">
@@ -41,7 +41,7 @@
             </Canvas>
             <TabControl Grid.Row="1" Style="{StaticResource RecTabCtrl}">
                 <TabItem Header="Cuota de Administración" Style="{StaticResource RecTabItem}" Width="200">
-                    <Canvas >
+                    <Canvas Margin="0,1,0,-1" >
                         <CheckBox x:Name="chkModuloPorSer" Content="A cada Servicio del Año contribuye solo un Módulo!"
                               Canvas.Left="20" Canvas.Top="15" Padding="10,0,0,0" Style="{StaticResource RecFuenteNormal}"
                               Background="Transparent" TabIndex="1"/>
@@ -53,45 +53,95 @@
                                   TabIndex="2" VerticalContentAlignment="Center" />
                         <Label x:Name="lblPresInicial" Content="Presupuesto Ingresos por Cuotas de Administración" 
                                Canvas.Left="20" Canvas.Top="71" Padding="0" 
-                               Style="{StaticResource RecFuenteNormal}"/>
+                               Style="{StaticResource RecFuenteNormal}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <TextBox x:Name="txtPresAno" Width="120" Canvas.Left="380" 
-                                 Canvas.Top="75" Style="{StaticResource RecFuenteNormal}"
+                                 Canvas.Top="70" Style="{StaticResource RecFuenteNormal}"
                                  HorizontalContentAlignment="Right" 
-                                 TabIndex="3" Height="18"/>
+                                 TabIndex="3" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Label x:Name="lblPresCalc" Content="Ejecución del Presupuesto por Cuotas de Administración" Canvas.Left="20"
-                           Canvas.Top="101" Padding="0" Style="{StaticResource RecFuenteNormal}"/>
-                        <Label x:Name="txtPresCalc" Width="120" Canvas.Left="380" Canvas.Top="105"
-                           HorizontalContentAlignment="Right" Style="{StaticResource RecTxtSoloLectura}"
-                           FontWeight="Normal" FontSize="12" Height="18"/>
-                        <GroupBox x:Name="grbDsctoPP" Canvas.Left="20" Canvas.Top="130"
+                           Canvas.Top="96" Padding="0" Style="{StaticResource RecFuenteNormal}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        <Label x:Name="txtPresCalc" Width="120" Canvas.Left="380" Canvas.Top="95"
+                               HorizontalContentAlignment="Right" 
+                               FontWeight="Normal" FontSize="12" Height="18" 
+                               HorizontalAlignment="Center" VerticalAlignment="Top"
+                               Style="{StaticResource RecTxtSoloLectura}"/>
+                        <GroupBox x:Name="grbDsctoPP" Canvas.Left="12" Canvas.Top="125"
                                   Style="{StaticResource RecFuenteNormal}" Width="490" 
-                                  Height="86" 
-                                  Header="Pronto Pago" Padding="0" >
+                                  Height="110"  Padding="0" HorizontalAlignment="Center" 
+                                  VerticalAlignment="Top"
+                                  Header="Incentivos para el Pago de la cuota de administración" >
                             <Canvas>
-                                <CheckBox x:Name="chkDsctoPP" Content="Descuento por Pronto Pago" 
-                                      Canvas.Left="10" Canvas.Top="5" 
-                                      Padding="5,0,0,0" TabIndex="11"/>
-                                <RadioButton x:Name="rdbDsctoPorcien" Canvas.Left="229" Canvas.Top="5" 
-                                      Background="Transparent" Content="Porcentaje" 
-                                      Padding="10,0,0,0" IsChecked="True" TabIndex="12"/>
-                                <RadioButton x:Name="rdbDsctoValor" Canvas.Left="359" Canvas.Top="5" 
-                                      Background="Transparent" Content="Valor Fijo" 
-                                      Padding="10,0,0,0"  TabIndex="13"/>
-                                <Label x:Name="lblDiasDscto" Content="Días para Descuento" 
-                                   Canvas.Left="10" Canvas.Top="31" Padding="0"/>
-                                <TextBox x:Name="txtDiasDscto" Canvas.Left="135" Canvas.Top="30"
-                                     Width="40" Padding="10,0,5,0"
-                                     HorizontalContentAlignment="Right" TabIndex="14"/>
-                                <TextBox x:Name="txtMontoPP" Canvas.Left="189" Canvas.Top="28" 
-                                     Width="280" Height="22" VerticalContentAlignment="Top"
-                                     TextWrapping="Wrap" Background="Transparent" Padding="2,3,2,0"
-                                     IsTabStop="False" IsReadOnly="True" TextAlignment="Justify"
-                                     Text="El monto del descuento se define en cada Sector."/>
+                                <Label x:Name="lblTipoIncentivo" Content="Tipo de incentivo" Canvas.Left="10"
+                                        Canvas.Top="13" Padding="0" Style="{StaticResource RecFuenteNormal}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="CboTipoIncentivo" Canvas.Left="150" 
+                                          Canvas.Top="10" Width="316" TabIndex="4"                                          
+                                          VerticalContentAlignment="Center"
+                                          Style="{StaticResource RecFuenteNormal}"
+                                          HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                <Canvas x:Name="cnvDsctoPP" Visibility="Collapsed">
+                                    <Label x:Name="lblTipoDcstoPP"  Canvas.Left="10" Canvas.Top="40" 
+                                       Content="Tipo Descuento por Pronto Pago"
+                                       Padding="0" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CboTipoDctoPP" Canvas.Left="200" 
+                                          Canvas.Top="35" Width="265" TabIndex="4"                                          
+                                          VerticalContentAlignment="Center"
+                                          Style="{StaticResource RecFuenteNormal}"
+                                          HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label x:Name="lblDiasDscto" Content="Días para Descuento"
+                                           Canvas.Left="10" Canvas.Top="64" Padding="0"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="txtDiasDscto" Canvas.Left="150" Canvas.Top="63"
+                                         Width="40" Padding="10,0,5,0" TabIndex="14"
+                                         HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="txtMontoPP" Canvas.Left="200" Canvas.Top="63"
+                                         Width="265" Background="Transparent" 
+                                         IsTabStop="False" IsReadOnly="True" 
+                                         Text="El monto del descuento se define en cada Sector." HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                </Canvas>
+                                <Canvas x:Name="cnvMulta" Visibility="Visible">
+                                    <Label x:Name="lblDiasMulta" Content="Días para Multa"
+                                       Canvas.Left="10" Canvas.Top="41" Padding="0" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="txtDiasMulta" Canvas.Left="105" Canvas.Top="40"
+                                         Width="30" Padding="0,0,2,0" TabIndex="15"
+                                         HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBox x:Name="txtDias" Canvas.Left="150" Canvas.Top="40"
+                                         Width="265" HorizontalContentAlignment="Right"
+                                         Background="Transparent" IsTabStop="False" IsReadOnly="True" 
+                                         Text="Días después de vencimiento para aplicar multa." HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <Label x:Name="lblValorMulta" Content="Valor Multa"
+                                       Canvas.Left="10" Canvas.Top="66" Padding="0" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="txtValorMulta" Canvas.Left="105"
+                                             Canvas.Top="65" Width="90" Padding="0,0,2,0" 
+                                             TabIndex="16" HorizontalContentAlignment="Right" 
+                                             HorizontalAlignment="Left" 
+                                             VerticalAlignment="Center" />
+                                    <Label x:Name="lblServicio" Content="Servicio"
+                                           Canvas.Left="205" Canvas.Top="66" Padding="0" 
+                                           ToolTip="Servicio asociado a la multa."
+                                           HorizontalAlignment="Left" 
+                                           VerticalAlignment="Center"/>
+                                    <Button x:Name="bttEncontrarSer" Canvas.Left="253" 
+                                            Canvas.Top="65" Style="{StaticResource RecEstiloBttEnc}"
+                                            TabIndex="17" ToolTip="Clic aqui para buscar la Cuenta Db(Cuenta por Cobrar) del Servicio." 
+                                            HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="txtIdServicioMulta" Canvas.Left="267" 
+                                             Canvas.Top="65" Width="20" TabIndex="18"
+                                             HorizontalContentAlignment="Right" 
+                                             HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                    <Label x:Name="txtServicioMulta" Width="175" Canvas.Left="290" 
+                                           Canvas.Top="65" Padding="0" 
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                               Style="{StaticResource RecTxtSoloLectura}"/>
+                                </Canvas>
                             </Canvas>
                         </GroupBox>
-                        <GroupBox x:Name="grbEstado" Canvas.Left="20" Canvas.Top="220" 
+                        <GroupBox x:Name="grbEstado" Canvas.Left="20" Canvas.Top="250" 
                                   Header="Estado de la Cuota de Administración"
-                                  Width="490" Height="55" Style="{StaticResource RecFuenteNormal}" >
+                                  Width="490" Height="55" Style="{StaticResource RecFuenteNormal}" HorizontalAlignment="Center" VerticalAlignment="Top" >
                             <Canvas>
                                 <CheckBox x:Name="chkEstaCalculado" 
                                       Content="Están generadas y calculadas" 

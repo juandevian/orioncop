@@ -1,0 +1,2598 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+OrionCopIU
+</name>
+</assembly>
+<members>
+<member name="T:OPT.OrionP.OrionCopIU.My.MyWpfExtension">
+ <summary>
+ Módulo utilizado para definir las propiedades disponibles en el espacio de nombres My de WPF
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.MyWpfExtension.Application">
+ <summary>
+ Devuelve el objeto de aplicación de la aplicación en ejecución
+ </summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.MyWpfExtension.Computer">
+ <summary>
+ Devuelve información sobre el equipo host.
+ </summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.MyWpfExtension.User">
+ <summary>
+ Devuelve información sobre el usuario actual.  Si desea ejecutar la aplicación con las credenciales 
+ del usuario de Windows actual, llame a My.User.InitializeWithWindowsUser().
+ </summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.MyWpfExtension.Log">
+ <summary>
+ Devuelve el registro de la aplicación. El archivo de configuración de la aplicación puede configurar los clientes de escucha.
+ </summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.MyWpfExtension.Windows">
+ <summary>
+ Devuelve la colección de Windows definida en el proyecto.
+ </summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.My.Resources.Resources">
+<summary>
+  Clase de recurso fuertemente tipado, para buscar cadenas traducidas, etc.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ResourceManager">
+<summary>
+  Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Culture">
+<summary>
+  Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
+  búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreAyuda">
+<summary>
+  Busca una cadena traducida similar a Abre la Ayuda de Panorama..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreAyudaCmd">
+<summary>
+  Busca una cadena traducida similar a cmdAyuda.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreBloc">
+<summary>
+  Busca una cadena traducida similar a Abre el Bloc de Notas de Windows..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreBlocCmd">
+<summary>
+  Busca una cadena traducida similar a cmdNotas.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreCalc">
+<summary>
+  Busca una cadena traducida similar a Abre la Calculadora de Windows..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreCalcCmd">
+<summary>
+  Busca una cadena traducida similar a cmdCalculadora.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreCalendario">
+<summary>
+  Busca una cadena traducida similar a Abre el Calendario de Windows..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreCalendarioCmd">
+<summary>
+  Busca una cadena traducida similar a cmdCalendario.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreMens">
+<summary>
+  Busca una cadena traducida similar a Abre los Mensajes de Panorama..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AbreMensCmd">
+<summary>
+  Busca una cadena traducida similar a cmdMensajes.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AceptaCam">
+<summary>
+  Busca una cadena traducida similar a Acepta los cambios en la Ventana..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AceptaCamCmd">
+<summary>
+  Busca una cadena traducida similar a cmdAceptar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Admin">
+<summary>
+  Busca una cadena traducida similar a Administración.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Advertencia">
+<summary>
+  Busca una cadena traducida similar a ADVERTENCIA: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AjuCuota">
+<summary>
+  Busca una cadena traducida similar a Ajuste Cuota.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AjusCuoAdm">
+<summary>
+  Busca una cadena traducida similar a Ajustando Cuotas de Administración.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Ano">
+<summary>
+  Busca una cadena traducida similar a Año.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Anos">
+<summary>
+  Busca una cadena traducida similar a Años.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AntPorApl">
+<summary>
+  Busca una cadena traducida similar a Generando Reporte Anticipos por Aplicar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AntRec">
+<summary>
+  Busca una cadena traducida similar a Anticipo recibido.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AnuCmd">
+<summary>
+  Busca una cadena traducida similar a cmdAnular.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AnuObj">
+<summary>
+  Busca una cadena traducida similar a Anular un Objeto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AplAnticipos">
+<summary>
+  Busca una cadena traducida similar a Aplicando Anticipos.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.App">
+<summary>
+  Busca una cadena traducida similar a  - Aplicación.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.AppCont">
+<summary>
+  Busca una cadena traducida similar a Aplicación Contable para Interfaz.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ArchExt">
+<summary>
+  Busca una cadena traducida similar a Archivo externo.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.BaseCP">
+<summary>
+  Busca una cadena traducida similar a Base para el Cálculo del Coediciente de Propiedad .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.BaseRedCP">
+<summary>
+  Busca una cadena traducida similar a Base del Redondeo para Coeficiente de Propiedad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.BaseRedGral">
+<summary>
+  Busca una cadena traducida similar a Base del Redondeo para operaciones en general.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.BaseRedIM">
+<summary>
+  Busca una cadena traducida similar a Base del Redondeo para Intereses de Mora.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.BtnCerrar">
+<summary>
+  Busca una cadena traducida similar a C_errar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.BtnGenRep">
+<summary>
+  Busca una cadena traducida similar a Generar _Reporte.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Calendario">
+<summary>
+  Busca una cadena traducida similar a Calendario.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CamposSinSatisfacer">
+<summary>
+  Busca una cadena traducida similar a Aún hay campos requeridos por satisfacer!.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CancelaCam">
+<summary>
+  Busca una cadena traducida similar a Cancela los cambios en la Ventana..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CancelaCamCmd">
+<summary>
+  Busca una cadena traducida similar a cmdCancelar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Cancelar">
+<summary>
+  Busca una cadena traducida similar a _Cancelar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Carpeta">
+<summary>
+  Busca una cadena traducida similar a  - Empresa.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CenUti">
+<summary>
+  Busca una cadena traducida similar a  - Copropiedad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Cero">
+<summary>
+  Busca una cadena traducida similar a 0.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CerrarBtn">
+<summary>
+  Busca una cadena traducida similar a _Cerrar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CierraWin">
+<summary>
+  Busca una cadena traducida similar a Cierra la Ventana actual..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CierraWinCmd">
+<summary>
+  Busca una cadena traducida similar a cmdCerrar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Cliente">
+<summary>
+  Busca una cadena traducida similar a Cliente.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CobPer">
+<summary>
+  Busca una cadena traducida similar a Cobro persuasivo.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CoefPropProp">
+<summary>
+  Busca una cadena traducida similar a Coeficientes de Propiedad por Propietario.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Coma">
+<summary>
+  Busca una cadena traducida similar a ,.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ComparaTU">
+<summary>
+  Busca una cadena traducida similar a Compara con Tasa de Usura.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CopyrightTYS">
+<summary>
+  Busca una cadena traducida similar a Copyright T&amp;&amp;S S.A.S..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CrearCmd">
+<summary>
+  Busca una cadena traducida similar a cmdCrear.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CrearObj">
+<summary>
+  Busca una cadena traducida similar a Crear un Objeto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CtaBanc">
+<summary>
+  Busca una cadena traducida similar a Cuentas Bancarias.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CtasConta">
+<summary>
+  Busca una cadena traducida similar a Cuentas Contables.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CuentaCliente">
+<summary>
+  Busca una cadena traducida similar a Cuenta del Cliente.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CuentaPredio">
+<summary>
+  Busca una cadena traducida similar a Cuenta del Predio.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.CuotasAdmin">
+<summary>
+  Busca una cadena traducida similar a Cuotas de Administración.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.De">
+<summary>
+  Busca una cadena traducida similar a  de .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.DiasJuri">
+<summary>
+  Busca una cadena traducida similar a Días para Cobro Jurídico.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.DiasPerdida">
+<summary>
+  Busca una cadena traducida similar a Dias para Pérdida.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.DiasPersuasivo">
+<summary>
+  Busca una cadena traducida similar a Días para Cobro Persuasivo.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.DiasPreju">
+<summary>
+  Busca una cadena traducida similar a Días para Cobro Prejurídico.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Doc">
+<summary>
+  Busca una cadena traducida similar a Documento.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Docs">
+<summary>
+  Busca una cadena traducida similar a Documentos.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Documentos">
+<summary>
+  Busca una cadena traducida similar a DOCUMENTOS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.DosPuntosEspacio">
+<summary>
+  Busca una cadena traducida similar a : .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.EleProce">
+<summary>
+  Busca una cadena traducida similar a Elementos Procesados : .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ElimFirma">
+<summary>
+  Busca una cadena traducida similar a Eliminar firma.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ErrorStr">
+<summary>
+  Busca una cadena traducida similar a ERROR: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.EsAjuste">
+<summary>
+  Busca una cadena traducida similar a ? Es Ajuste.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.EscribaTarea">
+<summary>
+  Busca una cadena traducida similar a Escriba aqui la descripción de la tarea..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Espacio">
+<summary>
+  Busca una cadena traducida similar a  .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.EstConsultando">
+<summary>
+  Busca una cadena traducida similar a Consultando.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.EstCreando">
+<summary>
+  Busca una cadena traducida similar a Creando.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.EstModificando">
+<summary>
+  Busca una cadena traducida similar a Modificando.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ExpFras">
+<summary>
+  Busca una cadena traducida similar a Exportando Facturas a PDF.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ExpRec">
+<summary>
+  Busca una cadena traducida similar a Rxportando Recibos de Caja.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Fact">
+<summary>
+  Busca una cadena traducida similar a Una Factura.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FactAuto">
+<summary>
+  Busca una cadena traducida similar a Facturas automáticas del Mes.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FactProcesadas">
+<summary>
+  Busca una cadena traducida similar a Facturas procesadas: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Fecha">
+<summary>
+  Busca una cadena traducida similar a Fecha: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FechaAnulacion">
+<summary>
+  Busca una cadena traducida similar a Fecha Anulación.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FechaCancelacion">
+<summary>
+  Busca una cadena traducida similar a Fecha Cancelación.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FechaGracia">
+<summary>
+  Busca una cadena traducida similar a Fecha Limite pago sin Mora.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FecUltCausa">
+<summary>
+  Busca una cadena traducida similar a Fecha de la Ultima Causación General.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaAnt">
+<summary>
+  Busca una cadena traducida similar a Ficha Anticipos - Anticipo Número: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaCliente">
+<summary>
+  Busca una cadena traducida similar a Ficha Clientes - Cliente: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaCtaCobro">
+<summary>
+  Busca una cadena traducida similar a Ficha Cuentas Cobro - Cuenta de Cobro Número: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaNAju">
+<summary>
+  Busca una cadena traducida similar a Ficha Notas Ajuste Cuota Administración - Nota Nro: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaNApl">
+<summary>
+  Busca una cadena traducida similar a Ficha Notas Aplicación Anticipos - Nota Nro: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaNCr">
+<summary>
+  Busca una cadena traducida similar a Ficha Notas Crédito - Nota Nro: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaNDb">
+<summary>
+  Busca una cadena traducida similar a Ficha Notas Intereses Mora - Nota Nro: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaNDev">
+<summary>
+  Busca una cadena traducida similar a Ficha Notas Reintegro de Anticipos - Nota Nro:.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaNRevCr">
+<summary>
+  Busca una cadena traducida similar a Ficha Notas Reversión Créditos - Nota Nro: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaPredio">
+<summary>
+  Busca una cadena traducida similar a Ficha Predios - Predio: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaProp">
+<summary>
+  Busca una cadena traducida similar a Ficha propietario.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.FichaRec">
+<summary>
+  Busca una cadena traducida similar a Ficha Recibos de Caja - Recibo de Caja Número: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenBK">
+<summary>
+  Busca una cadena traducida similar a Generando Copia de Seguridad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenEdadCar">
+<summary>
+  Busca una cadena traducida similar a Generando Reporte Edad de la Cartera.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenEstadosCtasCli">
+<summary>
+  Busca una cadena traducida similar a Generando Estados de Cuenta Clientes.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenEstadosCtasPre">
+<summary>
+  Busca una cadena traducida similar a Generando Estados de Cuenta Predios.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenFacturasDef">
+<summary>
+  Busca una cadena traducida similar a Generando Facturas Definitivas.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenInte">
+<summary>
+  Busca una cadena traducida similar a Generando Intereses de Mora.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenPreClientes">
+<summary>
+  Busca una cadena traducida similar a A CLIENTES.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenPrePredios">
+<summary>
+  Busca una cadena traducida similar a A PREDIOS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenPrePropPA">
+<summary>
+  Busca una cadena traducida similar a SOLO A PROPIETARIOS Y PREDIO AGRU..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GenPrePropSPA">
+<summary>
+  Busca una cadena traducida similar a A PROPIETARIOS SIN PREDIO AGRU..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GrpCarpetas">
+<summary>
+  Busca una cadena traducida similar a Grupo Carpetas.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GuaCmd">
+<summary>
+  Busca una cadena traducida similar a cmdGuardar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GuaObj">
+<summary>
+  Busca una cadena traducida similar a Guardar los cambios en el Objeto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.GuionSeparador">
+<summary>
+  Busca una cadena traducida similar a - .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCarpeta">
+<summary>
+  Busca una cadena traducida similar a Id. Carpeta.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCenUtil">
+<summary>
+  Busca una cadena traducida similar a Id. Copropiedad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCliente">
+<summary>
+  Busca una cadena traducida similar a Id. Cliente.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaAntRec">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Anticipos Recibidos.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaCaja">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Caja.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaDctoCap">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Devoluciones de Capital.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaDctoPP">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Descuentos por Pronto Pago.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaImptosAsumidos">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Impuetos Asumidos.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaIngPorIden">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Ingresos por identificar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaInMoCr">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Intereses de Mora Crédito.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaInMoDb">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Intereses de Mora Débito.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaRetFte">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Retefuente.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaRetIca">
+<summary>
+  Busca una cadena traducida similar a Cuenta para Retención de Industria y Comercio.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdCtaRetIva">
+<summary>
+  Busca una cadena traducida similar a Cuenta para ReteIva.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdPredio">
+<summary>
+  Busca una cadena traducida similar a Id. Predio.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdRecCaja">
+<summary>
+  Busca una cadena traducida similar a Nro. del Recibo de Caja.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdRepLegal">
+<summary>
+  Busca una cadena traducida similar a Id. Representante Legal.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IdTerCenUti">
+<summary>
+  Busca una cadena traducida similar a Id. Tercero Copropiedad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ImpFras">
+<summary>
+  Busca una cadena traducida similar a Importando Facturas de Saldos.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ImporFirma">
+<summary>
+  Busca una cadena traducida similar a Importar firma.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Import">
+<summary>
+  Busca una cadena traducida similar a Importado.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Importar">
+<summary>
+  Busca una cadena traducida similar a Importar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ImportarObjeto">
+<summary>
+  Busca una cadena traducida similar a Importar Objeto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Informacion">
+<summary>
+  Busca una cadena traducida similar a INFORMACION: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrAntCmd">
+<summary>
+  Busca una cadena traducida similar a cmdAlAnterior.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrAntObj">
+<summary>
+  Busca una cadena traducida similar a Ir Al Anterior.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrBusCmd">
+<summary>
+  Busca una cadena traducida similar a cmdBuscar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrBusObj">
+<summary>
+  Busca una cadena traducida similar a Busca un Objeto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrPriCmd">
+<summary>
+  Busca una cadena traducida similar a cmdAlPrimero.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrPriObj">
+<summary>
+  Busca una cadena traducida similar a Ir Al Primero.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrSigCmd">
+<summary>
+  Busca una cadena traducida similar a cmdAlSiguiente.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrSigObj">
+<summary>
+  Busca una cadena traducida similar a Ir Al Siguiente.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrUltCmd">
+<summary>
+  Busca una cadena traducida similar a cmdAlUltimo.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.IrUltObj">
+<summary>
+  Busca una cadena traducida similar a Ir Al Ultimo.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Licencia">
+<summary>
+  Busca una cadena traducida similar a Licencia.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.MasCtasCont">
+<summary>
+  Busca una cadena traducida similar a Mascara Cuentas Contables.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.MedPagoDef">
+<summary>
+  Busca una cadena traducida similar a Medio de Pago por defecto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.MenCtaCobro">
+<summary>
+  Busca una cadena traducida similar a Cuenta de cobro.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.MensPrueEmail">
+<summary>
+  Busca una cadena traducida similar a Este es un correo de prueba enviado desde Orión.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.MnuAgregarSectorModulo">
+<summary>
+  Busca una cadena traducida similar a Agregar _Sector Contribuyente.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ModCmd">
+<summary>
+  Busca una cadena traducida similar a cmdModificar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ModObj">
+<summary>
+  Busca una cadena traducida similar a Modificar un Objeto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NAA">
+<summary>
+  Busca una cadena traducida similar a Nota Aplicación Anticipo.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NCR">
+<summary>
+  Busca una cadena traducida similar a Nota Crédito.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NDB">
+<summary>
+  Busca una cadena traducida similar a Nota Intereses Mora.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Ninguno">
+<summary>
+  Busca una cadena traducida similar a &lt;Ninguno&gt;.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NivCapturaIngresos">
+<summary>
+  Busca una cadena traducida similar a Nivel de Captura de Ingresos.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NoCausa">
+<summary>
+  Busca una cadena traducida similar a La presente Factura no Causa Mora.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomAgrSer">
+<summary>
+  Busca una cadena traducida similar a CONCEPTO DE FACTURACION.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomAjuCtaAdm">
+<summary>
+  Busca una cadena traducida similar a AJUSTES CUOTA ADMINISTRACION.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomAno">
+<summary>
+  Busca una cadena traducida similar a AÑO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomAnti">
+<summary>
+  Busca una cadena traducida similar a ANTICIPOS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomAutDscto">
+<summary>
+  Busca una cadena traducida similar a AUTORIZACION DESCUENTO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomAuxCont">
+<summary>
+  Busca una cadena traducida similar a AUXILIAR CONTABLE.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NombreBk">
+<summary>
+  Busca una cadena traducida similar a OrionPlusBk.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NombreCarpeta">
+<summary>
+  Busca una cadena traducida similar a Nombre Carpeta.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NombreNodoServicioAno">
+<summary>
+  Busca una cadena traducida similar a ServicioAno.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NombrePredio">
+<summary>
+  Busca una cadena traducida similar a Identificación del Predio.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomCausaMora">
+<summary>
+  Busca una cadena traducida similar a CAUSA INTERESES DE MORA.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomCenUti">
+<summary>
+  Busca una cadena traducida similar a Nombre Copropiedad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomCenUtilOri">
+<summary>
+  Busca una cadena traducida similar a CONFIGURACION COPROPIEDAD.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomCierraMes">
+<summary>
+  Busca una cadena traducida similar a CIERRA PERIODO ACTUAL.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomClientes">
+<summary>
+  Busca una cadena traducida similar a CLIENTES.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomCtaBco">
+<summary>
+  Busca una cadena traducida similar a CUENTAS BANCOS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomCtaCon">
+<summary>
+  Busca una cadena traducida similar a CUENTAS CONTABILIDAD.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomCtaCorreoOri">
+<summary>
+  Busca una cadena traducida similar a Cuenta Correo Origen.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomCtasCob">
+<summary>
+  Busca una cadena traducida similar a CUENTAS DE COBRO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomECorreo">
+<summary>
+  Busca una cadena traducida similar a CORREO ELCTRONICO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomEFac">
+<summary>
+  Busca una cadena traducida similar a FACTURACION ELECTRONICA.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomEstaCta">
+<summary>
+  Busca una cadena traducida similar a ESTADO DE CUENTA.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomFacMan">
+<summary>
+  Busca una cadena traducida similar a FACTURA MANUAL.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomFacts">
+<summary>
+  Busca una cadena traducida similar a FACTURAS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomGenFras">
+<summary>
+  Busca una cadena traducida similar a GENERAR FACTURAS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomGenPreF">
+<summary>
+  Busca una cadena traducida similar a GENERAR PREFACTURAS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomImp">
+<summary>
+  Busca una cadena traducida similar a IMPORTACIÓN.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomInfCon">
+<summary>
+  Busca una cadena traducida similar a INFORME DE CONTINGENCIA.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomIntCon">
+<summary>
+  Busca una cadena traducida similar a INTERFAZ CONTABLE.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomLogOn">
+<summary>
+  Busca una cadena traducida similar a ORION PLUS: ACCESO Y REGISTRO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomModCont">
+<summary>
+  Busca una cadena traducida similar a MODULOS DE CONTRIBICION.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomModSer">
+<summary>
+  Busca una cadena traducida similar a MODULOS DEL SERVICIO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomNotAju">
+<summary>
+  Busca una cadena traducida similar a NOTAS AJUSTE CUOTA ADMIN..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomNotAplAnt">
+<summary>
+  Busca una cadena traducida similar a NOTAS APLICACION ANTICIPOS .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomNotCr">
+<summary>
+  Busca una cadena traducida similar a NOTAS CREDITO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomNotDevAnt">
+<summary>
+  Busca una cadena traducida similar a NOTAS REINTEGRO ANTICIPOS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomNotInt">
+<summary>
+  Busca una cadena traducida similar a NOTAS INTERESES MORA.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomNotRevCr">
+<summary>
+  Busca una cadena traducida similar a NOTAS REVERSION CREDITOS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomPara">
+<summary>
+  Busca una cadena traducida similar a CONFIGURAR APLICACION.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomPre">
+<summary>
+  Busca una cadena traducida similar a PREDIOS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomProFact">
+<summary>
+  Busca una cadena traducida similar a PROGRAMACION FACTURAS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomProp">
+<summary>
+  Busca una cadena traducida similar a Propietario.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomRecCaj">
+<summary>
+  Busca una cadena traducida similar a RECIBOS DE CAJA.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomRegCla">
+<summary>
+  Busca una cadena traducida similar a REGISTRO LICENCIA APLICACION.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomRepLeg">
+<summary>
+  Busca una cadena traducida similar a Nombre Representante Legal.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomRevPreF">
+<summary>
+  Busca una cadena traducida similar a REVERSAR PREFACTURAS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomSec">
+<summary>
+  Busca una cadena traducida similar a SECTORES.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomSecMod">
+<summary>
+  Busca una cadena traducida similar a SECTORES APORTAN AL MODULO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomSer">
+<summary>
+  Busca una cadena traducida similar a SERVICIO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomTasMor">
+<summary>
+  Busca una cadena traducida similar a TASAS INTERESES DE MORA.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomTerCenUti">
+<summary>
+  Busca una cadena traducida similar a Nombre Tercero Copropiedad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomTerceroAdmin">
+<summary>
+  Busca una cadena traducida similar a TERCERO ADMINISTRADOR.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NomVenMW">
+<summary>
+  Busca una cadena traducida similar a VENTANA PRINCIPAL.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NotaCr">
+<summary>
+  Busca una cadena traducida similar a NOTAS CREDITO.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.NotaRevRC">
+<summary>
+  Busca una cadena traducida similar a Nota Reversión Cr{edito Nro.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.PlazoFacManual">
+<summary>
+  Busca una cadena traducida similar a Plazo por Defecto en Factura Manual.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Predio">
+<summary>
+  Busca una cadena traducida similar a PREDIOS.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.PreFact">
+<summary>
+  Busca una cadena traducida similar a Prefijo de Facturas.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.PreNoCo">
+<summary>
+  Busca una cadena traducida similar a Prefijo de Notas de Contabilidad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.PreNoCr">
+<summary>
+  Busca una cadena traducida similar a Prefijo de Notas Crédito.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.PreNoDb">
+<summary>
+  Busca una cadena traducida similar a Prefijo de Notas Débito.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.PreNotRevRC">
+<summary>
+  Busca una cadena traducida similar a Prefijo Nota Reversa Rec. Caja.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.PrePrefact">
+<summary>
+  Busca una cadena traducida similar a Prefijo de las Prefacturas.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.PreProcesados">
+<summary>
+  Busca una cadena traducida similar a Predios Procesados :.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.PreRec">
+<summary>
+  Busca una cadena traducida similar a Prefijo de Recibos de Caja.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ProcesoCanc">
+<summary>
+  Busca una cadena traducida similar a Proceso cancelado por el Usuario!.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ProcesosEjec">
+<summary>
+  Busca una cadena traducida similar a Procesos Ejecutados: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Producto">
+<summary>
+  Busca una cadena traducida similar a Producto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ProTer">
+<summary>
+  Busca una cadena traducida similar a Proceso terminado.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.RecCaja">
+<summary>
+  Busca una cadena traducida similar a Recibo de Caja.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.RecCajaFec">
+<summary>
+  Busca una cadena traducida similar a Recibos de Caja entre Fechas.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.RefCmd">
+<summary>
+  Busca una cadena traducida similar a cmdRefrescar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.RefObj">
+<summary>
+  Busca una cadena traducida similar a Refrescar un Objeto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.RegProcesados">
+<summary>
+  Busca una cadena traducida similar a Registros Procesados:.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.RepAuxiliarCon">
+<summary>
+  Busca una cadena traducida similar a Auxiliar Contable.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Respo">
+<summary>
+  Busca una cadena traducida similar a Responsable: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.RevPreFac">
+<summary>
+  Busca una cadena traducida similar a Reversando Pre-Facturas.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.SaleApp">
+<summary>
+  Busca una cadena traducida similar a Sale de la Aplicación..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.SaleAppCmd">
+<summary>
+  Busca una cadena traducida similar a cmdSalirApp.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Separador">
+<summary>
+  Busca una cadena traducida similar a  - .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Servicio">
+<summary>
+  Busca una cadena traducida similar a Servicio.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ServiciosAnual">
+<summary>
+  Busca una cadena traducida similar a Servicios Anuales.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.ServiciosPerm">
+<summary>
+  Busca una cadena traducida similar a Servicios Permanentes.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.SinInfo">
+<summary>
+  Busca una cadena traducida similar a Sin Información.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.SinTareas">
+<summary>
+  Busca una cadena traducida similar a No hay más Tareas para mostrar!.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.SolComen">
+<summary>
+  Busca una cadena traducida similar a Solo comentario.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.SubjeEmail">
+<summary>
+  Busca una cadena traducida similar a Prueba Orión.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.SupCmd">
+<summary>
+  Busca una cadena traducida similar a cmdSuprimir.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.SupObj">
+<summary>
+  Busca una cadena traducida similar a Suprimir un Objeto.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Tarea">
+<summary>
+  Busca una cadena traducida similar a Tarea: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TasasMora">
+<summary>
+  Busca una cadena traducida similar a Tasas Interés de Mora.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TerCtaCajaBancos">
+<summary>
+  Busca una cadena traducida similar a Tercero para las Cuentas de Caja y Bancos.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TerPro">
+<summary>
+  Busca una cadena traducida similar a Terminando Proceso.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TipoArchivoImagen">
+<summary>
+  Busca una cadena traducida similar a Imagen(.jpg)|*.jpg.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TipoArchivoRep">
+<summary>
+  Busca una cadena traducida similar a Reporte(.rpt)|*.rpt.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TiposArchivosOrigen">
+<summary>
+  Busca una cadena traducida similar a Archivo Excel (*.xls, *.xlsx)|*.xls;*.xlsx|Archivo Access (*.mdb)|*.mdb|Todos los archivos (*.*)|*.*.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TituloRep">
+<summary>
+  Busca una cadena traducida similar a Reporte: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Todos">
+<summary>
+  Busca una cadena traducida similar a &lt;Todos&gt;.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TotalAreaCoprop">
+<summary>
+  Busca una cadena traducida similar a Total área de la copropiedad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TotalAreaPond">
+<summary>
+  Busca una cadena traducida similar a Total área ponderada.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TotalUnidadesSector">
+<summary>
+  Busca una cadena traducida similar a Total unidades del sector.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTAbrirModulosServicio">
+<summary>
+  Busca una cadena traducida similar a Abre la Ventana de los Módulo que contribuyen al Servicio.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTAbrirSectoresServicio">
+<summary>
+  Busca una cadena traducida similar a Abre la Ventana de los Sectores que Contribuyen al Servicio.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTAdicionaModuloServicio">
+<summary>
+  Busca una cadena traducida similar a Adiciona un Modulo de Contribución al Servicio.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTAgreSecMod">
+<summary>
+  Busca una cadena traducida similar a Agrega un Sector para contribuir con el Modulo Actual.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTAgreTodosSecMod">
+<summary>
+  Busca una cadena traducida similar a Agrega todos los Sector para contribuir con el Modulo Actual.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTAgruServicios">
+<summary>
+  Busca una cadena traducida similar a Dar clic contrario para abrir la ventana &apos;Conceptos de Facturación&apos;.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTBaseSector">
+<summary>
+  Busca una cadena traducida similar a Total del área o de las unidades que conforman el Sector.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTBotonesDePanel">
+<summary>
+  Busca una cadena traducida similar a Con Ctrl+F2 se muestra el Panel Siguiente; Con Ctrl+F3 se muestra el Panel Anterior.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTCierraVen">
+<summary>
+  Busca una cadena traducida similar a Cancela el Reporte y Cierra la Ventana.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTConfiguracion">
+<summary>
+  Busca una cadena traducida similar a Dar clic contrario o doble clic para configurar la Copropiedad.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTGeneraRep">
+<summary>
+  Busca una cadena traducida similar a Estando habilitado genera el Reporte.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTPlanContable">
+<summary>
+  Busca una cadena traducida similar a Dar clic contrario para abrir la ventana &apos;Cuentas Contabilidad&apos;.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTRedoCP">
+<summary>
+  Busca una cadena traducida similar a 1=No se redondea; de 4 a 9: Se redondea a la cantidad de decimales indicado..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTRedoIM">
+<summary>
+  Busca una cadena traducida similar a Los intereses por mora y los descuentos por pronto pago se redondean asi: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTRedoOpeMonet">
+<summary>
+  Busca una cadena traducida similar a 0.1=Redondea a décimo; 0.2=Redondea a centecimos; Número Entero=Redondea a multiplo entero del número..
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTSeleccionarAccion">
+<summary>
+  Busca una cadena traducida similar a Dar clic contrario para seleccionar la acción a ejecutar.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.TTServicio">
+<summary>
+  Busca una cadena traducida similar a Dar clic contrario para abrir la ventana &apos;Servicios&apos;.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Usuario">
+<summary>
+  Busca una cadena traducida similar a Usuario: .
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Ver">
+<summary>
+  Busca una cadena traducida similar a Versión.
+</summary>
+</member>
+<member name="P:OPT.OrionP.OrionCopIU.My.Resources.Resources.Windows">
+<summary>
+  Busca una cadena traducida similar a Windows.
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.Application">
+<summary>
+Application
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.Application.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.Application.Main">
+<summary>
+Application Entry Point.
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.MWOrionCop">
+<summary>
+MWOrionCop
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.MWOrionCop.SHabiliteMenuPpal">
+ <summary>
+ Determina si los items del menu principal definidos en la ventana tienen permiso para 
+ el usuario actual asi com el envio de la factura actual
+ </summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.MWOrionCop.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinAbrirRepGenerado">
+<summary>
+WinAbrirRepGenerado
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAbrirRepGenerado.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinRepLegal">
+<summary>
+WinRepLegal
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinRepLegal.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinRepLegal.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinAjusteCuotaAdmin">
+<summary>
+WinAjusteCuotaAdmin
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAjusteCuotaAdmin.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAjusteCuotaAdmin.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAjusteCuotaAdmin.SGuarde">
+ <summary>
+ Invalida el procedimiento "SGuarde" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAjusteCuotaAdmin.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinAnos">
+<summary>
+WinAnos
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAnos.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAnos.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinAnticipos">
+<summary>
+WinAnticipos
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAnticipos.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAnticipos.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAnticipos.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinAutorizaDscto">
+<summary>
+WinAutorizaDscto
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAutorizaDscto.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAutorizaDscto.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinAuxiliarCont">
+<summary>
+WinAuxiliarCont
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAuxiliarCont.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAuxiliarCont.SModifique">
+ <summary>
+ Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
+ de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAuxiliarCont.SGuarde">
+ <summary>
+ Invalida el procedimiento "SGuarde" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAuxiliarCont.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinAuxiliarCont.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCausaMora">
+<summary>
+WinCausaMora
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCausaMora.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCausaMora.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCentroUtilidadOriCop">
+<summary>
+WinCentroUtilidadOriCop
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCentroUtilidadOriCop.SEstablezcaToolTipGral">
+ <summary>
+ Establece el ToolTip de los Controles a un valor constante
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCentroUtilidadOriCop.SEstablezcaToolTipLeido">
+ <summary>
+ Establece el ToolTip al contenido del control despues de leido
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCentroUtilidadOriCop.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinClientes">
+<summary>
+WinClientes
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinClientes.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinClientes.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinClientes.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCorreoE">
+<summary>
+WinCorreoE
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCorreoE.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+ 
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCorreoE.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCuentaClientes">
+<summary>
+WinCuentaClientes
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentaClientes.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentaClientes.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentaClientes.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCuentaCorreoOrigen">
+<summary>
+WinCuentaCorreoOrigen
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentaCorreoOrigen.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCuentaPredios">
+<summary>
+WinCuentaPredios
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentaPredios.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentaPredios.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentaPredios.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCuentasBanco">
+<summary>
+WinCuentasBanco
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentasBanco.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentasBanco.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentasBanco.SModifique">
+ <summary>
+ Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
+ de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentasBanco.SEstablezcaToolTipGral">
+ <summary>
+ Establece el ToolTip de los Controles a un valor constante
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentasBanco.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCuentasCobro">
+<summary>
+WinCuentasCobro
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentasCobro.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentasCobro.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCuentasContabilidad">
+<summary>
+WinCuentasContabilidad
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentasContabilidad.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCuentasContabilidad.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinDocumentos">
+<summary>
+WinDocumentos
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinDocumentos.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinEstadoDocEFac">
+<summary>
+WinEstadoDocEFac
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinEstadoDocEFac.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinFacturas">
+<summary>
+WinFacturas
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinFacturas.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana 
+ y al objeto de la ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinFacturas.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinFacturas.FentIndiceServicio(System.Int16)">
+ <summary>
+ Devuelve el indice en el combobox de un servicio permanente identificado con "ashrIdServicio"
+ </summary>
+ <param name="ashrIdServicio">Id del Servicio a ubicar en el combobox</param>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinFacturas.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinGenFacturas">
+<summary>
+WinGenFacturas
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinGenFacturas.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinGenFacturas.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinGenPrefacturas">
+<summary>
+WinGenPrefacturas
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinGenPrefacturas.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinGenPrefacturas.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinHistServicio">
+<summary>
+WinHistServicio
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinHistServicio.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinIncrementoCA">
+<summary>
+WinIncrementoCA
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinIncrementoCA.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinInformeCont">
+<summary>
+WinInformeCont
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinInformeCont.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinIntegridad">
+<summary>
+WinIntegridad
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinIntegridad.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinIntegridad.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinInterfazCont">
+<summary>
+WinInterfazCont
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinInterfazCont.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinInterfazCont.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinInterfazCont.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinLogOn">
+<summary>
+WinLogOn
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinLogOn.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinMesInicioFact">
+<summary>
+WinMesInicioFact
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinMesInicioFact.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinModulosContribucion">
+<summary>
+WinModulosContribucion
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinModulosContribucion.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinModulosContribucion.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinModulosContribucion.SModifique">
+ <summary>
+ Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
+ de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinModulosContribucion.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinModulosServicios">
+<summary>
+WinModulosServicios
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinModulosServicios.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinNotasAjuste">
+<summary>
+WinNotasAjuste
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasAjuste.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasAjuste.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasAjuste.SEstablezcaDataContext">
+ <summary>
+ Establece el ToolTip de los Controles a un valor constante
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasAjuste.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinNotasAplicaAnt">
+<summary>
+WinNotasAplicaAnt
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasAplicaAnt.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasAplicaAnt.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+ 
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasAplicaAnt.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinNotasCr">
+<summary>
+WinNotasCr
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasCr.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasCr.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+ 
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasCr.SInvisibiliceCtrlsDsctos(System.Object)">
+ <summary>
+ Oculta los controles usados en modo consultando
+ </summary>
+ <param name="aobjObjeto"></param>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasCr.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinNotasDevAnt">
+<summary>
+WinNotasDevAnt
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasDevAnt.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasDevAnt.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasDevAnt.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinNotasIntMora">
+<summary>
+WinNotasIntMora
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasIntMora.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana 
+ y al objeto de la ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasIntMora.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasIntMora.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinNotasReversionCr">
+<summary>
+WinNotasReversionCr
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasReversionCr.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+ 
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasReversionCr.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinNotasReversionCr.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinOpcionesCopiasSeg">
+<summary>
+WinOpcionesCopiasSeg
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinOpcionesCopiasSeg.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinOpcionesCopiasSeg.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinParametrizacion">
+<summary>
+WinParametrizacion
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinParametrizacion.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin".
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinParametrizacion.SCreeAno">
+ <summary>
+ Crea un nuevo año.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinParametrizacion.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinPredios">
+<summary>
+WinPredios
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinPredios.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinPredios.SCalculeCP">
+ <summary>
+ Calcula el total de la base de calculo para el coeficiente de propiedad y calcula el
+ coeficiente de propiedad de cada uno de los predios. Actualiza los datos en la BD
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinPredios.FblnPrediosIntegros">
+ <summary>
+ Verifica que el Propietario de los Predios Agrupados sea el mismo Propietario del Predio Agrupador.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinPredios.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinProcesaEFac">
+<summary>
+WinProcesaEFac
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinProcesaEFac.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinProgramacionFacturas">
+<summary>
+WinProgramacionFacturas
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinProgramacionFacturas.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinProgramacionFacturas.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinProgramacionFacturas.SModifique">
+ <summary>
+ Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
+ de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinProgramacionFacturas.SGuarde">
+ <summary>
+ . Invalida el procedimiento "SGuarde" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinProgramacionFacturas.FblnDefinioBusqueda">
+ <summary>
+ Invalida la funcion "fblnDefinioBusqueda" de la clase base.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinProgramacionFacturas.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinPropietario">
+<summary>
+WinPropietario
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinPropietario.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinCoeficientesPropPropietarios">
+<summary>
+WinCoeficientesPropPropietarios
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCoeficientesPropPropietarios.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinCoeficientesPropPropietarios.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinRecibosCaja">
+<summary>
+WinRecibosCaja
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinRecibosCaja.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinRecibosCaja.SHabiliteControlesEstado">
+ <summary>
+ Establece el estado de los controles (habilitado o deshabilitado) según el estado de captura
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinRecibosCaja.SProceseGrales">
+ <summary>
+ Si la fecha del Rc, el Cliente, y el Concepto de pago y los predios agrupadores 
+ seleccionados son válidos se ejecuta este método que es llamado despues de registrar
+ en la clase los datos citados
+ </summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinRecibosCaja.SEnvieEmailRecCaja">
+ <summary>
+ En estado de creacion, informa si alguno de los predios agrupadores seleccionados 
+ tiene deuda con un cliente diferente
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinRecibosCaja.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinRegistroCopropiedad">
+<summary>
+WinRegistroCopropiedad
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinRegistroCopropiedad.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinReversarPreFacturas">
+<summary>
+WinReversarPreFacturas
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinReversarPreFacturas.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinReversarPreFacturas.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinRevisarNovedades">
+<summary>
+WinRevisarNovedades
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinRevisarNovedades.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinSectores">
+<summary>
+WinSectores
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectores.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectores.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectores.SModifique">
+ <summary>
+ Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
+ de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectores.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinSectoresModulos">
+<summary>
+WinSectoresModulos
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectoresModulos.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectoresModulos.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectoresModulos.SModifique">
+ <summary>
+ Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
+ de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectoresModulos.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinSectoresModuloServicio">
+<summary>
+WinSectoresModuloServicio
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectoresModuloServicio.SVisibiliceCtlsServicio">
+ <summary>
+ Visibiliza u oculta algunos controles dependiendo del tipo de servicio (Anual o Permanente)
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectoresModuloServicio.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinSectoresServicio">
+<summary>
+WinSectoresServicio
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectoresServicio.SVisibiliceCtlsServicio">
+ <summary>
+ Visibiliza u oculta algunos controles dependiendo del tipo de servicio (Anual o Permanente)
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinSectoresServicio.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinServicios">
+<summary>
+WinServicios
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinServicios.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinServicios.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:OPT.OrionP.OrionCopIU.WinTasasMora">
+<summary>
+WinTasasMora
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinTasasMora.SConfigureMenuesPropios">
+ <summary>
+ Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
+ ventana "objObjetoWin". 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinTasasMora.SCree">
+ <summary>
+ Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
+ "SCree" de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinTasasMora.SModifique">
+ <summary>
+ Prepara la ventana y su objeto para modificar el objeto. Invalida la función "SModifique"
+ de la clase base.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.WinTasasMora.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.mOrionCopIU.SSetAddRemoveProgramsIcon">
+ <summary>
+ Establece el icono de la aplicación en la ventana de desinstalar o cambiar un programa de windows
+ </summary>
+</member>
+<member name="M:OPT.OrionP.OrionCopIU.mOrionCopIU.SImprimaFactAut(System.Boolean)">
+ <summary>
+ Imprime las facturas al terminar el proceso de facturación automática
+ </summary>
+</member>
+</members>
+</doc>

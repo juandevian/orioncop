@@ -248,6 +248,18 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="repFacturasMultadas.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>repFacturasMultadas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="repItemsProgFactXPreAgr.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>repItemsProgFactXPreAgr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="repPazYSalvo.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -597,6 +609,14 @@
     <EmbeddedResource Include="repFacturaLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>repFacturaLogo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="repFacturasMultadas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>repFacturasMultadas.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="repItemsProgFactXPreAgr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>repItemsProgFactXPreAgr.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="repPazYSalvo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

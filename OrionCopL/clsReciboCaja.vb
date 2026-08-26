@@ -395,26 +395,30 @@
             If MdecDeuda > 0 Then
                 Dim ldtmfechaRecCaja As Date = ObjFechaRecDtm.ObjValorPro
                 MdecInteresesMoraPorCausar = ObjClienteRecibo.FdecIntMoraPorCausar(
-                    lstrIdPrediosAgrupadores, ObjFechaRecDtm.ObjValorPro)
+                        lstrIdPrediosAgrupadores, ObjFechaRecDtm.ObjValorPro)
             End If
             SCargueDsctos()
         End If
     End Sub
+
     Friend ReadOnly Property DecInteresesPorCausar As Decimal
         Get
             Return MdecInteresesMoraPorCausar
         End Get
     End Property
+
     Friend ReadOnly Property DecDeuda As Decimal
         Get
             Return MdecDeuda
         End Get
     End Property
+
     Private Function FblnDatoDeudorOk() As Boolean
         Dim lblnDatOk = ObjFechaRecDtm.BlnEsValido AndAlso ObjIdCliente_RecDbl.BlnEsValido AndAlso
             ObjIdPredioAgrupador_RecStr.BlnEsValido
         Return lblnDatOk
     End Function
+
     Friend Sub SEstablezcaFechaRec()
         If EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuCreando Then
             With GobjParametros
@@ -652,6 +656,7 @@
         SGenereItemsRecPago()
         SGenereItemsRecAnticipo()
     End Sub
+
     Private Sub SGenereItemsRecPago()
         Dim ldecPagoTotal As Decimal = ObjValor_RecDec.ObjValorPro -
                 ObjValorAnticipoDec.ObjValorPro
@@ -703,6 +708,7 @@
             End If
         End If
     End Sub
+
     Private Sub SGenereItemsRecPagoFactCap(aobjFactura As ClsFactura, adecValor As Decimal)
         Dim lstrServicios As String() = ObjServicios_RecStr.ToString().Split(",")
         Dim ldecPorAplicar = adecValor, ldecAAplicar As Decimal, lblnAplicar As Boolean
@@ -730,6 +736,7 @@
             If ldecPorAplicar = 0 Then Exit For
         Next
     End Sub
+
     ''' <summary>
     ''' Genera un Item de Recibo de Caja por cada medio de pago.
     ''' </summary>
@@ -775,6 +782,7 @@
             Throw New ErrorInesperadoPanLException("Total aplicado difiere del valor a aplicar!")
         End If
     End Sub
+
     Private Sub SGenereItemsRecMedPagoCap(adecValor As Decimal, astrPrefFac As String,
         aentIdFactura As Integer, ashrIdItemFac As Short)
         Dim lstrCtaDb = String.Empty
@@ -809,6 +817,7 @@
             Throw New ErrorInesperadoPanLException("Total aplicado difiere del valor a aplicar!")
         End If
     End Sub
+
     Private Sub SGenereItemsRecAnticipo()
         If ObjValorAnticipoDec.ObjValorPro > 0 Then
             Dim lstrCtaDb = String.Empty

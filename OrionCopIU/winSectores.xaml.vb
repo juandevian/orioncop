@@ -14,12 +14,14 @@ Public Class WinSectores
     Private ReadOnly MstrNombreVentana As String = My.Resources.NomSec
     Private MenuTipoDsctoPP As EnuTipoDsctoPP = EnuTipoDsctoPP.None
 #End Region
+
 #Region "Constructor"
     Public Sub New()
         InitializeComponent()
         HenuIdVentana = EnuIdVentanaDef.enuSectores
     End Sub
 #End Region
+
 #Region "Invalida metodos en la clase base que implementan la Interfaz"
     Protected Overrides Sub SLoad()
         Dim lcolCamposLlave As New Collection From {
@@ -137,6 +139,7 @@ Public Class WinSectores
         '
     End Sub
 #End Region
+
 #Region "Procedimientos invalidantes"
     ''' <summary>
     ''' Sub que prepara a la ventana y a su objeto para crear un nuevo objeto. Invalida el Sub
@@ -186,6 +189,7 @@ Public Class WinSectores
         SMuestreDatos()
     End Sub
 #End Region
+
 #Region "Procedimientos Propios"
     Private Sub SModifiqueBarraHerramientas()
         HbttAlPrimero.Visibility = Visibility.Collapsed
@@ -223,7 +227,8 @@ Public Class WinSectores
             txtIdSectorNuevo.Style = FindResource("RecCtlNoHabilitado")
             txtNombreSectorNuevo.Style = FindResource("RecCtlHabilitado")
             If GobjParametros.ObjAnoActual IsNot Nothing Then
-                If GobjParametros.ObjAnoActual.ObjAplicaDsctoPPBln.ObjValorPro Then
+                If GobjParametros.ObjAnoActual.ObjTipoIncentivoByt.ObjValorPro =
+                        EnuTipoIncentivo.EnuDescuentoPP Then
                     txtDsctoPPNuevo.Style = FindResource("RecCtlHabilitado")
                 Else
                     txtDsctoPPNuevo.Style = FindResource("RecCtlNoHabilitado")
@@ -277,6 +282,7 @@ Public Class WinSectores
         End If
     End Sub
 #End Region
+
 #Region "Eventos en la Ventana"
     Private Sub OnCogerFoco(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)

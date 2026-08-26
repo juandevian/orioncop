@@ -54,19 +54,24 @@
                 <Label x:Name="lblAliasCont" Canvas.Left="10" Canvas.Top="31" Content="Alias Contable"
                                Padding="0" Style="{StaticResource RecFuenteNormal}"/>
                 <TextBox x:Name="txtAliasCont" Canvas.Left="100" Canvas.Top="30" Width="100" 
-                                 TabIndex="6" Height="18"/>
+                                 TabIndex="4" Height="18"/>
                 <Label x:Name="lblRefPago" Canvas.Left="220" Canvas.Top="31" 
                        Content="Referencia pago" Padding="0" Style="{StaticResource RecFuenteNormal}"/>
                 <TextBox x:Name="txtRefPago" Canvas.Right="20" Canvas.Top="30" Width="120"
-                         Canvas.Left="330" TabIndex="7"/>
+                         Canvas.Left="330" TabIndex="5"/>
+                <Label x:Name="lblCentroCostos" Canvas.Left="552" Canvas.Top="31"
+                       Content="Centro Costos" Padding="0"
+                       Style="{StaticResource RecFuenteNormal}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtCentroCostos" Canvas.Left="660" Canvas.Top="30" 
+                                 Width="110" TabIndex="6" Height="19" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label x:Name="lblFichaCatastral"  Canvas.Left="10" Canvas.Top="56" 
                        Content="Ficha Catastral" Padding="0"/>
                 <TextBox x:Name="txtFichaCatastral" Canvas.Left="100" Canvas.Top="55" Width="160"
-                         TabIndex="8" Height="19"/>
-                <Label x:Name="lblMatInmobiliaria" Canvas.Left="531" Canvas.Top="31" 
-                       Content="Matricula Inmobiliaria" Padding="0"/>
-                <TextBox x:Name="txtMatInmobiliaria" Canvas.Right="20" Canvas.Top="30" Width="110"
-                         Canvas.Left="660" TabIndex="9"/>
+                         TabIndex="7" Height="19"/>
+                <Label x:Name="lblMatInmobiliaria" Canvas.Left="531" Canvas.Top="56" 
+                       Content="Matricula Inmobiliaria" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtMatInmobiliaria" Canvas.Right="20" Canvas.Top="55" Width="110"
+                         Canvas.Left="660" TabIndex="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Canvas>
             <Grid Grid.Row="1">
                 <TabControl x:Name="tbcPredios" Grid.Row="1" Style="{StaticResource RecTabCtrl}" 
