@@ -750,10 +750,12 @@
             .WinPadre = Me
         }
         lwinImportar.ShowDialog()
+        Mouse.OverrideCursor = Cursors.Wait
         If ablnPredio Then
             ClsOrionCop.SActualiceTotalAreaCopr()
         End If
         SRefrescarClic()
+        Mouse.OverrideCursor = Cursors.Arrow
     End Sub
     Private Sub SCrearCliente(astrIdCliente As String)
         If IsNumeric(astrIdCliente) Then

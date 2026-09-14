@@ -2,6 +2,13 @@
 
 > Completa todas las secciones. Esta plantilla es obligatoria para mantener trazabilidad, control de riesgo y coordinacion cross-repo.
 
+## 0. Estado del repositorio antes de abrir la PR
+
+- [ ] Ejecuté `git status --short --branch` y `git status`.
+- [ ] Confirmé que no hay archivos en staging, modificados ni sin seguimiento que queden fuera del alcance del PR.
+- [ ] Si existían cambios pendientes, decidí explícitamente si se incluyen en este PR o se dejan para un commit posterior.
+- [ ] El alcance del commit actual está claro y documentado.
+
 ## 1. Resumen del cambio
 
 - que problema resuelve;
