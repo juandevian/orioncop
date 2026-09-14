@@ -1,7 +1,19 @@
 # Hoja de Ruta v1 - orioncop
 
 > **Estado:** vigente  
-> **Documento base:** `docs/PLAN_ORIONCOP_V1.md`
+> **Documento base:** `docs/PLAN_ORIONCOP_V1.md`  
+> **Versión base actual:** `v17.39.452.1452`  
+> **Proyecto principal ejecutable:** `OrionCopIU`
+
+## Baseline técnica actual
+
+La referencia operativa del repositorio queda fijada en la versión `v17.39.452.1452` del ensamblado principal `OrionCopIU`.
+
+Trazabilidad:
+
+- `OrionCopIU/My Project/AssemblyInfo.vb` -> `AssemblyVersion("17.39.452.1452")`
+- `OrionCopIU/mOrionCopIU.vb` -> `My.Application.Info.Version.ToString`
+- Esta línea base se mantiene como despliegue principal del repositorio para la ejecución de la aplicación.
 
 ## Tramo 1 - Diagnostico funcional
 **Entregables**

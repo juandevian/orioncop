@@ -2,7 +2,9 @@
 
 > **Estado:** vigente para este repositorio  
 > **Alcance:** solo `orioncop`  
-> **Objetivo:** operar y evolucionar `orioncop` con bajo riesgo, trazabilidad alta y releases controlados.
+> **Objetivo:** operar y evolucionar `orioncop` con bajo riesgo, trazabilidad alta y releases controlados.  
+> **Versión base actual:** `v17.39.452.1452`  
+> **Proyecto principal ejecutable:** `OrionCopIU`
 
 ---
 
@@ -72,6 +74,16 @@ Cada release debe indicar:
 2. Impactos en `adminorion`/`orionpcorreo` (si aplica).
 3. Artefacto para `orion-installer`.
 
+### Línea base actual documentada
+
+El repositorio no presenta un único versionado compartido para todos sus proyectos. La versión funcional principal del módulo ejecutable viene determinada por `OrionCopIU` y corresponde a `v17.39.452.1452`.
+
+Trazabilidad:
+
+- `OrionCopIU/My Project/AssemblyInfo.vb` -> `AssemblyVersion("17.39.452.1452")`
+- `OrionCopIU/mOrionCopIU.vb` -> `GstrVersionApp = My.Application.Info.Version.ToString`
+- Esta línea base debe servir como referencia de release para la aplicación principal del repositorio `orioncop`.
+
 ---
 
 ## 6. CI minima obligatoria
@@ -100,3 +112,11 @@ Para `orioncop` se adopta:
 2. Integracion controlada con `comunes`, `adminorion`, `orionpcorreo` y `orion-installer`.
 3. Releases pequenos, trazables y reversibles.
 4. Prioridad en estabilidad operativa del modulo principal.
+
+---
+
+## 9. Traza de la versión actual
+
+La versión base de referencia para esta etapa es `v17.39.452.1452`.
+
+Esta decisión se sustenta en la evidencia técnica del ensamblado principal de la solución y queda documentada para uso de releases, trazabilidad y coordinación con repositorios asociados.

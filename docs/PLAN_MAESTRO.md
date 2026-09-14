@@ -2,7 +2,10 @@
 
 > **Estado:** vigente para ejecución inicial (2026/06/07)  
 > **Ámbito:** solo este repositorio (`orioncop`)  
-> **Documento complementario:** `docs/ESTRATEGIA_REPOSITORIOS_GITHUB.md`
+> **Documento complementario:** `docs/ESTRATEGIA_REPOSITORIOS_GITHUB.md`  
+> **Versión base operativa:** `v17.39.452.1452`  
+> **Proyecto principal de ejecución:** `OrionCopIU`  
+> **Evidencia:** `OrionCopIU/My Project/AssemblyInfo.vb` declara `AssemblyVersion("17.39.452.1452")`; `OrionCopIU/mOrionCopIU.vb` usa `My.Application.Info.Version.ToString` para tomar la versión en runtime.
 
 ---
 
@@ -122,3 +125,15 @@ Este plan se considera cumplido cuando:
 2. Existe trazabilidad completa de cambios y releases.
 3. Los impactos cross-repo se gestionan por contrato.
 4. El siguiente trimestre puede enfocarse en mejora evolutiva.
+
+---
+
+## 9. Línea base técnica de la versión actual
+
+La versión base actualmente documentada para la aplicación principal es `v17.39.452.1452`, equivalente al ensamblado `OrionCopIU`.
+
+Trazabilidad de referencia:
+
+- `OrionCopIU/My Project/AssemblyInfo.vb` -> `AssemblyVersion("17.39.452.1452")`
+- `OrionCopIU/mOrionCopIU.vb` -> `GstrVersionApp = My.Application.Info.Version.ToString`
+- Esta versión representa la línea base operativa del módulo principal ejecutable del repositorio `orioncop`.
