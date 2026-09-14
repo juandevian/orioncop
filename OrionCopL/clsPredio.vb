@@ -887,13 +887,15 @@
     Friend Shared Function FblnConRefPago() As Boolean
         Dim lstrTabla = SstrNombreTabla
         Dim lstrCampSel As String() = {"COUNT(" & ClsIdPredioStr.SstrNombreCampoBd & ")"}
-        Dim lstrFiltro = ClsOrionCop.StrFiltroUbicacion & " AND " & ClsIdPredioStr.SstrNombreCampoBd &
+        Dim lstrFiltro = ClsOrionCop.StrFiltroUbicacion & " AND " &
+                ClsIdPredioStr.SstrNombreCampoBd &
                 " = " & ClsIdPredioAgrupadorStr.SstrNombreCampoBd & " AND " &
                 ClsReferenciaPagoStr.SstrNombreCampoBd & " <> ''"
         Dim lstrOrden As String(,) = {{"", ""}}
         Dim ldtbRes = ClsPanorama.FdtbDataTable(lstrTabla, lstrCampSel, lstrOrden, lstrFiltro,
                 False, {})
-        Dim lblnConRefPago = ClsPanorama.FobjValorCampo(ldtbRes.Rows(0)(0), EnuTipoValor.EnuByte) > 0
+        Dim lblnConRefPago = ClsPanorama.FobjValorCampo(ldtbRes.Rows(0)(0),
+                EnuTipoValor.EnuInteger) > 0
         Return lblnConRefPago
     End Function
 #End Region
