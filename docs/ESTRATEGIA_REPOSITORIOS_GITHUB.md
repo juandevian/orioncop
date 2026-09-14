@@ -3,7 +3,7 @@
 > **Estado:** vigente para este repositorio  
 > **Alcance:** solo `orioncop`  
 > **Objetivo:** operar y evolucionar `orioncop` con bajo riesgo, trazabilidad alta y releases controlados.  
-> **Versión base actual:** `v17.39.452.1452`  
+> **Versión base actual:** `v17.39.453.1454`  
 > **Proyecto principal ejecutable:** `OrionCopIU`
 
 ---
@@ -76,13 +76,15 @@ Cada release debe indicar:
 
 ### Línea base actual documentada
 
-El repositorio no presenta un único versionado compartido para todos sus proyectos. La versión funcional principal del módulo ejecutable viene determinada por `OrionCopIU` y corresponde a `v17.39.452.1452`.
+La línea base actual efectiva del repositorio queda fijada en `v17.39.453.1454` para el módulo principal ejecutable `OrionCopIU`.
 
 Trazabilidad:
 
-- `OrionCopIU/My Project/AssemblyInfo.vb` -> `AssemblyVersion("17.39.452.1452")`
-- `OrionCopIU/mOrionCopIU.vb` -> `GstrVersionApp = My.Application.Info.Version.ToString`
-- Esta línea base debe servir como referencia de release para la aplicación principal del repositorio `orioncop`.
+- `OrionCopIU/My Project/AssemblyInfo.vb` -> `AssemblyVersion("17.39.453.1454")`
+- `OrionCopIU/OrionCopIU.vbproj` -> `ApplicationVersion>17.39.453.1454</ApplicationVersion>`
+- `OrionCopL/clsSectorModulo.vb` -> validación de `TasaContribucion` ajustada a máximo `2`
+- `OriIntCon` -> ajuste de dependencia `Newtonsoft.Json` a `13.0.3`
+- `RepOriCop/RepOriCop.vbproj` -> eliminación de `mDefPubRepOrion.vb`
 
 ---
 
@@ -117,6 +119,6 @@ Para `orioncop` se adopta:
 
 ## 9. Traza de la versión actual
 
-La versión base de referencia para esta etapa es `v17.39.452.1452`.
+La versión base de referencia para esta etapa es `v17.39.453.1454`.
 
-Esta decisión se sustenta en la evidencia técnica del ensamblado principal de la solución y queda documentada para uso de releases, trazabilidad y coordinación con repositorios asociados.
+Se documenta con evidencia en `AssemblyInfo.vb` y `vbproj` del módulo principal, además del cambio funcional y de dependencias que acompaña a la release.

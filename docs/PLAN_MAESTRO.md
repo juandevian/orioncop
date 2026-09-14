@@ -3,9 +3,9 @@
 > **Estado:** vigente para ejecución inicial (2026/06/07)  
 > **Ámbito:** solo este repositorio (`orioncop`)  
 > **Documento complementario:** `docs/ESTRATEGIA_REPOSITORIOS_GITHUB.md`  
-> **Versión base operativa:** `v17.39.452.1452`  
+> **Versión base operativa:** `v17.39.453.1454`  
 > **Proyecto principal de ejecución:** `OrionCopIU`  
-> **Evidencia:** `OrionCopIU/My Project/AssemblyInfo.vb` declara `AssemblyVersion("17.39.452.1452")`; `OrionCopIU/mOrionCopIU.vb` usa `My.Application.Info.Version.ToString` para tomar la versión en runtime.
+> **Evidencia:** `OrionCopIU/My Project/AssemblyInfo.vb` declara `AssemblyVersion("17.39.453.1454")`; `OrionCopIU/OrionCopIU.vbproj` usa `ApplicationVersion>17.39.453.1454</ApplicationVersion>`.
 
 ---
 
@@ -130,10 +130,14 @@ Este plan se considera cumplido cuando:
 
 ## 9. Línea base técnica de la versión actual
 
-La versión base actualmente documentada para la aplicación principal es `v17.39.452.1452`, equivalente al ensamblado `OrionCopIU`.
+La versión base actualmente documentada para la aplicación principal es `v17.39.453.1454`, equivalente al ensamblado `OrionCopIU`.
 
 Trazabilidad de referencia:
 
-- `OrionCopIU/My Project/AssemblyInfo.vb` -> `AssemblyVersion("17.39.452.1452")`
-- `OrionCopIU/mOrionCopIU.vb` -> `GstrVersionApp = My.Application.Info.Version.ToString`
-- Esta versión representa la línea base operativa del módulo principal ejecutable del repositorio `orioncop`.
+- `OrionCopIU/My Project/AssemblyInfo.vb` -> `AssemblyVersion("17.39.453.1454")`
+- `OrionCopIU/OrionCopIU.vbproj` -> `ApplicationVersion>17.39.453.1454</ApplicationVersion>`
+- `OrionCopL/clsSectorModulo.vb` -> validación de `TasaContribucion` ajustada a máximo `2`
+- `OriIntCon` -> ajuste de dependencia `Newtonsoft.Json` a `13.0.3`
+- `RepOriCop/RepOriCop.vbproj` -> eliminación de `mDefPubRepOrion.vb`
+
+Esta versión representa la línea base operativa efectiva del módulo principal ejecutable del repositorio `orioncop`.

@@ -29,8 +29,8 @@
     <SuiteName>OPTIMUSOFT</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <DisallowUrlActivation>true</DisallowUrlActivation>
-    <ApplicationRevision>1452</ApplicationRevision>
-    <ApplicationVersion>17.39.452.1452</ApplicationVersion>
+    <ApplicationRevision>1454</ApplicationRevision>
+    <ApplicationVersion>17.39.453.1454</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>

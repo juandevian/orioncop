@@ -7,6 +7,7 @@
     Private ReadOnly MobjPadre As clsModuloContribucion = Nothing
     Private MobjSector_SectorModulo As ClsSector = Nothing
 #End Region
+
 #Region "Constructores"
     ''' <summary>
     ''' Instancia un objeto Panorama
@@ -45,6 +46,7 @@
         HcolTablas.Add(MCSTRNOMBRETABLA)
         HcolCamposSelect.Add(lstrCamposSelect)
     End Sub
+
     ''' <summary>
     ''' Instancia el objeto como un objeto no navegable, básicamente para formar parte de una colección
     ''' </summary>
@@ -62,6 +64,7 @@
         DtbTablaColeccion = DrwRegistroActual.Table
     End Sub
 #End Region
+
 #Region "Propiedades"
 #Region "Propiedades indentificadoras"
     Protected Overrides ReadOnly Property HstrNombreTabla As String
@@ -69,21 +72,25 @@
             Return MCSTRNOMBRETABLA
         End Get
     End Property
+
     Friend Shared ReadOnly Property SstrNombreTabla As String
         Get
             Return MCSTRNOMBRETABLA
         End Get
     End Property
+
     Protected Overrides ReadOnly Property HenuIdClase As EnuIdClasesPanDef
         Get
             Return EnuIdClasesPanDef.enuSectorModulo
         End Get
     End Property
+
     Protected Overrides ReadOnly Property HstrNombreClase As String
         Get
             Return "Sector Módulo"
         End Get
     End Property
+
     Friend Overrides ReadOnly Property HstrNombreObj As String
         Get
             Dim lstrNom = Chr(34) & ObjSector_SectorModulo.ObjNombreSectorStr.ObjValorPro & " - " &
@@ -92,6 +99,7 @@
         End Get
     End Property
 #End Region
+
 #Region "Propiedades Prop"
     Friend ReadOnly Property ObjIdCarpeta_SectorModuloShr As New ClsIdCarpetaShr(Me)
     Friend ReadOnly Property ObjIdCentroUtil_SectorModuloShr As New ClsIdCentroUtilShr(Me)
@@ -111,6 +119,7 @@
         End Get
     End Property
 #End Region
+
 #Region "Otras propiedades"
     Friend ReadOnly Property ObjSector_SectorModulo As ClsSector
         Get
@@ -127,11 +136,13 @@
     End Property
 #End Region
 #End Region
+
 #Region "Procedimientos y funciones invalidantes"
     Protected Overrides Sub SVacie()
         MyBase.SVacie()
         MobjSector_SectorModulo = Nothing
     End Sub
+
     Protected Overrides Sub SActualice(ablnExigeRequeridos As Boolean)
         If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuCreando Then
             GobjPanDat.SControleProcesoObj(True)
@@ -156,6 +167,7 @@
         End If
     End Sub
 #End Region
+
 #Region "Procedimientos del objeto"
     Friend Function FdblBasePartiPonderada(aenuBasePartic As EnuTipoBaseCalculo) As Double
         Dim ldblBasePartSector As Double
@@ -167,6 +179,7 @@
         ldblBasePartPon = ldblBasePartSector * ldblFactorPondera
         Return ldblBasePartPon
     End Function
+
     Friend Function FblnParticipaAdmon() As Boolean
         Return MobjPadre.ObjContribuyeCuotaAdminBln.ObjValorPro
     End Function
@@ -185,6 +198,7 @@ Friend Class ClsIdModulo_SectorModuloShr
         HblnEsLlave = True
         HbytPosicionLlave = 2
     End Sub
+
     Public Overrides Sub SValide()
         HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 1,
                 Short.MaxValue, BlnEsRequerido)
@@ -200,11 +214,13 @@ Friend Class ClsIdModulo_SectorModuloShr
             End If
         End If
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If IsNothing(ObjValorPro) Then
             Return ""
@@ -213,6 +229,7 @@ Friend Class ClsIdModulo_SectorModuloShr
         End If
     End Function
 End Class
+
 Friend Class ClsIdSector_SectorModuloShr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IdSector"
@@ -225,6 +242,7 @@ Friend Class ClsIdSector_SectorModuloShr
         HblnEsLlave = True
         HbytPosicionLlave = 3
     End Sub
+
     Public Overrides Sub SValide()
         Dim lobjPadre As ClsSectorModulo = ObjPadre
         HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 1, Short.MaxValue, HblnEsRequerido,
@@ -245,11 +263,13 @@ Friend Class ClsIdSector_SectorModuloShr
             End If
         End If
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If IsNothing(ObjValorPro) Then
             Return ""
@@ -258,6 +278,7 @@ Friend Class ClsIdSector_SectorModuloShr
         End If
     End Function
 End Class
+
 Friend Class ClsTasaContribucionDbl
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "TasaContribucion"
@@ -269,18 +290,21 @@ Friend Class ClsTasaContribucionDbl
         HblnRegistrarLogCambio = True
         HblnEsRequerido = True
     End Sub
+
     Public Overrides Sub SValide()
-        HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 0, 1, HblnEsRequerido,
+        HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 0, 2, HblnEsRequerido,
                 HenuTipoValor)
         If HblnEsValido Then
             HobjValorNew = Math.Round(HobjValorNew, 4)
         End If
     End Sub
+
     Friend Shared ReadOnly Property SstrNombreCampoBd As String
         Get
             Return MCSTRNOMBRECAMPOBD
         End Get
     End Property
+
     Public Overrides Function ToString() As String
         If IsNothing(HobjValorPro) Then
             Return ""
