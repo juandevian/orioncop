@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Win32
+<Obsolete("Ventana obsoleta. Migrar uso a la nueva implementación y planificar eliminación en próximas versiones.")>
 Public Class WinCentroUtilidadOriCop
 #Region "Definiciones"
     ' Herencia e Interfaz
@@ -289,6 +290,7 @@ Public Class WinCentroUtilidadOriCop
         MyBase.SCree()
         '
     End Sub
+
     Protected Overrides Sub SHabiliteMenues()
         MyBase.SHabiliteMenues()
         With GobjPanorama.ObjUsuarioActual
@@ -303,6 +305,7 @@ Public Class WinCentroUtilidadOriCop
             MnuAutorizarEFac.Visibility = Visibility.Collapsed
         End If
     End Sub
+
     Protected Overrides Sub SModifique()
         MyBase.SModifique()
         SVisibiliceBttEncontrar(EnuOperacionEnWin <> EnuOperacionEnVentana.cenuConsultando)
@@ -310,6 +313,7 @@ Public Class WinCentroUtilidadOriCop
             txtPieFac1.Style = FindResource("RecCtlNoHabilitado")
         End If
     End Sub
+
     Protected Overrides Sub SGuarde()
         Dim lblnCreando = EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando
         MyBase.SGuarde()
@@ -325,6 +329,7 @@ Public Class WinCentroUtilidadOriCop
             End If
         End If
     End Sub
+
     Protected Overrides Sub SFinaliceOperacion()
         MyBase.SFinaliceOperacion()
         SVisibiliceBttEncontrar(EnuOperacionEnWin <> EnuOperacionEnVentana.cenuConsultando)

@@ -204,10 +204,10 @@ Public Class WinFacturas
         txtRefPago.Content = MobjObjetoWin.ObjReferenciaPago_FacStr.ToString()
         SMuestreUsuario()
         If EnuOperacionEnWin <> EnuOperacionEnVentana.CenuConsultando OrElse
-            MobjObjetoWin.BlnExiste Then
+                MobjObjetoWin.BlnExiste Then
             SValide()
         End If
-        SMuestreTitulo
+        SMuestreTitulo()
         If EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
             If txtIdFactura.Focus Then
                 txtIdFactura.SelectAll()
@@ -226,7 +226,7 @@ Public Class WinFacturas
     Protected Overrides Sub SValide()
         Dim lblnNoHayDatos = Not BlnVentanaAux AndAlso ObjObjetoWin.FblnEstaVacioOrigenDatos
         If lblnNoHayDatos AndAlso EnuOperacionEnWin =
-        EnuOperacionEnVentana.CenuConsultando Then
+                EnuOperacionEnVentana.CenuConsultando Then
             SInicialiceValido()
         Else
             With MobjObjetoWin

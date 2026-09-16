@@ -334,11 +334,17 @@ Friend Class ClsItemFactura
             Select Case lenuTipoNov
                 Case EnuTipoNov.enuCrPagoCap, EnuTipoNov.enuCrAnApCap
                     ldecVlrPago += lobjNov.ObjValor_NovDec.ObjValorPro
-                Case EnuTipoNov.enuCrPagoInt, EnuTipoNov.enuCrAnApInt
+                Case EnuTipoNov.enuCrPagoInt, EnuTipoNov.EnuCrAnApInt
+                    ldecVlrPago += lobjNov.ObjValor_NovDec.ObjValorPro
+                Case EnuTipoNov.EnuCrRetFte, EnuTipoNov.EnuCrRetCre, EnuTipoNov.EnuCrRetIca,
+                            EnuTipoNov.EnuCrRetIva
                     ldecVlrPago += lobjNov.ObjValor_NovDec.ObjValorPro
                 Case EnuTipoNov.enuRCrPagoCap, EnuTipoNov.enuRCrAnApCap
                     ldecVlrPago -= lobjNov.ObjValor_NovDec.ObjValorPro
                 Case EnuTipoNov.enuRCrPagoInt, EnuTipoNov.enuRCrAnApInt
+                    ldecVlrPago -= lobjNov.ObjValor_NovDec.ObjValorPro
+                Case EnuTipoNov.EnuRCrRetFte, EnuTipoNov.EnuRCrRetCre, EnuTipoNov.EnuRCrRetIca,
+                            EnuTipoNov.EnuRCrRetIva
                     ldecVlrPago -= lobjNov.ObjValor_NovDec.ObjValorPro
             End Select
         Next

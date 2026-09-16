@@ -3490,8 +3490,10 @@ Friend Class ClsIdCtaImptosAsumidosStr
     Inherits ClsCBPropiedad
     Private Const MCSTRNOMBRECAMPOBD As String = "IDCtaImpAsumidos"
     Private MstrNombreCuenta As String = String.Empty
+    Private MobjPadre As ClsCentroUtilOriCop = Nothing
     Public Sub New(aobjPadre As ClsCBObjetoPan)
         MyBase.New(aobjPadre)
+        MobjPadre = aobjPadre
         HstrNombre = "Cta Impuestos Asumidos"
         HshrLongitud = 30
         HenuTipoValor = EnuTipoValor.enuString
@@ -3500,6 +3502,7 @@ Friend Class ClsIdCtaImptosAsumidosStr
     End Sub
     Public Overrides Sub SValide()
         MstrNombreCuenta = String.Empty
+        HblnEsRequerido = MobjPadre.ObjAutorizaEFacBln.ObjValorPro = True
         HblnEsValido = ClsPanorama.FblnEsValidoString(HobjValorNew, 4, ShrLongitud, BlnEsRequerido)
         If ObjPadre.EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuConsultando Then
             If HblnEsValido Then
