@@ -73,6 +73,7 @@ Cada release debe indicar:
 1. Versión de `comunes` esperada.
 2. Impactos en `adminorion`/`orionpcorreo` (si aplica).
 3. Artefacto para `orion-installer`.
+4. Notas de versión basadas en `docs/PLANTILLA_NOTAS_VERSION.md` y almacenadas en `docs/RELEASE_NOTES/<TAG>.md`.
 
 ### Línea base actual documentada
 
