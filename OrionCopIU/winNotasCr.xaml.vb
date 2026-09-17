@@ -184,6 +184,7 @@ Public Class WinNotasCr
                 txtItemFactura.Text = MobjItemNotaCrActual.StrItemFactura
                 txtTipoDcto.Text = MobjItemNotaCrActual.ObjIdTipoDscto_ItemNotaCrByt.ToString
                 txtValorDcto.Text = Format(MobjItemNotaCrActual.ObjValor_ItemNotaCrDec.ObjValorPro, "c")
+                txtValorDctoNuevo.Text = Format(MobjItemNotaCrActual.ObjValor_ItemNotaCrDec.ObjValorPro, "c")
             Else
                 SVacieItem()
             End If
