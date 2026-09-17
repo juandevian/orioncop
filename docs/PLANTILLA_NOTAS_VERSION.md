@@ -2,6 +2,9 @@
 
 Usar esta plantilla para cada release y guardarla en `docs/RELEASE_NOTES/<TAG>.md`.
 
+> Guardar siempre en UTF-8 y publicar con `gh release edit/create --notes-file`.
+> No usar notas largas inline en PowerShell para evitar errores de parsing y tildes corruptas.
+
 ## Actualización de la línea base operativa
 Con esta versión se deja alineada la base operativa de OrionCop con la versión `<VERSION_PRINCIPAL>` y se corrigen ajustes necesarios para mantener la operación estable y consistente.
 

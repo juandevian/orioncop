@@ -61,6 +61,19 @@ git push origin <version-tag>
 gh release create <version-tag> --title "<version-tag>" --notes "Release de la versión <version-tag>"
 ```
 
+## Regla técnica para notas de release en PowerShell
+
+Si las notas de release son multilínea y tienen caracteres especiales (`-`, tildes, backticks), no usar `--notes` inline en terminal integrada porque PowerShell puede interpretar el contenido como script.
+
+Usar este patrón:
+
+1. Ejecutar en modo aislado: `powershell -NoProfile -Command ...`
+2. Guardar notas en archivo UTF-8.
+3. Publicar con `gh release create/edit --notes-file <ruta>`.
+4. Mantener comandos cortos por paso.
+
+Esto evita bloqueos del intérprete y corrupción de tildes en GitHub Release.
+
 ## Importante: PR vs. release
 - La PR se crea cuando hay cambios de código o de documentación que deben integrarse en `main`.
 - El release se crea después de que la versión ya fue aprobada, fusionada y etiquetada.
