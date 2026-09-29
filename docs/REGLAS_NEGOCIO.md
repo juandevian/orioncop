@@ -24,9 +24,15 @@ Este documento consolida reglas de negocio funcionales encontradas en el código
 11. **Ajuste de cuotas administracion:** solo aplica para cuotas de administracion anuales, no ajustadas, y del ano actual.
 12. **Concepto unico en servicios permanentes:** el concepto debe ser unico para servicios permanentes.
 13. **EsAjuste restringido:** solo puede ser `True` cuando el tipo de servicio es anual.
+14. **Tope del interés de mora (Ley 675 de 2001, art. 30):** el interés de mora no puede superar 1,5 veces el interés bancario corriente (IBC) certificado. La parametrización lo impide: si se digita un valor mayor se avisa y se deja el máximo. En modo Fijo la tasa deseada se conserva y la tasa efectiva es `Min(deseada, 1,5 x IBC)`, que se recalcula con cada IBC.
+15. **Modo Variable:** tasa = IBC x factor, con factor definido por el usuario en el rango (0, 1,5]. Modo *Sin parametrizar* (por defecto) no consulta la API ni bloquea el cierre.
+16. **Sincronización del IBC en el Cierre de mes:** antes de cerrar el mes y de causar intereses se actualiza `OriTasasMora` (la causación lee la tasa del día anterior a su fecha, por eso se usa el certificado vigente ese día). Si no se puede sincronizar (API caída y sin certificado local vigente) no se cierra el mes ni se causan intereses. La sincronización manual se puede hacer en cualquier momento.
+17. **Tasa de mora anual simple:** `TasaMora` se guarda como fracción anual simple; la mora se calcula `deuda x (tasa / 365|366) x días`, y el equivalente mensual mostrado es `anual / 12`.
 
 ## Evidencia en codigo
 
+- `OrionCopLsIbcCalculo.vb`, `OrionCopLsIbcSincroniza.vb`, `OrionCopLsOrionCop.vb` (FblnSincronizaIbc)
+- `OrionCopLsItemFactura.vb` (FdecIntereseMora), `OrionCopLsCentroUtilidadOriCop.vb` (FdblTasaMoraFecha)
 - `OrionCopL\clsReciboCaja.vb:246-267`
 - `OrionCopL\clsReciboCaja.vb:453-455`
 - `OrionCopL\clsReciboCaja.vb:470-472`
