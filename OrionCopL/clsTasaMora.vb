@@ -199,10 +199,9 @@
             Throw New ErrorInesperadoPanLException("No se pudo crear la Tasa de Mora: el usuario no tiene permiso para crearla!")
         End If
         Try
-            ' Las fechas se asignan con la cultura del usuario, FUERA de la ventana invariante: el SValide de
-            ' FechaDesde llama FdtmFechaDesdeUltima -> FdtbTasasMora, que escribe Format(Today, "dd/MM/yyyy")
-            ' en una columna DateTime; con cultura invariante ese texto se lee como MM/dd (falla los días
-            ' 13-31 y cambia el día por el mes los días 1-12).
+            ' Las fechas se asignan FUERA de la ventana invariante: el SValide de FechaDesde llama
+            ' FdtmFechaDesdeUltima -> FdtbTasasMora y consulta la BD; no debe correr con otra cultura.
+            ' (FdtbTasasMora ya asigna FechaHasta como Date y no depende de la cultura.)
             ObjFechaDesdeTasaMoraDtm.ObjValorPro = adtmFechaDesde.Date
             ObjFechaHastaTasaMoraDtm.ObjValorPro = Date.Today
             ' La ventana invariante debe cubrir SOLO esta asignación: ClsTasaMoraDbl arma "<valor>mv" con

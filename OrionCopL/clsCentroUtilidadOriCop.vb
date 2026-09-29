@@ -1006,13 +1006,22 @@
                                     {ClsOrdinalTasaMoraEnt.SstrNombreCampoBd, "ASC"}}
         Dim ldtbTasasMora = ClsPanorama.FdtbDataTable(ClsTasaMora.SstrNombreTabla, lstrCamposSelect,
                 lstrIndice, lstrFiltro)
-        If ldtbTasasMora.Rows.Count > 0 Then
-            Dim lstrFecha = Format(Today, GCSTRFMTFECHASIMPLE)
-            Dim ldrwTasMor As DataRow = ldtbTasasMora(ldtbTasasMora.Rows.Count - 1)
-            ldrwTasMor("FechaHasta") = lstrFecha
-        End If
+        SAsigneFechaHastaUltimaTasa(ldtbTasasMora, Today)
         Return ldtbTasasMora
     End Function
+
+    ''' <summary>
+    ''' Reemplaza la FechaHasta de la última tasa (la vigente) por la fecha dada.
+    ''' </summary>
+    ''' <remarks>La columna es DateTime: se asigna un Date, nunca un texto formateado, porque el DataTable
+    ''' interpreta el texto con la cultura del hilo (con MM/dd falla los días 13-31 y cambia día por mes
+    ''' los días 1-12).</remarks>
+    Friend Shared Sub SAsigneFechaHastaUltimaTasa(adtbTasasMora As DataTable, adtmFechaHasta As Date)
+        If adtbTasasMora.Rows.Count > 0 Then
+            Dim ldrwTasMor As DataRow = adtbTasasMora.Rows(adtbTasasMora.Rows.Count - 1)
+            ldrwTasMor(ClsFechaHastaTasaMoraDtm.SstrNombreCampoBd) = adtmFechaHasta.Date
+        End If
+    End Sub
 
     Friend Function FdblTasaMoraFecha(adtmFecha As Date) As Double
         Dim ldblTasa = 0.0
