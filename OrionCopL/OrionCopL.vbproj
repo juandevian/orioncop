@@ -213,6 +213,7 @@
     <Compile Include="clsIbcInterfaces.vb" />
     <Compile Include="clsIbcCertificado.vb" />
     <Compile Include="clsIbcTasasMoraBd.vb" />
+    <Compile Include="clsIbcSincroniza.vb" />
     <Compile Include="clsSector.vb" />
     <Compile Include="clsPredio.vb" />
     <Compile Include="clsXTerCliente.vb" />
