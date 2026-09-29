@@ -233,7 +233,7 @@ Friend Class ClsOrionCop
 
     Friend ReadOnly Property EntVersionBDEnProg As Integer Implements IPanDat.EntVersionBDEnProg
         Get
-            Return 267
+            Return 268
         End Get
     End Property
 #End Region
