@@ -79,6 +79,7 @@
     Friend ReadOnly Property ObjDiasParaPerdidaShr As New ClsDiasParaPerdidaShr(Me)
     Friend ReadOnly Property ObjExigeFechaHoyCajaBln As New ClsExigeFechaHoyCajaBln(Me)
     Friend ReadOnly Property ObjExigeFechaHoyDocsBln As New ClsExigeFechaHoyDocsBln(Me)
+    Friend ReadOnly Property ObjFactorVariableDbl As New ClsFactorVariableDbl(Me)
     Friend ReadOnly Property ObjFechaResolucionContDtm As New ClsFechaResolucionContDtm(Me)
     Friend ReadOnly Property ObjFechaResolucionFactDtm As New ClsFechaResolucionFactDtm(Me)
     Friend ReadOnly Property ObjFechaUltCausacionGralDtm As New ClsFechaUltCausacionGralDtm(Me)
@@ -97,6 +98,7 @@
     Friend ReadOnly Property ObjIdCtaReteIvaStr As New ClsIdCtaReteIvaStr(Me)
     Friend ReadOnly Property ObjIdProvEFacByt As New ClsIdProvEFacByt(Me)
     Friend ReadOnly Property ObjInformaSaldoTotalDespuesRCBln As New ClsInformaSaldoTotalDespuesRCBln(Me)
+    Friend ReadOnly Property ObjModoInteresByt As New ClsModoInteresByt(Me)
     Friend ReadOnly Property ObjNoMostrarAyudaBln As New ClsNoMostrarAyudaBln(Me)
     Friend ReadOnly Property ObjNotificacionesSonorasBln As New ClsNotificacionesSonorasBln(Me)
     Friend ReadOnly Property ObjNumeroResolContiStr As New ClsNumeroResolContiStr(Me)
@@ -114,6 +116,7 @@
     Friend ReadOnly Property ObjRangoFraIniEnt As New ClsRangoFraIniEnt(Me)
     Friend ReadOnly Property ObjServicioIdActivoBln As New ClsServicioIdActivoBln(Me)
     Friend ReadOnly Property ObjTarifaReteIvaDbl As New ClsTarifaReteIvaDbl(Me)
+    Friend ReadOnly Property ObjTasaFijaDeseadaDbl As New ClsTasaFijaDeseadaDbl(Me)
     Friend ReadOnly Property ObjTipoInterfazByt As New ClsTipoInterfazByt(Me)
     Friend ReadOnly Property ObjIdMedioPagoDefectoByt As New ClsIdMedioPagoDefectoByt(Me)
     Friend ReadOnly Property ObjTipoTerceroCajaByt As New ClsTipoTerceroCajaByt(Me)
@@ -134,6 +137,7 @@
                 HcolPropiedades.Add(ObjDiasParaPerdidaShr)
                 HcolPropiedades.Add(ObjExigeFechaHoyCajaBln)
                 HcolPropiedades.Add(ObjExigeFechaHoyDocsBln)
+                HcolPropiedades.Add(ObjFactorVariableDbl)
                 HcolPropiedades.Add(ObjFechaResolucionContDtm)
                 HcolPropiedades.Add(ObjFechaResolucionFactDtm)
                 HcolPropiedades.Add(ObjFechaUltCausacionGralDtm)
@@ -153,6 +157,7 @@
                 HcolPropiedades.Add(ObjIdCtaReteIvaStr)
                 HcolPropiedades.Add(ObjIdProvEFacByt)
                 HcolPropiedades.Add(ObjInformaSaldoTotalDespuesRCBln)
+                HcolPropiedades.Add(ObjModoInteresByt)
                 HcolPropiedades.Add(ObjNotificacionesSonorasBln)
                 HcolPropiedades.Add(ObjNoMostrarAyudaBln)
                 HcolPropiedades.Add(ObjNumeroResolContiStr)
@@ -170,6 +175,7 @@
                 HcolPropiedades.Add(ObjRangoFraIniEnt)
                 HcolPropiedades.Add(ObjServicioIdActivoBln)
                 HcolPropiedades.Add(ObjTarifaReteIvaDbl)
+                HcolPropiedades.Add(ObjTasaFijaDeseadaDbl)
                 HcolPropiedades.Add(ObjTipoInterfazByt)
                 HcolPropiedades.Add(ObjIdMedioPagoDefectoByt)
                 HcolPropiedades.Add(ObjTipoTerceroCajaByt)
@@ -4582,6 +4588,80 @@ Friend Class ClsTipoInterfazByt
         Else
             Return ClsOrionCop.FstrNombreDatoConstanteOri(EnuGrupoConstantesOriDef.EnuTipoInterfaz, HobjValorPro)
         End If
+    End Function
+End Class
+
+Friend Class ClsModoInteresByt
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "ModoInteres"
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        HstrNombre = "Modo de interés de mora"
+        HenuTipoValor = EnuTipoValor.EnuByte
+        HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HblnRegistrarLogCambio = True
+    End Sub
+    Public Overrides Sub SValide()
+        HblnEsValido = ClsPanorama.FblnEsValidoEnumByte(HobjValorNew, EnuModoInteres.None,
+                EnuModoInteres.EnuVariable, HblnEsRequerido)
+    End Sub
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+    Public Overrides Function ToString() As String
+        If IsNothing(HobjValorPro) Then Return "" Else Return HobjValorPro.ToString
+    End Function
+End Class
+
+Friend Class ClsTasaFijaDeseadaDbl
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "TasaFijaDeseada"
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        HstrNombre = "Tasa fija deseada"
+        HenuTipoValor = EnuTipoValor.EnuDouble
+        HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HblnRegistrarLogCambio = True
+    End Sub
+    Public Overrides Sub SValide()
+        HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 0, 1, HblnEsRequerido,
+                EnuTipoValor.EnuDouble)
+        If HblnEsValido Then HobjValorNew = Math.Round(HobjValorNew, 6)
+    End Sub
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+    Public Overrides Function ToString() As String
+        If IsNothing(HobjValorPro) Then Return "" Else Return HobjValorPro.ToString
+    End Function
+End Class
+
+Friend Class ClsFactorVariableDbl
+    Inherits ClsCBPropiedad
+    Private Const MCSTRNOMBRECAMPOBD As String = "FactorVariable"
+    Public Sub New(aobjPadre As ClsCBObjetoPan)
+        MyBase.New(aobjPadre)
+        HstrNombre = "Factor variable"
+        HenuTipoValor = EnuTipoValor.EnuDouble
+        HstrNombreCampoBd = MCSTRNOMBRECAMPOBD
+        HblnRegistrarLogCambio = True
+    End Sub
+    Public Overrides Sub SValide()
+        HblnEsValido = ClsPanorama.FblnEsValidoNumero(HobjValorNew, 0, ClsIbcCalculo.CDBLFACTORMAXIMO,
+                HblnEsRequerido, EnuTipoValor.EnuDouble)
+        If HblnEsValido Then HobjValorNew = Math.Round(HobjValorNew, 4)
+    End Sub
+    Friend Shared ReadOnly Property SstrNombreCampoBd As String
+        Get
+            Return MCSTRNOMBRECAMPOBD
+        End Get
+    End Property
+    Public Overrides Function ToString() As String
+        If IsNothing(HobjValorPro) Then Return "" Else Return HobjValorPro.ToString
     End Function
 End Class
 

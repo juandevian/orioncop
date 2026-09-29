@@ -73,4 +73,23 @@ Public Class IbcEsquemaTests
         Assert.IsNotNull(lxelPk, "Falta el indice PK_OriIbcCertificados")
         Assert.AreEqual("S", CStr(lxelPk.Attribute("Principal")))
     End Sub
+
+    <TestMethod>
+    Public Sub CentroUtilidad_TieneLasColumnasDeInteres_YElComandoAcm()
+        Dim lxdoc = FxdocEsquema()
+        If lxdoc Is Nothing Then Assert.Inconclusive("No se encontro la carpeta Comunes.")
+        Dim lxelTabla = lxdoc.Descendants("Tabla").FirstOrDefault(
+                Function(x) CStr(x.Attribute("Nombre")) = "OriCentrosUtilidadOriCop")
+        Assert.IsNotNull(lxelTabla, "Falta la tabla OriCentrosUtilidadOriCop")
+        Dim lstrEsperadas As String() = {"ModoInteres:BYTE:0", "TasaFijaDeseada:DOUBLE:0", "FactorVariable:DOUBLE:0"}
+        Dim lstrReales As String() = lxelTabla.Element("Columnas").Elements("Columna").
+                Where(Function(c) lstrEsperadas.Any(Function(e) e.StartsWith(CStr(c.Attribute("Nombre")) & ":"))).
+                Select(Function(c) CStr(c.Attribute("Nombre")) & ":" & CStr(c.Attribute("TipoDato")).ToUpper() &
+                        ":" & CStr(c.Attribute("ValorDefecto"))).ToArray()
+        CollectionAssert.AreEquivalent(lstrEsperadas, lstrReales)
+        Dim lstrComandos As String() = lxelTabla.Element("Comandos").Elements("Comando").
+                Where(Function(c) CStr(c.Attribute("Accion")) = "ACM" AndAlso CStr(c.Attribute("Condicion")) = "VBD<268").
+                Select(Function(c) CStr(c.Attribute("Parametros"))).ToArray()
+        CollectionAssert.AreEquivalent(New String() {"ModoInteres", "TasaFijaDeseada", "FactorVariable"}, lstrComandos)
+    End Sub
 End Class

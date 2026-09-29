@@ -65,6 +65,26 @@ Friend Class ClsIbcCalculo
         Return Math.Min(adblDeseada, FdblTopeMaximo(adblIbc))
     End Function
 
+    ''' <summary>
+    ''' Tasa fija que se acepta al digitar: nunca negativa ni mayor al tope. Si se ajusta, avisa.
+    ''' </summary>
+    Friend Shared Function FdblTasaFijaPermitida(adblDigitada As Double, adblIbc As Double,
+            ByRef ablnSeAjusto As Boolean) As Double
+        Dim ldblTope = FdblTopeMaximo(adblIbc)
+        Dim ldblPermitida = Math.Max(0, Math.Min(adblDigitada, ldblTope))
+        ablnSeAjusto = ldblPermitida <> adblDigitada
+        Return ldblPermitida
+    End Function
+
+    ''' <summary>
+    ''' Factor que se acepta al digitar: nunca mayor al factor maximo. Si se ajusta, avisa.
+    ''' </summary>
+    Friend Shared Function FdblFactorPermitido(adblDigitado As Double, ByRef ablnSeAjusto As Boolean) As Double
+        Dim ldblPermitido = Math.Min(adblDigitado, CDBLFACTORMAXIMO)
+        ablnSeAjusto = ldblPermitido <> adblDigitado
+        Return ldblPermitido
+    End Function
+
     Friend Shared Function FblnFactorValido(adblFactor As Double) As Boolean
         Return adblFactor > 0 AndAlso adblFactor <= CDBLFACTORMAXIMO
     End Function
