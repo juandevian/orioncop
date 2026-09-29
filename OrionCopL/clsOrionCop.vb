@@ -4647,10 +4647,12 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
     ''' de causar mora (y antes de cerrar el mes), fuera de la transacción de la causación.
     ''' </summary>
     ''' <param name="adtmFecha">Fecha de causación (la tasa que se usa es la del día anterior).</param>
+    ''' <param name="ablnForzarConsulta">True para consultar la API aunque ya haya certificado local vigente.</param>
     ''' <param name="astrMens">Mensaje para el usuario cuando devuelve False.</param>
     ''' <returns>True si la tasa quedó al día o si el centro no usa IBC (modo None); False si no se pudo:
     ''' en ese caso NO se debe causar mora.</returns>
-    Friend Function FblnSincronizaIbcCierre(adtmFecha As Date, ByRef astrMens As String) As Boolean
+    Friend Shared Function FblnSincronizaIbc(adtmFecha As Date, ablnForzarConsulta As Boolean,
+            ByRef astrMens As String) As Boolean
         Dim lenuModo = CType(GobjParametros.ObjModoInteresByt.ObjValorPro, EnuModoInteres)
         ' Modo None: comportamiento anterior a la herramienta IBC (ni API ni BD ni mensaje)
         If lenuModo = EnuModoInteres.None Then Return True
@@ -4663,12 +4665,35 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
         Dim lstrMensIbc = String.Empty
         Dim lblnSincronizo = lobjSinc.FblnSincronice(adtmFecha, lenuModo,
                 GobjParametros.ObjTasaFijaDeseadaDbl.ObjValorPro, GobjParametros.ObjFactorVariableDbl.ObjValorPro,
-                False, Date.Today, lstrMensIbc)
+                ablnForzarConsulta, Date.Today, lstrMensIbc)
         If Not lblnSincronizo Then
             astrMens = If(String.IsNullOrEmpty(lstrMensIbc),
                     "No se pudo actualizar la tasa de mora con el IBC. No se causaron intereses.", lstrMensIbc)
         End If
         Return lblnSincronizo
+    End Function
+    ''' <summary>
+    ''' Sincroniza antes de causar mora (no fuerza la consulta a la API si ya hay certificado local vigente).
+    ''' </summary>
+    Friend Function FblnSincronizaIbcCierre(adtmFecha As Date, ByRef astrMens As String) As Boolean
+        Return FblnSincronizaIbc(adtmFecha, False, astrMens)
+    End Function
+    ''' <summary>
+    ''' Sincronización manual (ventanas de la herramienta IBC): fuerza la consulta a la API y deja registrada
+    ''' la tasa vigente hoy. Se usa la fecha de mañana porque la causación lee la tasa del día anterior.
+    ''' </summary>
+    Friend Shared Function FblnSincronizaIbcManual(ByRef astrMens As String) As Boolean
+        astrMens = String.Empty
+        If CType(GobjParametros.ObjModoInteresByt.ObjValorPro, EnuModoInteres) = EnuModoInteres.None Then
+            astrMens = "El centro de utilidad está sin parametrizar: no hay nada que sincronizar. La tasa se " &
+                    "gestiona manualmente en Tasas de Mora."
+            Return False
+        End If
+        If IsNothing(SobjProveedorIbc) Then
+            astrMens = "El servicio de consulta del IBC no está disponible en esta versión."
+            Return False
+        End If
+        Return FblnSincronizaIbc(Date.Today.AddDays(1), True, astrMens)
     End Function
     ''' <summary>
     ''' Causa mora a todas las deudas el primer dia del período despues de cerrar mes o el día 

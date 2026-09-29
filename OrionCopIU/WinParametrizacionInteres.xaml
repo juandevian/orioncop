@@ -1,0 +1,55 @@
+﻿<Window x:Class="WinParametrizacionInteres"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FontSize="12"
+        WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png"
+        Title="Interés de mora (IBC)" Height="520" Width="560" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition MinHeight="20"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0" Margin="0,20,0,0">
+            <!--Label Relleno-->
+            <Label Height="10" DockPanel.Dock="Top"/>
+            <!--Label Notificaciones-->
+            <Label x:Name="lblNotifica" Background="Transparent"
+                   Padding="10,0,0,0" BorderThickness="1" BorderBrush="LightGray"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <Canvas Grid.Row="1">
+            <Label Content="Interés de mora" Canvas.Left="20" Canvas.Top="10"
+                   Foreground="Gray" FontSize="17" FontStyle="Italic" Padding="0"/>
+            <TextBlock x:Name="lblIbcVigente" Canvas.Left="20" Canvas.Top="45" Width="510"
+                       TextWrapping="Wrap"/>
+            <TextBlock x:Name="lblTope" Canvas.Left="20" Canvas.Top="80" Width="510"
+                       TextWrapping="Wrap" FontWeight="SemiBold"/>
+            <RadioButton x:Name="optNinguno" GroupName="Modo" Canvas.Left="20" Canvas.Top="115"
+                         TabIndex="1"
+                         Content="Sin parametrizar (la tasa se gestiona manualmente en Tasas de Mora)"/>
+            <RadioButton x:Name="optFijo" GroupName="Modo" Canvas.Left="20" Canvas.Top="145"
+                         TabIndex="2" Content="Fijo: una tasa definida por la copropiedad"/>
+            <Label Content="Tasa anual (%)" Canvas.Left="60" Canvas.Top="172" Padding="0"/>
+            <TextBox x:Name="txtTasaFija" Canvas.Left="200" Canvas.Top="170" Width="90"
+                     TabIndex="3" HorizontalContentAlignment="Right"/>
+            <RadioButton x:Name="optVariable" GroupName="Modo" Canvas.Left="20" Canvas.Top="205"
+                         TabIndex="4" Content="Variable: IBC vigente × factor (se actualiza sola)"/>
+            <Label Content="Factor (máximo 1,5)" Canvas.Left="60" Canvas.Top="232" Padding="0"/>
+            <TextBox x:Name="txtFactor" Canvas.Left="200" Canvas.Top="230" Width="90"
+                     TabIndex="5" HorizontalContentAlignment="Right"/>
+            <TextBlock x:Name="lblAnual" Canvas.Left="20" Canvas.Top="275" Width="510"
+                       TextWrapping="Wrap"/>
+            <TextBlock x:Name="lblMensual" Canvas.Left="20" Canvas.Top="298" Width="510"
+                       TextWrapping="Wrap"/>
+            <TextBlock x:Name="lblAviso" Canvas.Left="20" Canvas.Top="325" Width="510" Height="50"
+                       TextWrapping="Wrap" Foreground="DarkRed"/>
+            <Button Name="bttSincronizar" Content="_Sincronizar ahora" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Left="20" Canvas.Top="385" TabIndex="6" Width="150"/>
+            <Button Name="bttGuardar" Content="_Guardar" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Left="300" Canvas.Top="385" TabIndex="7"/>
+            <Button Name="bttCancelar" Content="_Cancelar" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Left="420" Canvas.Top="385" TabIndex="8"/>
+        </Canvas>
+    </Grid>
+</Window>

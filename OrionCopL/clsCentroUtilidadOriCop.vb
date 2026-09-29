@@ -1380,6 +1380,33 @@
         End If
     End Sub
 
+    ''' <summary>
+    ''' Registra la parametrización del interés de mora (herramienta IBC). La tasa fija deseada solo se
+    ''' modifica en modo Fijo y el factor solo en modo Variable: el tope legal nunca las sobrescribe.
+    ''' </summary>
+    Friend Sub SRegistreParametrosInteres(aenuModo As EnuModoInteres, adblTasaFijaDeseada As Double,
+            adblFactor As Double)
+        If EnuEstadoActualizacion <> EnuEstadoObjetoDef.EnuConsultando Then
+            Throw New ErrorInesperadoPanLException("El centro de utilidad no está disponible para modificar " &
+                    "la parametrización del interés de mora.")
+        End If
+        EnuEstadoActualizacion = EnuEstadoObjetoDef.EnuModificando
+        Try
+            ObjModoInteresByt.ObjValorPro = CByte(aenuModo)
+            If aenuModo = EnuModoInteres.EnuFijo Then
+                ObjTasaFijaDeseadaDbl.ObjValorPro = adblTasaFijaDeseada
+            ElseIf aenuModo = EnuModoInteres.EnuVariable Then
+                ObjFactorVariableDbl.ObjValorPro = adblFactor
+            End If
+            SActualice(True)
+        Catch ex As Exception
+            ' Este objeto es global: si falla, debe volver a consulta y recargarse de la BD; de lo contrario
+            ' quedaría "modificando" y otros procesos (SRegistreFechaUltCausa) dejarían de registrar
+            SNormaliceEstado(True)
+            Throw
+        End Try
+    End Sub
+
     Friend Sub SRegistreFechaFacturación()
         Dim lobjPeriodoActual = ObjAnoActual.ObjPeriodoActual
         With lobjPeriodoActual

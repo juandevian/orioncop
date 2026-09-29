@@ -351,6 +351,12 @@
     <Compile Include="winTasasMora.xaml.vb">
       <DependentUpon>winTasasMora.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinConsultaIbc.xaml.vb">
+      <DependentUpon>WinConsultaIbc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinParametrizacionInteres.xaml.vb">
+      <DependentUpon>WinParametrizacionInteres.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Import Include="OPT.OrionP.GesDat" />
@@ -642,6 +648,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="winTasasMora.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WinConsultaIbc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WinParametrizacionInteres.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

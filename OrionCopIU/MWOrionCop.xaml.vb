@@ -87,6 +87,8 @@ Public Class MWOrionCop
     Private MnuECorreo As MenuItemPan = Nothing
     Private MnuCopiaSeguridad As MenuItemPan = Nothing
     Private MnuConsultaSql As MenuItem = Nothing
+    Private MnuConsultaIbc As MenuItem = Nothing
+    Private MnuParametrizaInteres As MenuItem = Nothing
     Private MnuLogApp As MenuItemPan = Nothing
     Private MnuCarpetaReportes As MenuItem = Nothing
     Private MnuBaseDatos As MenuItem = Nothing
@@ -333,6 +335,9 @@ Public Class MWOrionCop
         HmnuHerramientas.Items.Add(MnuLogApp)
         ' Reportes Sql
         HmnuHerramientas.Items.Add(MnuConsultaSql)
+        ' Herramienta IBC: parametrización del interés de mora y consulta de certificados
+        HmnuHerramientas.Items.Add(MnuParametrizaInteres)
+        HmnuHerramientas.Items.Add(MnuConsultaIbc)
         ' Abrir Exploador de archivos en la carpeta que contiene los Reportes
         HmnuHerramientas.Items.Add(MnuCarpetaReportes)
         HmnuHerramientas.Items.Add(MnuRevisarNovs)
@@ -569,6 +574,10 @@ Public Class MWOrionCop
         MnuCopiaSeguridad = FmnuiMenuItemPan("MnuCopiaSeguridad", "Copia de Segur_idad", 34, "")
         MnuLogApp = FmnuiMenuItemPan("MnuLogApp", "_Log de la Aplicación", 35, "")
         MnuConsultaSql = FmnuiMenuItemPan("MnuConsultaSql", "Consultas _SQL", 36, "")
+        MnuConsultaIbc = FmnuiMenuItem("MnuConsultaIbc", "Consulta _IBC (interés bancario corriente)",
+                "RecMnuItemSec")
+        MnuParametrizaInteres = FmnuiMenuItem("MnuParametrizaInteres", "Parametrizar interés de _mora (IBC)",
+                "RecMnuItemSec")
         MnuCarpetaReportes = FmnuiMenuItem("MnuCarpetaReportes", "Abrir Ca_rpeta Reportes", "RecMnuItemSec")
         MnuBaseDatos = FmnuiMenuItem("MnuBaseDatos", "_Base de Datos", "RecMnuItemSec")
         MnuRevisarNovs = FmnuiMenuItem("MnuRevisarNovs", "Re_visar integridad novedades", "RecMnuItemSec")
@@ -1890,6 +1899,12 @@ Public Class MWOrionCop
             Case "MnuConsultaSql"
                 Dim lwinVentana = New WinConsultasSql
                 lwinVentana.Show()
+            Case "MnuConsultaIbc"
+                Dim lwinConsultaIbc As New WinConsultaIbc With {.Owner = Me}
+                lwinConsultaIbc.ShowDialog()
+            Case "MnuParametrizaInteres"
+                Dim lwinInteres As New WinParametrizacionInteres With {.Owner = Me}
+                lwinInteres.ShowDialog()
             Case "MnuCarpetaReportes"
                 Dim NoUsado = Process.Start("explorer.exe", GstrTrayReportes)
             Case "MnuVerificarIntegridad"

@@ -1,0 +1,47 @@
+﻿<Window x:Class="WinConsultaIbc"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FontSize="12"
+        WindowStartupLocation="CenterScreen" Icon="RecImagenes/OrionLogo24.png"
+        Title="Consulta IBC (interés bancario corriente)" Height="560" Width="760" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition MinHeight="20"/>
+        </Grid.RowDefinitions>
+        <StaticResource ResourceKey="RecImgCabeza" />
+        <StaticResource ResourceKey="RecImgCuerpo" />
+        <DockPanel Name="PanelControl" Grid.Row="0" Margin="0,20,0,0">
+            <!--Label Relleno-->
+            <Label Height="10" DockPanel.Dock="Top"/>
+            <!--Label Notificaciones-->
+            <Label x:Name="lblNotifica" Background="Transparent"
+                   Padding="10,0,0,0" BorderThickness="1" BorderBrush="LightGray"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <Canvas Grid.Row="1">
+            <Label Content="Certificados del interés bancario corriente" Canvas.Left="20" Canvas.Top="10"
+                   Foreground="Gray" FontSize="17" FontStyle="Italic" Padding="0"/>
+            <TextBlock x:Name="lblVigente" Canvas.Left="20" Canvas.Top="45" Width="710" TextWrapping="Wrap"
+                       FontWeight="SemiBold"/>
+            <TextBlock x:Name="lblEstado" Canvas.Left="20" Canvas.Top="70" Width="710" TextWrapping="Wrap"/>
+            <DataGrid x:Name="dgrCertificados" Canvas.Left="20" Canvas.Top="100" Width="710" Height="300"
+                      AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"
+                      SelectionMode="Single" TabIndex="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Certificado" Binding="{Binding Idfile}" Width="130"/>
+                    <DataGridTextColumn Header="Emisión" Binding="{Binding Emision}" Width="100"/>
+                    <DataGridTextColumn Header="Vigente desde" Binding="{Binding Desde}" Width="110"/>
+                    <DataGridTextColumn Header="Vigente hasta" Binding="{Binding Hasta}" Width="110"/>
+                    <DataGridTextColumn Header="IBC (E.A.)" Binding="{Binding Ibc}" Width="100"/>
+                    <DataGridTextColumn Header="Tope 1,5 × IBC" Binding="{Binding Tope}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Name="bttConsultar" Content="_Consultar ahora" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Left="20" Canvas.Top="415" TabIndex="2" Width="150"/>
+            <Button Name="bttAplicar" Content="_Aplicar a Tasas de Mora" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Left="190" Canvas.Top="415" TabIndex="3" Width="190"/>
+            <Button Name="bttCerrar" Content="C_errar" Style="{StaticResource RecBttAceCan}"
+                    Canvas.Left="610" Canvas.Top="415" TabIndex="4"/>
+        </Canvas>
+    </Grid>
+</Window>
