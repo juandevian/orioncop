@@ -25,6 +25,8 @@ Friend Class ClsOrionCop
     Private Shared Property DtmFechaFactAuto As Date = GCDTMFECHANULA
     ' Primera CtaCobro Generada
     Friend Shared Property BlnHayCtasCobro As Boolean = False
+    ''' <summary>Proveedor de certificados IBC; lo asigna la UI al iniciar (solo asignación, sin red).</summary>
+    Friend Shared Property SobjProveedorIbc As IIbcProveedor
     ' Integridad
     Private Shared MblnHayerror As Boolean = False
 #Region "Ubicación Ventana"
@@ -4641,18 +4643,53 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
 
 #Region "Calculo y causación de intereses de Mora  a todas las deudas"
     ''' <summary>
+    ''' Deja OriTasasMora al día según el modo de interés del centro (herramienta IBC). Se ejecuta antes
+    ''' de causar mora (y antes de cerrar el mes), fuera de la transacción de la causación.
+    ''' </summary>
+    ''' <param name="adtmFecha">Fecha de causación (la tasa que se usa es la del día anterior).</param>
+    ''' <param name="astrMens">Mensaje para el usuario cuando devuelve False.</param>
+    ''' <returns>True si la tasa quedó al día o si el centro no usa IBC (modo None); False si no se pudo:
+    ''' en ese caso NO se debe causar mora.</returns>
+    Friend Function FblnSincronizaIbcCierre(adtmFecha As Date, ByRef astrMens As String) As Boolean
+        Dim lenuModo = CType(GobjParametros.ObjModoInteresByt.ObjValorPro, EnuModoInteres)
+        ' Modo None: comportamiento anterior a la herramienta IBC (ni API ni BD ni mensaje)
+        If lenuModo = EnuModoInteres.None Then Return True
+        If IsNothing(SobjProveedorIbc) Then
+            astrMens = "El interés de mora del centro de utilidad está parametrizado con el IBC, pero el " &
+                    "proveedor de certificados IBC no está disponible. No se causaron intereses."
+            Return False
+        End If
+        Dim lobjSinc As New ClsIbcSincroniza(SobjProveedorIbc, New ClsIbcAlmacenBd, New ClsIbcTasasMoraBd)
+        Dim lstrMensIbc = String.Empty
+        Dim lblnSincronizo = lobjSinc.FblnSincronice(adtmFecha, lenuModo,
+                GobjParametros.ObjTasaFijaDeseadaDbl.ObjValorPro, GobjParametros.ObjFactorVariableDbl.ObjValorPro,
+                False, Date.Today, lstrMensIbc)
+        If Not lblnSincronizo Then
+            astrMens = If(String.IsNullOrEmpty(lstrMensIbc),
+                    "No se pudo actualizar la tasa de mora con el IBC. No se causaron intereses.", lstrMensIbc)
+        End If
+        Return lblnSincronizo
+    End Function
+    ''' <summary>
     ''' Causa mora a todas las deudas el primer dia del período despues de cerrar mes o el día 
     ''' de hoy cuando está establecido que los documentos se deben generar con al fecha de hoy
     ''' </summary>
     ''' <param name="astrMens">Mensaje producido en el proceso</param>
-    ''' <returns></returns>
+    ''' <returns>False si se canceló o si no se pudo sincronizar el IBC (en ese caso astrMens trae el
+    ''' motivo y no se causó nada).</returns>
     ' Causa mora en proceso FM
     Friend Function FblnCausoMoraGeneral(ByRef astrMens As String) As Boolean ' FM-
         Dim lblnNoHayError = False, lblnCausoMora As Boolean
+        ' La fecha se calcula una sola vez: con ExigeFechaHoyDocs depende de Date.Today
+        Dim ldtmFechaCausacion = FdtmFechaCausaMoraGeneral()
+        ' IBC: solo si se va a causar, y ANTES de iniciar el proceso y la transacción de la causación
+        If ldtmFechaCausacion > GobjParametros.ObjFechaUltCausacionGralDtm.ObjValorPro AndAlso
+                Not FblnSincronizaIbcCierre(ldtmFechaCausacion, astrMens) Then
+            Return False
+        End If
         GobjPanDat.SControleProcesoObj(True)
         GblnCausandoFM = True
         Try
-            Dim ldtmFechaCausacion = FdtmFechaCausaMoraGeneral()
             If ldtmFechaCausacion > GobjParametros.ObjFechaUltCausacionGralDtm.ObjValorPro Then
                 If GobjParametros.FdblTasaMoraFecha(ldtmFechaCausacion) > 0 Then
                     GobjPanDat.SInicialiceTransaccion()
