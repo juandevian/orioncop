@@ -294,10 +294,15 @@
                 GobjParametros.SAbraPeriodoAnterior()
             End If
         ElseIf Not lblnCauso AndAlso Not String.IsNullOrEmpty(astrMens) Then
-            ' No se pudo sincronizar el IBC: no se causó nada. Igual que al cancelar, se reabre el
-            ' período para poder repetir el Cierre de mes cuando se corrija la tasa.
+            ' No se pudo sincronizar el IBC: no se causó nada.
             If MenuTipoAccion = EnuTipoAccion.EnuAmbas Then
+                ' Igual que al cancelar (Finally de FblnCausoMoraGeneral): se deshace TODA la transacción
+                ' anidada abierta en SGuarde, cierre de mes incluido (el contador queda en -1 y SGuarde ya
+                ' no confirma nada), y luego se reabre en memoria el período que había cerrado SCierreMes.
+                GobjPanDat.SAborteTransaccion()
                 GobjParametros.SAbraPeriodoAnterior()
+                astrMens &= " Se deshizo el Cierre de mes y todo lo registrado en este proceso (incluida " &
+                        "cualquier Tasa de Mora o certificado IBC guardado); corrija la causa y repita el Cierre de mes."
             End If
             aenuSeve = EnuSeveridadNot.EnuAdvertencia
             MsgBox(astrMens, MsgBoxStyle.Exclamation, "Interés bancario corriente")
