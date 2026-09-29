@@ -6,12 +6,47 @@ Friend Enum EnuModoInteres As Byte
 End Enum
 #End Region
 
+#Region "Estructuras"
+Friend Structure StcIbcCertificado
+    Friend Property StrIdfile As String
+    Friend Property DtmFechaCertificado As Date
+    Friend Property DtmFechaDesde As Date
+    Friend Property DtmFechaHasta As Date
+    ''' <summary>IBC como fracción (0.1938).</summary>
+    Friend Property DblIbc As Double
+End Structure
+#End Region
+
 Friend Class ClsIbcCalculo
 #Region "Definiciones"
     ' Ley 675 de 2001, art. 30: el interés de mora no puede exceder 1.5 veces el IBC certificado
     Friend Const CDBLFACTORMAXIMO As Double = 1.5
 #End Region
 #Region "Reglas de cálculo"
+    ''' <summary>
+    ''' Busca el certificado cuya vigencia cubre la fecha. Ignora IBC no positivos. Si hay varios,
+    ''' toma el de emisión más reciente (desempate por Idfile descendente).
+    ''' </summary>
+    Friend Shared Function FblnCertificadoVigente(alstCertificados As IEnumerable(Of StcIbcCertificado),
+            adtmFecha As Date, ByRef astcVigente As StcIbcCertificado) As Boolean
+        Dim lblnHay = False
+        astcVigente = Nothing
+        If Not IsNothing(alstCertificados) Then
+            For Each lstcCert As StcIbcCertificado In alstCertificados
+                If lstcCert.DblIbc > 0 AndAlso lstcCert.DtmFechaDesde <= adtmFecha AndAlso
+                        adtmFecha <= lstcCert.DtmFechaHasta Then
+                    If Not lblnHay OrElse lstcCert.DtmFechaCertificado > astcVigente.DtmFechaCertificado OrElse
+                            (lstcCert.DtmFechaCertificado = astcVigente.DtmFechaCertificado AndAlso
+                            String.CompareOrdinal(lstcCert.StrIdfile, astcVigente.StrIdfile) > 0) Then
+                        astcVigente = lstcCert
+                        lblnHay = True
+                    End If
+                End If
+            Next
+        End If
+        Return lblnHay
+    End Function
+
     ''' <summary>
     ''' Convierte el IBC de la API (porcentaje, ej. 19.38) a fracción (0.1938).
     ''' </summary>
