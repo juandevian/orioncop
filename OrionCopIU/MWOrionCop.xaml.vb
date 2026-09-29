@@ -92,6 +92,8 @@ Public Class MWOrionCop
     Private MnuBaseDatos As MenuItem = Nothing
     Private MnuRevisarNovs As MenuItem = Nothing
     Private ReadOnly MstrNombreVentana As String = My.Resources.NomVenMW
+    ' API de certificados IBC (herramienta de interés bancario corriente)
+    Private Const CSTRURLAPIIBC As String = "https://api-ibc-certificados-sif.onrender.com"
 
     Private WithEvents MobjImpoFacOri As ClsImportarOrion = Nothing
     Private WithEvents MobjReportesOrion As ClsRepOrionCop = Nothing
@@ -141,6 +143,8 @@ Public Class MWOrionCop
         Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lblnNoHayError = False
         Dim lblnLogon = False
         Try
+            ' Solo asignación: el cliente no hace llamadas de red hasta que se consulta el IBC
+            ClsOrionCop.SobjProveedorIbc = New ClsIbcApiCliente(CSTRURLAPIIBC, MdefIbcApiKey.FstrApiKey())
             SCargueForma(EnuElementosAdicionalesDef.None, 0, Nothing, Nothing, True)
             SLeaArchivoIni()
             SRefresqueBotones()
