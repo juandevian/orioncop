@@ -85,6 +85,47 @@ Friend Class ClsIbcCalculo
         Return ldblPermitido
     End Function
 
+    ''' <summary>
+    ''' Interpreta el porcentaje que digita el usuario ("24", "24,5", "24.5 %") como fracción (0.245).
+    ''' Acepta coma o punto decimal sin depender de la cultura del hilo.
+    ''' </summary>
+    Friend Shared Function FblnTryParsePorcentaje(astrTexto As String, ByRef adblFraccion As Double) As Boolean
+        Dim ldblPorcentaje As Double
+        adblFraccion = 0
+        Dim lblnOk = FblnTryParseNumero(astrTexto, ldblPorcentaje)
+        If lblnOk Then
+            adblFraccion = Math.Round(ldblPorcentaje / 100, 6)
+        End If
+        Return lblnOk
+    End Function
+
+    ''' <summary>
+    ''' Interpreta el factor que digita el usuario ("1,3", "1.5") sin depender de la cultura del hilo.
+    ''' </summary>
+    Friend Shared Function FblnTryParseFactor(astrTexto As String, ByRef adblFactor As Double) As Boolean
+        Dim ldblFactor As Double
+        adblFactor = 0
+        Dim lblnOk = FblnTryParseNumero(astrTexto, ldblFactor)
+        If lblnOk Then
+            adblFactor = Math.Round(ldblFactor, 4)
+        End If
+        Return lblnOk
+    End Function
+
+    Private Shared Function FblnTryParseNumero(astrTexto As String, ByRef adblNumero As Double) As Boolean
+        adblNumero = 0
+        If String.IsNullOrWhiteSpace(astrTexto) Then Return False
+        Dim lstrTexto = astrTexto.Replace("%", "").Replace(" ", "").Replace(",", ".")
+        Dim ldblNumero As Double
+        If Double.TryParse(lstrTexto, Globalization.NumberStyles.Float,
+                Globalization.CultureInfo.InvariantCulture, ldblNumero) AndAlso
+                Not Double.IsInfinity(ldblNumero) AndAlso Not Double.IsNaN(ldblNumero) Then
+            adblNumero = ldblNumero
+            Return True
+        End If
+        Return False
+    End Function
+
     Friend Shared Function FblnFactorValido(adblFactor As Double) As Boolean
         Return adblFactor > 0 AndAlso adblFactor <= CDBLFACTORMAXIMO
     End Function
