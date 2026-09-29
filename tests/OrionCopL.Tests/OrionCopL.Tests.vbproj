@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System.Net.Http" />
     <ProjectReference Include="..\..\OrionCopL\OrionCopL.vbproj" />
     <ProjectReference Include="..\..\OriIntCon\OriIntCon.vbproj" />
   </ItemGroup>
