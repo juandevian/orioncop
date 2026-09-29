@@ -6,6 +6,7 @@
 <Assembly: InternalsVisibleTo("WinCom")>
 <Assembly: InternalsVisibleTo("RepOriCop")>
 <Assembly: InternalsVisibleTo("OriIntCon")>
+<Assembly: InternalsVisibleTo("OrionCopL.Tests")>
 #End Region
 #Region "Estructuras"
 Friend Structure StcIntMoraFactura
