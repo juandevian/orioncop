@@ -19,18 +19,34 @@ Friend Class ClsIbcTasasMoraBd
     ''' Agrega una fila a OriTasasMora con la tasa anual (fracción) desde la fecha indicada y cierra la
     ''' anterior. Luego relee la BD y lanza error si lo guardado no coincide (evita un 0 silencioso).
     ''' </summary>
+    ''' <exception cref="ErrorTasaMoraGuardadaException">La fila nueva SÍ se guardó pero quedó inconsistente
+    ''' (no se cerró la anterior o la relectura no coincide): no reintentar, requiere corrección manual.</exception>
+    ''' <remarks>Cualquier otra excepción proviene de las validaciones previas: no se escribió nada.</remarks>
     Friend Sub SRegistreTasa(adtmFechaDesde As Date, adblTasaAnual As Double) Implements IIbcTasasMora.SRegistreTasa
         Dim lobjTasa As New ClsTasaMora(EnuModoInstanciaObjDef.enuNavegable)
         lobjTasa.SRegistreTasaAnual(adtmFechaDesde, adblTasaAnual)
-        SVerifiqueRegistro(adtmFechaDesde.Date, adblTasaAnual)
+        ' Desde aquí la fila nueva ya está en la BD: toda falla es "guardada pero inconsistente"
+        Dim lstrDetalle = String.Empty
+        Dim lobjInterna As Exception = Nothing
+        Try
+            lstrDetalle = FstrInconsistencia(adtmFechaDesde.Date, adblTasaAnual)
+        Catch ex As Exception
+            lstrDetalle = "no se pudo verificar lo guardado (" & ex.Message & ")"
+            lobjInterna = ex
+        End Try
+        If Not String.IsNullOrEmpty(lstrDetalle) Then
+            Throw New ErrorTasaMoraGuardadaException(lobjTasa.EntOrdinalCreado, adtmFechaDesde.Date,
+                    lstrDetalle, lobjInterna)
+        End If
     End Sub
 
-    Private Shared Sub SVerifiqueRegistro(adtmFechaDesde As Date, adblTasaAnual As Double)
+    ''' <summary>Relee lo guardado; devuelve la inconsistencia encontrada o vacío si todo coincide.</summary>
+    Private Shared Function FstrInconsistencia(adtmFechaDesde As Date, adblTasaAnual As Double) As String
         ' FdblTasaMoraFecha(f) busca la fila vigente en f - 1: se consulta con FechaDesde + 1
         Dim ldblLeida = GobjParametros.FdblTasaMoraFecha(adtmFechaDesde.AddDays(1))
         If Not ClsIbcCalculo.FblnTasaCoincide(adblTasaAnual, ldblLeida) Then
-            Throw New ErrorInesperadoPanLException("La tasa de mora guardada (" & ldblLeida.ToString &
-                    ") no coincide con la calculada (" & adblTasaAnual.ToString & ")!")
+            Return "la tasa leída (" & ldblLeida.ToString & ") no coincide con la calculada (" &
+                    adblTasaAnual.ToString & ")"
         End If
         ' La fila anterior debe quedar cerrada en FechaDesde - 1. FdtbTasasMora solo reemplaza (para
         ' mostrar) la FechaHasta de la ÚLTIMA fila con hoy; la penúltima trae el valor real de la BD.
@@ -40,9 +56,10 @@ Friend Class ClsIbcTasasMoraBd
             Dim ldtmHastaAnterior As Date = ClsPanorama.FobjValorCampo(
                     ldrwAnterior(ClsFechaHastaTasaMoraDtm.SstrNombreCampoBd), EnuTipoValor.enuDate)
             If ldtmHastaAnterior <> adtmFechaDesde.AddDays(-1) Then
-                Throw New ErrorInesperadoPanLException("La tasa de mora anterior no quedó cerrada en " &
-                        Format(adtmFechaDesde.AddDays(-1), GCSTRFMTFECHASIMPLE) & "!")
+                Return "la tasa anterior no quedó cerrada en " &
+                        Format(adtmFechaDesde.AddDays(-1), GCSTRFMTFECHASIMPLE)
             End If
         End If
-    End Sub
+        Return String.Empty
+    End Function
 End Class
