@@ -100,4 +100,24 @@ Friend Class ClsIbcCalculo
         Return Math.Round(adblTasaAnual / 12, 6)
     End Function
 #End Region
+#Region "Escritura en OriTasasMora"
+    ''' <summary>
+    ''' Valor que se asigna a ClsTasaMoraDbl.ObjValorPro para guardar la tasa anual indicada: la propiedad
+    ''' interpreta lo asignado como tasa MENSUAL vencida y la multiplica por 12 (interés simple).
+    ''' </summary>
+    Friend Shared Function FdblTasaMensualParaAsignar(adblTasaAnual As Double) As Double
+        Return Math.Round(adblTasaAnual / 12, 8)
+    End Function
+
+    ''' <summary>Texto de la tasa mensual con punto decimal, sin importar la cultura del hilo.</summary>
+    Friend Shared Function FstrTasaMensualInvariante(adblTasaAnual As Double) As String
+        Return FdblTasaMensualParaAsignar(adblTasaAnual).ToString("0.########",
+                Globalization.CultureInfo.InvariantCulture)
+    End Function
+
+    ''' <summary>Indica si la tasa leída de la BD coincide con la esperada (tolerancia 0.000002).</summary>
+    Friend Shared Function FblnTasaCoincide(adblEsperada As Double, adblLeida As Double) As Boolean
+        Return Math.Abs(adblEsperada - adblLeida) <= 0.000002
+    End Function
+#End Region
 End Class

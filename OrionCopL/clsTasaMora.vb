@@ -165,6 +165,58 @@
         End If
         Return ldtmFechaDesdeUltima
     End Function
+    ''' <summary>
+    ''' Crea y guarda una fila nueva de tasa de mora sin pasar por la ventana (sincronización IBC).
+    ''' El objeto debe ser navegable y estar consultando. Al guardar, SActualice cierra la FechaHasta
+    ''' de la fila anterior (FechaDesde - 1), igual que al crear desde winTasasMora.
+    ''' </summary>
+    ''' <param name="adtmFechaDesde">Fecha desde la cual rige la tasa.</param>
+    ''' <param name="adblTasaAnual">Tasa anual simple como fracción (0.2907 = 29.07 %).</param>
+    ''' <remarks>ClsTasaMoraDbl interpreta lo asignado como tasa MENSUAL vencida ("valor" &amp; "mv") y la
+    ''' multiplica por 12; el texto se arma con la cultura del hilo y con coma decimal da 0 en silencio. Por
+    ''' eso se asigna anual/12 con cultura invariante y se verifica el valor resultante antes de guardar.</remarks>
+    Friend Sub SRegistreTasaAnual(adtmFechaDesde As Date, adblTasaAnual As Double)
+        If Not BlnEsNavegable OrElse EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuConsultando Then
+            Throw New ErrorInesperadoPanLException("La Tasa de Mora debe ser un objeto navegable en consulta para registrar una tasa nueva!")
+        End If
+        ' Si ya hay filas, al guardar se modifica la anterior (FechaHasta): sin permiso de modificar
+        ' SModifique no hace nada y la fila anterior quedaría abierta en silencio.
+        If FdtmFechaDesdeUltima() <> GCDTMFECHANULA AndAlso
+                Not CType(EnuPermisosObj And EnuPermisosDef.enuModificar, Boolean) Then
+            Throw New ErrorInesperadoPanLException("El usuario no tiene permiso para modificar Tasas de Mora: no se puede cerrar la tasa anterior!")
+        End If
+        SCreeObj(Nothing)
+        If EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuCreando Then
+            Throw New ErrorInesperadoPanLException("No se pudo crear la Tasa de Mora: el usuario no tiene permiso para crearla!")
+        End If
+        Dim lcultOriginal = Threading.Thread.CurrentThread.CurrentCulture
+        Try
+            ' ClsTasaMoraDbl usa ToString() con la cultura del hilo y Val(): forzar punto decimal
+            Threading.Thread.CurrentThread.CurrentCulture = Globalization.CultureInfo.InvariantCulture
+            ObjFechaDesdeTasaMoraDtm.ObjValorPro = adtmFechaDesde.Date
+            ObjFechaHastaTasaMoraDtm.ObjValorPro = Date.Today
+            ObjTasaMoraDbl.ObjValorPro = ClsIbcCalculo.FdblTasaMensualParaAsignar(adblTasaAnual)
+        Finally
+            Threading.Thread.CurrentThread.CurrentCulture = lcultOriginal
+        End Try
+        Dim lstrMens = String.Empty
+        If Not ObjFechaDesdeTasaMoraDtm.BlnEsValido Then
+            lstrMens = "La fecha desde de la Tasa de Mora (" & Format(adtmFechaDesde, GCSTRFMTFECHASIMPLE) &
+                    ") no es válida: debe ser posterior a la última registrada y no mayor que hoy!"
+        ElseIf Not ObjFechaHastaTasaMoraDtm.BlnEsValido Then
+            lstrMens = "La fecha hasta de la Tasa de Mora no es válida!"
+        ElseIf Not ObjTasaMoraDbl.BlnEsValido OrElse
+                Not ClsIbcCalculo.FblnTasaCoincide(adblTasaAnual, CDbl(ObjTasaMoraDbl.ObjValorPro)) Then
+            lstrMens = "La Tasa de Mora convertida (" & CStr(ObjTasaMoraDbl.ObjValorPro) &
+                    ") no coincide con la calculada (" & adblTasaAnual.ToString & ")!"
+        End If
+        If Not String.IsNullOrEmpty(lstrMens) Then
+            SNormaliceEstado(False)
+            Throw New ErrorInesperadoPanLException(lstrMens)
+        End If
+        SActualice(True)
+        SNormaliceEstado(True)
+    End Sub
 #End Region
 End Class
 #Region "Clases de Propiedad"
