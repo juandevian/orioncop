@@ -38,4 +38,41 @@ Public Class IbcParametrosTests
         Dim lblnAjusto As Boolean
         Assert.AreEqual(0, ClsIbcCalculo.FdblTasaFijaPermitida(-0.1, 0.1938, lblnAjusto), 0.0000001)
     End Sub
+
+    <TestMethod>
+    Public Sub Tasa_fija_ya_guardada_sobre_el_tope_se_conserva_al_guardar()
+        ' deseada 24 %, el IBC bajo y el tope es 21 %: abrir y guardar NO debe bajar la deseada
+        Dim lblnAjusto As Boolean
+        Assert.AreEqual(0.24, ClsIbcCalculo.FdblTasaFijaAGuardar(0.24, 0.24, 0.14, True, lblnAjusto), 0.0000001)
+        Assert.IsFalse(lblnAjusto)
+    End Sub
+
+    <TestMethod>
+    Public Sub Tasa_fija_nueva_sobre_el_tope_se_ajusta_y_avisa()
+        Dim lblnAjusto As Boolean
+        Assert.AreEqual(0.21, ClsIbcCalculo.FdblTasaFijaAGuardar(0.3, 0.24, 0.14, True, lblnAjusto), 0.0000001)
+        Assert.IsTrue(lblnAjusto)
+    End Sub
+
+    <TestMethod>
+    Public Sub Tasa_fija_nueva_bajo_el_tope_se_acepta_sin_ajuste()
+        Dim lblnAjusto As Boolean
+        Assert.AreEqual(0.2, ClsIbcCalculo.FdblTasaFijaAGuardar(0.2, 0.24, 0.14, True, lblnAjusto), 0.0000001)
+        Assert.IsFalse(lblnAjusto)
+    End Sub
+
+    <TestMethod>
+    Public Sub Primera_tasa_fija_sobre_el_tope_se_ajusta_al_maximo()
+        Dim lblnAjusto As Boolean
+        Assert.AreEqual(0.2907, ClsIbcCalculo.FdblTasaFijaAGuardar(0.35, 0, 0.1938, True, lblnAjusto), 0.0000001)
+        Assert.IsTrue(lblnAjusto)
+    End Sub
+
+    <TestMethod>
+    Public Sub Sin_ibc_local_la_tasa_digitada_se_acepta_sin_ajuste()
+        Dim lblnAjusto As Boolean
+        Assert.AreEqual(0.35, ClsIbcCalculo.FdblTasaFijaAGuardar(0.35, 0.24, 0, False, lblnAjusto), 0.0000001)
+        Assert.IsFalse(lblnAjusto)
+        Assert.AreEqual(0.24, ClsIbcCalculo.FdblTasaFijaAGuardar(0.24, 0.24, 0, False, lblnAjusto), 0.0000001)
+    End Sub
 End Class

@@ -8,7 +8,6 @@
 #Region "Constructores"
     Public Sub New()
         InitializeComponent()
-        GblnOK = False
     End Sub
 #End Region
 #Region "Presentación"
@@ -18,6 +17,7 @@
 
     ''' <summary>Muestra los certificados guardados en este equipo y cuál está vigente hoy.</summary>
     Private Sub SRefresque()
+        Try
         Dim llstCertificados = New ClsIbcAlmacenBd().FlstCertificados()
         llstCertificados.Sort(Function(a, b) b.DtmFechaDesde.CompareTo(a.DtmFechaDesde))
         Dim ldtbCertificados As New DataTable
@@ -40,6 +40,10 @@
         End If
         lblEstado.Text = If(MdtmUltimaConsulta = Nothing, "Aún no se ha consultado en esta sesión.",
                 "Última consulta exitosa: " & Format(MdtmUltimaConsulta, "yyyy-MM-dd HH:mm") & ".")
+        Catch ex As Exception
+            lblVigente.Text = "No se pudieron leer los certificados guardados: " & ex.Message
+            lblEstado.Text = String.Empty
+        End Try
     End Sub
 #End Region
 #Region "Eventos"
@@ -98,8 +102,8 @@
         End Try
         SRefresque()
         If lblnOk Then
-            MsgBox("La tasa de mora quedó al día. Tasa anual vigente: " &
-                    Format(GobjParametros.FdblTasaMoraFecha(Date.Today.AddDays(1)), "#0.00%") & ".",
+            MsgBox("La tasa de mora quedó al día. Tasa anual para el próximo cierre: " &
+                    Format(GobjParametros.FdblTasaMoraFecha(ClsOrionCop.FdtmFechaCausaMoraGeneral()), "#0.00%") & ".",
                     MsgBoxStyle.Information, MCSTRTITULO)
         Else
             MsgBox(lstrMens, MsgBoxStyle.Exclamation, MCSTRTITULO)

@@ -119,6 +119,11 @@ Friend Class ClsIbcCertificado
     ''' <summary>Crea y guarda un certificado nuevo en la BD (el objeto debe ser navegable y estar consultando).</summary>
     Friend Sub SGuardeCertificado(astcCertificado As StcIbcCertificado)
         SCreeObj(Nothing)
+        ' SCreeObj no hace nada (sin error) si el usuario no puede crear: no dejar el certificado sin guardar en silencio
+        If EnuEstadoActualizacion <> EnuEstadoObjetoDef.EnuCreando Then
+            Throw New ErrorInesperadoPanLException("No se pudo guardar el certificado IBC " & astcCertificado.StrIdfile &
+                    ": el usuario no tiene permiso para crear certificados IBC.")
+        End If
         ObjIdfileIbcStr.ObjValorPro = astcCertificado.StrIdfile
         ObjFechaCertificadoIbcDtm.ObjValorPro = astcCertificado.DtmFechaCertificado
         ObjFechaDesdeIbcDtm.ObjValorPro = astcCertificado.DtmFechaDesde

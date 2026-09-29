@@ -4680,7 +4680,9 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
     End Function
     ''' <summary>
     ''' Sincronización manual (ventanas de la herramienta IBC): fuerza la consulta a la API y deja registrada
-    ''' la tasa vigente hoy. Se usa la fecha de mañana porque la causación lee la tasa del día anterior.
+    ''' la tasa que usará la PRÓXIMA causación (la del periodo abierto: FdtmFechaCausaMoraGeneral). No se usa
+    ''' "mañana": registraría una fila con fecha desde posterior al periodo pendiente de cerrar y luego el
+    ''' Cierre no podría registrar la tasa de su periodo.
     ''' </summary>
     Friend Shared Function FblnSincronizaIbcManual(ByRef astrMens As String) As Boolean
         astrMens = String.Empty
@@ -4693,7 +4695,7 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
             astrMens = "El servicio de consulta del IBC no está disponible en esta versión."
             Return False
         End If
-        Return FblnSincronizaIbc(Date.Today.AddDays(1), True, astrMens)
+        Return FblnSincronizaIbc(FdtmFechaCausaMoraGeneral(), True, astrMens)
     End Function
     ''' <summary>
     ''' Causa mora a todas las deudas el primer dia del período despues de cerrar mes o el día 

@@ -82,14 +82,14 @@ Friend Class ClsIbcSincroniza
                 ldtmDesdeUltima.AddDays(1))
         If ldtmDesde > adtmHoy Then
             astrMens = "No se puede registrar una tasa nueva con fecha " & Format(ldtmDesde, MCSTRFMTFECHA) &
-                    " porque es posterior a hoy. Registre la tasa manualmente en Tasas de Mora."
+                    " porque es posterior a hoy. Ya hay una tasa registrada desde esa fecha o una posterior: si no es correcta, elimínela en Tasas de Mora, o cambie el interés a 'Sin parametrizar' y gestione la tasa manualmente."
             Return False
         End If
         If ldtmDesde > ldtmFechaTasa Then
             astrMens = "La nueva tasa de mora tendría fecha desde " & Format(ldtmDesde, MCSTRFMTFECHA) &
                     " y no regiría el " & Format(ldtmFechaTasa, MCSTRFMTFECHA) &
                     ", día cuya tasa usa la causación de intereses del " & Format(adtmFecha, MCSTRFMTFECHA) &
-                    ". Registre la tasa manualmente en Tasas de Mora."
+                    ". Ya hay una tasa registrada desde esa fecha o una posterior: si no es correcta, elimínela en Tasas de Mora, o cambie el interés a 'Sin parametrizar' y gestione la tasa manualmente."
             Return False
         End If
         Try

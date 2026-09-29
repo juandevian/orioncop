@@ -77,6 +77,19 @@ Friend Class ClsIbcCalculo
     End Function
 
     ''' <summary>
+    ''' Tasa fija que se guarda como "deseada". Si lo digitado es igual a lo ya guardado se conserva tal cual
+    ''' (el tope vigente solo limita lo que se COBRA, nunca reemplaza lo deseado: 24 % que baja a 21 % y
+    ''' vuelve a 24 %). Solo un valor NUEVO se limita al tope y avisa.
+    ''' </summary>
+    Friend Shared Function FdblTasaFijaAGuardar(adblDigitada As Double, adblGuardada As Double, adblIbc As Double,
+            ablnHayIbc As Boolean, ByRef ablnSeAjusto As Boolean) As Double
+        ablnSeAjusto = False
+        If FblnTasaCoincide(adblDigitada, adblGuardada) Then Return adblGuardada
+        If Not ablnHayIbc Then Return adblDigitada
+        Return FdblTasaFijaPermitida(adblDigitada, adblIbc, ablnSeAjusto)
+    End Function
+
+    ''' <summary>
     ''' Factor que se acepta al digitar: nunca mayor al factor maximo. Si se ajusta, avisa.
     ''' </summary>
     Friend Shared Function FdblFactorPermitido(adblDigitado As Double, ByRef ablnSeAjusto As Boolean) As Double

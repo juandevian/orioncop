@@ -10,7 +10,6 @@
 #Region "Constructores"
     Public Sub New()
         InitializeComponent()
-        GblnOK = False
     End Sub
 #End Region
 #Region "Carga y presentación"
@@ -31,6 +30,7 @@
     End Sub
 
     Private Sub SCargueCertificadoVigente()
+        Try
         MlstCertificados = New ClsIbcAlmacenBd().FlstCertificados()
         MblnHayIbc = ClsIbcCalculo.FblnCertificadoVigente(MlstCertificados, Date.Today, MstcVigente)
         If MblnHayIbc Then
@@ -44,6 +44,11 @@
                     "Use «Sincronizar ahora» o Herramientas > Consulta IBC."
             lblTope.Text = "El tope legal (1,5 × IBC) se validará al sincronizar."
         End If
+        Catch ex As Exception
+            MblnHayIbc = False
+            lblIbcVigente.Text = "No se pudieron leer los certificados guardados: " & ex.Message
+            lblTope.Text = "El tope legal (1,5 × IBC) se validará al sincronizar."
+        End Try
     End Sub
 
     Private Shared Function FstrPorcentajeDigitable(adblFraccion As Double) As String
@@ -110,17 +115,20 @@
             MsgBox("La tasa fija debe ser mayor que 0.", MsgBoxStyle.Exclamation, MCSTRTITULO)
             Return False
         End If
-        If MblnHayIbc Then
-            Dim lblnSeAjusto As Boolean
-            Dim ldblPermitida = ClsIbcCalculo.FdblTasaFijaPermitida(adblTasa, MstcVigente.DblIbc, lblnSeAjusto)
-            If lblnSeAjusto Then
-                MsgBox("No es posible cobrar un interés superior a 1,5 veces el interés bancario corriente (" &
-                        Format(ClsIbcCalculo.FdblTopeMaximo(MstcVigente.DblIbc), "#0.00%") &
-                        "). Se ajustó al máximo permitido.", MsgBoxStyle.Exclamation, MCSTRTITULO)
-                adblTasa = ldblPermitida
-                txtTasaFija.Text = FstrPorcentajeDigitable(adblTasa)
-            End If
-        ElseIf adblTasa > 1 Then
+        ' La tasa deseada ya guardada NUNCA se reemplaza por el tope vigente (solo lo que se cobra lo limita):
+        ' el tope solo ajusta un valor NUEVO. Ver ClsIbcCalculo.FdblTasaFijaAGuardar.
+        Dim lblnSeAjusto As Boolean
+        Dim ldblGuardada = CDbl(GobjParametros.ObjTasaFijaDeseadaDbl.ObjValorPro)
+        Dim ldblAGuardar = ClsIbcCalculo.FdblTasaFijaAGuardar(adblTasa, ldblGuardada,
+                If(MblnHayIbc, MstcVigente.DblIbc, 0), MblnHayIbc, lblnSeAjusto)
+        If lblnSeAjusto Then
+            MsgBox("No es posible cobrar un interés superior a 1,5 veces el interés bancario corriente (" &
+                    Format(ClsIbcCalculo.FdblTopeMaximo(MstcVigente.DblIbc), "#0.00%") &
+                    "). Se ajustó al máximo permitido.", MsgBoxStyle.Exclamation, MCSTRTITULO)
+            txtTasaFija.Text = FstrPorcentajeDigitable(ldblAGuardar)
+        End If
+        adblTasa = ldblAGuardar
+        If Not MblnHayIbc AndAlso adblTasa > 1 Then
             MsgBox("La tasa fija anual no puede ser mayor que 100 %.", MsgBoxStyle.Exclamation, MCSTRTITULO)
             Return False
         End If
@@ -189,13 +197,11 @@
 
     Private Sub BttGuardar_Click(sender As Object, e As RoutedEventArgs) Handles bttGuardar.Click
         If FblnGuarde() Then
-            GblnOK = True
             Close()
         End If
     End Sub
 
     Private Sub BttCancelar_Click(sender As Object, e As RoutedEventArgs) Handles bttCancelar.Click
-        GblnOK = False
         Close()
     End Sub
 
@@ -216,8 +222,8 @@
         If lblnOk Then
             SCargueCertificadoVigente()
             SRefresque()
-            MsgBox("La tasa de mora quedó al día. Tasa anual vigente: " &
-                    Format(GobjParametros.FdblTasaMoraFecha(Date.Today.AddDays(1)), "#0.00%") & ".",
+            MsgBox("La tasa de mora quedó al día. Tasa anual para el próximo cierre: " &
+                    Format(GobjParametros.FdblTasaMoraFecha(ClsOrionCop.FdtmFechaCausaMoraGeneral()), "#0.00%") & ".",
                     MsgBoxStyle.Information, MCSTRTITULO)
         Else
             MsgBox(lstrMens, MsgBoxStyle.Exclamation, MCSTRTITULO)

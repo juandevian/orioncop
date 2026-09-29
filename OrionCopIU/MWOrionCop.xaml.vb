@@ -145,8 +145,14 @@ Public Class MWOrionCop
         Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lblnNoHayError = False
         Dim lblnLogon = False
         Try
-            ' Solo asignación: el cliente no hace llamadas de red hasta que se consulta el IBC
-            ClsOrionCop.SobjProveedorIbc = New ClsIbcApiCliente(CSTRURLAPIIBC, MdefIbcApiKey.FstrApiKey())
+            ' Solo asignación: el cliente no hace llamadas de red hasta que se consulta el IBC. Si la clave
+            ' ofuscada de esta versión está mal formada, la herramienta IBC queda no disponible pero la
+            ' aplicación inicia normalmente.
+            Try
+                ClsOrionCop.SobjProveedorIbc = New ClsIbcApiCliente(CSTRURLAPIIBC, MdefIbcApiKey.FstrApiKey())
+            Catch exClave As FormatException
+                ClsOrionCop.SobjProveedorIbc = Nothing
+            End Try
             SCargueForma(EnuElementosAdicionalesDef.None, 0, Nothing, Nothing, True)
             SLeaArchivoIni()
             SRefresqueBotones()
@@ -576,8 +582,9 @@ Public Class MWOrionCop
         MnuConsultaSql = FmnuiMenuItemPan("MnuConsultaSql", "Consultas _SQL", 36, "")
         MnuConsultaIbc = FmnuiMenuItem("MnuConsultaIbc", "Consulta _IBC (interés bancario corriente)",
                 "RecMnuItemSec")
-        MnuParametrizaInteres = FmnuiMenuItem("MnuParametrizaInteres", "Parametrizar interés de _mora (IBC)",
-                "RecMnuItemSec")
+        ' Permiso de "Parametrizar" (id 1): quien puede parametrizar el centro puede parametrizar el interés
+        MnuParametrizaInteres = FmnuiMenuItemPan("MnuParametrizaInteres", "Parametrizar interés de _mora (IBC)",
+                1, "")
         MnuCarpetaReportes = FmnuiMenuItem("MnuCarpetaReportes", "Abrir Ca_rpeta Reportes", "RecMnuItemSec")
         MnuBaseDatos = FmnuiMenuItem("MnuBaseDatos", "_Base de Datos", "RecMnuItemSec")
         MnuRevisarNovs = FmnuiMenuItem("MnuRevisarNovs", "Re_visar integridad novedades", "RecMnuItemSec")

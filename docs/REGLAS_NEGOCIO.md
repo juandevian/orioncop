@@ -31,8 +31,8 @@ Este documento consolida reglas de negocio funcionales encontradas en el código
 
 ## Evidencia en codigo
 
-- `OrionCopLsIbcCalculo.vb`, `OrionCopLsIbcSincroniza.vb`, `OrionCopLsOrionCop.vb` (FblnSincronizaIbc)
-- `OrionCopLsItemFactura.vb` (FdecIntereseMora), `OrionCopLsCentroUtilidadOriCop.vb` (FdblTasaMoraFecha)
+- `OrionCopL\clsIbcCalculo.vb`, `OrionCopL\clsIbcSincroniza.vb`, `OrionCopL\clsOrionCop.vb` (FblnSincronizaIbc)
+- `OrionCopL\clsItemFactura.vb` (FdecIntereseMora), `OrionCopL\clsCentroUtilidadOriCop.vb` (FdblTasaMoraFecha)
 - `OrionCopL\clsReciboCaja.vb:246-267`
 - `OrionCopL\clsReciboCaja.vb:453-455`
 - `OrionCopL\clsReciboCaja.vb:470-472`
