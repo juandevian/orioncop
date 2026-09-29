@@ -95,7 +95,7 @@ Public Class MWOrionCop
     Private MnuRevisarNovs As MenuItem = Nothing
     Private ReadOnly MstrNombreVentana As String = My.Resources.NomVenMW
     ' API de certificados IBC (herramienta de interés bancario corriente)
-    Private Const CSTRURLAPIIBC As String = "https://api-ibc-certificados-sif.onrender.com"
+    ' La dirección de la API del IBC (y su clave) viene de OriIntCon\IbcApiKey.vb (local, no versionado)
 
     Private WithEvents MobjImpoFacOri As ClsImportarOrion = Nothing
     Private WithEvents MobjReportesOrion As ClsRepOrionCop = Nothing
@@ -149,7 +149,7 @@ Public Class MWOrionCop
             ' ofuscada de esta versión está mal formada, la herramienta IBC queda no disponible pero la
             ' aplicación inicia normalmente.
             Try
-                ClsOrionCop.SobjProveedorIbc = New ClsIbcApiCliente(CSTRURLAPIIBC, MdefIbcApiKey.FstrApiKey())
+                ClsOrionCop.SobjProveedorIbc = New ClsIbcApiCliente(MdefIbcApiKey.FstrUrlApi(), MdefIbcApiKey.FstrApiKey())
             Catch exClave As FormatException
                 ClsOrionCop.SobjProveedorIbc = Nothing
             End Try
