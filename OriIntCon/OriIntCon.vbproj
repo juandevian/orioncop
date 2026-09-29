@@ -178,6 +178,9 @@
     <Compile Include="clsInterfazContaSIIGO.vb" />
     <Compile Include="ClsInterfazMekano.vb" />
     <Compile Include="clsInterfazMisFacturas.vb" />
+    <Compile Include="clsIbcApiCliente.vb" />
+    <Compile Include="IbcApiKey.vb" Condition="Exists('IbcApiKey.vb')" />
+    <Compile Include="IbcApiKey.sample.vb" Condition="!Exists('IbcApiKey.vb')" />
     <Compile Include="ClsInterfazPodium.vb" />
     <Compile Include="mdefOriInt.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

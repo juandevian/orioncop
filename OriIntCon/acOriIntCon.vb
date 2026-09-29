@@ -2,6 +2,7 @@
 #Region "Definiciones"
 <Assembly: CLSCompliant(True)>
 <Assembly: InternalsVisibleTo("OrionCopIU")>
+<Assembly: InternalsVisibleTo("OrionCopL.Tests")>
 #End Region
 #Region "Enumeradores"
 Friend Enum EnuTipoDocIdDian As Integer

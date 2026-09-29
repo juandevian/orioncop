@@ -3,6 +3,8 @@
     Inherits ClsCBObjetoPan
     ' Constantes
     Private Const MCSTRNOMBRETABLA As String = "OriTasasMora"
+    ' Variables
+    Private MentOrdinalCreado As Integer = 0
 #End Region
 #Region "Constructores"
     ''' <summary>
@@ -142,8 +144,15 @@
             lentOrdinal = clsPanorama.fobjUltimaIdNumericaObjeto(sstrNombreTabla,
                     objOrdinalTasaMoraEnt.strNombreCampoBD, objOrdinalTasaMoraEnt.enuTipoValor, lstrFiltro) + 1
             objOrdinalTasaMoraEnt.objValorPro = lentOrdinal
+            MentOrdinalCreado = lentOrdinal
         End If
     End Sub
+    ''' <summary>Ordinal asignado a la última fila creada con este objeto (0 si no se ha creado ninguna).</summary>
+    Friend ReadOnly Property EntOrdinalCreado As Integer
+        Get
+            Return MentOrdinalCreado
+        End Get
+    End Property
     Private Sub SActualiceFechaHasta()
         If DtbTablaNavegacion.Rows.Count > 1 Then
             SVayaAlAnterior()
@@ -165,6 +174,84 @@
         End If
         Return ldtmFechaDesdeUltima
     End Function
+    ''' <summary>
+    ''' Crea y guarda una fila nueva de tasa de mora sin pasar por la ventana (sincronización IBC).
+    ''' El objeto debe ser navegable y estar consultando. Al guardar, SActualice cierra la FechaHasta
+    ''' de la fila anterior (FechaDesde - 1), igual que al crear desde winTasasMora.
+    ''' </summary>
+    ''' <param name="adtmFechaDesde">Fecha desde la cual rige la tasa.</param>
+    ''' <param name="adblTasaAnual">Tasa anual simple como fracción (0.2907 = 29.07 %).</param>
+    ''' <remarks>ClsTasaMoraDbl interpreta lo asignado como tasa MENSUAL vencida ("valor" &amp; "mv") y la
+    ''' multiplica por 12; el texto se arma con la cultura del hilo y con coma decimal da 0 en silencio. Por
+    ''' eso se asigna anual/12 con cultura invariante y se verifica el valor resultante antes de guardar.</remarks>
+    Friend Sub SRegistreTasaAnual(adtmFechaDesde As Date, adblTasaAnual As Double)
+        If Not BlnEsNavegable OrElse EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuConsultando Then
+            Throw New ErrorInesperadoPanLException("La Tasa de Mora debe ser un objeto navegable en consulta para registrar una tasa nueva!")
+        End If
+        ' Si ya hay filas, al guardar se modifica la anterior (FechaHasta): sin permiso de modificar
+        ' SModifique no hace nada y la fila anterior quedaría abierta en silencio.
+        If FdtmFechaDesdeUltima() <> GCDTMFECHANULA AndAlso
+                Not CType(EnuPermisosObj And EnuPermisosDef.enuModificar, Boolean) Then
+            Throw New ErrorInesperadoPanLException("El usuario no tiene permiso para modificar Tasas de Mora: no se puede cerrar la tasa anterior!")
+        End If
+        SCreeObj(Nothing)
+        If EnuEstadoActualizacion <> EnuEstadoObjetoDef.enuCreando Then
+            Throw New ErrorInesperadoPanLException("No se pudo crear la Tasa de Mora: el usuario no tiene permiso para crearla!")
+        End If
+        Try
+            ' Las fechas se asignan con la cultura del usuario, FUERA de la ventana invariante: el SValide de
+            ' FechaDesde llama FdtmFechaDesdeUltima -> FdtbTasasMora, que escribe Format(Today, "dd/MM/yyyy")
+            ' en una columna DateTime; con cultura invariante ese texto se lee como MM/dd (falla los días
+            ' 13-31 y cambia el día por el mes los días 1-12).
+            ObjFechaDesdeTasaMoraDtm.ObjValorPro = adtmFechaDesde.Date
+            ObjFechaHastaTasaMoraDtm.ObjValorPro = Date.Today
+            ' La ventana invariante debe cubrir SOLO esta asignación: ClsTasaMoraDbl arma "<valor>mv" con
+            ' ToString() de la cultura del hilo y Val() solo entiende punto decimal (con coma da 0 en silencio).
+            ' Esta asignación no toca fechas ni BD: EvnPreSetValor -> FdblTraduceATasaEfectivaAnual y SValide
+            ' -> FblnEsValidoNumero.
+            Dim lcultOriginal = Threading.Thread.CurrentThread.CurrentCulture
+            Try
+                Threading.Thread.CurrentThread.CurrentCulture = Globalization.CultureInfo.InvariantCulture
+                ObjTasaMoraDbl.ObjValorPro = ClsIbcCalculo.FdblTasaMensualParaAsignar(adblTasaAnual)
+            Finally
+                Threading.Thread.CurrentThread.CurrentCulture = lcultOriginal
+            End Try
+        Catch
+            SNormaliceEstado(False)
+            Throw
+        End Try
+        Dim lstrMens = String.Empty
+        If Not ObjFechaDesdeTasaMoraDtm.BlnEsValido Then
+            lstrMens = "La fecha desde de la Tasa de Mora (" & Format(adtmFechaDesde, GCSTRFMTFECHASIMPLE) &
+                    ") no es válida: debe ser posterior a la última registrada y no mayor que hoy!"
+        ElseIf Not ObjFechaHastaTasaMoraDtm.BlnEsValido Then
+            lstrMens = "La fecha hasta de la Tasa de Mora no es válida!"
+        ElseIf Not ObjTasaMoraDbl.BlnEsValido OrElse
+                Not ClsIbcCalculo.FblnTasaCoincide(adblTasaAnual, CDbl(ObjTasaMoraDbl.ObjValorPro)) Then
+            lstrMens = "La Tasa de Mora convertida (" & CStr(ObjTasaMoraDbl.ObjValorPro) &
+                    ") no coincide con la calculada (" & adblTasaAnual.ToString & ")!"
+        End If
+        If Not String.IsNullOrEmpty(lstrMens) Then
+            SNormaliceEstado(False)
+            Throw New ErrorInesperadoPanLException(lstrMens)
+        End If
+        MentOrdinalCreado = 0
+        Try
+            SActualice(True)
+            SNormaliceEstado(True)
+        Catch ex As Exception
+            ' El insert confirma en su propia transacción y luego STermineActualizacion pasa el estado a
+            ' Consultando ANTES de refrescar y de cerrar la fila anterior. Si el estado sigue en Creando, la
+            ' falla fue antes del insert (nada se guardó); si no, la fila nueva ya está en la BD.
+            If EnuEstadoActualizacion = EnuEstadoObjetoDef.enuCreando Then
+                SNormaliceEstado(False)
+                Throw
+            End If
+            Throw New ErrorTasaMoraGuardadaException(MentOrdinalCreado, adtmFechaDesde.Date,
+                    "falló un paso posterior al guardado (cierre de la tasa anterior o relectura: " &
+                    ex.Message & ")", ex)
+        End Try
+    End Sub
 #End Region
 End Class
 #Region "Clases de Propiedad"

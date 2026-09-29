@@ -209,6 +209,10 @@
     <Compile Include="clsSectorModuloServicio.vb" />
     <Compile Include="clsServicio.vb" />
     <Compile Include="clsTasaMora.vb" />
+    <Compile Include="clsIbcCalculo.vb" />
+    <Compile Include="clsIbcInterfaces.vb" />
+    <Compile Include="clsIbcCertificado.vb" />
+    <Compile Include="clsIbcTasasMoraBd.vb" />
     <Compile Include="clsSector.vb" />
     <Compile Include="clsPredio.vb" />
     <Compile Include="clsXTerCliente.vb" />
