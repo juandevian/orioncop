@@ -87,11 +87,15 @@ Public Class MWOrionCop
     Private MnuECorreo As MenuItemPan = Nothing
     Private MnuCopiaSeguridad As MenuItemPan = Nothing
     Private MnuConsultaSql As MenuItem = Nothing
+    Private MnuConsultaIbc As MenuItem = Nothing
+    Private MnuParametrizaInteres As MenuItem = Nothing
     Private MnuLogApp As MenuItemPan = Nothing
     Private MnuCarpetaReportes As MenuItem = Nothing
     Private MnuBaseDatos As MenuItem = Nothing
     Private MnuRevisarNovs As MenuItem = Nothing
     Private ReadOnly MstrNombreVentana As String = My.Resources.NomVenMW
+    ' API de certificados IBC (herramienta de interés bancario corriente)
+    Private Const CSTRURLAPIIBC As String = "https://api-ibc-certificados-sif.onrender.com"
 
     Private WithEvents MobjImpoFacOri As ClsImportarOrion = Nothing
     Private WithEvents MobjReportesOrion As ClsRepOrionCop = Nothing
@@ -141,6 +145,14 @@ Public Class MWOrionCop
         Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lblnNoHayError = False
         Dim lblnLogon = False
         Try
+            ' Solo asignación: el cliente no hace llamadas de red hasta que se consulta el IBC. Si la clave
+            ' ofuscada de esta versión está mal formada, la herramienta IBC queda no disponible pero la
+            ' aplicación inicia normalmente.
+            Try
+                ClsOrionCop.SobjProveedorIbc = New ClsIbcApiCliente(CSTRURLAPIIBC, MdefIbcApiKey.FstrApiKey())
+            Catch exClave As FormatException
+                ClsOrionCop.SobjProveedorIbc = Nothing
+            End Try
             SCargueForma(EnuElementosAdicionalesDef.None, 0, Nothing, Nothing, True)
             SLeaArchivoIni()
             SRefresqueBotones()
@@ -329,6 +341,9 @@ Public Class MWOrionCop
         HmnuHerramientas.Items.Add(MnuLogApp)
         ' Reportes Sql
         HmnuHerramientas.Items.Add(MnuConsultaSql)
+        ' Herramienta IBC: parametrización del interés de mora y consulta de certificados
+        HmnuHerramientas.Items.Add(MnuParametrizaInteres)
+        HmnuHerramientas.Items.Add(MnuConsultaIbc)
         ' Abrir Exploador de archivos en la carpeta que contiene los Reportes
         HmnuHerramientas.Items.Add(MnuCarpetaReportes)
         HmnuHerramientas.Items.Add(MnuRevisarNovs)
@@ -565,6 +580,11 @@ Public Class MWOrionCop
         MnuCopiaSeguridad = FmnuiMenuItemPan("MnuCopiaSeguridad", "Copia de Segur_idad", 34, "")
         MnuLogApp = FmnuiMenuItemPan("MnuLogApp", "_Log de la Aplicación", 35, "")
         MnuConsultaSql = FmnuiMenuItemPan("MnuConsultaSql", "Consultas _SQL", 36, "")
+        MnuConsultaIbc = FmnuiMenuItem("MnuConsultaIbc", "Consulta _IBC (interés bancario corriente)",
+                "RecMnuItemSec")
+        ' Permiso de "Parametrizar" (id 1): quien puede parametrizar el centro puede parametrizar el interés
+        MnuParametrizaInteres = FmnuiMenuItemPan("MnuParametrizaInteres", "Parametrizar interés de _mora (IBC)",
+                1, "")
         MnuCarpetaReportes = FmnuiMenuItem("MnuCarpetaReportes", "Abrir Ca_rpeta Reportes", "RecMnuItemSec")
         MnuBaseDatos = FmnuiMenuItem("MnuBaseDatos", "_Base de Datos", "RecMnuItemSec")
         MnuRevisarNovs = FmnuiMenuItem("MnuRevisarNovs", "Re_visar integridad novedades", "RecMnuItemSec")
@@ -1886,6 +1906,12 @@ Public Class MWOrionCop
             Case "MnuConsultaSql"
                 Dim lwinVentana = New WinConsultasSql
                 lwinVentana.Show()
+            Case "MnuConsultaIbc"
+                Dim lwinConsultaIbc As New WinConsultaIbc With {.Owner = Me}
+                lwinConsultaIbc.ShowDialog()
+            Case "MnuParametrizaInteres"
+                Dim lwinInteres As New WinParametrizacionInteres With {.Owner = Me}
+                lwinInteres.ShowDialog()
             Case "MnuCarpetaReportes"
                 Dim NoUsado = Process.Start("explorer.exe", GstrTrayReportes)
             Case "MnuVerificarIntegridad"

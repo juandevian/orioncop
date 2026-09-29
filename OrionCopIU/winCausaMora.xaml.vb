@@ -293,6 +293,19 @@
             If MenuTipoAccion = EnuTipoAccion.EnuAmbas Then
                 GobjParametros.SAbraPeriodoAnterior()
             End If
+        ElseIf Not lblnCauso AndAlso Not String.IsNullOrEmpty(astrMens) Then
+            ' No se pudo sincronizar el IBC: no se causó nada.
+            If MenuTipoAccion = EnuTipoAccion.EnuAmbas Then
+                ' Igual que al cancelar (Finally de FblnCausoMoraGeneral): se deshace TODA la transacción
+                ' anidada abierta en SGuarde, cierre de mes incluido (el contador queda en -1 y SGuarde ya
+                ' no confirma nada), y luego se reabre en memoria el período que había cerrado SCierreMes.
+                GobjPanDat.SAborteTransaccion()
+                GobjParametros.SAbraPeriodoAnterior()
+                astrMens &= " Se deshizo el Cierre de mes y todo lo registrado en este proceso (incluida " &
+                        "cualquier Tasa de Mora o certificado IBC guardado); corrija la causa y repita el Cierre de mes."
+            End If
+            aenuSeve = EnuSeveridadNot.EnuAdvertencia
+            MsgBox(astrMens, MsgBoxStyle.Exclamation, "Interés bancario corriente")
         End If
         Return lblnCauso
     End Function
@@ -303,6 +316,16 @@
             astrMens = "Antes de cerrar mes, debe crear el nuevo año!"
             aenuSeve = EnuSeveridadNot.EnuInformacion
             MsgBox(astrMens, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Información")
+            Return False
+        End If
+        ' IBC: la tasa de mora se deja al día ANTES de cerrar el mes; si no se puede, no se cierra ni se
+        ' causa. La causación posterior al cierre usa el inicio del período siguiente (fin actual + 1).
+        Dim ldtmFechaCausa As Date = GobjParametros.ObjAnoActual.ObjPeriodoActual.DtmFechaFinPeriodo
+        Dim lstrMensIbc = String.Empty
+        If Not MobjOrionCop.FblnSincronizaIbcCierre(ldtmFechaCausa.AddDays(1), lstrMensIbc) Then
+            astrMens = lstrMensIbc
+            aenuSeve = EnuSeveridadNot.EnuAdvertencia
+            MsgBox(astrMens, MsgBoxStyle.Exclamation, "Interés bancario corriente")
             Return False
         End If
         SCierreMes()

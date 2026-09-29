@@ -1,5 +1,17 @@
 # Changelog de orioncop
 
+## En desarrollo (sin liberar): herramienta IBC (interés bancario corriente)
+
+Estado: en integración (PR de `orioncop` y `comunes`). Requiere el esquema de BD 268 de `comunes`.
+
+- Consulta de los certificados del interés bancario corriente (IBC) de la Superfinanciera desde la API propia (`OriIntCon/clsIbcApiCliente.vb`) y almacenamiento local en la tabla `OriIbcCertificados`.
+- Parametrización del interés de mora por centro de utilidad: **Fijo** o **Variable** (IBC x factor definido por el usuario, máximo 1,5). Modo *Sin parametrizar* (por defecto) mantiene el comportamiento anterior.
+- Tope legal de 1,5 x IBC (Ley 675 de 2001, art. 30): no se puede parametrizar un interés superior; la tasa fija deseada se conserva y la tasa efectiva se recalcula con cada IBC.
+- El Cierre de mes actualiza `OriTasasMora` antes de causar intereses; si no se puede (API caída y sin certificado local vigente) no se cierra el mes ni se causan intereses.
+- Herramientas > *Parametrizar interés de mora (IBC)* y *Consulta IBC*.
+- Pruebas unitarias MSTest en `tests/OrionCopL.Tests` (fuera de la solución).
+- Archivos principales: `OrionCopL/clsIbcCalculo.vb`, `clsIbcSincroniza.vb`, `clsIbcCertificado.vb`, `clsIbcTasasMoraBd.vb`, `clsTasaMora.vb` (`SRegistreTasaAnual`), `clsCentroUtilidadOriCop.vb`, `clsOrionCop.vb`, `OrionCopIU/WinParametrizacionInteres.xaml`, `WinConsultaIbc.xaml`, `winCausaMora.xaml.vb`.
+
 ## Release actual: `v17.39.454.1455`
 
 **Fecha de referencia:** 2026-09-16  
