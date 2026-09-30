@@ -102,9 +102,7 @@
         End Try
         SRefresque()
         If lblnOk Then
-            MsgBox("La tasa de mora quedó al día. Tasa anual para el próximo cierre: " &
-                    Format(GobjParametros.FdblTasaMoraFecha(ClsOrionCop.FdtmFechaCausaMoraGeneral()), "#0.00%") & ".",
-                    MsgBoxStyle.Information, MCSTRTITULO)
+            MsgBox(lstrMens, MsgBoxStyle.Information, MCSTRTITULO)
         Else
             MsgBox(lstrMens, MsgBoxStyle.Exclamation, MCSTRTITULO)
         End If

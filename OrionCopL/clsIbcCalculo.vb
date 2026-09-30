@@ -148,6 +148,15 @@ Friend Class ClsIbcCalculo
     End Function
 
     ''' <summary>
+    ''' Fecha con la que se sincroniza la tasa del mes abierto: el día siguiente al fin del periodo. La causación
+    ''' lee la tasa del día anterior a su fecha, es decir, el último día del periodo (p. ej. abierto abril: 01/05 lee
+    ''' el 30/04 y usa el certificado de abril). Usar el inicio del periodo tomaría el certificado del mes anterior.
+    ''' </summary>
+    Friend Shared Function FdtmFechaSincronizacionMesAbierto(adtmFinPeriodo As Date) As Date
+        Return adtmFinPeriodo.Date.AddDays(1)
+    End Function
+
+    ''' <summary>
     ''' Equivalente mensual que se muestra al usuario (misma convención de FdtbTasasMora: anual / 12).
     ''' </summary>
     Friend Shared Function FdblMensualParaMostrar(adblTasaAnual As Double) As Double

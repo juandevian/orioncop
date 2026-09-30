@@ -8,6 +8,22 @@ Friend Class ClsIbcSincroniza
     Private ReadOnly MobjProveedor As IIbcProveedor
     Private ReadOnly MobjAlmacen As IIbcAlmacen
     Private ReadOnly MobjTasas As IIbcTasasMora
+    Private MstcCertificadoAplicado As StcIbcCertificado
+    Private MdblTasaAplicada As Double
+#End Region
+#Region "Resultado de la última sincronización"
+    ''' <summary>Certificado cuyo IBC se usó en la última sincronización (vacío si no se llegó a elegir).</summary>
+    Friend ReadOnly Property StcCertificadoAplicado As StcIbcCertificado
+        Get
+            Return MstcCertificadoAplicado
+        End Get
+    End Property
+    ''' <summary>Tasa anual (fracción) calculada en la última sincronización (0 si no se calculó).</summary>
+    Friend ReadOnly Property DblTasaAplicada As Double
+        Get
+            Return MdblTasaAplicada
+        End Get
+    End Property
 #End Region
 
 #Region "Constructores"
@@ -31,6 +47,8 @@ Friend Class ClsIbcSincroniza
     Friend Function FblnSincronice(adtmFecha As Date, aenuModo As EnuModoInteres, adblTasaFijaDeseada As Double,
             adblFactor As Double, ablnForzarConsulta As Boolean, adtmHoy As Date, ByRef astrMens As String) As Boolean
         astrMens = String.Empty
+        MstcCertificadoAplicado = Nothing
+        MdblTasaAplicada = 0
         If aenuModo = EnuModoInteres.None Then Return True
         If aenuModo <> EnuModoInteres.EnuFijo AndAlso aenuModo <> EnuModoInteres.EnuVariable Then
             astrMens = "El modo de interés de mora parametrizado (" & CByte(aenuModo).ToString & ") no es válido."
@@ -75,6 +93,8 @@ Friend Class ClsIbcSincroniza
             astrMens = "La tasa de interés calculada es cero; revise la parametrización."
             Return False
         End If
+        MstcCertificadoAplicado = lstcCert
+        MdblTasaAplicada = ldblTasa
         ' FdblTasaVigente(adtmFecha) ya consulta la tasa del día anterior
         If ClsIbcCalculo.FblnTasaCoincide(ldblTasa, MobjTasas.FdblTasaVigente(adtmFecha)) Then Return True
         Dim ldtmDesdeUltima = MobjTasas.FdtmFechaDesdeUltima()

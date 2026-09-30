@@ -4651,8 +4651,11 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
     ''' <param name="astrMens">Mensaje para el usuario cuando devuelve False.</param>
     ''' <returns>True si la tasa quedó al día o si el centro no usa IBC (modo None); False si no se pudo:
     ''' en ese caso NO se debe causar mora.</returns>
-    Friend Shared Function FblnSincronizaIbc(adtmFecha As Date, ablnForzarConsulta As Boolean,
-            ByRef astrMens As String) As Boolean
+    Friend Shared Function FblnSincronizaIbcDetalle(adtmFecha As Date, ablnForzarConsulta As Boolean,
+            ByRef astrMens As String, ByRef astcCertificado As StcIbcCertificado,
+            ByRef adblTasa As Double) As Boolean
+        astcCertificado = Nothing
+        adblTasa = 0
         Dim lenuModo = CType(GobjParametros.ObjModoInteresByt.ObjValorPro, EnuModoInteres)
         ' Modo None: comportamiento anterior a la herramienta IBC (ni API ni BD ni mensaje)
         If lenuModo = EnuModoInteres.None Then Return True
@@ -4666,11 +4669,20 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
         Dim lblnSincronizo = lobjSinc.FblnSincronice(adtmFecha, lenuModo,
                 GobjParametros.ObjTasaFijaDeseadaDbl.ObjValorPro, GobjParametros.ObjFactorVariableDbl.ObjValorPro,
                 ablnForzarConsulta, Date.Today, lstrMensIbc)
+        astcCertificado = lobjSinc.StcCertificadoAplicado
+        adblTasa = lobjSinc.DblTasaAplicada
         If Not lblnSincronizo Then
             astrMens = If(String.IsNullOrEmpty(lstrMensIbc),
                     "No se pudo actualizar la tasa de mora con el IBC. No se causaron intereses.", lstrMensIbc)
         End If
         Return lblnSincronizo
+    End Function
+    ''' <summary>Igual que FblnSincronizaIbcDetalle sin devolver el certificado ni la tasa aplicados.</summary>
+    Friend Shared Function FblnSincronizaIbc(adtmFecha As Date, ablnForzarConsulta As Boolean,
+            ByRef astrMens As String) As Boolean
+        Dim lstcCertificado As StcIbcCertificado
+        Dim ldblTasa As Double
+        Return FblnSincronizaIbcDetalle(adtmFecha, ablnForzarConsulta, astrMens, lstcCertificado, ldblTasa)
     End Function
     ''' <summary>
     ''' Sincroniza antes de causar mora (no fuerza la consulta a la API si ya hay certificado local vigente).
@@ -4680,9 +4692,9 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
     End Function
     ''' <summary>
     ''' Sincronización manual (ventanas de la herramienta IBC): fuerza la consulta a la API y deja registrada
-    ''' la tasa que usará la PRÓXIMA causación (la del periodo abierto: FdtmFechaCausaMoraGeneral). No se usa
-    ''' "mañana": registraría una fila con fecha desde posterior al periodo pendiente de cerrar y luego el
-    ''' Cierre no podría registrar la tasa de su periodo.
+    ''' la tasa del PERIODO ABIERTO (p. ej. abierto abril: la del certificado que cubre 01/04 al 30/04), no la del
+    ''' mes anterior. Se usa el día siguiente al fin del periodo, igual que el Cierre de mes. Si es True, astrMens
+    ''' trae el detalle de lo aplicado (certificado, vigencia, IBC y tasa).
     ''' </summary>
     Friend Shared Function FblnSincronizaIbcManual(ByRef astrMens As String) As Boolean
         astrMens = String.Empty
@@ -4695,7 +4707,21 @@ ClsIdFacturaEnt.SstrNombreCampoBd}
             astrMens = "El servicio de consulta del IBC no está disponible en esta versión."
             Return False
         End If
-        Return FblnSincronizaIbc(FdtmFechaCausaMoraGeneral(), True, astrMens)
+        Dim ldtmFecha = ClsIbcCalculo.FdtmFechaSincronizacionMesAbierto(
+                GobjParametros.ObjAnoActual.ObjPeriodoActual.DtmFechaFinPeriodo)
+        Dim lstcCertificado As StcIbcCertificado
+        Dim ldblTasa As Double
+        Dim lblnOk = FblnSincronizaIbcDetalle(ldtmFecha, True, astrMens, lstcCertificado, ldblTasa)
+        If lblnOk Then
+            astrMens = "La tasa de mora quedó al día para el periodo abierto (" &
+                    GobjParametros.ObjAnoActual.StrNombrePeriodoActual & "). Certificado IBC " &
+                    lstcCertificado.StrIdfile & ", vigente del " & Format(lstcCertificado.DtmFechaDesde, "dd/MM/yyyy") &
+                    " al " & Format(lstcCertificado.DtmFechaHasta, "dd/MM/yyyy") & ": IBC " &
+                    Format(lstcCertificado.DblIbc, "#0.00%") & " E.A. Tasa de mora aplicada: " &
+                    Format(ldblTasa, "#0.00%") & " anual (" &
+                    Format(ClsIbcCalculo.FdblMensualParaMostrar(ldblTasa), "#0.00%") & " mensual)."
+        End If
+        Return lblnOk
     End Function
     ''' <summary>
     ''' Causa mora a todas las deudas el primer dia del período despues de cerrar mes o el día 
