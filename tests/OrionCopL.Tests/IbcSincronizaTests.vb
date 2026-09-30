@@ -293,4 +293,39 @@ Public Class IbcSincronizaTests
         Assert.ThrowsException(Of InvalidOperationException)(
             Sub() lobjS.FblnSincronice(MdtmHoy, EnuModoInteres.EnuVariable, 0, 1.3, False, MdtmHoy, lstrMens))
     End Sub
+
+    <TestMethod>
+    Public Sub Mes_abierto_abril_aplica_el_certificado_de_abril_y_no_el_de_marzo()
+        ' Periodo abierto: abril. La causacion es el 1/05 y lee la tasa del 30/04 => certificado de abril
+        Dim lobjP As New ProveedorFalso, lobjA As New AlmacenFalso, lobjT As New TasasFalsas
+        lobjA.Lista.Add(FstcCert("MAR", #2026-03-01#, #2026-03-31#, 0.15))
+        lobjA.Lista.Add(FstcCert("ABR", #2026-04-01#, #2026-04-30#, 0.2))
+        lobjA.Lista.Add(FstcCert("MAY", #2026-05-01#, #2026-05-31#, 0.25))
+        Dim lobjS = FobjSinc(lobjP, lobjA, lobjT)
+        Dim ldtmFecha = ClsIbcCalculo.FdtmFechaSincronizacionMesAbierto(#2026-04-30#)
+        Dim lstrMens As String = String.Empty
+        Assert.IsTrue(lobjS.FblnSincronice(ldtmFecha, EnuModoInteres.EnuVariable, 0, 1.3, False, #2026-04-15#, lstrMens))
+        Assert.AreEqual("ABR", lobjS.StcCertificadoAplicado.StrIdfile)
+        Assert.AreEqual(0.26, lobjT.Registros(0).Item2, 0.0000001)
+        Assert.AreEqual(0.26, lobjS.DblTasaAplicada, 0.0000001)
+    End Sub
+
+    <TestMethod>
+    Public Sub Fecha_de_sincronizacion_del_mes_abierto_es_el_dia_siguiente_al_fin_del_periodo()
+        Assert.AreEqual(#2026-05-01#, ClsIbcCalculo.FdtmFechaSincronizacionMesAbierto(#2026-04-30#))
+        Assert.AreEqual(#2027-01-01#, ClsIbcCalculo.FdtmFechaSincronizacionMesAbierto(#2026-12-31#))
+        Assert.AreEqual(#2028-03-01#, ClsIbcCalculo.FdtmFechaSincronizacionMesAbierto(#2028-02-29#))
+    End Sub
+
+    <TestMethod>
+    Public Sub Con_el_inicio_del_periodo_se_aplicaria_el_certificado_del_mes_anterior()
+        ' Documenta el defecto corregido: usar el 1/04 (inicio del periodo) lee la tasa del 31/03
+        Dim lobjP As New ProveedorFalso, lobjA As New AlmacenFalso, lobjT As New TasasFalsas
+        lobjA.Lista.Add(FstcCert("MAR", #2026-03-01#, #2026-03-31#, 0.15))
+        lobjA.Lista.Add(FstcCert("ABR", #2026-04-01#, #2026-04-30#, 0.2))
+        Dim lobjS = FobjSinc(lobjP, lobjA, lobjT)
+        Dim lstrMens As String = String.Empty
+        Assert.IsTrue(lobjS.FblnSincronice(#2026-04-01#, EnuModoInteres.EnuVariable, 0, 1.3, False, #2026-04-15#, lstrMens))
+        Assert.AreEqual("MAR", lobjS.StcCertificadoAplicado.StrIdfile)
+    End Sub
 End Class
