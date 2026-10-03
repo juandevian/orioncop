@@ -53,6 +53,6 @@ Imports System.Runtime.InteropServices
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
 <Assembly: AssemblyVersion("7.30.178.1454")>
-<Assembly: AssemblyFileVersion("7.30.178.1454")>
+<Assembly: AssemblyFileVersion("7.30.179.1456")>
 
 <Assembly: NeutralResourcesLanguageAttribute("es-CO")>

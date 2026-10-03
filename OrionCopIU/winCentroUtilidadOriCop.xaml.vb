@@ -1,5 +1,4 @@
 ﻿Imports Microsoft.Win32
-<Obsolete("Ventana obsoleta. Migrar uso a la nueva implementación y planificar eliminación en próximas versiones.")>
 Public Class WinCentroUtilidadOriCop
 #Region "Definiciones"
     ' Herencia e Interfaz

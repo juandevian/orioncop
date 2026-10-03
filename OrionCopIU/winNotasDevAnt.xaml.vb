@@ -22,12 +22,14 @@ Public Class WinNotasDevAnt
     Private MdtbAnticipos As DataTable = Nothing
     Private ReadOnly MstrNombreVentana As String = My.Resources.NomNotDevAnt
 #End Region
+
 #Region "Constructor"
     Public Sub New()
         InitializeComponent()
         HenuIdVentana = EnuIdVentanaDef.enuNotaDevAnt
     End Sub
 #End Region
+
 #Region "Invalida metodos en la clase base que implementan la Interfaz"
     Protected Overrides Sub SLoad()
         Dim lcolControlesLlave As New Collection From {
@@ -45,16 +47,19 @@ Public Class WinNotasDevAnt
         txtValorR.Visibility = Visibility.Visible
         SPuebleBarraEstado(HcolLabelsBarraEstado)
     End Sub
+
     Protected Overrides ReadOnly Property StrNombreVentana As String
         Get
             Return MstrNombreVentana
         End Get
     End Property
+
     Protected Overrides ReadOnly Property EnuIdVentana As EnuIdVentanaDef
         Get
             Return HenuIdVentana
         End Get
     End Property
+
     Protected Overrides Sub SInicialiceObjeto()
         If IsNothing(ObjObjetoWin) Then
             Dim lstrPref = GobjParametros.FstrPrefijoDoc(EnuIdDocumentoDef.EnuNotaReintegroAnt)
@@ -66,6 +71,7 @@ Public Class WinNotasDevAnt
         MobjObjetoWin = ObjObjetoWin
         EnuTipoPermisoObjWin = MobjObjetoWin.EnuPermisosObj
     End Sub
+
     Protected Overrides Sub SInicialiceControles()
         If IsNothing(ObjObjetoWin) Then
             SCerrarClic()
@@ -81,10 +87,11 @@ Public Class WinNotasDevAnt
         HbttAceptar.TabIndex = 10
         HbttCancelar.TabIndex = 11
     End Sub
+
     Protected Overrides Sub SMuestreDatos()
         HblnMostrandoDatos = True
         If Not BlnVentanaAux AndAlso ObjObjetoWin.FblnEstaVacioOrigenDatos AndAlso
-                EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
+                EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
             SLevanteEveNoti("No hay Notas para ser mostradas!", "", 0,
                     EnuSeveridadNot.EnuInformacion)
             cboPref.IsEnabled = False
@@ -96,7 +103,7 @@ Public Class WinNotasDevAnt
                 dtpFechaDevAnt.SelectedDate = .ObjFecha_NotaDevAntDtm.ObjValorPro
                 txtIdCliente.Text = .ObjIdCliente_NotaDevAntDbl.ToString
                 txtNombreCliente.Content = .ObjClienteNota.ObjNombreCompletoStr.ToString()
-                If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
+                If EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
                     Dim lstrIdPredioAgr = String.Empty
                     If String.IsNullOrEmpty(.ObjIdPredioAgrupador_NotaDevAntStr.ToString) Then
                         lstrIdPredioAgr = GCSTRSINPA
@@ -114,22 +121,23 @@ Public Class WinNotasDevAnt
         SMuestreUsuarios()
         SMuestreEstado()
         Title = My.Resources.FichaNDev
-        If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
+        If EnuOperacionEnWin = EnuOperacionEnVentana.CenuCreando Then
             Title &= "Nuevo " & My.Resources.De & txtNombreCliente.Content
         Else
             Title &= txtIdNota.Text & My.Resources.De & txtNombreCliente.Content
         End If
         SValide()
-        If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
+        If EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
             SEstablezcaDataContext()
             txtIdNota.Focus()
         End If
         HblnMostrandoDatos = False
     End Sub
+
     Protected Overrides Sub SValide()
         Dim lblnNoHayDatos = Not BlnVentanaAux AndAlso ObjObjetoWin.FblnEstaVacioOrigenDatos
         If lblnNoHayDatos AndAlso EnuOperacionEnWin =
-                EnuOperacionEnVentana.cenuConsultando Then
+                EnuOperacionEnVentana.CenuConsultando Then
             SInicialiceValido()
         Else
             With MobjObjetoWin
@@ -145,6 +153,7 @@ Public Class WinNotasDevAnt
         SHabiliteBotonesTlb()
         FblnEstanTodosBien()
     End Sub
+
     Protected Overrides Sub SRegistre()
         With MobjObjetoWin
             .ObjIdNotaDevAntEnt.ObjValorPro = 0
@@ -161,6 +170,7 @@ Public Class WinNotasDevAnt
         End With
         SValide()
     End Sub
+
     ''' <summary>
     ''' Adiciona al menu de la ventana (hmnuMiMenu) los items de acuerdo al tipo de ventana y al objeto de la
     ''' ventana "objObjetoWin". 
@@ -174,6 +184,7 @@ Public Class WinNotasDevAnt
         HmnuAcciones.Items.Insert(lentPosicion, lsepSeparad)
     End Sub
 #End Region
+
 #Region "Procedimientos invalidantes"
     Protected Overrides Sub SCree()
         MyBase.SCree()
@@ -204,17 +215,18 @@ Public Class WinNotasDevAnt
             dtpFechaDevAnt.Focus()
         End If
     End Sub
+
     Protected Overrides Sub SGuarde()
         Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lblnNoHayError = False
         Dim lblnGuardo As Boolean
         Try
             GobjPanDat.SControleProcesoObj(True)
-            If EnuOperacionEnWin <> EnuOperacionEnVentana.cenuConsultando Then
+            If EnuOperacionEnWin <> EnuOperacionEnVentana.CenuConsultando Then
                 SRegistre()
                 SValide()
                 lblnGuardo = FblnGravo()
                 If lblnGuardo Then
-                    If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
+                    If EnuOperacionEnWin = EnuOperacionEnVentana.CenuCreando Then
                         SFinaliceOperacion()
                         lstrMens = "Desea imprimir la Nota?"
                         If MsgBox(lstrMens, vbYesNo + MsgBoxStyle.Question, "Imprimir Nota?") = vbYes Then
@@ -258,6 +270,7 @@ Public Class WinNotasDevAnt
             End If
         End Try
     End Sub
+
     Protected Overrides Function SAnule() As Boolean
         Dim lblnAnulo = MyBase.SAnule()
         If lblnAnulo Then
@@ -265,9 +278,10 @@ Public Class WinNotasDevAnt
         End If
         Return lblnAnulo
     End Function
+
     Protected Overrides Sub SEstablezcaWinConsultando()
         MyBase.SEstablezcaWinConsultando()
-        If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
+        If EnuOperacionEnWin = EnuOperacionEnVentana.CenuConsultando Then
             bttEncontrarCliente.Visibility = Visibility.Hidden
             cboPredioAgru.Visibility = Visibility.Hidden
             dgrAnticipos.Visibility = Visibility.Hidden
@@ -281,6 +295,7 @@ Public Class WinNotasDevAnt
             SEstablezcaDataContext()
         End If
     End Sub
+
     Protected Overrides Sub SImprima()
         Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lblnNoHayError = False
         Try
@@ -321,6 +336,7 @@ Public Class WinNotasDevAnt
         End Try
     End Sub
 #End Region
+
 #Region "Busqueda"
     Protected Overrides Sub SBuscar()
         MyBase.SBuscar()
@@ -341,6 +357,7 @@ Public Class WinNotasDevAnt
             End If
         End If
     End Sub
+
     ''' <summary>
     ''' Invalida la funcion "fblnDefinioBusqueda" de la clase base.
     ''' </summary>
@@ -359,6 +376,7 @@ Public Class WinNotasDevAnt
         End If
         Return True
     End Function
+
     Private Sub SDefineBusquedaCliente()
         Dim lstrTabla = ClsCliente.SstrNombreTabla
         Dim lstrCamposMostrar = {ClsIdClienteDbl.SstrNombreCampoBd, ClsNombreCompletoStr.SstrNombreCampoBd}
@@ -368,6 +386,7 @@ Public Class WinNotasDevAnt
         HwinBusqueda.SDefinaBusqueda("Nombre Cliente", lstrTabla, lstrCamposMostrar,
                 lstrCampoBusqueda, lstrCampoRetornar, lstrFiltro)
     End Sub
+
     Private Sub SDefineBusquedaPredioAgr_Prop()
         Dim lstrTablaPri = ClsPredio.SstrNombreTabla
         Dim lstrTablaSec = ClsPropietario.SstrNombreTabla
@@ -393,6 +412,7 @@ Public Class WinNotasDevAnt
                 lstrTablaSec, lstrCamSelTablaPri, lstrCampSelTablaSec, lstrCampRelPri,
                 lstrCampRelSec, lstrCampoBusqueda, lstrCampoRetornar, lstrFiltro, False)
     End Sub
+
     Private Sub SDefineBusquedaPredioAgr_Arren()
         Dim lstrTablaSec As String = ClsPredio.SstrNombreTabla
         Dim lstrTablaPri As String = ClsCliente.SstrNombreTabla
@@ -411,6 +431,7 @@ Public Class WinNotasDevAnt
                 lstrCamposTabPri, lstrCamposTabSec, lstrCamTabPriRel, lstrCamTabSecRel,
                 lstrCampoBusqueda, lstrCampoRetornar, lstrFiltro, False)
     End Sub
+
     Private Sub SDefineNombreCliente()
         Dim lstrTablaPri As String = ClsCliente.SstrNombreTabla
         Dim lstrTablaSec As String = ClsNotaDevAnt.SstrNombreTabla
@@ -418,17 +439,20 @@ Public Class WinNotasDevAnt
                                             ClsNombreCompletoStr.SstrNombreCampoBd}
         Dim lstrCamposTabSec As String() = {ClsIdPredioAgrupador_NotaDevAntStr.SstrNombreCampoBd,
                                             ClsFecha_NotaDevAntDtm.SstrNombreCampoBd,
+                                            ClsPrefijo_NotaDevAntStr.SstrNombreCampoBd,
                                             ClsIdNotaDevAntEnt.SstrNombreCampoBd}
         Dim lstrCamTabPriRel As String() = {ClsIdClienteDbl.SstrNombreCampoBd}
         Dim lstrCamTabSecRel As String() = {ClsIdCliente_NotaDevAntDbl.SstrNombreCampoBd}
         Dim lstrCampoBusqueda As String = ClsNombreCompletoStr.SstrNombreCampoBd
-        Dim lstrCampoRetornar As String = ClsIdNotaDevAntEnt.SstrNombreCampoBd
+        Dim lstrCamposRetornar As String() = {ClsPrefijo_NotaDevAntStr.SstrNombreCampoBd,
+                                            ClsIdNotaDevAntEnt.SstrNombreCampoBd}
         Dim lstrFiltro As String = "P." & StrCampoCarpeta & " = " & GshrIdCarpeta &
                 " AND P." & StrCampoCentroUtil & " = " & GshrIdCentroUtil
         HwinBusqueda.SDefinaBusqueda("Nombre Cliente", lstrTablaPri, lstrTablaSec,
                 lstrCamposTabPri, lstrCamposTabSec, lstrCamTabPriRel, lstrCamTabSecRel,
-                lstrCampoBusqueda, lstrCampoRetornar, lstrFiltro, False)
+                lstrCampoBusqueda, lstrCamposRetornar, lstrFiltro, False)
     End Sub
+
     Private Sub SDefinePredioAgr()
         Dim lstrTablaPri As String = ClsCliente.SstrNombreTabla
         Dim lstrTablaSec As String = ClsNotaDevAnt.SstrNombreTabla
@@ -451,6 +475,7 @@ Public Class WinNotasDevAnt
                 lstrCampoBusqueda, lstrCamposRetornar, lstrFiltro, False)
     End Sub
 #End Region
+
 #Region "Procedimientos Propios"
     Private Sub SInicialiceNota()
         If MobjObjetoWin IsNot Nothing Then
@@ -467,6 +492,7 @@ Public Class WinNotasDevAnt
             End If
         End If
     End Sub
+
     Private Sub SMuestreUsuarios()
         With MobjObjetoWin
             If MobjObjetoWin.BlnExiste Then
@@ -490,6 +516,7 @@ Public Class WinNotasDevAnt
             End If
         End With
     End Sub
+
     Private Sub SMuestreEstado()
         If MobjObjetoWin.ObjAnuladoBln.ObjValorPro Then
             txtEstado.Style = FindResource("RecDocAnulado")
@@ -497,12 +524,14 @@ Public Class WinNotasDevAnt
             txtEstado.Style = FindResource("RecDocNormal")
         End If
     End Sub
+
     Private Sub SPuebleComboBoxes()
         MblnPoblandoCbo = True
         Dim ldrwConst = ClsOrionCop.FdrwPrefDoc(EnuTipoDocOri.EnuNotaDevAnt)
         SPuebleComboBox(ldrwConst, cboPref)
         MblnPoblandoCbo = False
     End Sub
+
     Private Sub SPuebleCboPredAgru()
         MblnPoblandoCbo = True
         cboPredioAgru.Items.Clear()
@@ -534,6 +563,7 @@ Public Class WinNotasDevAnt
             OnCboCambio(cboPredioAgru, lreaArgumento)
         End If
     End Sub
+
     Private Sub SRegistreCliente()
         With MobjObjetoWin
             Dim ldblIdCliente As Double = .ObjIdCliente_NotaDevAntDbl.ObjValorPro
@@ -546,6 +576,7 @@ Public Class WinNotasDevAnt
             End If
         End With
     End Sub
+
     Private Sub SRegistrePredAgr()
         With MobjObjetoWin
             If cboPredioAgru.Items.Count = 1 Then
@@ -566,6 +597,7 @@ Public Class WinNotasDevAnt
             End If
         End With
     End Sub
+
     Private Sub SEstablezcaDataContext()
         If Me.EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
             dgrAnticipos.DataContext = MdtbAnticipos
@@ -573,6 +605,7 @@ Public Class WinNotasDevAnt
             dgrNovedades.DataContext = MobjObjetoWin.DtbNovedades
         End If
     End Sub
+
     Private Sub SAbraNota()
         If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
             Dim lstrMens = String.Empty, lstrMensEx = String.Empty, lblnNoHayError = False
@@ -605,6 +638,7 @@ Public Class WinNotasDevAnt
         End If
     End Sub
 #End Region
+
 #Region "Eventos en la Ventana"
     Private Sub OnBotonClic(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
@@ -617,6 +651,7 @@ Public Class WinNotasDevAnt
             End If
         End If
     End Sub
+
     Private Sub OnCogerFoco(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
         Select Case True
@@ -633,6 +668,7 @@ Public Class WinNotasDevAnt
                 End If
         End Select
     End Sub
+
     Private Sub OnPierdeFoco(sender As Object, e As RoutedEventArgs)
         If Not HblnSeEstaCerrando AndAlso Not HblnMostrandoDatos Then
             Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
@@ -657,6 +693,7 @@ Public Class WinNotasDevAnt
             End If
         End If
     End Sub
+
     Private Sub OnCboCambio(sender As Object, e As RoutedEventArgs)
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
         If Not MblnPoblandoCbo AndAlso TypeOf lelmElemento Is ComboBox AndAlso Not HblnSeEstaCerrando Then
@@ -677,6 +714,7 @@ Public Class WinNotasDevAnt
             End If
         End If
     End Sub
+
     Private Sub Txt_KeyDown(sender As Object, e As KeyEventArgs) Handles txtIdNota.KeyDown
         If EnuOperacionEnWin = EnuOperacionEnVentana.cenuConsultando Then
             If e.Key = Key.Return OrElse e.Key = Key.Tab Then
@@ -684,6 +722,7 @@ Public Class WinNotasDevAnt
             End If
         End If
     End Sub
+
     Private Sub DgrAnticipos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles dgrAnticipos.SelectionChanged
         If EnuOperacionEnWin = EnuOperacionEnVentana.cenuCreando Then
             Dim ldrvAnticipo As DataRowView = dgrAnticipos.SelectedItem
@@ -696,6 +735,7 @@ Public Class WinNotasDevAnt
             SValide()
         End If
     End Sub
+
     Private Sub Dgr_MouseRightButtonUp(sender As Object, e As MouseButtonEventArgs) Handles _
                  dgrNovedades.MouseRightButtonUp
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
@@ -703,6 +743,7 @@ Public Class WinNotasDevAnt
             SAbraAnticipo(CType(txtIdAntSeleccionado.Content, Integer))
         End If
     End Sub
+
     Private Sub Ctl_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles _
             txtIdAntSeleccionado.MouseDoubleClick
         Dim lelmElemento As FrameworkElement = CType(e.Source, FrameworkElement)
